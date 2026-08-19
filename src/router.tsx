@@ -1,0 +1,87 @@
+import React from 'react';
+import { createBrowserRouter, Navigate } from 'react-router-dom';
+
+// Public Experience
+import { PublicLayout } from './app/public/layouts/PublicLayout';
+import { HomePage } from './app/public/pages/HomePage';
+import { MapPage } from './app/public/pages/MapPage';
+import { StartupsPage } from './app/public/pages/StartupsPage';
+import { StartupDetailPage } from './app/public/pages/StartupDetailPage';
+import { DistrictExplorerPage } from './app/public/pages/DistrictExplorerPage';
+import { DistrictDetailPage } from './app/public/pages/DistrictDetailPage';
+import { SubmitStartupPage } from './app/public/pages/SubmitStartupPage';
+import { LoginPage } from './app/public/pages/LoginPage';
+import { RegisterPage } from './app/public/pages/RegisterPage';
+import { BookmarksPage } from './app/public/pages/BookmarksPage';
+import { BlogListPage } from './app/public/pages/BlogListPage';
+import { BlogDetailPage } from './app/public/pages/BlogDetailPage';
+import { WriteArticlePage } from './app/public/pages/WriteArticlePage';
+
+// Founder Experience
+import { FounderLayout } from './app/founder/layouts/FounderLayout';
+import { FounderDashboard } from './app/founder/pages/FounderDashboard';
+import { FounderEditProfile } from './app/founder/pages/FounderEditProfile';
+
+// Admin Experience
+import { AdminLayout } from './app/admin/layouts/AdminLayout';
+import { AdminOverview } from './app/admin/pages/AdminOverview';
+import { AdminSubmissions } from './app/admin/pages/AdminSubmissions';
+import { AdminClaims } from './app/admin/pages/AdminClaims';
+import { AdminStartups } from './app/admin/pages/AdminStartups';
+import { AdminBlogs } from './app/admin/pages/AdminBlogs';
+import { AdminUsers } from './app/admin/pages/AdminUsers';
+
+export const router = createBrowserRouter([
+  // Public Domain Routes
+  {
+    path: '/',
+    element: <PublicLayout />,
+    children: [
+      { index: true, element: <HomePage /> },
+      { path: 'map', element: <MapPage /> },
+      { path: 'startups', element: <StartupsPage /> },
+      { path: 'startups/:slug', element: <StartupDetailPage /> },
+      { path: 'districts', element: <DistrictExplorerPage /> },
+      { path: 'districts/:slug', element: <DistrictDetailPage /> },
+      { path: 'blog', element: <BlogListPage /> },
+      { path: 'blog/new', element: <WriteArticlePage /> },
+      { path: 'blog/edit/:id', element: <WriteArticlePage /> },
+      { path: 'blog/:slug', element: <BlogDetailPage /> },
+      { path: 'submit', element: <SubmitStartupPage /> },
+      { path: 'bookmarks', element: <BookmarksPage /> },
+      { path: 'login', element: <LoginPage /> },
+      { path: 'register', element: <RegisterPage /> },
+    ],
+  },
+
+  // Founder Domain Routes (Protected)
+  {
+    path: '/founder',
+    element: <FounderLayout />,
+    children: [
+      { index: true, element: <Navigate to="/founder/dashboard" replace /> },
+      { path: 'dashboard', element: <FounderDashboard /> },
+      { path: 'edit', element: <FounderEditProfile /> },
+    ],
+  },
+
+  // Admin Domain Routes (Protected)
+  {
+    path: '/admin',
+    element: <AdminLayout />,
+    children: [
+      { index: true, element: <AdminOverview /> },
+      { path: 'submissions', element: <AdminSubmissions /> },
+      { path: 'claims', element: <AdminClaims /> },
+      { path: 'startups', element: <AdminStartups /> },
+      { path: 'blogs', element: <AdminBlogs /> },
+      { path: 'users', element: <AdminUsers /> },
+    ],
+  },
+
+  // Catch-all fallback
+  {
+    path: '*',
+    element: <Navigate to="/" replace />,
+  },
+]);

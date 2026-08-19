@@ -1,0 +1,172 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  USER
+  FOUNDER
+  ADMIN
+  SUPER_ADMIN
+}
+
+enum VerificationStatus {
+  PENDING
+  VERIFIED
+  REJECTED
+  CLAIMED
+}
+
+enum SubmissionStatus {
+  PENDING_REVIEW
+  APPROVED
+  REJECTED
+}
+
+enum ClaimStatus {
+  PENDING_REVIEW
+  APPROVED
+  REJECTED
+}
+
+model User {
+  id               String       @id @default(uuid())
+  email            String       @unique
+  name             String
+  role             UserRole     @default(USER)
+  passwordHash     String?
+  avatarUrl        String?
+  companyName      String?
+  claimedStartupId String?
+  createdAt        DateTime     @default(now())
+  updatedAt        DateTime     @updatedAt
+
+  submissions      Submission[]
+  claims           Claim[]
+  bookmarks        Bookmark[]
+
+  @@map("users")
+}
+
+model District {
+  id              String    @id @default(uuid())
+  name            String    @unique
+  slug            String    @unique
+  headquarters    String
+  latitude        Float
+  longitude       Float
+  description     String
+  keySectors      String[]
+  incubatorsCount Int       @default(0)
+  startups        Startup[]
+
+  @@map("districts")
+}
+
+model Sector {
+  id          String   @id @default(uuid())
+  name        String   @unique
+  slug        String   @unique
+  icon        String
+  color       String
+  description String
+
+  @@map("sectors")
+}
+
+model Startup {
+  id                 String             @id @default(uuid())
+  slug               String             @unique
+  name               String
+  tagline            String
+  description        String
+  logoUrl            String?
+  brandColor         String?
+  website            String
+  linkedin           String?
+  twitter            String?
+  github             String?
+  foundedYear        Int
+  stage              String             @default("Seed")
+  fundingType        String             @default("Bootstrapped")
+  totalFundingInr    String?
+  totalFundingUsd    String?
+  teamSize           String             @default("1-10")
+  districtId         String?
+  district           District?          @relation(fields: [districtId], references: [id])
+  districtName       String
+  districtSlug       String
+  city               String
+  latitude           Float
+  longitude          Float
+  sectors            String[]
+  founders           Json               @default("[]")
+  fundingRounds      Json               @default("[]")
+  verificationStatus VerificationStatus @default(VERIFIED)
+  source             String             @default("Platform Verification")
+  sourceUrl          String?
+  lastVerifiedAt     DateTime           @default(now())
+  trendingScore      Int                @default(70)
+  claimedByUserId    String?
+  isHiring           Boolean            @default(false)
+  createdAt          DateTime           @default(now())
+  updatedAt          DateTime           @updatedAt
+
+  bookmarks          Bookmark[]
+
+  @@index([districtSlug])
+  @@index([trendingScore])
+  @@map("startups")
+}
+
+model Submission {
+  id                String           @id @default(uuid())
+  data              Json
+  status            SubmissionStatus @default(PENDING_REVIEW)
+  submittedByEmail  String
+  submittedByUserId String?
+  submittedBy       User?            @relation(fields: [submittedByUserId], references: [id])
+  reviewedByUserId  String?
+  adminNotes        String?
+  createdAt         DateTime         @default(now())
+  updatedAt         DateTime         @updatedAt
+
+  @@map("submissions")
+}
+
+model Claim {
+  id               String      @id @default(uuid())
+  startupId        String
+  startupSlug      String
+  startupName      String
+  claimantName     String
+  claimantEmail    String
+  claimantRole     String
+  claimantLinkedin String?
+  proofDetails     String
+  status           ClaimStatus @default(PENDING_REVIEW)
+  userId           String?
+  user             User?       @relation(fields: [userId], references: [id])
+  reviewedByUserId String?
+  adminNotes       String?
+  createdAt        DateTime    @default(now())
+  updatedAt        DateTime    @updatedAt
+
+  @@map("claims")
+}
+
+model Bookmark {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  startupId String
+  startup   Startup  @relation(fields: [startupId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@unique([userId, startupId])
+  @@map("bookmarks")
+}
