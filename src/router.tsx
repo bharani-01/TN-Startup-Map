@@ -16,6 +16,7 @@ import { BookmarksPage } from './app/public/pages/BookmarksPage';
 import { BlogListPage } from './app/public/pages/BlogListPage';
 import { BlogDetailPage } from './app/public/pages/BlogDetailPage';
 import { WriteArticlePage } from './app/public/pages/WriteArticlePage';
+import { SupportPage } from './app/public/pages/SupportPage';
 
 // Founder Experience
 import { FounderLayout } from './app/founder/layouts/FounderLayout';
@@ -47,6 +48,7 @@ export const router = createBrowserRouter([
       { path: 'blog/new', element: <WriteArticlePage /> },
       { path: 'blog/edit/:id', element: <WriteArticlePage /> },
       { path: 'blog/:slug', element: <BlogDetailPage /> },
+      { path: 'support', element: <SupportPage /> },
       { path: 'submit', element: <SubmitStartupPage /> },
       { path: 'bookmarks', element: <BookmarksPage /> },
       { path: 'login', element: <LoginPage /> },

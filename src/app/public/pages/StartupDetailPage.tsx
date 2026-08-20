@@ -801,23 +801,16 @@ export const StartupDetailPage: React.FC = () => {
                 <p><span className="font-medium text-[#1D1D1F]">Source:</span> {startup.source}</p>
                 <p><span className="font-medium text-[#1D1D1F]">Status:</span> {startup.verificationStatus}</p>
               </div>
-            </div>
 
-            {/* Founder Claim Profile Callout */}
-            <div className="bg-[#1D1D1F] text-white rounded-3xl p-6 shadow-apple-modal space-y-3 text-xs border border-white/10">
-              <div className="flex items-center gap-2 text-amber-400 font-bold">
-                <Lock className="w-4 h-4" />
-                <span>Founder Management</span>
+              <div className="pt-2 border-t border-black/[0.05] flex items-center justify-between text-[11px]">
+                <span className="text-[#86868B]">Need to update or claim?</span>
+                <Link
+                  to={`/support?tab=claim&startup=${startup.slug}`}
+                  className="text-[#0071E3] font-semibold hover:underline flex items-center gap-1"
+                >
+                  <span>Support & Claims</span>
+                </Link>
               </div>
-              <p className="text-slate-300 leading-relaxed">
-                Are you a founder or executive of <strong>{startup.name}</strong>? Claim management access to edit profile banners, news releases, contact channels, and hiring roles.
-              </p>
-              <button
-                onClick={() => setClaimOpen(true)}
-                className="w-full py-2.5 bg-[#0071E3] hover:bg-[#0077ED] text-white font-semibold rounded-full text-xs transition-all shadow-apple-sm apple-press"
-              >
-                Claim This Startup Profile
-              </button>
             </div>
 
           </div>

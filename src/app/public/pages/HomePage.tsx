@@ -3,7 +3,6 @@ import { useOutletContext, Link } from 'react-router-dom';
 import { Compass, ArrowRight, Layers, MapPin, Sparkles } from 'lucide-react';
 import { HeroSection } from '../components/HeroSection';
 import { FeaturedLeaders } from '../components/FeaturedLeaders';
-import { StatsCounter } from '../components/StatsCounter';
 import { StartupMap } from '../map/StartupMap';
 import { DistrictCard } from '../components/DistrictCard';
 import { NearMeSection } from '../components/NearMeSection';
@@ -55,17 +54,15 @@ export const HomePage: React.FC = () => {
   }, []);
 
   return (
-    <div className="space-y-12 sm:space-y-16 pb-24">
+    <div className="pb-24">
       {/* 1. Keynote Hero Section */}
       <HeroSection onOpenSearch={onOpenSearch} />
 
-      {/* 2. Featured Innovation Leaders Showcase */}
-      <FeaturedLeaders />
+      <div className="space-y-10 sm:space-y-14 pt-4 sm:pt-6">
+        {/* 2. Featured Innovation Leaders Showcase */}
+        <FeaturedLeaders />
 
-      {/* 3. Floating Health / Activity Style Metrics Ribbon */}
-      <StatsCounter stats={stats} loading={loading} />
-
-      {/* 4. Sectors Explorer Strip */}
+      {/* 3. Sectors Explorer Strip */}
       {sectors.length > 0 && (
         <section className="max-w-[1536px] mx-auto px-4 sm:px-8 lg:px-12">
           <div className="flex items-center justify-between gap-4 mb-3">
@@ -260,6 +257,7 @@ export const HomePage: React.FC = () => {
           </div>
         </section>
       )}
+      </div>
     </div>
   );
 };

@@ -99,9 +99,19 @@ export const PublicFooter: React.FC = () => {
           {/* Col 5: Governance & Roles */}
           <div className="space-y-3">
             <h4 className="font-semibold text-apple-text text-xs uppercase tracking-wider">
-              Portals
+              Portals & Help
             </h4>
             <ul className="space-y-2">
+              <li>
+                <Link to="/support?tab=claim" className="hover:text-apple-blue transition-colors text-apple-blue font-medium">
+                  Claim Startup Profile
+                </Link>
+              </li>
+              <li>
+                <Link to="/support" className="hover:text-apple-blue transition-colors">
+                  Ecosystem Support
+                </Link>
+              </li>
               <li>
                 <Link to="/founder/dashboard" className="hover:text-apple-blue transition-colors">
                   Founder Verification
@@ -115,11 +125,6 @@ export const PublicFooter: React.FC = () => {
               <li>
                 <Link to="/login" className="hover:text-apple-blue transition-colors">
                   Account Sign In
-                </Link>
-              </li>
-              <li>
-                <Link to="/register" className="hover:text-apple-blue transition-colors">
-                  Join Ecosystem
                 </Link>
               </li>
             </ul>
