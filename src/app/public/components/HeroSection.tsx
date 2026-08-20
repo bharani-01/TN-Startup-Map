@@ -8,17 +8,17 @@ interface HeroSectionProps {
 
 export const HeroSection: React.FC<HeroSectionProps> = () => {
   return (
-    <section className="relative overflow-hidden pt-12 pb-10 sm:pt-16 sm:pb-12 lg:pt-20 lg:pb-14 flex flex-col justify-start bg-[#FAFBFD]">
+    <section className="relative overflow-hidden pt-12 pb-14 sm:pt-16 sm:pb-20 lg:pt-20 lg:pb-24 flex flex-col justify-start bg-[#FAFBFD]">
       
       {/* 1. Tamil Nadu Heritage & Modern Skyline Background */}
       <div className="absolute inset-0 w-full h-full pointer-events-none select-none z-0 overflow-hidden">
         <img 
           src="/tn-skyline-hero.png" 
           alt="Tamil Nadu Heritage and Modern Innovation Skyline" 
-          className="w-full h-full object-cover object-bottom opacity-90"
+          className="w-full h-full object-cover object-top opacity-95"
         />
         {/* Subtle Bottom Transition Gradient */}
-        <div className="absolute inset-x-0 bottom-0 h-10 bg-gradient-to-t from-[#FAFBFD] via-[#FAFBFD]/40 to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 h-6 bg-gradient-to-t from-[#FAFBFD]/60 to-transparent" />
       </div>
 
       {/* Subtle Ambient Radial Backlight */}
