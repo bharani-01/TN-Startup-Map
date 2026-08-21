@@ -57,11 +57,17 @@ export const StartupCard: React.FC<StartupCardProps> = ({ startup, viewMode = 'g
     }
   }, [startup.website]);
 
-  const initialLogo = startup.logoUrl || (domain ? `https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://${domain}&size=128` : '');
+  const resolveLogo = (logo?: string, dom?: string) => {
+    if (logo && !logo.includes('clearbit.com')) return logo;
+    if (dom) return `https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://${dom}&size=128`;
+    return '';
+  };
+
+  const initialLogo = resolveLogo(startup.logoUrl, domain);
   const [currentSrc, setCurrentSrc] = useState<string>(initialLogo);
 
   useEffect(() => {
-    const freshLogo = startup.logoUrl || (domain ? `https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://${domain}&size=128` : '');
+    const freshLogo = resolveLogo(startup.logoUrl, domain);
     setCurrentSrc(freshLogo);
     setImgError(false);
   }, [startup.logoUrl, domain]);

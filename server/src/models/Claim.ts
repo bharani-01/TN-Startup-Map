@@ -11,20 +11,33 @@ export interface ClaimRequestDTO {
   workEmail?: string;
 }
 
+export interface ClaimEvidenceItem {
+  id?: string;
+  evidenceType: 'LINKEDIN_PROFILE' | 'CORPORATE_EMAIL' | 'INCORPORATION_CERT' | 'ID_DOCUMENT' | 'OTHER';
+  url?: string;
+  description?: string;
+  submittedAt?: string;
+  reviewedByUserId?: string;
+  reviewNotes?: string;
+}
+
 export interface Claim {
-  id: string;
+  id: string; // UUID primary key
+  publicId?: string; // Cryptographic public ID (clm_...)
   startupId: string;
   startupSlug: string;
   startupName: string;
   claimantName: string;
   claimantEmail: string;
   claimantRole: string;
-  claimantLinkedin: string;
+  claimantLinkedin?: string;
   proofDetails: string;
   status: ClaimStatus;
   userId?: string;
+  userAccountId?: string;
   reviewedByUserId?: string;
   adminNotes?: string;
+  evidence?: ClaimEvidenceItem[];
   createdAt: string;
   updatedAt: string;
 }

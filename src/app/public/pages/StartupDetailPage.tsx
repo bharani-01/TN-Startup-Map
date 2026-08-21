@@ -159,7 +159,16 @@ export const StartupDetailPage: React.FC = () => {
     }
   }, [startup?.website]);
 
-  const effectiveLogo = startup?.logoUrl || (domain ? `https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://${domain}&size=128` : '');
+  const effectiveLogo = React.useMemo(() => {
+    if (startup?.logoUrl && !startup.logoUrl.includes('clearbit.com')) {
+      return startup.logoUrl;
+    }
+    if (domain) {
+      return `https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://${domain}&size=128`;
+    }
+    return '';
+  }, [startup?.logoUrl, domain]);
+
   const effectiveBanner = startup?.bannerUrl || BANNER_PRESETS[0].url;
   const socials = startup?.socialLinks || {};
 

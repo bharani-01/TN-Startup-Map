@@ -5,6 +5,7 @@ import apiRouter from './routes/index.js';
 import { authenticate } from './middleware/authenticate.js';
 import { requestLogger } from './middleware/requestLogger.js';
 import { errorHandler } from './middleware/errorHandler.js';
+import { auditMiddleware } from './middleware/auditLogger.js';
 
 export function createApp() {
   const app = express();
@@ -17,9 +18,10 @@ export function createApp() {
   app.use(express.json({ limit: '10mb' }));
   app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
-  // Logging & Authentication middleware
+  // Logging, Audit & Authentication middleware
   app.use(requestLogger);
   app.use(authenticate);
+  app.use(auditMiddleware);
 
   // Mount master API routes under /api
   app.use('/api', apiRouter);

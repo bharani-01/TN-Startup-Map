@@ -4,3 +4,8 @@ export * from './District.js';
 export * from './Sector.js';
 export * from './Submission.js';
 export * from './Claim.js';
+export * from './BlogPost.js';
+export * from './Investor.js';
+export * from './AuditLog.js';
+export * from './Notification.js';
+export * from './SocialLink.js';

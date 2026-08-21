@@ -16,6 +16,7 @@ import {
   Plus
 } from 'lucide-react';
 import { useAuth } from '../../../context/AuthContext';
+import { MarkdownRenderer } from '../components/MarkdownRenderer';
 import { BlogCategory, Startup } from '../../../types';
 
 const CATEGORY_OPTIONS: BlogCategory[] = [
@@ -28,11 +29,11 @@ const CATEGORY_OPTIONS: BlogCategory[] = [
 ];
 
 const COVER_PRESETS = [
-  { label: 'DeepTech & SpaceTech', url: 'https://images.unsplash.com/photo-1517976487588-4663b6528823?auto=format&fit=crop&w=1600&q=80' },
-  { label: 'SaaS & Enterprise Cloud', url: 'https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=1600&q=80' },
-  { label: 'EV Mobility & CleanTech', url: 'https://images.unsplash.com/photo-1509391365360-2e959784a276?auto=format&fit=crop&w=1600&q=80' },
-  { label: 'IIT Madras R&D Matrix', url: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1600&q=80' },
-  { label: 'Precision Manufacturing', url: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1600&q=80' },
+  { label: 'DeepTech & SpaceTech', url: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1200&q=80' },
+  { label: 'SaaS & Enterprise Cloud', url: 'https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=1200&q=80' },
+  { label: 'EV Mobility & CleanTech', url: 'https://images.unsplash.com/photo-1593941707882-a5bba14938c7?auto=format&fit=crop&w=1200&q=80' },
+  { label: 'IIT Madras R&D Matrix', url: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80' },
+  { label: 'Precision Manufacturing', url: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1200&q=80' },
 ];
 
 export const WriteArticlePage: React.FC = () => {
@@ -218,10 +219,13 @@ export const WriteArticlePage: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-[#F5F5F7] pb-24">
-      
-      {/* Top Header Bar */}
-      <div className="bg-white/80 backdrop-blur-xl border-b border-black/[0.06] sticky top-16 z-30">
+    <div className="relative min-h-screen bg-[#F5F5F7] pb-24">
+      {/* Precision Blueprint Tech Grid Canvas Background */}
+      <div className="absolute inset-0 bg-grid-pattern opacity-40 pointer-events-none z-0" />
+
+      <div className="relative z-10">
+        {/* Top Header Bar */}
+        <div className="bg-white/80 backdrop-blur-xl border-b border-black/[0.06] sticky top-16 z-30">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-8 py-3 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <Link to="/blog" className="text-[#86868B] hover:text-[#1D1D1F] p-1.5 rounded-full hover:bg-black/[0.04] transition-all">
@@ -454,14 +458,15 @@ export const WriteArticlePage: React.FC = () => {
               </div>
             )}
 
-            <div className="prose max-w-none text-sm leading-relaxed whitespace-pre-wrap">
-              {content || 'No content written yet.'}
+            <div className="pt-2">
+              <MarkdownRenderer content={content || '*No content written yet. Start typing on the editor tab to see rich markdown preview here.*'} />
             </div>
           </div>
         )}
 
       </main>
 
+      </div>
     </div>
   );
 };

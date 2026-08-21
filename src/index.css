@@ -319,3 +319,44 @@ path.leaflet-interactive:focus,
     border: 1px solid #000000 !important;
   }
 }
+
+/* ==========================================================================
+   Blueprint & Tech Grid Background Systems
+   ========================================================================== */
+
+.bg-grid-pattern {
+  background-size: 36px 36px;
+  background-image: 
+    linear-gradient(to right, rgba(0, 113, 227, 0.07) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 113, 227, 0.07) 1px, transparent 1px);
+}
+
+.bg-grid-pattern-dense {
+  background-size: 24px 24px;
+  background-image: 
+    linear-gradient(to right, rgba(0, 113, 227, 0.08) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 113, 227, 0.08) 1px, transparent 1px);
+}
+
+.bg-grid-pattern-slate {
+  background-size: 36px 36px;
+  background-image: 
+    linear-gradient(to right, rgba(148, 163, 184, 0.22) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(148, 163, 184, 0.22) 1px, transparent 1px);
+}
+
+.mask-radial-fade {
+  mask-image: radial-gradient(circle at center, black 45%, transparent 85%);
+  -webkit-mask-image: radial-gradient(circle at center, black 45%, transparent 85%);
+}
+
+.mask-radial-hero {
+  mask-image: radial-gradient(ellipse 90% 80% at 50% 30%, black 50%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 90% 80% at 50% 30%, black 50%, transparent 100%);
+}
+
+.mask-linear-fade-b {
+  mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+}
+

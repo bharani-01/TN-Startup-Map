@@ -4,9 +4,10 @@ import { startupRepository } from '../repositories/StartupRepository.js';
 import { userRepository } from '../repositories/UserRepository.js';
 import { emailService } from './EmailService.js';
 import { ClaimRequestDTO, Claim } from '../models/Claim.js';
-import { generateInternalUserId, generateDisplayUserId } from '../models/User.js';
+import { generateInternalUserId } from '../models/User.js';
 import { ClaimStatus, UserRole } from '../utils/constants.js';
 import { ApiError } from '../utils/ApiError.js';
+import { generatePublicId } from '../utils/publicId.js';
 
 export class ClaimService {
   async submitClaim(data: ClaimRequestDTO, userId?: string): Promise<Claim> {
@@ -21,6 +22,7 @@ export class ClaimService {
 
     const newClaim: Claim = {
       id: `clm-${Date.now()}-${Math.random().toString(36).substring(2, 7)}`,
+      publicId: generatePublicId('clm'),
       startupId: startup.id,
       startupSlug: startup.slug,
       startupName: startup.name,
@@ -75,9 +77,11 @@ export class ClaimService {
     } else {
       isNewUser = true;
       userId = generateInternalUserId();
+      const publicId = generatePublicId('usr');
       await userRepository.create({
         id: userId,
-        displayId: generateDisplayUserId(UserRole.FOUNDER),
+        publicId,
+        displayId: publicId,
         email: claimantEmail,
         name: claimantName,
         role: UserRole.FOUNDER,

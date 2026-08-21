@@ -54,13 +54,18 @@ export const HomePage: React.FC = () => {
   }, []);
 
   return (
-    <div className="pb-24">
-      {/* 1. Keynote Hero Section */}
-      <HeroSection onOpenSearch={onOpenSearch} />
+    <div className="relative min-h-screen pb-24 bg-[#F5F5F7]">
+      {/* Precision Blueprint Tech Grid Canvas Background */}
+      <div className="absolute inset-0 bg-grid-pattern opacity-60 pointer-events-none z-0" />
 
-      <div className="space-y-10 sm:space-y-14 pt-4 sm:pt-6">
-        {/* 2. Featured Innovation Leaders Showcase */}
-        <FeaturedLeaders />
+      {/* Main Page Content Layer */}
+      <div className="relative z-10">
+        {/* 1. Keynote Hero Section */}
+        <HeroSection onOpenSearch={onOpenSearch} />
+
+        <div className="space-y-10 sm:space-y-14 pt-4 sm:pt-6">
+          {/* 2. Featured Innovation Leaders Showcase */}
+          <FeaturedLeaders />
 
       {/* 3. Sectors Explorer Strip */}
       {sectors.length > 0 && (
@@ -216,6 +221,9 @@ export const HomePage: React.FC = () => {
                     <img
                       src={b.coverImageUrl || 'https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=800&q=80'}
                       alt={b.title}
+                      onError={(e) => {
+                        e.currentTarget.src = 'https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=800&q=80';
+                      }}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                     <div className="absolute top-3 left-3">
@@ -257,6 +265,7 @@ export const HomePage: React.FC = () => {
           </div>
         </section>
       )}
+        </div>
       </div>
     </div>
   );

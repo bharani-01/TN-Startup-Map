@@ -14,8 +14,7 @@ import {
   Briefcase,
   ChevronDown,
   Bookmark,
-  BookOpen,
-  HelpCircle
+  BookOpen
 } from 'lucide-react';
 import { useAuth } from '../../../context/AuthContext';
 import { useBookmarks } from '../../../context/BookmarkContext';
@@ -42,7 +41,6 @@ export const PublicNavbar: React.FC<PublicNavbarProps> = ({ onOpenSearch }) => {
     { label: 'Startups', path: '/startups', icon: Building2 },
     { label: 'Districts', path: '/districts', icon: Layers },
     { label: 'Stories', path: '/blog', icon: BookOpen },
-    { label: 'Support', path: '/support', icon: HelpCircle },
   ];
 
   return (

@@ -1,6 +1,6 @@
-import { db } from '../database/connection.js';
+import { db, prisma } from '../database/connection.js';
 import { Startup, StartupFilterQuery } from '../models/Startup.js';
-import { VerificationStatus } from '../utils/constants.js';
+import { generatePublicId } from '../utils/publicId.js';
 
 export class StartupRepository {
   async findAll(filters: StartupFilterQuery = {}): Promise<{ startups: Startup[]; total: number; page: number; limit: number; totalPages: number }> {
@@ -10,7 +10,6 @@ export class StartupRepository {
     if (!filters.includeDeleted) {
       result = result.filter((s) => !s.isDeleted);
     } else {
-      // If includeDeleted is true, we might filter specifically for deleted ones
       result = result.filter((s) => s.isDeleted === true);
     }
 
@@ -102,14 +101,21 @@ export class StartupRepository {
   }
 
   async findById(id: string): Promise<Startup | null> {
-    const s = db.startups.get(id);
+    let s = db.startups.get(id);
+    if (!s) {
+      s = Array.from(db.startups.values()).find((item) => item.publicId === id || item.id === id);
+    }
     if (!s || s.isDeleted) return null;
     return s;
   }
 
   async findBySlug(slug: string): Promise<Startup | null> {
     const s = Array.from(db.startups.values()).find(
-      (item) => (item.slug.toLowerCase() === slug.toLowerCase() || item.id === slug) && !item.isDeleted
+      (item) =>
+        (item.slug.toLowerCase() === slug.toLowerCase() ||
+          item.id === slug ||
+          item.publicId === slug) &&
+        !item.isDeleted
     );
     return s || null;
   }
@@ -183,6 +189,7 @@ export class StartupRepository {
         },
         properties: {
           id: s.id,
+          publicId: s.publicId,
           slug: s.slug,
           name: s.name,
           tagline: s.tagline,
@@ -206,25 +213,32 @@ export class StartupRepository {
     };
   }
 
-  async create(data: Omit<Startup, 'id' | 'createdAt' | 'updatedAt'>): Promise<Startup> {
+  async create(data: Omit<Startup, 'id' | 'createdAt' | 'updatedAt' | 'publicId'> & { publicId?: string }): Promise<Startup> {
     const now = new Date().toISOString();
     const id = `startup-${Date.now()}-${Math.random().toString(36).substring(2, 7)}`;
+    const publicId = data.publicId || generatePublicId('stp');
+
     const startup: Startup = {
       ...data,
       id,
+      publicId,
       isDeleted: false,
       deletedAt: null,
       deletedByUserId: null,
       createdAt: now,
       updatedAt: now,
     };
+
     db.startups.set(id, startup);
     db.recomputeCounts();
     return startup;
   }
 
   async update(id: string, data: Partial<Startup>): Promise<Startup | null> {
-    const existing = db.startups.get(id);
+    let existing = db.startups.get(id);
+    if (!existing) {
+      existing = Array.from(db.startups.values()).find((s) => s.publicId === id || s.id === id);
+    }
     if (!existing) return null;
 
     const updated: Startup = {
@@ -232,14 +246,16 @@ export class StartupRepository {
       ...data,
       updatedAt: new Date().toISOString(),
     };
-    db.startups.set(id, updated);
+    db.startups.set(existing.id, updated);
     db.recomputeCounts();
     return updated;
   }
 
-  // Strict Soft Delete (Non-destructive)
   async delete(id: string, deletedByUserId?: string): Promise<boolean> {
-    const existing = db.startups.get(id);
+    let existing = db.startups.get(id);
+    if (!existing) {
+      existing = Array.from(db.startups.values()).find((s) => s.publicId === id || s.id === id);
+    }
     if (!existing) return false;
 
     existing.isDeleted = true;
@@ -247,14 +263,16 @@ export class StartupRepository {
     existing.deletedByUserId = deletedByUserId || 'admin';
     existing.updatedAt = new Date().toISOString();
     
-    db.startups.set(id, existing);
+    db.startups.set(existing.id, existing);
     db.recomputeCounts();
     return true;
   }
 
-  // Soft Delete Restore
   async restore(id: string): Promise<Startup | null> {
-    const existing = db.startups.get(id);
+    let existing = db.startups.get(id);
+    if (!existing) {
+      existing = Array.from(db.startups.values()).find((s) => s.publicId === id || s.id === id);
+    }
     if (!existing) return null;
 
     existing.isDeleted = false;
@@ -262,7 +280,7 @@ export class StartupRepository {
     existing.deletedByUserId = null;
     existing.updatedAt = new Date().toISOString();
 
-    db.startups.set(id, existing);
+    db.startups.set(existing.id, existing);
     db.recomputeCounts();
     return existing;
   }

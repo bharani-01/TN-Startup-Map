@@ -9,17 +9,19 @@ export type BlogCategory =
 export type BlogStatus = 'PUBLISHED' | 'DRAFT' | 'ARCHIVED';
 
 export interface BlogPost {
-  id: string;
+  id: string; // UUID primary key
+  publicId?: string; // Cryptographic public ID (blg_...)
   slug: string;
   title: string;
   subtitle?: string;
-  content: string; // Markdown or rich formatted text
+  content: string; // Full markdown body text (from blog_content table)
   category: BlogCategory;
   coverImageUrl?: string;
-  tags: string[];
+  tags: string[]; // From blog_tags junction
   
   // Author metadata
   authorId: string;
+  authorPublicId?: string;
   authorName: string;
   authorRole: string;
   authorEmail: string;
@@ -28,12 +30,15 @@ export interface BlogPost {
   
   // Associated Startup (optional)
   startupId?: string;
+  startupPublicId?: string;
   startupName?: string;
   startupSlug?: string;
 
   status: BlogStatus;
   featured: boolean;
-  clapsCount: number;
+  clapsCount: number; // From blog_engagement
+  viewsCount?: number;
+  sharesCount?: number;
   readTimeMinutes: number;
   publishedAt: string;
   

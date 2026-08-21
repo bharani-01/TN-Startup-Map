@@ -1,27 +1,36 @@
 import { VerificationStatus } from '../utils/constants.js';
 
 export type StartupStage = 'Idea' | 'Pre-seed' | 'Seed' | 'Series A' | 'Series B+' | 'Bootstrapped' | 'Acquired';
-
 export type FundingType = 'Bootstrapped' | 'Angel' | 'Pre-seed' | 'Seed' | 'Venture funded';
 
 export interface FounderInfo {
+  id?: string;
+  publicId?: string;
   name: string;
-  role: string;
+  role: string; // roleTitle in schema
+  roleTitle?: string;
   bio?: string;
+  email?: string;
   linkedin?: string;
   twitter?: string;
   avatarUrl?: string;
   education?: string;
   previousCompanies?: string;
+  displayOrder?: number;
 }
 
 export interface FundingRoundInfo {
+  id?: string;
   roundType: string;
   amountInr?: string;
   amountUsd?: string;
-  date: string;
+  date: string; // roundDate in schema
+  roundDate?: string;
   investors: string[];
+  leadInvestorId?: string;
+  leadInvestorName?: string;
   sourceUrl?: string;
+  announcedAt?: string;
 }
 
 export interface CompanyPost {
@@ -38,11 +47,21 @@ export interface CustomProfileSection {
   id: string;
   title: string;
   content: string;
+  displayOrder?: number;
   items?: Array<{ label: string; value: string }>;
 }
 
+export interface StartupMediaItem {
+  id?: string;
+  mediaType: 'IMAGE' | 'VIDEO' | 'DOCUMENT';
+  url: string;
+  caption?: string;
+  displayOrder?: number;
+}
+
 export interface Startup {
-  id: string;
+  id: string; // UUID primary key
+  publicId?: string; // Cryptographic public ID (stp_...)
   slug: string;
   name: string;
   tagline: string;
@@ -68,6 +87,7 @@ export interface Startup {
     discord?: string;
     youtube?: string;
     blog?: string;
+    instagram?: string;
   };
   foundedYear: number;
   stage: StartupStage;
@@ -76,6 +96,7 @@ export interface Startup {
   totalFundingUsd?: string;
   teamSize: string;
   district: string;
+  districtId?: string;
   districtSlug: string;
   city: string;
   latitude: number;

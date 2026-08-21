@@ -1,5 +1,6 @@
-import { db } from '../database/connection.js';
+import { db, prisma } from '../database/connection.js';
 import { BlogPost, BlogFilterQuery } from '../models/BlogPost.js';
+import { generatePublicId } from '../utils/publicId.js';
 
 export class BlogRepository {
   async findAll(filters: BlogFilterQuery = {}): Promise<{ blogs: BlogPost[]; total: number; page: number; limit: number; totalPages: number }> {
@@ -32,12 +33,12 @@ export class BlogRepository {
 
     // Author filter
     if (filters.authorId) {
-      result = result.filter((b) => b.authorId === filters.authorId);
+      result = result.filter((b) => b.authorId === filters.authorId || b.authorPublicId === filters.authorId);
     }
 
     // Startup filter
     if (filters.startupId) {
-      result = result.filter((b) => b.startupId === filters.startupId || b.startupSlug === filters.startupId);
+      result = result.filter((b) => b.startupId === filters.startupId || b.startupSlug === filters.startupId || b.startupPublicId === filters.startupId);
     }
 
     // Featured filter
@@ -92,14 +93,21 @@ export class BlogRepository {
   }
 
   async findById(id: string): Promise<BlogPost | null> {
-    const b = db.blogs.get(id);
+    let b = db.blogs.get(id);
+    if (!b) {
+      b = Array.from(db.blogs.values()).find((item) => item.publicId === id || item.id === id);
+    }
     if (!b || b.isDeleted) return null;
     return b;
   }
 
   async findBySlug(slug: string): Promise<BlogPost | null> {
     const b = Array.from(db.blogs.values()).find(
-      (item) => (item.slug.toLowerCase() === slug.toLowerCase() || item.id === slug) && !item.isDeleted
+      (item) =>
+        (item.slug.toLowerCase() === slug.toLowerCase() ||
+          item.id === slug ||
+          item.publicId === slug) &&
+        !item.isDeleted
     );
     return b || null;
   }
@@ -111,12 +119,15 @@ export class BlogRepository {
       .slice(0, limit);
   }
 
-  async create(data: Omit<BlogPost, 'id' | 'createdAt' | 'updatedAt'>): Promise<BlogPost> {
+  async create(data: Omit<BlogPost, 'id' | 'createdAt' | 'updatedAt' | 'publicId'> & { publicId?: string }): Promise<BlogPost> {
     const now = new Date().toISOString();
     const id = `blog-${Date.now()}-${Math.random().toString(36).substring(2, 7)}`;
+    const publicId = data.publicId || generatePublicId('blg');
+
     const blog: BlogPost = {
       ...data,
       id,
+      publicId,
       isDeleted: false,
       deletedAt: null,
       deletedByUserId: null,
@@ -128,7 +139,10 @@ export class BlogRepository {
   }
 
   async update(id: string, updates: Partial<BlogPost>): Promise<BlogPost | null> {
-    const existing = db.blogs.get(id);
+    let existing = db.blogs.get(id);
+    if (!existing) {
+      existing = Array.from(db.blogs.values()).find((item) => item.publicId === id || item.id === id);
+    }
     if (!existing) return null;
 
     const updated: BlogPost = {
@@ -136,40 +150,50 @@ export class BlogRepository {
       ...updates,
       updatedAt: new Date().toISOString(),
     };
-    db.blogs.set(id, updated);
+    db.blogs.set(existing.id, updated);
     return updated;
   }
 
   async incrementClap(id: string): Promise<number | null> {
-    const existing = db.blogs.get(id);
+    let existing = db.blogs.get(id);
+    if (!existing) {
+      existing = Array.from(db.blogs.values()).find((item) => item.publicId === id || item.id === id);
+    }
     if (!existing) return null;
+
     existing.clapsCount = (existing.clapsCount || 0) + 1;
     existing.updatedAt = new Date().toISOString();
-    db.blogs.set(id, existing);
+    db.blogs.set(existing.id, existing);
     return existing.clapsCount;
   }
 
-  // Safe Soft Delete
   async delete(id: string, deletedByUserId?: string): Promise<boolean> {
-    const existing = db.blogs.get(id);
+    let existing = db.blogs.get(id);
+    if (!existing) {
+      existing = Array.from(db.blogs.values()).find((item) => item.publicId === id || item.id === id);
+    }
     if (!existing) return false;
+
     existing.isDeleted = true;
     existing.deletedAt = new Date().toISOString();
     existing.deletedByUserId = deletedByUserId || 'admin';
     existing.updatedAt = new Date().toISOString();
-    db.blogs.set(id, existing);
+    db.blogs.set(existing.id, existing);
     return true;
   }
 
-  // Restore Soft-Deleted Article
   async restore(id: string): Promise<BlogPost | null> {
-    const existing = db.blogs.get(id);
+    let existing = db.blogs.get(id);
+    if (!existing) {
+      existing = Array.from(db.blogs.values()).find((item) => item.publicId === id || item.id === id);
+    }
     if (!existing) return null;
+
     existing.isDeleted = false;
     existing.deletedAt = null;
     existing.deletedByUserId = null;
     existing.updatedAt = new Date().toISOString();
-    db.blogs.set(id, existing);
+    db.blogs.set(existing.id, existing);
     return existing;
   }
 }

@@ -1,15 +1,24 @@
-import { db } from '../database/connection.js';
+import { db, prisma } from '../database/connection.js';
 import { Claim } from '../models/Claim.js';
 import { ClaimStatus } from '../utils/constants.js';
+import { generatePublicId } from '../utils/publicId.js';
 
 export class ClaimRepository {
   async create(claim: Claim): Promise<Claim> {
-    db.claims.set(claim.id, claim);
-    return claim;
+    const claimToSave: Claim = {
+      ...claim,
+      publicId: claim.publicId || generatePublicId('clm'),
+    };
+    db.claims.set(claimToSave.id, claimToSave);
+    return claimToSave;
   }
 
   async findById(id: string): Promise<Claim | null> {
-    return db.claims.get(id) || null;
+    let claim = db.claims.get(id);
+    if (!claim) {
+      claim = Array.from(db.claims.values()).find((c) => c.publicId === id || c.id === id);
+    }
+    return claim || null;
   }
 
   async findAll(status?: ClaimStatus): Promise<Claim[]> {
@@ -21,7 +30,10 @@ export class ClaimRepository {
   }
 
   async updateStatus(id: string, status: ClaimStatus, reviewedByUserId?: string, adminNotes?: string): Promise<Claim | null> {
-    const claim = db.claims.get(id);
+    let claim = db.claims.get(id);
+    if (!claim) {
+      claim = Array.from(db.claims.values()).find((c) => c.publicId === id || c.id === id);
+    }
     if (!claim) return null;
 
     claim.status = status;
@@ -29,7 +41,7 @@ export class ClaimRepository {
     if (adminNotes) claim.adminNotes = adminNotes;
     claim.updatedAt = new Date().toISOString();
 
-    db.claims.set(id, claim);
+    db.claims.set(claim.id, claim);
     return claim;
   }
 }

@@ -7,11 +7,34 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// -----------------------------------------------------------------------------
+// ENUMS
+// -----------------------------------------------------------------------------
+
 enum UserRole {
   USER
   FOUNDER
+  INVESTOR
   ADMIN
   SUPER_ADMIN
+}
+
+enum StartupStage {
+  IDEA
+  PRE_SEED
+  SEED
+  SERIES_A
+  SERIES_B_PLUS
+  BOOTSTRAPPED
+  ACQUIRED
+}
+
+enum FundingType {
+  BOOTSTRAPPED
+  ANGEL
+  PRE_SEED
+  SEED
+  VENTURE_FUNDED
 }
 
 enum VerificationStatus {
@@ -33,140 +56,700 @@ enum ClaimStatus {
   REJECTED
 }
 
-model User {
-  id               String       @id @default(uuid())
-  email            String       @unique
-  name             String
-  role             UserRole     @default(USER)
-  passwordHash     String?
-  avatarUrl        String?
-  companyName      String?
-  claimedStartupId String?
-  createdAt        DateTime     @default(now())
-  updatedAt        DateTime     @updatedAt
-
-  submissions      Submission[]
-  claims           Claim[]
-  bookmarks        Bookmark[]
-
-  @@map("users")
+enum BlogCategory {
+  FOUNDER_STORIES
+  ECOSYSTEM_NEWS
+  DEEPTECH_INSIGHTS
+  POLICY_GRANTS
+  FUNDRAISING
+  TECH_ARCHITECTURE
 }
 
-model District {
+enum BlogStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+enum EntityType {
+  STARTUP
+  FOUNDER
+  USER
+  INVESTOR
+  DISTRICT
+  BLOG_POST
+  CLAIM
+  SUBMISSION
+}
+
+enum SocialPlatform {
+  LINKEDIN
+  TWITTER
+  GITHUB
+  FACEBOOK
+  YOUTUBE
+  DISCORD
+  SLACK
+  BLOG
+  WEBSITE
+  INSTAGRAM
+}
+
+enum TokenType {
+  EMAIL_VERIFY
+  PASSWORD_RESET
+  MAGIC_LINK
+}
+
+enum MediaType {
+  IMAGE
+  VIDEO
+  DOCUMENT
+}
+
+enum InvestorType {
+  ANGEL
+  VC
+  CORPORATE
+  GOVERNMENT
+  ACCELERATOR
+}
+
+enum ReviewAction {
+  COMMENT
+  APPROVE
+  REJECT
+  REQUEST_CHANGES
+}
+
+enum EvidenceType {
+  LINKEDIN_PROFILE
+  CORPORATE_EMAIL
+  INCORPORATION_CERT
+  ID_DOCUMENT
+  OTHER
+}
+
+enum NotificationType {
+  CLAIM_APPROVED
+  CLAIM_REJECTED
+  SUBMISSION_APPROVED
+  SUBMISSION_REJECTED
+  NEW_BLOG_COMMENT
+  SYSTEM_ANNOUNCEMENT
+}
+
+// -----------------------------------------------------------------------------
+// DOMAIN 1: IDENTITY & ACCESS (7 Tables)
+// -----------------------------------------------------------------------------
+
+model UserAccount {
+  id              String         @id @default(uuid())
+  publicId        String         @unique @map("public_id")
+  email           String         @unique
+  passwordHash    String?        @map("password_hash")
+  role            UserRole       @default(USER)
+  isEmailVerified Boolean        @default(false) @map("is_email_verified")
+  isActive        Boolean        @default(true) @map("is_active")
+  lastLoginAt     DateTime?      @map("last_login_at")
+  createdAt       DateTime       @default(now()) @map("created_at")
+  updatedAt       DateTime       @updatedAt @map("updated_at")
+  deletedAt       DateTime?      @map("deleted_at")
+
+  profile         UserProfile?
+  contact         UserContact?
+  preferences     UserPreference?
+  sessions        UserSession[]
+  tokens          AuthToken[]
+  founders        Founder[]
+  claimedStartups Startup[]      @relation("ClaimedStartups")
+  blogPosts       BlogPost[]     @relation("AuthorPosts")
+  submissions     Submission[]   @relation("SubmittedByUser")
+  reviewedSubmissions SubmissionReview[] @relation("ReviewedByUser")
+  claims          Claim[]        @relation("UserClaims")
+  reviewedEvidence ClaimEvidence[] @relation("ReviewedEvidence")
+  bookmarks       Bookmark[]
+  notifications   Notification[]
+  auditLogs       AuditLog[]     @relation("ActorAuditLogs")
+
+  @@index([role])
+  @@index([deletedAt])
+  @@map("user_accounts")
+}
+
+model UserProfile {
+  id            String      @id @default(uuid())
+  userAccountId String      @unique @map("user_account_id")
+  userAccount   UserAccount @relation(fields: [userAccountId], references: [id], onDelete: Cascade)
+  displayName   String      @map("display_name")
+  avatarUrl     String?     @map("avatar_url")
+  bio           String?
+  headline      String?
+  companyName   String?     @map("company_name")
+  updatedAt     DateTime    @updatedAt @map("updated_at")
+
+  @@map("user_profiles")
+}
+
+model UserContact {
+  id             String      @id @default(uuid())
+  userAccountId  String      @unique @map("user_account_id")
+  userAccount    UserAccount @relation(fields: [userAccountId], references: [id], onDelete: Cascade)
+  phone          String?
+  secondaryEmail String?     @map("secondary_email")
+  city           String?
+  state          String?     @default("Tamil Nadu")
+  updatedAt      DateTime    @updatedAt @map("updated_at")
+
+  @@map("user_contacts")
+}
+
+model UserSession {
+  id               String      @id @default(uuid())
+  userAccountId    String      @map("user_account_id")
+  userAccount      UserAccount @relation(fields: [userAccountId], references: [id], onDelete: Cascade)
+  tokenFingerprint String      @map("token_fingerprint")
+  deviceInfo       String?     @map("device_info")
+  ipAddress        String?     @map("ip_address")
+  isActive         Boolean     @default(true) @map("is_active")
+  expiresAt        DateTime    @map("expires_at")
+  createdAt        DateTime    @default(now()) @map("created_at")
+
+  @@index([userAccountId, isActive])
+  @@map("user_sessions")
+}
+
+model UserPreference {
+  id                 String      @id @default(uuid())
+  userAccountId      String      @unique @map("user_account_id")
+  userAccount        UserAccount @relation(fields: [userAccountId], references: [id], onDelete: Cascade)
+  theme              String      @default("system")
+  emailNotifications Boolean     @default(true) @map("email_notifications")
+  newsletterOptIn    Boolean     @default(false) @map("newsletter_opt_in")
+  locale             String      @default("en-IN")
+  updatedAt          DateTime    @updatedAt @map("updated_at")
+
+  @@map("user_preferences")
+}
+
+model RolePermission {
+  id        String   @id @default(uuid())
+  role      UserRole
+  permission String
+  isGranted Boolean  @default(true) @map("is_granted")
+
+  @@unique([role, permission])
+  @@map("roles_permissions")
+}
+
+model AuthToken {
+  id            String      @id @default(uuid())
+  userAccountId String      @map("user_account_id")
+  userAccount   UserAccount @relation(fields: [userAccountId], references: [id], onDelete: Cascade)
+  tokenHash     String      @map("token_hash")
+  tokenType     TokenType   @map("token_type")
+  expiresAt     DateTime    @map("expires_at")
+  usedAt        DateTime?   @map("used_at")
+  createdAt     DateTime    @default(now()) @map("created_at")
+
+  @@index([tokenHash, tokenType])
+  @@map("auth_tokens")
+}
+
+// -----------------------------------------------------------------------------
+// DOMAIN 2: STARTUP ECOSYSTEM (10 Tables)
+// -----------------------------------------------------------------------------
+
+model Startup {
+  id                 String             @id @default(uuid())
+  publicId           String             @unique @map("public_id")
+  slug               String             @unique
+  name               String
+  tagline            String
+  website            String
+  stage              StartupStage       @default(SEED)
+  fundingType        FundingType        @default(BOOTSTRAPPED) @map("funding_type")
+  foundedYear        Int                @map("founded_year")
+  teamSize           String             @default("1-10") @map("team_size")
+  verificationStatus VerificationStatus @default(VERIFIED) @map("verification_status")
+  claimedByUserId    String?            @map("claimed_by_user_id")
+  claimedByUser      UserAccount?       @relation("ClaimedStartups", fields: [claimedByUserId], references: [id])
+  trendingScore      Int                @default(70) @map("trending_score")
+  isHiring           Boolean            @default(false) @map("is_hiring")
+  createdAt          DateTime           @default(now()) @map("created_at")
+  updatedAt          DateTime           @updatedAt @map("updated_at")
+  deletedAt          DateTime?          @map("deleted_at")
+  deletedByUserId    String?            @map("deleted_by_user_id")
+
+  details            StartupDetail?
+  location           StartupLocation?
+  financials         StartupFinancial?
+  media              StartupMedia[]
+  sectors            StartupSector[]
+  techStack          StartupTechStack[]
+  founders           Founder[]
+  fundingRounds      FundingRound[]
+  blogPosts          BlogPost[]
+  claims             Claim[]
+  bookmarks          Bookmark[]
+  customSections     CustomSection[]
+
+  @@index([trendingScore(sort: Desc)])
+  @@index([stage])
+  @@index([fundingType])
+  @@index([createdAt(sort: Desc)])
+  @@index([deletedAt])
+  @@map("startups")
+}
+
+model StartupDetail {
+  id             String    @id @default(uuid())
+  startupId      String    @unique @map("startup_id")
+  startup        Startup   @relation(fields: [startupId], references: [id], onDelete: Cascade)
+  description    String
+  extendedBio    String?   @map("extended_bio")
+  brandColor     String?   @map("brand_color")
+  logoUrl        String?   @map("logo_url")
+  bannerUrl      String?   @map("banner_url")
+  source         String    @default("Platform Verification")
+  sourceUrl      String?   @map("source_url")
+  lastVerifiedAt DateTime  @default(now()) @map("last_verified_at")
+  updatedAt      DateTime  @updatedAt @map("updated_at")
+
+  @@map("startup_details")
+}
+
+model StartupLocation {
+  id         String    @id @default(uuid())
+  startupId  String    @unique @map("startup_id")
+  startup    Startup   @relation(fields: [startupId], references: [id], onDelete: Cascade)
+  districtId String?   @map("district_id")
+  district   District? @relation(fields: [districtId], references: [id])
+  city       String
+  address    String?
+  pincode    String?
+  latitude   Float
+  longitude  Float
+  updatedAt  DateTime  @updatedAt @map("updated_at")
+
+  @@index([districtId])
+  @@index([city])
+  @@map("startup_locations")
+}
+
+model StartupFinancial {
   id              String    @id @default(uuid())
-  name            String    @unique
-  slug            String    @unique
-  headquarters    String
-  latitude        Float
-  longitude       Float
-  description     String
-  keySectors      String[]
-  incubatorsCount Int       @default(0)
-  startups        Startup[]
+  startupId       String    @unique @map("startup_id")
+  startup         Startup   @relation(fields: [startupId], references: [id], onDelete: Cascade)
+  totalFundingInr String?   @map("total_funding_inr")
+  totalFundingUsd String?   @map("total_funding_usd")
+  latestRoundType String?   @map("latest_round_type")
+  latestRoundDate DateTime? @map("latest_round_date")
+  lastUpdatedAt   DateTime  @updatedAt @map("last_updated_at")
+
+  @@map("startup_financials")
+}
+
+model StartupMedia {
+  id           String    @id @default(uuid())
+  startupId    String    @map("startup_id")
+  startup      Startup   @relation(fields: [startupId], references: [id], onDelete: Cascade)
+  mediaType    MediaType @default(IMAGE) @map("media_type")
+  url          String
+  caption      String?
+  displayOrder Int       @default(0) @map("display_order")
+  uploadedAt   DateTime  @default(now()) @map("uploaded_at")
+
+  @@index([startupId, displayOrder])
+  @@map("startup_media")
+}
+
+model StartupSector {
+  startupId  String   @map("startup_id")
+  startup    Startup  @relation(fields: [startupId], references: [id], onDelete: Cascade)
+  sectorId   String   @map("sector_id")
+  sector     Sector   @relation(fields: [sectorId], references: [id], onDelete: Cascade)
+  isPrimary  Boolean  @default(false) @map("is_primary")
+  assignedAt DateTime @default(now()) @map("assigned_at")
+
+  @@id([startupId, sectorId])
+  @@index([sectorId])
+  @@map("startup_sectors")
+}
+
+model StartupTechStack {
+  id         String  @id @default(uuid())
+  startupId  String  @map("startup_id")
+  startup    Startup @relation(fields: [startupId], references: [id], onDelete: Cascade)
+  technology String
+  category   String?
+
+  @@index([startupId])
+  @@map("startup_tech_stack")
+}
+
+model Founder {
+  id                String       @id @default(uuid())
+  publicId          String       @unique @map("public_id")
+  startupId         String       @map("startup_id")
+  startup           Startup      @relation(fields: [startupId], references: [id], onDelete: Cascade)
+  userAccountId     String?      @map("user_account_id")
+  userAccount       UserAccount? @relation(fields: [userAccountId], references: [id])
+  name              String
+  roleTitle         String       @map("role_title")
+  bio               String?
+  email             String?
+  avatarUrl         String?      @map("avatar_url")
+  education         String?
+  previousCompanies String?      @map("previous_companies")
+  displayOrder      Int          @default(0) @map("display_order")
+  createdAt         DateTime     @default(now()) @map("created_at")
+  updatedAt         DateTime     @updatedAt @map("updated_at")
+
+  @@index([startupId, displayOrder])
+  @@map("founders")
+}
+
+model FundingRound {
+  id             String                 @id @default(uuid())
+  startupId      String                 @map("startup_id")
+  startup        Startup                @relation(fields: [startupId], references: [id], onDelete: Cascade)
+  roundType      String                 @map("round_type")
+  amountInr      String?                @map("amount_inr")
+  amountUsd      String?                @map("amount_usd")
+  roundDate      DateTime               @map("round_date")
+  leadInvestorId String?                @map("lead_investor_id")
+  leadInvestor   Investor?              @relation("LeadInvestorRounds", fields: [leadInvestorId], references: [id])
+  sourceUrl      String?                @map("source_url")
+  announcedAt    DateTime?              @map("announced_at")
+  createdAt      DateTime               @default(now()) @map("created_at")
+  investors      FundingRoundInvestor[]
+
+  @@index([startupId, roundDate(sort: Desc)])
+  @@map("funding_rounds")
+}
+
+model FundingRoundInvestor {
+  fundingRoundId String       @map("funding_round_id")
+  fundingRound   FundingRound @relation(fields: [fundingRoundId], references: [id], onDelete: Cascade)
+  investorId     String       @map("investor_id")
+  investor       Investor     @relation(fields: [investorId], references: [id], onDelete: Cascade)
+  isLead         Boolean      @default(false) @map("is_lead")
+
+  @@id([fundingRoundId, investorId])
+  @@index([investorId])
+  @@map("funding_round_investors")
+}
+
+// -----------------------------------------------------------------------------
+// DOMAIN 3: GEOGRAPHY & TAXONOMY (4 Tables)
+// -----------------------------------------------------------------------------
+
+model District {
+  id               String            @id @default(uuid())
+  name             String            @unique
+  slug             String            @unique
+  headquarters     String
+  latitude         Float
+  longitude        Float
+  createdAt        DateTime          @default(now()) @map("created_at")
+  updatedAt        DateTime          @updatedAt @map("updated_at")
+
+  metadata         DistrictMetadata?
+  startupLocations StartupLocation[]
 
   @@map("districts")
 }
 
+model DistrictMetadata {
+  id              String   @id @default(uuid())
+  districtId      String   @unique @map("district_id")
+  district        District @relation(fields: [districtId], references: [id], onDelete: Cascade)
+  description     String
+  keySectors      String[] @map("key_sectors")
+  incubatorsCount Int      @default(0) @map("incubators_count")
+  population      Int?
+  areaSqKm        Float?   @map("area_sq_km")
+  gdpRank         Int?     @map("gdp_rank")
+  updatedAt       DateTime @updatedAt @map("updated_at")
+
+  @@map("district_metadata")
+}
+
 model Sector {
-  id          String   @id @default(uuid())
-  name        String   @unique
-  slug        String   @unique
-  icon        String
-  color       String
-  description String
+  id           String          @id @default(uuid())
+  name         String          @unique
+  slug         String          @unique
+  icon         String
+  color        String
+  description  String
+  displayOrder Int             @default(0) @map("display_order")
+  isActive     Boolean         @default(true) @map("is_active")
+  createdAt    DateTime        @default(now()) @map("created_at")
+  updatedAt    DateTime        @updatedAt @map("updated_at")
+
+  startups     StartupSector[]
 
   @@map("sectors")
 }
 
-model Startup {
-  id                 String             @id @default(uuid())
-  slug               String             @unique
-  name               String
-  tagline            String
-  description        String
-  logoUrl            String?
-  brandColor         String?
-  website            String
-  linkedin           String?
-  twitter            String?
-  github             String?
-  foundedYear        Int
-  stage              String             @default("Seed")
-  fundingType        String             @default("Bootstrapped")
-  totalFundingInr    String?
-  totalFundingUsd    String?
-  teamSize           String             @default("1-10")
-  districtId         String?
-  district           District?          @relation(fields: [districtId], references: [id])
-  districtName       String
-  districtSlug       String
-  city               String
-  latitude           Float
-  longitude          Float
-  sectors            String[]
-  founders           Json               @default("[]")
-  fundingRounds      Json               @default("[]")
-  verificationStatus VerificationStatus @default(VERIFIED)
-  source             String             @default("Platform Verification")
-  sourceUrl          String?
-  lastVerifiedAt     DateTime           @default(now())
-  trendingScore      Int                @default(70)
-  claimedByUserId    String?
-  isHiring           Boolean            @default(false)
-  createdAt          DateTime           @default(now())
-  updatedAt          DateTime           @updatedAt
+model Investor {
+  id               String                 @id @default(uuid())
+  publicId         String                 @unique @map("public_id")
+  name             String
+  type             InvestorType           @default(VC)
+  website          String?
+  logoUrl          String?                @map("logo_url")
+  description      String?
+  headquartersCity String?                @map("headquarters_city")
+  createdAt        DateTime               @default(now()) @map("created_at")
+  updatedAt        DateTime               @updatedAt @map("updated_at")
 
-  bookmarks          Bookmark[]
+  leadRounds       FundingRound[]         @relation("LeadInvestorRounds")
+  roundInvestments FundingRoundInvestor[]
 
-  @@index([districtSlug])
-  @@index([trendingScore])
-  @@map("startups")
+  @@map("investors")
 }
 
-model Submission {
-  id                String           @id @default(uuid())
-  data              Json
-  status            SubmissionStatus @default(PENDING_REVIEW)
-  submittedByEmail  String
-  submittedByUserId String?
-  submittedBy       User?            @relation(fields: [submittedByUserId], references: [id])
-  reviewedByUserId  String?
-  adminNotes        String?
-  createdAt         DateTime         @default(now())
-  updatedAt         DateTime         @updatedAt
+// -----------------------------------------------------------------------------
+// DOMAIN 4: CONTENT & PUBLISHING (4 Tables)
+// -----------------------------------------------------------------------------
 
+model BlogPost {
+  id              String          @id @default(uuid())
+  publicId        String          @unique @map("public_id")
+  slug            String          @unique
+  title           String
+  subtitle        String?
+  category        BlogCategory    @default(FOUNDER_STORIES)
+  coverImageUrl   String?         @map("cover_image_url")
+  authorId        String          @map("author_id")
+  author          UserAccount     @relation("AuthorPosts", fields: [authorId], references: [id])
+  startupId       String?         @map("startup_id")
+  startup         Startup?        @relation(fields: [startupId], references: [id])
+  status          BlogStatus      @default(PUBLISHED)
+  isFeatured      Boolean         @default(false) @map("is_featured")
+  readTimeMinutes Int             @default(5) @map("read_time_minutes")
+  publishedAt     DateTime        @default(now()) @map("published_at")
+  createdAt       DateTime        @default(now()) @map("created_at")
+  updatedAt       DateTime        @updatedAt @map("updated_at")
+  deletedAt       DateTime?       @map("deleted_at")
+  deletedByUserId String?         @map("deleted_by_user_id")
+
+  content         BlogContent?
+  engagement      BlogEngagement?
+  tags            BlogTag[]
+
+  @@index([authorId])
+  @@index([status, publishedAt(sort: Desc)])
+  @@index([isFeatured])
+  @@index([deletedAt])
+  @@map("blog_posts")
+}
+
+model BlogContent {
+  id              String   @id @default(uuid())
+  blogPostId      String   @unique @map("blog_post_id")
+  blogPost        BlogPost @relation(fields: [blogPostId], references: [id], onDelete: Cascade)
+  contentMarkdown String   @map("content_markdown")
+  contentHtml     String?  @map("content_html")
+  wordCount       Int      @default(0) @map("word_count")
+  updatedAt       DateTime @updatedAt @map("updated_at")
+
+  @@map("blog_content")
+}
+
+model BlogTag {
+  id         String   @id @default(uuid())
+  blogPostId String   @map("blog_post_id")
+  blogPost   BlogPost @relation(fields: [blogPostId], references: [id], onDelete: Cascade)
+  tag        String
+
+  @@index([tag])
+  @@index([blogPostId])
+  @@map("blog_tags")
+}
+
+model BlogEngagement {
+  id            String   @id @default(uuid())
+  blogPostId    String   @unique @map("blog_post_id")
+  blogPost      BlogPost @relation(fields: [blogPostId], references: [id], onDelete: Cascade)
+  clapsCount    Int      @default(0) @map("claps_count")
+  viewsCount    Int      @default(0) @map("views_count")
+  sharesCount   Int      @default(0) @map("shares_count")
+  commentsCount Int      @default(0) @map("comments_count")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+
+  @@map("blog_engagement")
+}
+
+// -----------------------------------------------------------------------------
+// DOMAIN 5: MODERATION & WORKFLOWS (6 Tables)
+// -----------------------------------------------------------------------------
+
+model Submission {
+  id                String             @id @default(uuid())
+  publicId          String             @unique @map("public_id")
+  data              Json
+  status            SubmissionStatus   @default(PENDING_REVIEW)
+  submittedByEmail  String             @map("submitted_by_email")
+  submittedByUserId String?            @map("submitted_by_user_id")
+  submittedByUser   UserAccount?       @relation("SubmittedByUser", fields: [submittedByUserId], references: [id])
+  createdAt         DateTime           @default(now()) @map("created_at")
+  updatedAt         DateTime           @updatedAt @map("updated_at")
+
+  reviews           SubmissionReview[]
+
+  @@index([status])
+  @@index([submittedByEmail])
   @@map("submissions")
 }
 
-model Claim {
-  id               String      @id @default(uuid())
-  startupId        String
-  startupSlug      String
-  startupName      String
-  claimantName     String
-  claimantEmail    String
-  claimantRole     String
-  claimantLinkedin String?
-  proofDetails     String
-  status           ClaimStatus @default(PENDING_REVIEW)
-  userId           String?
-  user             User?       @relation(fields: [userId], references: [id])
-  reviewedByUserId String?
-  adminNotes       String?
-  createdAt        DateTime    @default(now())
-  updatedAt        DateTime    @updatedAt
+model SubmissionReview {
+  id             String       @id @default(uuid())
+  submissionId   String       @map("submission_id")
+  submission     Submission   @relation(fields: [submissionId], references: [id], onDelete: Cascade)
+  reviewerUserId String       @map("reviewer_user_id")
+  reviewerUser   UserAccount  @relation("ReviewedByUser", fields: [reviewerUserId], references: [id])
+  action         ReviewAction
+  notes          String?
+  createdAt      DateTime     @default(now()) @map("created_at")
 
+  @@index([submissionId])
+  @@map("submission_reviews")
+}
+
+model Claim {
+  id            String          @id @default(uuid())
+  publicId      String          @unique @map("public_id")
+  startupId     String          @map("startup_id")
+  startup       Startup         @relation(fields: [startupId], references: [id], onDelete: Cascade)
+  userAccountId String?         @map("user_account_id")
+  userAccount   UserAccount?    @relation("UserClaims", fields: [userAccountId], references: [id])
+  claimantName  String          @map("claimant_name")
+  claimantEmail String          @map("claimant_email")
+  claimantRole  String          @map("claimant_role")
+  status        ClaimStatus     @default(PENDING_REVIEW)
+  createdAt     DateTime        @default(now()) @map("created_at")
+  updatedAt     DateTime        @updatedAt @map("updated_at")
+
+  evidence      ClaimEvidence[]
+
+  @@index([startupId])
+  @@index([status])
   @@map("claims")
 }
 
-model Bookmark {
-  id        String   @id @default(uuid())
-  userId    String
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  startupId String
-  startup   Startup  @relation(fields: [startupId], references: [id], onDelete: Cascade)
-  createdAt DateTime @default(now())
+model ClaimEvidence {
+  id               String       @id @default(uuid())
+  claimId          String       @map("claim_id")
+  claim            Claim        @relation(fields: [claimId], references: [id], onDelete: Cascade)
+  evidenceType     EvidenceType @map("evidence_type")
+  url              String?
+  description      String?
+  submittedAt      DateTime     @default(now()) @map("submitted_at")
+  reviewedByUserId String?      @map("reviewed_by_user_id")
+  reviewedByUser   UserAccount? @relation("ReviewedEvidence", fields: [reviewedByUserId], references: [id])
+  reviewNotes      String?      @map("review_notes")
 
-  @@unique([userId, startupId])
+  @@index([claimId])
+  @@map("claim_evidence")
+}
+
+model Bookmark {
+  userAccountId String      @map("user_account_id")
+  userAccount   UserAccount @relation(fields: [userAccountId], references: [id], onDelete: Cascade)
+  startupId     String      @map("startup_id")
+  startup       Startup     @relation(fields: [startupId], references: [id], onDelete: Cascade)
+  createdAt     DateTime    @default(now()) @map("created_at")
+
+  @@id([userAccountId, startupId])
+  @@index([startupId])
   @@map("bookmarks")
+}
+
+model Notification {
+  id              String           @id @default(uuid())
+  publicId        String           @unique @map("public_id")
+  recipientUserId String           @map("recipient_user_id")
+  recipientUser   UserAccount      @relation(fields: [recipientUserId], references: [id], onDelete: Cascade)
+  type            NotificationType
+  title           String
+  message         String
+  entityType      String?          @map("entity_type")
+  entityId        String?          @map("entity_id")
+  isRead          Boolean          @default(false) @map("is_read")
+  readAt          DateTime?        @map("read_at")
+  createdAt       DateTime         @default(now()) @map("created_at")
+
+  @@index([recipientUserId, isRead])
+  @@map("notifications")
+}
+
+// -----------------------------------------------------------------------------
+// DOMAIN 6: SHARED & POLYMORPHIC (2 Tables)
+// -----------------------------------------------------------------------------
+
+model SocialLink {
+  id         String         @id @default(uuid())
+  entityType EntityType     @map("entity_type")
+  entityId   String         @map("entity_id")
+  platform   SocialPlatform
+  url        String
+
+  @@unique([entityType, entityId, platform])
+  @@index([entityType, entityId])
+  @@map("social_links")
+}
+
+model CustomSection {
+  id           String   @id @default(uuid())
+  startupId    String   @map("startup_id")
+  startup      Startup  @relation(fields: [startupId], references: [id], onDelete: Cascade)
+  title        String
+  content      String
+  displayOrder Int      @default(0) @map("display_order")
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  @@index([startupId, displayOrder])
+  @@map("custom_sections")
+}
+
+// -----------------------------------------------------------------------------
+// DOMAIN 7: AUDIT & TELEMETRY (2 Tables)
+// -----------------------------------------------------------------------------
+
+model AuditLog {
+  id           String       @id @default(uuid())
+  actorId      String?      @map("actor_id")
+  actor        UserAccount? @relation("ActorAuditLogs", fields: [actorId], references: [id])
+  actorEmail   String?      @map("actor_email")
+  action       String
+  entityType   String       @map("entity_type")
+  entityId     String?      @map("entity_id")
+  oldValue     Json?        @map("old_value")
+  newValue     Json?        @map("new_value")
+  ipAddress    String?      @map("ip_address")
+  userAgent    String?      @map("user_agent")
+  metadata     Json?
+  createdAt    DateTime     @default(now()) @map("created_at")
+
+  @@index([entityType, entityId])
+  @@index([actorId, createdAt(sort: Desc)])
+  @@index([action, createdAt(sort: Desc)])
+  @@map("audit_logs")
+}
+
+model PageView {
+  id           String   @id @default(uuid())
+  entityType   String   @map("entity_type")
+  entityId     String   @map("entity_id")
+  viewerIpHash String?  @map("viewer_ip_hash")
+  sessionId    String?  @map("session_id")
+  referrer     String?
+  createdAt    DateTime @default(now()) @map("created_at")
+
+  @@index([entityType, entityId, createdAt(sort: Desc)])
+  @@map("page_views")
 }

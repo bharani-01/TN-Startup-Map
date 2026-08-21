@@ -15,8 +15,8 @@ export const FeaturedLeaders: React.FC = () => {
   ];
 
   return (
-    <section className="max-w-[1536px] mx-auto px-4 sm:px-8 lg:px-12 -mt-10 sm:-mt-14 lg:-mt-16 relative z-20">
-      <div className="p-4 sm:p-6 rounded-3xl bg-white/95 backdrop-blur-2xl border border-black/[0.07] shadow-apple-card">
+    <section className="max-w-[1536px] mx-auto px-4 sm:px-8 lg:px-12 relative z-20">
+      <div className="p-4 sm:p-6 rounded-3xl bg-white border border-black/[0.07] shadow-apple-card">
         <div className="flex items-center justify-between gap-4 mb-4">
           <div className="flex items-center gap-2">
             <span className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-[#86868B]">

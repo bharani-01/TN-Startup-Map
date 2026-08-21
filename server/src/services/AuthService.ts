@@ -6,12 +6,12 @@ import {
   LoginDTO, 
   UserPublicProfile, 
   User, 
-  generateInternalUserId, 
-  generateDisplayUserId 
+  generateInternalUserId 
 } from '../models/User.js';
 import { UserRole } from '../utils/constants.js';
 import { ApiError } from '../utils/ApiError.js';
 import { config } from '../config/index.js';
+import { generatePublicId } from '../utils/publicId.js';
 
 export class AuthService {
   async register(data: RegisterDTO): Promise<{ user: UserPublicProfile; token: string }> {
@@ -22,10 +22,12 @@ export class AuthService {
 
     const passwordHash = await bcrypt.hash(data.password, config.bcryptRounds);
     const role = data.roleIntent === 'FOUNDER' ? UserRole.FOUNDER : UserRole.USER;
+    const publicId = generatePublicId('usr');
 
     const newUser: User = {
       id: generateInternalUserId(),
-      displayId: generateDisplayUserId(role),
+      publicId,
+      displayId: publicId,
       email: data.email.toLowerCase().trim(),
       name: data.name.trim(),
       role,
@@ -41,7 +43,10 @@ export class AuthService {
     const { passwordHash: _, ...publicUser } = newUser;
 
     return {
-      user: publicUser as UserPublicProfile,
+      user: {
+        ...publicUser,
+        displayName: publicUser.name,
+      } as UserPublicProfile,
       token,
     };
   }
@@ -61,7 +66,10 @@ export class AuthService {
     const { passwordHash: _, ...publicUser } = user;
 
     return {
-      user: publicUser as UserPublicProfile,
+      user: {
+        ...publicUser,
+        displayName: publicUser.name,
+      } as UserPublicProfile,
       token,
     };
   }
@@ -73,13 +81,17 @@ export class AuthService {
     }
 
     const { passwordHash: _, ...publicUser } = user;
-    return publicUser as UserPublicProfile;
+    return {
+      ...publicUser,
+      displayName: publicUser.name,
+    } as UserPublicProfile;
   }
 
   private generateToken(user: User): string {
     return jwt.sign(
       {
         id: user.id,
+        publicId: user.publicId,
         email: user.email,
         role: user.role,
         name: user.name,

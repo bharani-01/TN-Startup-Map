@@ -12,6 +12,10 @@ import { User } from '../models/User.js';
 import { Submission } from '../models/Submission.js';
 import { Claim } from '../models/Claim.js';
 import { BlogPost } from '../models/BlogPost.js';
+import { Investor } from '../models/Investor.js';
+import { AuditLog, CreateAuditLogDTO } from '../models/AuditLog.js';
+import { Notification } from '../models/Notification.js';
+import { generatePublicId } from '../utils/publicId.js';
 
 export const prisma = new PrismaClient();
 
@@ -20,7 +24,7 @@ class SpatialDatabase {
   private isConnected: boolean = false;
   private usePrisma: boolean = true;
 
-  // In-memory runtime mirror for high-speed spatial querying
+  // In-memory runtime mirror for high-speed spatial querying and instant filtering
   public startups: Map<string, Startup> = new Map();
   public districts: Map<string, District> = new Map();
   public sectors: Map<string, Sector> = new Map();
@@ -28,6 +32,9 @@ class SpatialDatabase {
   public submissions: Map<string, Submission> = new Map();
   public claims: Map<string, Claim> = new Map();
   public blogs: Map<string, BlogPost> = new Map();
+  public investors: Map<string, Investor> = new Map();
+  public notifications: Map<string, Notification> = new Map();
+  public auditLogs: AuditLog[] = [];
 
   private constructor() {}
 
@@ -42,34 +49,109 @@ class SpatialDatabase {
     try {
       await prisma.$connect();
       this.isConnected = true;
-      logger.info('🐘 Connected to PostgreSQL Database via Prisma ORM');
+      logger.info('🐘 Connected to PostgreSQL Database via Prisma ORM (35 Decomposed Models Active)');
       await this.syncFromDatabase();
     } catch (err: any) {
       this.usePrisma = false;
-      logger.warn(`PostgreSQL direct connection fallback: ${err.message}. Initializing in-memory spatial cache.`);
+      logger.warn(`PostgreSQL direct connection fallback: ${err.message}. Initializing in-memory spatial cache with cryptographic IDs.`);
       this.seedInMemory();
+    }
+  }
+
+  public async recordAuditLog(entry: CreateAuditLogDTO): Promise<void> {
+    const logItem: AuditLog = {
+      id: generatePublicId('aud'),
+      actorId: entry.actorId || null,
+      actorEmail: entry.actorEmail || null,
+      action: entry.action,
+      entityType: entry.entityType,
+      entityId: entry.entityId || null,
+      oldValue: entry.oldValue || null,
+      newValue: entry.newValue || null,
+      ipAddress: entry.ipAddress || null,
+      userAgent: entry.userAgent || null,
+      metadata: entry.metadata || null,
+      createdAt: new Date().toISOString(),
+    };
+
+    this.auditLogs.unshift(logItem);
+    if (this.auditLogs.length > 5000) {
+      this.auditLogs.pop();
+    }
+
+    if (this.isConnected) {
+      try {
+        await (prisma as any).auditLog?.create({
+          data: {
+            actorId: entry.actorId,
+            actorEmail: entry.actorEmail,
+            action: entry.action,
+            entityType: entry.entityType,
+            entityId: entry.entityId,
+            oldValue: entry.oldValue ? (entry.oldValue as any) : undefined,
+            newValue: entry.newValue ? (entry.newValue as any) : undefined,
+            ipAddress: entry.ipAddress,
+            userAgent: entry.userAgent,
+            metadata: entry.metadata ? (entry.metadata as any) : undefined,
+          },
+        });
+      } catch (err: any) {
+        logger.warn(`Could not persist audit log to DB: ${err.message}`);
+      }
     }
   }
 
   private async syncFromDatabase(): Promise<void> {
     try {
-      const [dbDistricts, dbSectors, dbUsers, dbStartups, dbSubmissions, dbClaims] = await Promise.all([
-        prisma.district.findMany(),
-        prisma.sector.findMany(),
-        prisma.user.findMany(),
-        prisma.startup.findMany(),
-        prisma.submission.findMany(),
-        prisma.claim.findMany(),
+      const p = prisma as any;
+      const [
+        dbDistricts,
+        dbSectors,
+        dbUsers,
+        dbStartups,
+        dbSubmissions,
+        dbClaims,
+        dbBlogs,
+        dbInvestors,
+      ] = await Promise.all([
+        p.district?.findMany ? p.district.findMany({ include: { metadata: true } }).catch(() => []) : [],
+        p.sector?.findMany ? p.sector.findMany().catch(() => []) : [],
+        p.userAccount?.findMany ? p.userAccount.findMany({ include: { profile: true, contact: true } }).catch(() => []) : [],
+        p.startup?.findMany ? p.startup.findMany({
+          include: {
+            details: true,
+            location: { include: { district: true } },
+            financials: true,
+            media: true,
+            sectors: { include: { sector: true } },
+            techStack: true,
+            founders: true,
+            fundingRounds: { include: { investors: { include: { investor: true } } } },
+            customSections: true,
+          },
+        }).catch(() => []) : [],
+        p.submission?.findMany ? p.submission.findMany({ include: { reviews: true } }).catch(() => []) : [],
+        p.claim?.findMany ? p.claim.findMany({ include: { evidence: true } }).catch(() => []) : [],
+        p.blogPost?.findMany ? p.blogPost.findMany({
+          include: {
+            content: true,
+            engagement: true,
+            tags: true,
+            author: { include: { profile: true } },
+            startup: true,
+          },
+        }).catch(() => []) : [],
+        p.investor?.findMany ? p.investor.findMany().catch(() => []) : [],
       ]);
 
-      if (dbStartups.length === 0) {
-        logger.info('Database empty. Seeding initial data via Prisma...');
+      if (!dbStartups || dbStartups.length === 0) {
+        logger.info('Database empty or not yet migrated. Seeding initial data in-memory...');
         this.seedInMemory();
         return;
       }
 
       this.districts.clear();
-      dbDistricts.forEach((d: any) => {
+      (dbDistricts || []).forEach((d: any) => {
         this.districts.set(d.id, {
           id: d.id,
           name: d.name,
@@ -77,15 +159,15 @@ class SpatialDatabase {
           headquarters: d.headquarters,
           latitude: d.latitude,
           longitude: d.longitude,
-          description: d.description,
-          keySectors: d.keySectors,
-          incubatorsCount: d.incubatorsCount,
+          description: d.metadata?.description || `${d.name} district, Tamil Nadu`,
+          keySectors: d.metadata?.keySectors || [],
+          incubatorsCount: d.metadata?.incubatorsCount || 0,
           startupsCount: 0,
         });
       });
 
       this.sectors.clear();
-      dbSectors.forEach((s: any) => {
+      (dbSectors || []).forEach((s: any) => {
         this.sectors.set(s.id, {
           id: s.id,
           name: s.name,
@@ -97,171 +179,273 @@ class SpatialDatabase {
         });
       });
 
+      this.investors.clear();
+      (dbInvestors || []).forEach((inv: any) => {
+        this.investors.set(inv.id, {
+          id: inv.id,
+          publicId: inv.publicId,
+          name: inv.name,
+          type: inv.type,
+          website: inv.website || undefined,
+          logoUrl: inv.logoUrl || undefined,
+          description: inv.description || undefined,
+          headquartersCity: inv.headquartersCity || undefined,
+          createdAt: inv.createdAt.toISOString(),
+          updatedAt: inv.updatedAt.toISOString(),
+        });
+      });
+
       this.users.clear();
-      dbUsers.forEach((u: any) => {
+      (dbUsers || []).forEach((u: any) => {
         this.users.set(u.id, {
           id: u.id,
-          displayId: u.displayId || 'TN-USR-1000',
+          publicId: u.publicId,
           email: u.email,
-          name: u.name,
+          name: u.profile?.displayName || u.email.split('@')[0],
           role: u.role as any,
           passwordHash: u.passwordHash || '',
-          avatarUrl: u.avatarUrl || undefined,
-          companyName: u.companyName || undefined,
-          claimedStartupId: u.claimedStartupId || undefined,
+          avatarUrl: u.profile?.avatarUrl || undefined,
+          bio: u.profile?.bio || undefined,
+          companyName: u.profile?.companyName || undefined,
+          phone: u.contact?.phone || undefined,
+          isEmailVerified: u.isEmailVerified,
+          isActive: u.isActive,
           createdAt: u.createdAt.toISOString(),
           updatedAt: u.updatedAt.toISOString(),
         });
       });
 
       this.startups.clear();
-      dbStartups.forEach((st: any) => {
-        const initialMatch = INITIAL_STARTUPS.find((i) => i.slug === st.slug || i.id === st.id);
+      (dbStartups || []).forEach((st: any) => {
+        const detail = st.details;
+        const loc = st.location;
+        const fin = st.financials;
+        const sectorsList = (st.sectors || []).map((s: any) => s.sector?.name || '');
+
+        const foundersList = (st.founders || []).map((f: any) => ({
+          id: f.id,
+          publicId: f.publicId,
+          name: f.name,
+          role: f.roleTitle,
+          roleTitle: f.roleTitle,
+          bio: f.bio || undefined,
+          email: f.email || undefined,
+          avatarUrl: f.avatarUrl || undefined,
+          education: f.education || undefined,
+          previousCompanies: f.previousCompanies || undefined,
+        }));
+
+        const roundsList = (st.fundingRounds || []).map((r: any) => ({
+          id: r.id,
+          roundType: r.roundType,
+          amountInr: r.amountInr || undefined,
+          amountUsd: r.amountUsd || undefined,
+          date: r.roundDate ? r.roundDate.toISOString() : new Date().toISOString(),
+          roundDate: r.roundDate ? r.roundDate.toISOString() : new Date().toISOString(),
+          investors: r.investors ? r.investors.map((i: any) => i.investor?.name || '') : [],
+          sourceUrl: r.sourceUrl || undefined,
+        }));
+
         this.startups.set(st.id, {
           id: st.id,
+          publicId: st.publicId,
           slug: st.slug,
           name: st.name,
           tagline: st.tagline,
-          description: st.description,
-          logoUrl: st.logoUrl || initialMatch?.logoUrl || undefined,
-          brandColor: st.brandColor || undefined,
+          description: detail?.description || '',
+          extendedBio: detail?.extendedBio || undefined,
+          logoUrl: detail?.logoUrl || undefined,
+          bannerUrl: detail?.bannerUrl || undefined,
+          brandColor: detail?.brandColor || undefined,
           website: st.website,
-          linkedin: st.linkedin || undefined,
-          twitter: st.twitter || undefined,
-          github: st.github || undefined,
           foundedYear: st.foundedYear,
           stage: st.stage as any,
           fundingType: st.fundingType as any,
-          totalFundingInr: st.totalFundingInr || undefined,
-          totalFundingUsd: st.totalFundingUsd || undefined,
+          totalFundingInr: fin?.totalFundingInr || undefined,
+          totalFundingUsd: fin?.totalFundingUsd || undefined,
           teamSize: st.teamSize,
-          district: st.districtName,
-          districtSlug: st.districtSlug,
-          city: st.city,
-          latitude: st.latitude,
-          longitude: st.longitude,
-          sectors: st.sectors,
-          founders: (st.founders as any) || [],
-          fundingRounds: (st.fundingRounds as any) || [],
+          district: loc?.district?.name || 'Chennai',
+          districtId: loc?.districtId || undefined,
+          districtSlug: loc?.district?.slug || 'chennai',
+          city: loc?.city || 'Chennai',
+          latitude: loc?.latitude || 13.0827,
+          longitude: loc?.longitude || 80.2707,
+          sectors: sectorsList,
+          founders: foundersList,
+          fundingRounds: roundsList,
           verificationStatus: st.verificationStatus as any,
-          source: st.source,
-          sourceUrl: st.sourceUrl || undefined,
-          lastVerifiedAt: st.lastVerifiedAt.toISOString(),
+          source: detail?.source || 'Platform Verification',
+          sourceUrl: detail?.sourceUrl || undefined,
+          lastVerifiedAt: detail?.lastVerifiedAt ? detail.lastVerifiedAt.toISOString() : st.updatedAt.toISOString(),
           trendingScore: st.trendingScore,
           claimedByUserId: st.claimedByUserId || undefined,
           isHiring: st.isHiring,
+          isDeleted: Boolean(st.deletedAt),
+          deletedAt: st.deletedAt ? st.deletedAt.toISOString() : null,
+          deletedByUserId: st.deletedByUserId || null,
           createdAt: st.createdAt.toISOString(),
           updatedAt: st.updatedAt.toISOString(),
         });
       });
 
+      this.blogs.clear();
+      (dbBlogs || []).forEach((b: any) => {
+        const catMap: Record<string, any> = {
+          FOUNDER_STORIES: 'Founder Stories',
+          ECOSYSTEM_NEWS: 'Ecosystem News',
+          DEEPTECH_INSIGHTS: 'DeepTech Insights',
+          POLICY_GRANTS: 'Policy & Grants',
+          FUNDRAISING: 'Fundraising',
+          TECH_ARCHITECTURE: 'Tech Architecture',
+        };
+
+        this.blogs.set(b.id, {
+          id: b.id,
+          publicId: b.publicId,
+          slug: b.slug,
+          title: b.title,
+          subtitle: b.subtitle || undefined,
+          content: b.content?.contentMarkdown || '',
+          category: catMap[b.category] || 'Founder Stories',
+          coverImageUrl: b.coverImageUrl || undefined,
+          tags: b.tags ? b.tags.map((t: any) => t.tag) : [],
+          authorId: b.authorId,
+          authorPublicId: b.author?.publicId,
+          authorName: b.author?.profile?.displayName || b.author?.email || 'Contributor',
+          authorRole: b.author?.role || 'Contributor',
+          authorEmail: b.author?.email || '',
+          authorAvatarUrl: b.author?.profile?.avatarUrl || undefined,
+          isFounder: b.author?.role === 'FOUNDER',
+          startupId: b.startupId || undefined,
+          startupName: b.startup?.name || undefined,
+          startupSlug: b.startup?.slug || undefined,
+          status: b.status as any,
+          featured: b.isFeatured,
+          clapsCount: b.engagement?.clapsCount || 0,
+          viewsCount: b.engagement?.viewsCount || 0,
+          sharesCount: b.engagement?.sharesCount || 0,
+          readTimeMinutes: b.readTimeMinutes,
+          publishedAt: b.publishedAt.toISOString(),
+          isDeleted: Boolean(b.deletedAt),
+          deletedAt: b.deletedAt ? b.deletedAt.toISOString() : null,
+          deletedByUserId: b.deletedByUserId || null,
+          createdAt: b.createdAt.toISOString(),
+          updatedAt: b.updatedAt.toISOString(),
+        });
+      });
+
       this.submissions.clear();
-      dbSubmissions.forEach((sub: any) => {
+      (dbSubmissions || []).forEach((sub: any) => {
         this.submissions.set(sub.id, {
           id: sub.id,
+          publicId: sub.publicId,
           data: sub.data as any,
           status: sub.status as any,
           submittedByEmail: sub.submittedByEmail,
           submittedByUserId: sub.submittedByUserId || undefined,
-          reviewedByUserId: sub.reviewedByUserId || undefined,
-          adminNotes: sub.adminNotes || undefined,
           createdAt: sub.createdAt.toISOString(),
           updatedAt: sub.updatedAt.toISOString(),
         });
       });
 
       this.claims.clear();
-      dbClaims.forEach((cl: any) => {
+      (dbClaims || []).forEach((cl: any) => {
         this.claims.set(cl.id, {
           id: cl.id,
+          publicId: cl.publicId,
           startupId: cl.startupId,
-          startupSlug: cl.startupSlug,
-          startupName: cl.startupName,
+          startupSlug: '',
+          startupName: '',
           claimantName: cl.claimantName,
           claimantEmail: cl.claimantEmail,
           claimantRole: cl.claimantRole,
-          claimantLinkedin: cl.claimantLinkedin || undefined,
-          proofDetails: cl.proofDetails,
+          proofDetails: cl.evidence?.[0]?.description || '',
           status: cl.status as any,
-          userId: cl.userId || undefined,
-          reviewedByUserId: cl.reviewedByUserId || undefined,
-          adminNotes: cl.adminNotes || undefined,
+          userId: cl.userAccountId || undefined,
+          userAccountId: cl.userAccountId || undefined,
           createdAt: cl.createdAt.toISOString(),
           updatedAt: cl.updatedAt.toISOString(),
         });
       });
 
-      // Always populate blogs
-      this.blogs.clear();
-      INITIAL_BLOGS.forEach((b) => this.blogs.set(b.id, { ...b }));
-
-      // If submissions queue is empty, populate test submissions
-      if (this.submissions.size === 0) {
-        this.submissions.set('sub-test-01', {
-          id: 'sub-test-01',
-          data: {
-            name: 'Kongu Robotics & Precision AGV',
-            tagline: 'Autonomous guided industrial robots for smart textile and auto warehouses',
-            description: 'Kongu Robotics builds high-payload autonomous mobile robots and precision AGVs engineered for heavy industrial environments in Coimbatore and Tiruppur.',
-            website: 'https://kongurobotics.in',
-            founderName: 'Karthik Shanmugam',
-            founderEmail: 'karthik@kongurobotics.in',
-            district: 'Coimbatore',
-            city: 'Coimbatore (Peelamedu Tech Hub)',
-            sectors: ['Robotics', 'Manufacturing', 'DeepTech'],
-            stage: 'Seed',
-            fundingType: 'Venture funded',
-            teamSize: '25-50',
-            foundedYear: 2023,
-          },
-          status: 'PENDING_REVIEW' as any,
-          submittedByEmail: 'karthik@kongurobotics.in',
-          createdAt: new Date().toISOString(),
-          updatedAt: new Date().toISOString(),
-        });
-
-        this.submissions.set('sub-test-02', {
-          id: 'sub-test-02',
-          data: {
-            name: 'Pandya AI Agritech',
-            tagline: 'Hyper-local precision soil intelligence and drip-fertigation IoT for delta farmers',
-            description: 'Pandya AI deploys low-cost optical spectroscopy soil sensors and automated micro-valves to reduce water usage by 40% across Madurai and Thanjavur paddy basins.',
-            website: 'https://pandyaagri.ai',
-            founderName: 'Meenakshi Sundaram',
-            founderEmail: 'meenakshi@pandyaagri.ai',
-            district: 'Madurai',
-            city: 'Madurai (Kappalur Industrial Estate)',
-            sectors: ['Agritech', 'AI', 'IoT'],
-            stage: 'Pre-seed',
-            fundingType: 'Angel',
-            teamSize: '10-20',
-            foundedYear: 2024,
-          },
-          status: 'PENDING_REVIEW' as any,
-          submittedByEmail: 'meenakshi@pandyaagri.ai',
-          createdAt: new Date().toISOString(),
-          updatedAt: new Date().toISOString(),
-        });
-      }
-
       this.recomputeCounts();
-      logger.info(`✅ Loaded ${this.startups.size} startups, ${this.blogs.size} stories, ${this.districts.size} districts, ${this.sectors.size} sectors from PostgreSQL cache`);
+      logger.info(`✅ Loaded ${this.startups.size} startups, ${this.blogs.size} stories, ${this.districts.size} districts, ${this.sectors.size} sectors, ${this.investors.size} investors from PostgreSQL 35-table database.`);
     } catch (err: any) {
       logger.error(`Error syncing from database: ${err.message}`);
       this.seedInMemory();
     }
   }
 
-  private seedInMemory(): void {
+  public seedInMemory(): void {
     ALL_TN_DISTRICTS.forEach((d) => this.districts.set(d.id, { ...d, startupsCount: 0 }));
     INITIAL_SECTORS.forEach((s) => this.sectors.set(s.id, { ...s, startupsCount: 0 }));
-    INITIAL_USERS.forEach((u) => this.users.set(u.id, { ...u }));
-    INITIAL_STARTUPS.forEach((st) => this.startups.set(st.id, { ...st }));
-    INITIAL_BLOGS.forEach((b) => this.blogs.set(b.id, { ...b }));
 
-    // Seed test pending submissions for Admin review testing
+    INITIAL_USERS.forEach((u) => {
+      this.users.set(u.id, {
+        ...u,
+        publicId: (u as any).publicId || generatePublicId('usr'),
+        name: u.name,
+      });
+    });
+
+    INITIAL_STARTUPS.forEach((st) => {
+      this.startups.set(st.id, {
+        ...st,
+        publicId: (st as any).publicId || generatePublicId('stp'),
+        districtId: `dist-${st.districtSlug}`,
+      });
+    });
+
+    INITIAL_BLOGS.forEach((b) => {
+      this.blogs.set(b.id, {
+        ...b,
+        publicId: (b as any).publicId || generatePublicId('blg'),
+      });
+    });
+
+    // Seed top ecosystem investors
+    const initialInvestors: Investor[] = [
+      {
+        id: 'inv-tansim',
+        publicId: generatePublicId('inv'),
+        name: 'StartupTN / TANFUND (Govt. of Tamil Nadu)',
+        type: 'GOVERNMENT',
+        website: 'https://startuptn.in',
+        description: 'Tamil Nadu government seed fund and venture debt initiative empowering regional deeptech & grassroots startups.',
+        headquartersCity: 'Chennai',
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+      },
+      {
+        id: 'inv-specialinvest',
+        publicId: generatePublicId('inv'),
+        name: 'Speciale Invest',
+        type: 'VC',
+        website: 'https://specialeinvest.com',
+        description: 'Pioneering seed-stage DeepTech venture capital firm investing across SpaceTech, Quantum, AI, and Semiconductors.',
+        headquartersCity: 'Chennai',
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+      },
+      {
+        id: 'inv-iitm-incubator',
+        publicId: generatePublicId('inv'),
+        name: 'IIT Madras Incubation Cell (IITMIC)',
+        type: 'ACCELERATOR',
+        website: 'https://incubation.iitm.ac.in',
+        description: 'Indias premier deep technology business incubator nurturing hardware, aerospace, AI, and green mobility startups.',
+        headquartersCity: 'Chennai',
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+      },
+    ];
+
+    initialInvestors.forEach((inv) => this.investors.set(inv.id, inv));
+
+    // Seed test pending submissions with public IDs
     this.submissions.set('sub-test-01', {
       id: 'sub-test-01',
+      publicId: generatePublicId('sub'),
       data: {
         name: 'Kongu Robotics & Precision AGV',
         tagline: 'Autonomous guided industrial robots for smart textile and auto warehouses',
@@ -283,41 +467,17 @@ class SpatialDatabase {
       updatedAt: new Date().toISOString(),
     });
 
-    this.submissions.set('sub-test-02', {
-      id: 'sub-test-02',
-      data: {
-        name: 'Pandya AI Agritech',
-        tagline: 'Hyper-local precision soil intelligence and drip-fertigation IoT for delta farmers',
-        description: 'Pandya AI deploys low-cost optical spectroscopy soil sensors and automated micro-valves to reduce water usage by 40% across Madurai and Thanjavur paddy basins.',
-        website: 'https://pandyaagri.ai',
-        founderName: 'Meenakshi Sundaram',
-        founderEmail: 'meenakshi@pandyaagri.ai',
-        district: 'Madurai',
-        city: 'Madurai (Kappalur Industrial Estate)',
-        sectors: ['Agritech', 'AI', 'IoT'],
-        stage: 'Pre-seed',
-        fundingType: 'Angel',
-        teamSize: '10-20',
-        foundedYear: 2024,
-      },
-      status: 'PENDING_REVIEW' as any,
-      submittedByEmail: 'meenakshi@pandyaagri.ai',
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
-    });
-
-    // Seed test pending founder claim for Admin verification testing
     this.claims.set('clm-test-01', {
       id: 'clm-test-01',
+      publicId: generatePublicId('clm'),
       startupId: 'stp-ather',
       startupSlug: 'ather-energy',
       startupName: 'Ather Energy',
       claimantName: 'Tarun Mehta',
       claimantEmail: 'tarun@atherenergy.com',
       claimantRole: 'Co-Founder & CEO',
-      claimantLinkedin: 'https://linkedin.com/in/tarunmehta',
       proofDetails: 'Official corporate domain email & IIT Madras incubation verification document reference.',
-      status: 'PENDING' as any,
+      status: 'PENDING_REVIEW' as any,
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
     });
@@ -334,7 +494,7 @@ class SpatialDatabase {
     }
 
     for (const startup of this.startups.values()) {
-      if (startup.verificationStatus !== 'REJECTED') {
+      if (startup.verificationStatus !== 'REJECTED' && !startup.isDeleted) {
         const dist = Array.from(this.districts.values()).find(
           (d) => d.slug === startup.districtSlug || d.name.toLowerCase() === startup.district.toLowerCase()
         );

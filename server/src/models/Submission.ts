@@ -22,14 +22,25 @@ export interface StartupSubmissionDTO {
   sourceUrl?: string;
 }
 
+export interface SubmissionReviewItem {
+  id?: string;
+  reviewerUserId: string;
+  reviewerName?: string;
+  action: 'COMMENT' | 'APPROVE' | 'REJECT' | 'REQUEST_CHANGES';
+  notes?: string;
+  createdAt: string;
+}
+
 export interface Submission {
-  id: string;
+  id: string; // UUID primary key
+  publicId?: string; // Cryptographic public ID (sub_...)
   data: StartupSubmissionDTO;
   status: SubmissionStatus;
   submittedByEmail: string;
   submittedByUserId?: string;
   reviewedByUserId?: string;
   adminNotes?: string;
+  reviews?: SubmissionReviewItem[];
   createdAt: string;
   updatedAt: string;
 }

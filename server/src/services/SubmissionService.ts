@@ -4,9 +4,10 @@ import { userRepository } from '../repositories/UserRepository.js';
 import { startupService } from './StartupService.js';
 import { emailService } from './EmailService.js';
 import { StartupSubmissionDTO, Submission } from '../models/Submission.js';
-import { generateInternalUserId, generateDisplayUserId } from '../models/User.js';
+import { generateInternalUserId } from '../models/User.js';
 import { SubmissionStatus, VerificationStatus, UserRole } from '../utils/constants.js';
 import { ApiError } from '../utils/ApiError.js';
+import { generatePublicId } from '../utils/publicId.js';
 
 export class SubmissionService {
   async submitStartup(data: StartupSubmissionDTO, userEmail?: string, userId?: string): Promise<Submission> {
@@ -16,6 +17,7 @@ export class SubmissionService {
 
     const newSub: Submission = {
       id: `sub-${Date.now()}-${Math.random().toString(36).substring(2, 7)}`,
+      publicId: generatePublicId('sub'),
       data,
       status: SubmissionStatus.PENDING_REVIEW,
       submittedByEmail: userEmail || data.founderEmail,
@@ -107,9 +109,13 @@ export class SubmissionService {
       isNewUser = true;
       tempPassword = emailService.generateTempPassword();
       const passwordHash = await bcrypt.hash(tempPassword, 10);
+      const userId = generateInternalUserId();
+      const publicId = generatePublicId('usr');
+
       const newUser = {
-        id: generateInternalUserId(),
-        displayId: generateDisplayUserId(UserRole.FOUNDER),
+        id: userId,
+        publicId,
+        displayId: publicId,
         email: founderEmail,
         name: founderName,
         role: UserRole.FOUNDER,
@@ -145,8 +151,9 @@ export class SubmissionService {
       startup: createdStartup,
       founderAccount: {
         email: founderEmail,
+        name: founderName,
         isNewUser,
-        tempPassword: isNewUser ? tempPassword : null,
+        tempPassword: isNewUser ? tempPassword : undefined,
       },
     };
   }
@@ -157,13 +164,14 @@ export class SubmissionService {
       throw ApiError.notFound('Submission record not found');
     }
 
-    await submissionRepository.updateStatus(submissionId, SubmissionStatus.REJECTED, reviewedByUserId, reason || 'Rejected by administrator');
-
-    return {
+    const updated = await submissionRepository.updateStatus(
       submissionId,
-      status: SubmissionStatus.REJECTED,
-      reason,
-    };
+      SubmissionStatus.REJECTED,
+      reviewedByUserId,
+      reason || 'Submission does not meet listing criteria'
+    );
+
+    return updated;
   }
 }
 
