@@ -1,5 +1,5 @@
 # Firebase App Hosting Configuration for Tamil Nadu Startup Connect
-# Documentation: https://firebase.google.com/docs/app-hosting/configure
+# Secrets must NOT be committed to Git. Configure secrets in Firebase Console / Cloud Secret Manager.
 
 runConfig:
   minInstances: 0
@@ -11,16 +11,3 @@ runConfig:
 env:
   - variable: NODE_ENV
     value: "production"
-  - variable: DATABASE_URL
-    value: "postgresql://postgres.ajdhxuqpkwjbcbjxrwed:Tn_startup_mapss@aws-0-ap-southeast-1.pooler.supabase.com:6543/postgres?pgbouncer=true"
-    availability:
-      - RUNTIME
-  - variable: DIRECT_URL
-    value: "postgresql://postgres.ajdhxuqpkwjbcbjxrwed:Tn_startup_mapss@aws-0-ap-southeast-1.pooler.supabase.com:5432/postgres"
-    availability:
-      - BUILD
-      - RUNTIME
-  - variable: JWT_SECRET
-    value: "tn_startup_map_enterprise_jwt_secret_key_2026_super_secure"
-    availability:
-      - RUNTIME
