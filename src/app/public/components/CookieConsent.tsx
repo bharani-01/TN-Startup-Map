@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ShieldCheck, Cookie, X, Check, Sliders, ChevronDown } from 'lucide-react';
+import { ShieldCheck, X, Sliders, Check } from 'lucide-react';
 
 export const CookieConsent: React.FC = () => {
   const [visible, setVisible] = useState(false);
@@ -10,8 +10,7 @@ export const CookieConsent: React.FC = () => {
   useEffect(() => {
     const consent = localStorage.getItem('tn_cookie_consent');
     if (!consent) {
-      // Small delay for natural Apple spring entrance
-      const timer = setTimeout(() => setVisible(true), 1000);
+      const timer = setTimeout(() => setVisible(true), 1200);
       return () => clearTimeout(timer);
     }
   }, []);
@@ -44,20 +43,23 @@ export const CookieConsent: React.FC = () => {
   if (!visible) return null;
 
   return (
-    <div className="fixed bottom-4 sm:bottom-6 inset-x-4 sm:inset-x-6 z-50 max-w-xl mx-auto animate-in slide-in-from-bottom-8 duration-300">
-      <div className="p-5 sm:p-6 rounded-3xl bg-[#1c1c1e]/95 backdrop-blur-2xl border border-white/15 text-white shadow-apple-modal space-y-4">
+    <aside
+      aria-label="Cookie and Privacy Consent"
+      className="fixed bottom-5 right-5 sm:bottom-6 sm:right-6 z-50 max-w-sm sm:max-w-md w-[calc(100vw-2.5rem)] animate-in fade-in slide-in-from-bottom-5 duration-300"
+    >
+      <div className="p-5 sm:p-6 rounded-3xl bg-white/95 backdrop-blur-2xl border border-black/[0.08] text-[#1D1D1F] shadow-[0_20px_60px_-15px_rgba(0,0,0,0.18)] space-y-3.5">
         
-        {/* Header Bar */}
-        <div className="flex items-start justify-between gap-3">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-2xl bg-[#0071E3]/20 text-[#0071E3] border border-[#0071E3]/30 flex items-center justify-center shrink-0">
-              <Cookie className="w-5 h-5" />
+        {/* Header */}
+        <div className="flex items-center justify-between gap-3">
+          <div className="flex items-center gap-2.5">
+            <div className="w-8 h-8 rounded-xl bg-[#0071E3]/10 text-[#0071E3] flex items-center justify-center shrink-0">
+              <ShieldCheck className="w-4.5 h-4.5" />
             </div>
             <div>
-              <h3 className="font-display font-extrabold text-sm sm:text-base text-white tracking-tight">
-                Cookie & Privacy Choices
+              <h3 className="font-display font-extrabold text-xs sm:text-sm text-[#1D1D1F] tracking-tight">
+                Privacy & Data Preferences
               </h3>
-              <p className="text-[11px] text-slate-400">
+              <p className="text-[10px] text-[#86868B] font-medium">
                 Tamil Nadu Startup Connect
               </p>
             </div>
@@ -65,56 +67,63 @@ export const CookieConsent: React.FC = () => {
 
           <button
             onClick={() => setVisible(false)}
-            className="p-1.5 rounded-full bg-white/5 hover:bg-white/15 text-slate-400 hover:text-white transition-all"
-            aria-label="Close banner"
+            className="p-1.5 rounded-full hover:bg-black/[0.05] text-[#86868B] hover:text-[#1D1D1F] transition-all cursor-pointer"
+            aria-label="Dismiss cookie notice"
           >
             <X className="w-4 h-4" />
           </button>
         </div>
 
-        {/* Explanatory Content */}
-        <p className="text-xs text-slate-300 leading-relaxed">
-          We use strictly necessary cookies to keep you signed in securely and first-party telemetry to understand ecosystem discovery traffic. We never sell your personal data or use cross-site trackers.
+        {/* Description */}
+        <p className="text-[11px] sm:text-xs text-[#515154] leading-relaxed">
+          We use strictly essential tokens for secure authentication and first-party telemetry to understand ecosystem discovery. We do not sell data or use third-party ad trackers.
         </p>
 
-        {/* Detailed Preferences Panel (Collapsible) */}
+        {/* Preferences Drawer */}
         {showPreferences && (
-          <div className="pt-2 space-y-3 border-t border-white/10 text-xs">
-            <div className="flex items-center justify-between p-3 rounded-2xl bg-white/5 border border-white/10">
-              <div className="space-y-0.5 pr-2">
-                <span className="font-bold text-white block">Essential System Cookies</span>
-                <p className="text-[11px] text-slate-400">Required for authentication, session verification, and security tokens.</p>
+          <div className="pt-2 space-y-2 border-t border-black/[0.06] text-[11px]">
+            <div className="flex items-center justify-between p-2.5 rounded-2xl bg-black/[0.02] border border-black/[0.04]">
+              <div>
+                <span className="font-bold text-[#1D1D1F] block">Essential Session Tokens</span>
+                <span className="text-[10px] text-[#86868B]">Security & logged-in state</span>
               </div>
-              <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded-full bg-[#0071E3]/20 text-[#0071E3] border border-[#0071E3]/30 shrink-0">
-                ALWAYS ACTIVE
+              <span className="text-[9px] font-mono font-bold px-2 py-0.5 rounded-full bg-[#0071E3]/10 text-[#0071E3]">
+                REQUIRED
               </span>
             </div>
 
-            <div className="flex items-center justify-between p-3 rounded-2xl bg-white/5 border border-white/10">
-              <div className="space-y-0.5 pr-2">
-                <span className="font-bold text-white block">Ecosystem Traffic Telemetry</span>
-                <p className="text-[11px] text-slate-400">Anonymized view & click metrics to help admin measure startup reach and regional engagement.</p>
+            <div className="flex items-center justify-between p-2.5 rounded-2xl bg-black/[0.02] border border-black/[0.04]">
+              <div>
+                <span className="font-bold text-[#1D1D1F] block">Native Ecosystem Telemetry</span>
+                <span className="text-[10px] text-[#86868B]">Anonymized page views & link clicks</span>
               </div>
               <input
                 type="checkbox"
                 checked={analyticsConsent}
                 onChange={(e) => setAnalyticsConsent(e.target.checked)}
-                className="w-4 h-4 rounded accent-[#0071E3] cursor-pointer shrink-0"
+                className="w-4 h-4 rounded accent-[#0071E3] cursor-pointer"
               />
             </div>
           </div>
         )}
 
-        {/* Action Buttons */}
-        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5 pt-1">
-          <div className="flex items-center gap-3 text-[11px] text-slate-400 justify-center sm:justify-start">
-            <Link to="/privacy" className="hover:text-white underline transition-colors">
-              Privacy Policy
+        {/* Footer & Actions */}
+        <div className="pt-1 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div className="flex items-center gap-2 text-[10px] text-[#86868B]">
+            <Link to="/privacy" className="hover:text-[#0071E3] underline transition-colors">
+              Privacy
             </Link>
             <span>•</span>
-            <Link to="/terms" className="hover:text-white underline transition-colors">
-              Terms of Use
+            <Link to="/terms" className="hover:text-[#0071E3] underline transition-colors">
+              Terms
             </Link>
+            <span>•</span>
+            <button
+              onClick={() => setShowPreferences((p) => !p)}
+              className="hover:text-[#0071E3] underline transition-colors cursor-pointer"
+            >
+              {showPreferences ? 'Hide Options' : 'Customize'}
+            </button>
           </div>
 
           <div className="flex items-center gap-2">
@@ -122,23 +131,15 @@ export const CookieConsent: React.FC = () => {
               <>
                 <button
                   type="button"
-                  onClick={() => setShowPreferences(true)}
-                  className="flex-1 sm:flex-none px-3.5 py-2 rounded-full bg-white/5 hover:bg-white/10 text-slate-300 text-xs font-semibold transition-all apple-press cursor-pointer flex items-center justify-center gap-1"
-                >
-                  <Sliders className="w-3.5 h-3.5" />
-                  <span>Customize</span>
-                </button>
-                <button
-                  type="button"
                   onClick={handleEssentialOnly}
-                  className="flex-1 sm:flex-none px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 text-white text-xs font-semibold transition-all apple-press cursor-pointer"
+                  className="flex-1 sm:flex-none px-3.5 py-1.5 rounded-full bg-black/[0.04] hover:bg-black/[0.08] text-[#1D1D1F] text-xs font-semibold transition-all apple-press cursor-pointer"
                 >
                   Essential Only
                 </button>
                 <button
                   type="button"
                   onClick={handleAcceptAll}
-                  className="flex-1 sm:flex-none px-5 py-2 rounded-full bg-[#0071E3] hover:bg-[#0077ED] text-white text-xs font-semibold shadow-apple-sm transition-all apple-press cursor-pointer"
+                  className="flex-1 sm:flex-none px-4 py-1.5 rounded-full bg-[#0071E3] hover:bg-[#0077ED] text-white text-xs font-semibold shadow-apple-sm transition-all apple-press cursor-pointer"
                 >
                   Accept All
                 </button>
@@ -147,15 +148,15 @@ export const CookieConsent: React.FC = () => {
               <button
                 type="button"
                 onClick={handleSaveCustom}
-                className="w-full sm:w-auto px-6 py-2 rounded-full bg-[#0071E3] hover:bg-[#0077ED] text-white text-xs font-semibold shadow-apple-sm transition-all apple-press cursor-pointer"
+                className="w-full sm:w-auto px-4 py-1.5 rounded-full bg-[#0071E3] hover:bg-[#0077ED] text-white text-xs font-semibold shadow-apple-sm transition-all apple-press cursor-pointer"
               >
-                Save Preferences
+                Save Choices
               </button>
             )}
           </div>
         </div>
 
       </div>
-    </div>
+    </aside>
   );
 };
