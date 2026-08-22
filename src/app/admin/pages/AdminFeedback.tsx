@@ -195,7 +195,7 @@ export const AdminFeedback: React.FC = () => {
   const getRatingBadge = (rating: number) => {
     if (rating >= 4) {
       return (
-        <span className="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200/60 font-mono font-bold text-xs flex items-center gap-1">
+        <span className="px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-700 border border-emerald-200 font-mono font-bold text-xs flex items-center gap-1">
           <Star className="w-3.5 h-3.5 fill-emerald-500 text-emerald-500" />
           {rating}.0
         </span>
@@ -203,14 +203,14 @@ export const AdminFeedback: React.FC = () => {
     }
     if (rating === 3) {
       return (
-        <span className="px-2.5 py-1 rounded-full bg-amber-50 text-amber-700 border border-amber-200/60 font-mono font-bold text-xs flex items-center gap-1">
+        <span className="px-2 py-0.5 rounded-md bg-amber-50 text-amber-700 border border-amber-200 font-mono font-bold text-xs flex items-center gap-1">
           <Star className="w-3.5 h-3.5 fill-amber-500 text-amber-500" />
           {rating}.0
         </span>
       );
     }
     return (
-      <span className="px-2.5 py-1 rounded-full bg-rose-50 text-rose-700 border border-rose-200/60 font-mono font-bold text-xs flex items-center gap-1">
+      <span className="px-2 py-0.5 rounded-md bg-rose-50 text-rose-700 border border-rose-200 font-mono font-bold text-xs flex items-center gap-1">
         <Star className="w-3.5 h-3.5 fill-rose-500 text-rose-500" />
         {rating}.0
       </span>
@@ -372,19 +372,19 @@ export const AdminFeedback: React.FC = () => {
               }`}
             >
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-2.5">
                   {getRatingBadge(item.rating)}
 
-                  <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-black/[0.04] text-[#515154]">
+                  <span className="px-2 py-0.5 rounded-md text-[10px] font-semibold bg-slate-100 text-slate-700 border border-slate-200">
                     {item.category.replace('_', ' ')}
                   </span>
 
                   {item.isResolved ? (
-                    <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                    <span className="px-2 py-0.5 rounded-md text-[10px] font-mono font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
                       RESOLVED
                     </span>
                   ) : (
-                    <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-amber-50 text-amber-700 border border-amber-200">
+                    <span className="px-2 py-0.5 rounded-md text-[10px] font-mono font-bold bg-amber-50 text-amber-700 border border-amber-200">
                       PENDING
                     </span>
                   )}
@@ -396,17 +396,17 @@ export const AdminFeedback: React.FC = () => {
                       setSelectedItem(item);
                       setAdminNoteInput(item.adminNotes || '');
                     }}
-                    className="px-3 py-1.5 rounded-full bg-apple-card hover:bg-black/[0.06] text-xs font-semibold text-apple-text border border-apple-border transition-all cursor-pointer"
+                    className="px-3 py-1 rounded-md bg-slate-50 hover:bg-slate-100 text-xs font-semibold text-slate-700 border border-slate-200 transition-colors cursor-pointer"
                   >
                     {item.adminNotes ? 'Edit Notes' : 'Add Note'}
                   </button>
 
                   <button
                     onClick={() => handleToggleResolve(item)}
-                    className={`px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all flex items-center gap-1.5 cursor-pointer ${
+                    className={`px-3 py-1 rounded-md text-xs font-semibold transition-colors flex items-center gap-1.5 cursor-pointer ${
                       item.isResolved
                         ? 'bg-amber-50 hover:bg-amber-100 text-amber-700 border border-amber-200'
-                        : 'bg-emerald-600 hover:bg-emerald-700 text-white shadow-apple-sm'
+                        : 'bg-emerald-600 hover:bg-emerald-700 text-white'
                     }`}
                   >
                     <Check className="w-3.5 h-3.5" />

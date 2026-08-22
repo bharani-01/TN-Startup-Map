@@ -179,19 +179,19 @@ export const AdminErrorLogs: React.FC = () => {
     switch (severity) {
       case 'CRITICAL':
         return (
-          <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-rose-50 text-rose-700 border border-rose-200">
+          <span className="px-2 py-0.5 rounded-md text-[10px] font-mono font-bold bg-rose-50 text-rose-700 border border-rose-200">
             CRITICAL
           </span>
         );
       case 'WARNING':
         return (
-          <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-amber-50 text-amber-700 border border-amber-200">
+          <span className="px-2 py-0.5 rounded-md text-[10px] font-mono font-bold bg-amber-50 text-amber-700 border border-amber-200">
             WARNING
           </span>
         );
       default:
         return (
-          <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-orange-50 text-orange-700 border border-orange-200">
+          <span className="px-2 py-0.5 rounded-md text-[10px] font-mono font-bold bg-orange-50 text-orange-700 border border-orange-200">
             ERROR
           </span>
         );
@@ -348,23 +348,23 @@ export const AdminErrorLogs: React.FC = () => {
               }`}
             >
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                <div className="flex flex-wrap items-center gap-2.5">
+                <div className="flex flex-wrap items-center gap-2">
                   {getSeverityBadge(item.severity)}
 
-                  <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold ${
+                  <span className={`px-2 py-0.5 rounded-md text-[10px] font-mono font-bold ${
                     item.source === 'BACKEND' ? 'bg-indigo-50 text-indigo-700 border border-indigo-200' : 'bg-sky-50 text-sky-700 border border-sky-200'
                   }`}>
                     {item.source}
                   </span>
 
                   {item.statusCode && (
-                    <span className="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-black/[0.05] text-[#1D1D1F]">
+                    <span className="px-2 py-0.5 rounded-md text-[10px] font-mono font-bold bg-slate-100 text-slate-800 border border-slate-200">
                       HTTP {item.statusCode}
                     </span>
                   )}
 
                   {item.method && item.route && (
-                    <span className="text-xs font-mono font-semibold text-[#1D1D1F]">
+                    <span className="text-xs font-mono font-semibold text-slate-900">
                       {item.method} {item.route}
                     </span>
                   )}
@@ -373,10 +373,10 @@ export const AdminErrorLogs: React.FC = () => {
                 <div className="flex items-center gap-2">
                   <button
                     onClick={() => handleToggleResolve(item)}
-                    className={`px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all flex items-center gap-1.5 cursor-pointer ${
+                    className={`px-3 py-1 rounded-md text-xs font-semibold transition-colors flex items-center gap-1.5 cursor-pointer ${
                       item.isResolved
                         ? 'bg-amber-50 hover:bg-amber-100 text-amber-700 border border-amber-200'
-                        : 'bg-emerald-600 hover:bg-emerald-700 text-white shadow-apple-sm'
+                        : 'bg-emerald-600 hover:bg-emerald-700 text-white'
                     }`}
                   >
                     <Check className="w-3.5 h-3.5" />

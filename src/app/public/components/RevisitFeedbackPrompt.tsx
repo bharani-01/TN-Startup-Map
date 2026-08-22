@@ -1,20 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { MessageSquarePlus, X, Star, CheckCircle2, Sparkles, Send } from 'lucide-react';
+import { MessageSquare, X, Check, Send } from 'lucide-react';
 
 const CATEGORIES = [
-  { id: 'GENERAL', label: 'General Experience' },
-  { id: 'DATA_ACCURACY', label: 'Data Accuracy / Fix' },
-  { id: 'FEATURE_REQUEST', label: 'Feature Idea' },
-  { id: 'USER_EXPERIENCE', label: 'Design & Speed' },
-  { id: 'HIRING_PORTAL', label: 'Job Portal' },
-];
-
-const RATINGS = [
-  { value: 5, label: 'Exceptional', emoji: '🌟' },
-  { value: 4, label: 'Great', emoji: '👍' },
-  { value: 3, label: 'Good', emoji: '👌' },
-  { value: 2, label: 'Needs Work', emoji: '⚠️' },
-  { value: 1, label: 'Poor', emoji: '👎' },
+  { id: 'GENERAL', label: 'General Platform Experience' },
+  { id: 'DATA_ACCURACY', label: 'Startup Data Correction' },
+  { id: 'FEATURE_REQUEST', label: 'Feature Request / Idea' },
+  { id: 'USER_EXPERIENCE', label: 'Design & Usability' },
+  { id: 'HIRING_PORTAL', label: 'Talent & Job Portal' },
 ];
 
 export const RevisitFeedbackPrompt: React.FC = () => {
@@ -56,7 +48,7 @@ export const RevisitFeedbackPrompt: React.FC = () => {
     if (visitCount >= 2 && hoursSinceFirstVisit >= 6) {
       const timer = setTimeout(() => {
         setIsOpen(true);
-      }, 3500);
+      }, 3000);
       return () => clearTimeout(timer);
     }
   }, []);
@@ -108,7 +100,7 @@ export const RevisitFeedbackPrompt: React.FC = () => {
       setSubmitted(true);
       setTimeout(() => {
         setIsOpen(false);
-      }, 2500);
+      }, 2000);
     } catch (err) {
       console.error('Failed to submit feedback:', err);
     } finally {
@@ -120,31 +112,31 @@ export const RevisitFeedbackPrompt: React.FC = () => {
 
   return (
     <aside
-      aria-label="User Feedback"
-      className="fixed bottom-5 left-5 sm:bottom-6 sm:left-6 z-40 max-w-sm sm:max-w-md w-[calc(100vw-2.5rem)] animate-in fade-in slide-in-from-bottom-6 duration-300"
+      aria-label="User Feedback Dialog"
+      className="fixed bottom-5 left-5 sm:bottom-6 sm:left-6 z-40 max-w-sm sm:max-w-md w-[calc(100vw-2.5rem)] animate-in fade-in slide-in-from-bottom-4 duration-300"
     >
-      <div className="p-5 sm:p-6 rounded-3xl bg-white/95 backdrop-blur-2xl border border-black/[0.08] text-[#1D1D1F] shadow-[0_20px_60px_-15px_rgba(0,0,0,0.18)] space-y-4">
+      <div className="p-5 sm:p-6 rounded-2xl bg-white border border-slate-200 text-slate-900 shadow-xl space-y-4">
         
         {/* Header */}
         <div className="flex items-center justify-between gap-3">
           <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-xl bg-[#0071E3]/10 text-[#0071E3] flex items-center justify-center shrink-0">
-              <Sparkles className="w-4.5 h-4.5" />
+            <div className="w-8 h-8 rounded-lg bg-blue-50 text-[#0071E3] flex items-center justify-center shrink-0">
+              <MessageSquare className="w-4 h-4" />
             </div>
             <div>
-              <h3 className="font-display font-bold text-xs sm:text-sm text-[#1D1D1F] tracking-tight">
-                Share Your Feedback
+              <h3 className="font-bold text-sm text-slate-900 tracking-tight">
+                Platform Feedback
               </h3>
-              <p className="text-[10px] text-[#86868B] font-medium">
-                Help us improve Tamil Nadu Startup Connect
+              <p className="text-[11px] text-slate-500 font-medium">
+                Tamil Nadu Startup Connect
               </p>
             </div>
           </div>
 
           <button
             onClick={handleSnooze}
-            className="p-1.5 rounded-full hover:bg-black/[0.05] text-[#86868B] hover:text-[#1D1D1F] transition-all cursor-pointer"
-            aria-label="Close feedback"
+            className="p-1 rounded-md text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors cursor-pointer"
+            aria-label="Close"
           >
             <X className="w-4 h-4" />
           </button>
@@ -152,99 +144,94 @@ export const RevisitFeedbackPrompt: React.FC = () => {
 
         {submitted ? (
           <div className="py-6 text-center space-y-2">
-            <div className="w-12 h-12 rounded-full bg-emerald-500/10 text-emerald-600 flex items-center justify-center mx-auto">
-              <CheckCircle2 className="w-6 h-6" />
+            <div className="w-10 h-10 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center mx-auto">
+              <Check className="w-5 h-5" />
             </div>
-            <h4 className="font-bold text-sm text-[#1D1D1F]">Thank You!</h4>
-            <p className="text-xs text-[#86868B]">
-              Your suggestions help shape the innovation ecosystem for Tamil Nadu.
+            <h4 className="font-bold text-sm text-slate-900">Feedback Received</h4>
+            <p className="text-xs text-slate-500">
+              Thank you for helping us improve Tamil Nadu Startup Connect.
             </p>
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-3.5">
             
-            {/* 1-5 Rating Selector */}
+            {/* 1-5 Numeric Rating Scale */}
             <div className="space-y-1.5">
-              <label className="text-[11px] font-semibold text-[#515154] block">
-                How would you rate your experience? <span className="text-rose-500">*</span>
-              </label>
+              <div className="flex items-center justify-between text-[11px] font-semibold text-slate-700">
+                <span>Rating</span>
+                <span className="text-slate-400 font-normal">1 (Poor) to 5 (Excellent)</span>
+              </div>
               <div className="grid grid-cols-5 gap-1.5">
-                {RATINGS.map((r) => (
+                {[1, 2, 3, 4, 5].map((val) => (
                   <button
-                    key={r.value}
+                    key={val}
                     type="button"
-                    onClick={() => setRating(r.value)}
-                    className={`py-2 px-1 rounded-2xl flex flex-col items-center gap-1 text-[10px] font-semibold border transition-all cursor-pointer ${
-                      rating === r.value
-                        ? 'bg-[#0071E3] text-white border-[#0071E3] shadow-apple-sm scale-105'
-                        : 'bg-black/[0.02] border-black/[0.06] text-[#1D1D1F] hover:bg-black/[0.05]'
+                    onClick={() => setRating(val)}
+                    className={`py-2 rounded-lg font-mono font-bold text-xs border transition-colors cursor-pointer ${
+                      rating === val
+                        ? 'bg-[#0071E3] text-white border-[#0071E3]'
+                        : 'bg-slate-50 border-slate-200 text-slate-700 hover:bg-slate-100'
                     }`}
                   >
-                    <span className="text-sm">{r.emoji}</span>
-                    <span>{r.value}</span>
+                    {val}
                   </button>
                 ))}
               </div>
             </div>
 
-            {/* Category Pills */}
-            <div className="space-y-1.5">
-              <label className="text-[11px] font-semibold text-[#515154] block">
-                What is this feedback about?
+            {/* Category Dropdown */}
+            <div className="space-y-1">
+              <label className="text-[11px] font-semibold text-slate-700 block">
+                Category
               </label>
-              <div className="flex flex-wrap gap-1.5">
+              <select
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
+                className="w-full px-3 py-2 rounded-lg bg-slate-50 border border-slate-200 text-xs text-slate-800 focus:outline-none focus:border-[#0071E3] transition-colors cursor-pointer"
+              >
                 {CATEGORIES.map((c) => (
-                  <button
-                    key={c.id}
-                    type="button"
-                    onClick={() => setCategory(c.id)}
-                    className={`px-2.5 py-1 rounded-full text-[10px] font-semibold transition-all cursor-pointer ${
-                      category === c.id
-                        ? 'bg-[#1D1D1F] text-white'
-                        : 'bg-black/[0.04] text-[#515154] hover:bg-black/[0.08]'
-                    }`}
-                  >
+                  <option key={c.id} value={c.id}>
                     {c.label}
-                  </button>
+                  </option>
                 ))}
-              </div>
+              </select>
             </div>
 
-            {/* Text Input / Textarea */}
-            <div className="space-y-1.5">
-              <label className="text-[11px] font-semibold text-[#515154] flex items-center justify-between">
-                <span>Tell us your thoughts / suggestions</span>
-                <span className="text-[9px] text-[#86868B] font-mono">{message.length}/500</span>
-              </label>
+            {/* Text Input / Comments */}
+            <div className="space-y-1">
+              <div className="flex items-center justify-between text-[11px] font-semibold text-slate-700">
+                <span>Your Comments</span>
+                <span className="text-[10px] text-slate-400 font-mono">{message.length}/500</span>
+              </div>
               <textarea
                 value={message}
                 onChange={(e) => setMessage(e.target.value.slice(0, 500))}
-                placeholder="What did you like? Missing startups, feature requests, or UI improvements..."
+                placeholder="Share your suggestions, missing startup details, or feature requests..."
                 rows={3}
-                className="w-full px-3 py-2 rounded-2xl bg-black/[0.02] border border-black/[0.08] text-xs text-[#1D1D1F] placeholder:text-[#86868B] focus:outline-none focus:ring-2 focus:ring-[#0071E3]/20 focus:border-[#0071E3] transition-all resize-none"
+                className="w-full px-3 py-2 rounded-lg bg-slate-50 border border-slate-200 text-xs text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#0071E3] transition-colors resize-none"
               />
             </div>
 
             {/* Optional Email */}
             <div className="space-y-1">
-              <label className="text-[10px] font-medium text-[#86868B] block">
-                Your email (optional, if you'd like admin follow-up)
+              <label className="text-[11px] font-medium text-slate-500 block">
+                Email (optional)
               </label>
               <input
                 type="email"
                 value={userEmail}
                 onChange={(e) => setUserEmail(e.target.value)}
-                placeholder="you@example.com"
-                className="w-full px-3 py-1.5 rounded-xl bg-black/[0.02] border border-black/[0.08] text-xs text-[#1D1D1F] placeholder:text-[#86868B] focus:outline-none focus:border-[#0071E3] transition-all"
+                placeholder="founder@example.com"
+                className="w-full px-3 py-1.5 rounded-lg bg-slate-50 border border-slate-200 text-xs text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#0071E3] transition-colors"
               />
             </div>
 
-            {/* Action Buttons */}
+            {/* Actions */}
             <div className="pt-1 flex items-center justify-between gap-2">
               <button
                 type="button"
                 onClick={handleSnooze}
-                className="px-3.5 py-1.5 rounded-full text-xs font-semibold text-[#86868B] hover:text-[#1D1D1F] hover:bg-black/[0.04] transition-all cursor-pointer"
+                className="px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-500 hover:text-slate-800 hover:bg-slate-100 transition-colors cursor-pointer"
               >
                 Maybe Later
               </button>
@@ -252,10 +239,10 @@ export const RevisitFeedbackPrompt: React.FC = () => {
               <button
                 type="submit"
                 disabled={!rating || isSubmitting}
-                className="px-4 py-1.5 rounded-full bg-[#0071E3] hover:bg-[#0077ED] disabled:opacity-50 text-white text-xs font-semibold shadow-apple-sm transition-all apple-press flex items-center gap-1.5 cursor-pointer"
+                className="px-4 py-1.5 rounded-lg bg-[#0071E3] hover:bg-[#0077ED] disabled:opacity-50 text-white text-xs font-semibold transition-colors flex items-center gap-1.5 cursor-pointer"
               >
                 <Send className="w-3.5 h-3.5" />
-                <span>{isSubmitting ? 'Sending...' : 'Submit'}</span>
+                <span>{isSubmitting ? 'Submitting...' : 'Submit'}</span>
               </button>
             </div>
 

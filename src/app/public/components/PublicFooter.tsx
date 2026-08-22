@@ -139,7 +139,7 @@ export const PublicFooter: React.FC = () => {
                   onClick={() => window.dispatchEvent(new Event('open-feedback-prompt'))}
                   className="hover:text-apple-blue transition-colors text-left cursor-pointer font-medium text-[#0071E3]"
                 >
-                  Share Feedback 💬
+                  Share Feedback
                 </button>
               </li>
               <li>
