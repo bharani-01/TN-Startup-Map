@@ -13,11 +13,13 @@ export const PublicFooter: React.FC = () => {
           {/* Col 1 & 2: Platform Bio */}
           <div className="md:col-span-2 space-y-4">
             <Link to="/" className="flex items-center gap-2.5 apple-press inline-flex">
-              <div className="w-7 h-7 rounded-xl bg-apple-text text-white flex items-center justify-center shadow-apple-sm">
-                <MapPin className="w-3.5 h-3.5 text-white" />
-              </div>
+              <img
+                src="/logo.png"
+                alt="Tamil Nadu"
+                className="h-9 w-auto object-contain shrink-0 drop-shadow-xs"
+              />
               <span className="font-display font-extrabold text-base text-apple-text tracking-tight">
-                TN Startup Map
+                Startup Connect
               </span>
             </Link>
 
@@ -123,9 +125,22 @@ export const PublicFooter: React.FC = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/login" className="hover:text-apple-blue transition-colors">
-                  Account Sign In
+                <Link to="/terms" className="hover:text-apple-blue transition-colors">
+                  Terms of Service
                 </Link>
+              </li>
+              <li>
+                <Link to="/privacy" className="hover:text-apple-blue transition-colors">
+                  Privacy Policy
+                </Link>
+              </li>
+              <li>
+                <button
+                  onClick={() => window.dispatchEvent(new Event('open-cookie-preferences'))}
+                  className="hover:text-apple-blue transition-colors text-left cursor-pointer"
+                >
+                  Cookie Settings
+                </button>
               </li>
             </ul>
           </div>
@@ -134,14 +149,27 @@ export const PublicFooter: React.FC = () => {
 
         {/* Bottom Sub-bar */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-apple-secondary">
-          <p>© {new Date().getFullYear()} TN Startup Map. Open intelligence initiative for Tamil Nadu.</p>
-          <div className="flex items-center gap-4">
+          <p>© {new Date().getFullYear()} Tamil Nadu Startup Connect. Open innovation initiative for Tamil Nadu.</p>
+          <div className="flex flex-wrap items-center gap-3 sm:gap-4">
+            <Link to="/privacy" className="hover:text-apple-text transition-colors">
+              Privacy Policy
+            </Link>
+            <span>•</span>
+            <Link to="/terms" className="hover:text-apple-text transition-colors">
+              Terms of Service
+            </Link>
+            <span>•</span>
+            <button
+              onClick={() => window.dispatchEvent(new Event('open-cookie-preferences'))}
+              className="hover:text-apple-text transition-colors cursor-pointer"
+            >
+              Cookie Choices
+            </button>
+            <span>•</span>
             <span className="flex items-center gap-1">
               <span>Crafted for Tamil Nadu</span>
               <Heart className="w-3 h-3 text-apple-rose fill-apple-rose" />
             </span>
-            <span>•</span>
-            <span className="hover:text-apple-text cursor-pointer">Privacy & Terms</span>
           </div>
         </div>
 

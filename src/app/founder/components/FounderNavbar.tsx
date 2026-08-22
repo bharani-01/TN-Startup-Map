@@ -14,14 +14,16 @@ export const FounderNavbar: React.FC = () => {
           
           <div className="flex items-center gap-6">
             <Link to="/" className="flex items-center gap-2.5 group apple-press">
-              <div className="w-8 h-8 rounded-xl bg-apple-text text-white flex items-center justify-center font-bold shadow-apple-sm">
-                <MapPin className="w-4 h-4 text-white" />
-              </div>
+              <img
+                src="/logo.png"
+                alt="Tamil Nadu"
+                className="h-9 sm:h-10 w-auto object-contain shrink-0 drop-shadow-xs"
+              />
               <div className="flex flex-col">
                 <span className="font-display font-extrabold text-base text-apple-text leading-tight">
-                  TN Startup Map
+                  Startup Connect
                 </span>
-                <span className="text-[10px] font-bold text-apple-blue uppercase tracking-wider">
+                <span className="text-[10px] font-bold text-[#0071E3] uppercase tracking-wider">
                   Founder Studio
                 </span>
               </div>

@@ -1,6 +1,8 @@
 import { Router } from 'express';
 import { adminController } from '../controllers/AdminController.js';
 import { jobController } from '../controllers/JobController.js';
+import { auditLogController } from '../controllers/AuditLogController.js';
+import { analyticsController } from '../controllers/AnalyticsController.js';
 import { requireAuth } from '../middleware/authenticate.js';
 import { authorize } from '../middleware/authorize.js';
 import { UserRole } from '../utils/constants.js';
@@ -30,5 +32,13 @@ router.patch('/users/:id/role', adminController.updateUserRole.bind(adminControl
 router.get('/jobs', jobController.adminListJobs.bind(jobController));
 router.post('/jobs/:id/hide', jobController.adminHideJob.bind(jobController));
 router.post('/jobs/:id/restore', jobController.adminRestoreJob.bind(jobController));
+
+// Detailed API Access Audit Logging
+router.get('/audit-logs', auditLogController.getAuditLogs.bind(auditLogController));
+router.get('/audit-logs/stats', auditLogController.getAuditStats.bind(auditLogController));
+
+// Platform Ecosystem Telemetry & Traffic
+router.get('/analytics', analyticsController.getEcosystemAnalytics.bind(analyticsController));
+router.get('/startups/:id/analytics', analyticsController.getStartupAnalytics.bind(analyticsController));
 
 export default router;

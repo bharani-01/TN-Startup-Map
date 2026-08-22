@@ -18,6 +18,8 @@ import { BlogDetailPage } from './app/public/pages/BlogDetailPage';
 import { WriteArticlePage } from './app/public/pages/WriteArticlePage';
 import { SupportPage } from './app/public/pages/SupportPage';
 import { JobsPage } from './app/public/pages/JobsPage';
+import { TermsPage } from './app/public/pages/TermsPage';
+import { PrivacyPolicyPage } from './app/public/pages/PrivacyPolicyPage';
 
 // Founder Experience
 import { FounderLayout } from './app/founder/layouts/FounderLayout';
@@ -34,6 +36,8 @@ import { AdminStartups } from './app/admin/pages/AdminStartups';
 import { AdminBlogs } from './app/admin/pages/AdminBlogs';
 import { AdminUsers } from './app/admin/pages/AdminUsers';
 import { AdminJobs } from './app/admin/pages/AdminJobs';
+import { AdminAuditLogs } from './app/admin/pages/AdminAuditLogs';
+import { AdminStartupDetail } from './app/admin/pages/AdminStartupDetail';
 
 export const router = createBrowserRouter([
   // Public Domain Routes
@@ -57,6 +61,8 @@ export const router = createBrowserRouter([
       { path: 'jobs', element: <JobsPage /> },
       { path: 'login', element: <LoginPage /> },
       { path: 'register', element: <RegisterPage /> },
+      { path: 'terms', element: <TermsPage /> },
+      { path: 'privacy', element: <PrivacyPolicyPage /> },
     ],
   },
 
@@ -81,9 +87,11 @@ export const router = createBrowserRouter([
       { path: 'submissions', element: <AdminSubmissions /> },
       { path: 'claims', element: <AdminClaims /> },
       { path: 'startups', element: <AdminStartups /> },
+      { path: 'startups/:id', element: <AdminStartupDetail /> },
       { path: 'blogs', element: <AdminBlogs /> },
       { path: 'users', element: <AdminUsers /> },
       { path: 'jobs', element: <AdminJobs /> },
+      { path: 'audit-logs', element: <AdminAuditLogs /> },
     ],
   },
 

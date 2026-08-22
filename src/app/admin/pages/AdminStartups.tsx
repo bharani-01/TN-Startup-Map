@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Building2, Search, Trash2, ShieldCheck, Loader2, ExternalLink, RefreshCw, Archive, RotateCcw } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Building2, Search, Trash2, ShieldCheck, Loader2, ExternalLink, RefreshCw, Archive, RotateCcw, Activity } from 'lucide-react';
 import { useAuth } from '../../../context/AuthContext';
 import { Startup } from '../../../types';
 
@@ -166,7 +167,12 @@ export const AdminStartups: React.FC = () => {
                             {startup.name.charAt(0)}
                           </div>
                           <div>
-                            <span className="font-bold text-white block">{startup.name}</span>
+                            <Link
+                              to={`/admin/startups/${startup.id}`}
+                              className="font-bold text-white hover:text-[#0071E3] transition-colors block"
+                            >
+                              {startup.name}
+                            </Link>
                             <span className="text-[11px] text-slate-400 truncate max-w-xs block">{startup.tagline}</span>
                           </div>
                         </div>
@@ -196,12 +202,20 @@ export const AdminStartups: React.FC = () => {
                       </td>
                       <td className="py-4 px-5 text-right">
                         <div className="flex items-center justify-end gap-2">
+                          <Link
+                            to={`/admin/startups/${startup.id}`}
+                            className="p-2 text-[#0071E3] hover:text-white hover:bg-[#0071E3]/20 rounded-full transition-all apple-press"
+                            title="Open Dossier & Analytics"
+                          >
+                            <Activity className="w-3.5 h-3.5" />
+                          </Link>
+
                           <a
                             href={`/startups/${startup.slug}`}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="p-2 text-slate-400 hover:text-white hover:bg-white/10 rounded-full transition-all apple-press"
-                            title="View Profile"
+                            title="View Public Profile"
                           >
                             <ExternalLink className="w-3.5 h-3.5" />
                           </a>

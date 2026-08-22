@@ -87,13 +87,15 @@ export const LoginPage: React.FC = () => {
       <div className="w-full max-w-md bg-white/90 backdrop-blur-2xl rounded-3xl border border-black/[0.08] shadow-apple-card p-6 sm:p-9 space-y-6">
         
         {/* Brand Icon Header */}
-        <div className="text-center space-y-2">
-          <div className="w-14 h-14 rounded-2xl bg-[#1D1D1F] text-white flex items-center justify-center mx-auto shadow-md">
-            <MapPin className="w-7 h-7 text-white" />
-          </div>
+        <div className="text-center space-y-3">
+          <img
+            src="/logo.png"
+            alt="Tamil Nadu"
+            className="h-16 w-auto object-contain mx-auto"
+          />
           <div>
             <h1 className="font-display font-extrabold text-2xl text-[#1D1D1F] tracking-tight">
-              {mode === 'login' ? 'Ecosystem Portal' : 'Join TN Startup Map'}
+              {mode === 'login' ? 'Startup Connect Portal' : 'Join Startup Connect'}
             </h1>
             <p className="text-xs text-[#86868B] mt-0.5">
               {mode === 'login'

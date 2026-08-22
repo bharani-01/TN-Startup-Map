@@ -20,6 +20,7 @@ import {
   ShieldCheck,
 } from 'lucide-react';
 import { JobListing, JobType, JobExperience } from '../../../types';
+import { trackEvent } from '../../../utils/telemetry';
 
 const JOB_TYPE_LABELS: Record<JobType, string> = {
   FULL_TIME: 'Full Time',
@@ -373,6 +374,7 @@ export const JobsPage: React.FC = () => {
                       href={applyHref}
                       target={job.applyUrl ? '_blank' : undefined}
                       rel="noopener noreferrer"
+                      onClick={() => trackEvent({ entityType: 'JOB', entityId: job.id, eventType: 'APPLY_CLICK', targetUrl: job.applyUrl || job.applyEmail })}
                       className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#0071E3] hover:bg-[#0077ED] text-white font-semibold text-xs shadow-2xs transition-all apple-press"
                     >
                       <span>Apply Now</span>

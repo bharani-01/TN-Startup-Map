@@ -1,11 +1,13 @@
 import express from 'express';
 import cors from 'cors';
+import path from 'path';
+import fs from 'fs';
 import { config } from './config/index.js';
 import apiRouter from './routes/index.js';
 import { authenticate } from './middleware/authenticate.js';
 import { requestLogger } from './middleware/requestLogger.js';
 import { errorHandler } from './middleware/errorHandler.js';
-import { auditMiddleware } from './middleware/auditLogger.js';
+import { apiAuditLogger } from './middleware/apiAuditLogger.js';
 
 export function createApp() {
   const app = express();
@@ -21,10 +23,22 @@ export function createApp() {
   // Logging, Audit & Authentication middleware
   app.use(requestLogger);
   app.use(authenticate);
-  app.use(auditMiddleware);
+  app.use(apiAuditLogger);
 
   // Mount master API routes under /api
   app.use('/api', apiRouter);
+
+  // Serve static client assets from dist if available (Full-stack App Hosting / Production)
+  const distPath = path.resolve(process.cwd(), 'dist');
+  if (fs.existsSync(distPath)) {
+    app.use(express.static(distPath));
+    app.get('*', (req, res, next) => {
+      if (req.path.startsWith('/api')) {
+        return next();
+      }
+      res.sendFile(path.join(distPath, 'index.html'));
+    });
+  }
 
   // Global error handler
   app.use(errorHandler);

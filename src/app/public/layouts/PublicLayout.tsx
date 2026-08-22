@@ -3,6 +3,7 @@ import { Outlet } from 'react-router-dom';
 import { PublicNavbar } from '../components/PublicNavbar';
 import { PublicFooter } from '../components/PublicFooter';
 import { GlobalSearchModal } from '../search/GlobalSearchModal';
+import { CookieConsent } from '../components/CookieConsent';
 
 export const PublicLayout: React.FC = () => {
   const [searchOpen, setSearchOpen] = useState(false);
@@ -32,6 +33,9 @@ export const PublicLayout: React.FC = () => {
 
       {/* Public Footer */}
       <PublicFooter />
+
+      {/* Cookie & Privacy Consent Banner */}
+      <CookieConsent />
 
       {/* Command Palette Modal */}
       <GlobalSearchModal isOpen={searchOpen} onClose={() => setSearchOpen(false)} />

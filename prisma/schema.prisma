@@ -162,6 +162,14 @@ enum NotificationType {
   SYSTEM_ANNOUNCEMENT
 }
 
+enum AnalyticsEventType {
+  PAGE_VIEW
+  WEBSITE_CLICK
+  APPLY_CLICK
+  PITCH_DECK_CLICK
+  SOCIAL_CLICK
+}
+
 // -----------------------------------------------------------------------------
 // DOMAIN 1: IDENTITY & ACCESS (7 Tables)
 // -----------------------------------------------------------------------------
@@ -195,6 +203,8 @@ model UserAccount {
   bookmarks       Bookmark[]
   notifications   Notification[]
   auditLogs       AuditLog[]     @relation("ActorAuditLogs")
+  apiAccessLogs   ApiAccessLog[] @relation("ActorApiLogs")
+  analyticsEvents AnalyticsEvent[] @relation("ActorAnalyticsEvents")
 
   @@index([role])
   @@index([deletedAt])
@@ -888,3 +898,49 @@ model JobListing {
   @@index([createdAt(sort: Desc)])
   @@map("job_listings")
 }
+
+// -----------------------------------------------------------------------------
+// DOMAIN 8: ANALYTICS & API ACCESS LOGS (2 Tables)
+// -----------------------------------------------------------------------------
+
+model AnalyticsEvent {
+  id           String             @id @default(uuid())
+  eventType    AnalyticsEventType @map("event_type")
+  entityType   String             @map("entity_type")
+  entityId     String             @map("entity_id")
+  targetUrl    String?            @map("target_url")
+  actorId      String?            @map("actor_id")
+  actor        UserAccount?       @relation("ActorAnalyticsEvents", fields: [actorId], references: [id])
+  actorEmail   String?            @map("actor_email")
+  ipAddress    String?            @map("ip_address")
+  referrer     String?
+  metadata     Json?
+  createdAt    DateTime           @default(now()) @map("created_at")
+
+  @@index([entityType, entityId, eventType])
+  @@index([createdAt(sort: Desc)])
+  @@map("analytics_events")
+}
+
+model ApiAccessLog {
+  id          String       @id @default(uuid())
+  actorId     String?      @map("actor_id")
+  actor       UserAccount? @relation("ActorApiLogs", fields: [actorId], references: [id])
+  actorEmail  String?      @map("actor_email")
+  actorRole   String?      @map("actor_role")
+  method      String
+  route       String
+  statusCode  Int          @map("status_code")
+  durationMs  Int          @map("duration_ms")
+  ipAddress   String?      @map("ip_address")
+  userAgent   String?      @map("user_agent")
+  queryParams Json?        @map("query_params")
+  createdAt   DateTime     @default(now()) @map("created_at")
+
+  @@index([actorEmail])
+  @@index([route])
+  @@index([statusCode])
+  @@index([createdAt(sort: Desc)])
+  @@map("api_access_logs")
+}
+

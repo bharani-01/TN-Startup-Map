@@ -33,6 +33,7 @@ export const SubmitStartupPage: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [submitted, setSubmitted] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
+  const [agreedConsent, setAgreedConsent] = useState(false);
 
   // Streamlined Form State (Basic Details to Join)
   const [formData, setFormData] = useState({
@@ -139,6 +140,11 @@ export const SubmitStartupPage: React.FC = () => {
   };
 
   const handleSubmit = async () => {
+    if (!agreedConsent) {
+      setError('Please accept the Terms of Service and Privacy Policy before submitting');
+      return;
+    }
+
     setLoading(true);
     setError(null);
 
@@ -533,6 +539,27 @@ export const SubmitStartupPage: React.FC = () => {
             <div className="p-4 rounded-2xl bg-blue-50/60 border border-blue-100 text-blue-800 text-[11px] leading-relaxed">
               <strong>Progressive Completion:</strong> After joining, you will be directed to your Founder Dashboard where you can add milestones, enterprise client logos, awards, and complete your data profile.
             </div>
+
+            {/* Terms & Privacy Consent Checkbox */}
+            <div className="p-4 rounded-2xl bg-white border border-black/[0.08] shadow-2xs flex items-start gap-3">
+              <input
+                type="checkbox"
+                id="submitConsent"
+                checked={agreedConsent}
+                onChange={(e) => setAgreedConsent(e.target.checked)}
+                className="w-4 h-4 mt-0.5 rounded accent-[#0071E3] cursor-pointer shrink-0"
+              />
+              <label htmlFor="submitConsent" className="text-xs text-[#424245] leading-relaxed cursor-pointer select-none">
+                I agree to the{' '}
+                <Link to="/terms" target="_blank" className="font-semibold text-[#0071E3] hover:underline">
+                  Terms of Service
+                </Link>{' '}
+                and{' '}
+                <Link to="/privacy" target="_blank" className="font-semibold text-[#0071E3] hover:underline">
+                  Privacy Policy
+                </Link>, and certify that I am an authorized representative submitting truthful and verifiable company metrics.
+              </label>
+            </div>
           </div>
         )}
 
@@ -564,8 +591,8 @@ export const SubmitStartupPage: React.FC = () => {
             <button
               type="button"
               onClick={handleSubmit}
-              disabled={loading}
-              className="px-7 py-2.5 rounded-full bg-[#1D1D1F] hover:bg-black text-white font-semibold text-xs flex items-center gap-1.5 shadow-apple-sm transition-all apple-press disabled:opacity-50"
+              disabled={loading || !agreedConsent}
+              className="px-7 py-2.5 rounded-full bg-[#1D1D1F] hover:bg-black text-white font-semibold text-xs flex items-center gap-1.5 shadow-apple-sm transition-all apple-press disabled:opacity-50 cursor-pointer"
             >
               {loading ? (
                 <>

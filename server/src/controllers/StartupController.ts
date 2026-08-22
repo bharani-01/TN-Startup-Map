@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { startupService } from '../services/StartupService.js';
+import { analyticsRepository } from '../repositories/AnalyticsRepository.js';
 import { ApiResponse } from '../utils/ApiResponse.js';
 import { HTTP_STATUS } from '../utils/constants.js';
 
@@ -37,6 +38,22 @@ export class StartupController {
   async getStartupBySlug(req: Request, res: Response, next: NextFunction) {
     try {
       const startup = await startupService.getStartupBySlug(String(req.params.slug));
+      
+      // Auto-record page open event asynchronously
+      if (startup) {
+        analyticsRepository.recordEvent(
+          {
+            eventType: 'PAGE_VIEW',
+            entityType: 'STARTUP',
+            entityId: startup.id,
+            referrer: (req.headers['referer'] as string) || undefined,
+          },
+          (req as any).user?.id,
+          (req as any).user?.email,
+          req.ip || (req.headers['x-forwarded-for'] as string)
+        ).catch(() => {});
+      }
+
       res.status(HTTP_STATUS.OK).json(ApiResponse.success(startup));
     } catch (error) {
       next(error);

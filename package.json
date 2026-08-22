@@ -11,7 +11,8 @@
     "server:dev": "tsx watch server/index.ts",
     "server:build": "tsc -p server/tsconfig.json",
     "server:start": "node dist-server/index.js",
-    "build": "npm run client:build && npm run server:build"
+    "build": "npm run client:build && npm run server:build",
+    "start": "node dist-server/index.js"
   },
   "dependencies": {
     "@prisma/client": "^5.22.0",

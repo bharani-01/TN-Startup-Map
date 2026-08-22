@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { founderController } from '../controllers/FounderController.js';
 import { jobController } from '../controllers/JobController.js';
+import { analyticsController } from '../controllers/AnalyticsController.js';
 import { requireAuth } from '../middleware/authenticate.js';
 import { authorize } from '../middleware/authorize.js';
 import { requireStartupOwner } from '../middleware/checkStartupOwnership.js';

@@ -54,15 +54,17 @@ export const PublicNavbar: React.FC<PublicNavbarProps> = ({ onOpenSearch }) => {
           {/* Left: Brand Logo */}
           <div className="flex items-center gap-3 shrink-0">
             <Link to="/" className="flex items-center gap-2.5 apple-press group">
-              <div className="w-9 h-9 rounded-2xl bg-[#1D1D1F] text-white flex items-center justify-center shadow-apple-sm group-hover:bg-[#0071E3] transition-colors shrink-0">
-                <MapPin className="w-4.5 h-4.5 text-white" />
-              </div>
+              <img
+                src="/logo.png"
+                alt="Tamil Nadu"
+                className="h-10 sm:h-12 w-auto object-contain shrink-0 drop-shadow-xs"
+              />
               <div className="flex flex-col">
-                <span className="font-display font-extrabold text-base sm:text-lg text-[#1D1D1F] tracking-tight leading-tight">
-                  TN Startup Map
+                <span className="font-display font-extrabold text-base sm:text-lg text-[#1D1D1F] tracking-tight leading-tight group-hover:text-[#0071E3] transition-colors">
+                  Startup Connect
                 </span>
-                <span className="text-[10px] text-[#86868B] font-medium tracking-wide hidden 2xl:inline">
-                  Tamil Nadu Innovation Ecosystem
+                <span className="text-[10px] text-[#86868B] font-medium tracking-wide hidden sm:inline">
+                  Startup & Ecosystem Directory
                 </span>
               </div>
             </Link>
