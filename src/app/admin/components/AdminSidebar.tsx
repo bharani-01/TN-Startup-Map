@@ -7,7 +7,8 @@ import {
   Building2, 
   Users, 
   BookOpen,
-  ExternalLink 
+  ExternalLink,
+  Briefcase
 } from 'lucide-react';
 
 export const AdminSidebar: React.FC = () => {
@@ -16,6 +17,7 @@ export const AdminSidebar: React.FC = () => {
     { label: 'Pending Submissions', path: '/admin/submissions', icon: Inbox },
     { label: 'Founder Claims', path: '/admin/claims', icon: ShieldCheck },
     { label: 'Startup Entities', path: '/admin/startups', icon: Building2 },
+    { label: 'Jobs Moderation', path: '/admin/jobs', icon: Briefcase },
     { label: 'Stories & Blogs', path: '/admin/blogs', icon: BookOpen },
     { label: 'User Roles & Access', path: '/admin/users', icon: Users },
   ];

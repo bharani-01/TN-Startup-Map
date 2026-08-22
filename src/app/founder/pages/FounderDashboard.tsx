@@ -433,6 +433,13 @@ export const FounderDashboard: React.FC = () => {
                 Update Profile Information
               </Link>
               <Link
+                to="/founder/jobs"
+                className="px-5 py-2.5 bg-[#0071E3] hover:bg-[#0077ED] text-white text-xs font-semibold rounded-full shadow-apple-sm transition-all apple-press flex items-center gap-1.5"
+              >
+                <Briefcase className="w-3.5 h-3.5" />
+                <span>Manage Job Openings</span>
+              </Link>
+              <Link
                 to={`/startups/${startup.slug}`}
                 className="px-5 py-2.5 bg-white hover:bg-slate-50 border border-black/[0.08] text-[#1D1D1F] text-xs font-semibold rounded-full shadow-apple-sm transition-all apple-press"
               >

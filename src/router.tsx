@@ -17,11 +17,13 @@ import { BlogListPage } from './app/public/pages/BlogListPage';
 import { BlogDetailPage } from './app/public/pages/BlogDetailPage';
 import { WriteArticlePage } from './app/public/pages/WriteArticlePage';
 import { SupportPage } from './app/public/pages/SupportPage';
+import { JobsPage } from './app/public/pages/JobsPage';
 
 // Founder Experience
 import { FounderLayout } from './app/founder/layouts/FounderLayout';
 import { FounderDashboard } from './app/founder/pages/FounderDashboard';
 import { FounderEditProfile } from './app/founder/pages/FounderEditProfile';
+import { FounderJobsManager } from './app/founder/pages/FounderJobsManager';
 
 // Admin Experience
 import { AdminLayout } from './app/admin/layouts/AdminLayout';
@@ -31,6 +33,7 @@ import { AdminClaims } from './app/admin/pages/AdminClaims';
 import { AdminStartups } from './app/admin/pages/AdminStartups';
 import { AdminBlogs } from './app/admin/pages/AdminBlogs';
 import { AdminUsers } from './app/admin/pages/AdminUsers';
+import { AdminJobs } from './app/admin/pages/AdminJobs';
 
 export const router = createBrowserRouter([
   // Public Domain Routes
@@ -51,6 +54,7 @@ export const router = createBrowserRouter([
       { path: 'support', element: <SupportPage /> },
       { path: 'submit', element: <SubmitStartupPage /> },
       { path: 'bookmarks', element: <BookmarksPage /> },
+      { path: 'jobs', element: <JobsPage /> },
       { path: 'login', element: <LoginPage /> },
       { path: 'register', element: <RegisterPage /> },
     ],
@@ -64,6 +68,7 @@ export const router = createBrowserRouter([
       { index: true, element: <Navigate to="/founder/dashboard" replace /> },
       { path: 'dashboard', element: <FounderDashboard /> },
       { path: 'edit', element: <FounderEditProfile /> },
+      { path: 'jobs', element: <FounderJobsManager /> },
     ],
   },
 
@@ -78,6 +83,7 @@ export const router = createBrowserRouter([
       { path: 'startups', element: <AdminStartups /> },
       { path: 'blogs', element: <AdminBlogs /> },
       { path: 'users', element: <AdminUsers /> },
+      { path: 'jobs', element: <AdminJobs /> },
     ],
   },
 

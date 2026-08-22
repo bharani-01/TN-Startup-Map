@@ -57,6 +57,28 @@ enum ClaimStatus {
   REJECTED
 }
 
+enum JobStatus {
+  OPEN
+  CLOSED
+  DRAFT
+}
+
+enum JobType {
+  FULL_TIME
+  PART_TIME
+  CONTRACT
+  INTERNSHIP
+  REMOTE
+}
+
+enum JobExperience {
+  FRESHER
+  JUNIOR
+  MID
+  SENIOR
+  LEAD
+}
+
 enum BlogCategory {
   FOUNDER_STORIES
   ECOSYSTEM_NEWS
@@ -164,6 +186,7 @@ model UserAccount {
   tokens          AuthToken[]
   founders        Founder[]
   claimedStartups Startup[]      @relation("ClaimedStartups")
+  jobListings     JobListing[]   @relation("PostedByUser")
   blogPosts       BlogPost[]     @relation("AuthorPosts")
   submissions     Submission[]   @relation("SubmittedByUser")
   reviewedSubmissions SubmissionReview[] @relation("ReviewedByUser")
@@ -298,6 +321,7 @@ model Startup {
   awards             StartupAward[]
   clients            StartupClient[]
   pressMentions      StartupPress[]
+  jobListings        JobListing[]
 
   @@index([trendingScore(sort: Desc)])
   @@index([stage])
@@ -827,4 +851,40 @@ model PageView {
 
   @@index([entityType, entityId, createdAt(sort: Desc)])
   @@map("page_views")
+}
+
+// -----------------------------------------------------------------------------
+// DOMAIN 7: HIRING & JOBS (1 Table)
+// -----------------------------------------------------------------------------
+
+model JobListing {
+  id          String        @id @default(uuid())
+  publicId    String        @unique @map("public_id")
+  startupId   String        @map("startup_id")
+  startup     Startup       @relation(fields: [startupId], references: [id], onDelete: Cascade)
+  postedById  String?       @map("posted_by_id")
+  postedBy    UserAccount?  @relation("PostedByUser", fields: [postedById], references: [id])
+  title       String
+  department  String?
+  jobType     JobType       @default(FULL_TIME) @map("job_type")
+  experience  JobExperience @default(JUNIOR) @map("experience")
+  location    String?
+  isRemote    Boolean       @default(false) @map("is_remote")
+  salaryMin   Int?          @map("salary_min")
+  salaryMax   Int?          @map("salary_max")
+  description String
+  skills      String[]
+  applyUrl    String?       @map("apply_url")
+  applyEmail  String?       @map("apply_email")
+  status      JobStatus     @default(OPEN)
+  isHidden    Boolean       @default(false) @map("is_hidden")
+  expiresAt   DateTime?     @map("expires_at")
+  createdAt   DateTime      @default(now()) @map("created_at")
+  updatedAt   DateTime      @updatedAt @map("updated_at")
+
+  @@index([startupId])
+  @@index([status])
+  @@index([jobType])
+  @@index([createdAt(sort: Desc)])
+  @@map("job_listings")
 }

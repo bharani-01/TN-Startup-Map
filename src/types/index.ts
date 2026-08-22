@@ -164,6 +164,7 @@ export interface Startup {
   trendingScore: number;
   claimedByUserId?: string;
   isHiring?: boolean;
+  jobListings?: JobListing[];
   distanceKm?: number;
   isDeleted?: boolean;
   deletedAt?: string | null;
@@ -171,6 +172,39 @@ export interface Startup {
   createdAt: string;
   updatedAt: string;
 }
+
+export type JobType = 'FULL_TIME' | 'PART_TIME' | 'CONTRACT' | 'INTERNSHIP' | 'REMOTE';
+export type JobStatus = 'OPEN' | 'CLOSED' | 'DRAFT';
+export type JobExperience = 'FRESHER' | 'JUNIOR' | 'MID' | 'SENIOR' | 'LEAD';
+
+export interface JobListing {
+  id: string;
+  publicId: string;
+  startupId: string;
+  startupSlug?: string;
+  startupName?: string;
+  startupLogoUrl?: string;
+  startupSectors?: string[];
+  postedById?: string;
+  title: string;
+  department?: string;
+  jobType: JobType;
+  experience: JobExperience;
+  location?: string;
+  isRemote: boolean;
+  salaryMin?: number;
+  salaryMax?: number;
+  description: string;
+  skills: string[];
+  applyUrl?: string;
+  applyEmail?: string;
+  status: JobStatus;
+  isHidden: boolean;
+  expiresAt?: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
 
 export interface BannerPreset {
   id: string;

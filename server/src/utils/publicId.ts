@@ -16,7 +16,8 @@ export type PublicIdPrefix =
   | 'fndr' // Funding rounds
   | 'aud' // Audit logs
   | 'rev' // Reviews
-  | 'evd'; // Evidence
+  | 'evd' // Evidence
+  | 'job'; // Job listings
 
 /**
  * Generate a cryptographically secure, 16-hex-character public identifier

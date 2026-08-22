@@ -42,6 +42,7 @@ export const PublicNavbar: React.FC<PublicNavbarProps> = ({ onOpenSearch }) => {
   const navLinks = [
     { label: 'Map', path: '/map', icon: Compass },
     { label: 'Startups', path: '/startups', icon: Building2 },
+    { label: 'Jobs', path: '/jobs', icon: Briefcase },
     { label: 'Stories', path: '/blog', icon: BookOpen },
   ];
 

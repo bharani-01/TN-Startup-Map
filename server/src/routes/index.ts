@@ -10,6 +10,7 @@ import statsRoutes from './stats.routes.js';
 import adminRoutes from './admin.routes.js';
 import blogRoutes from './blog.routes.js';
 import founderRoutes from './founder.routes.js';
+import jobRoutes from './job.routes.js';
 
 const router = Router();
 
@@ -24,6 +25,7 @@ router.use('/claims', claimRoutes);
 router.use('/stats', statsRoutes);
 router.use('/admin', adminRoutes);
 router.use('/blogs', blogRoutes);
+router.use('/jobs', jobRoutes);
 
 // Health check endpoint
 router.get('/health', (req, res) => {

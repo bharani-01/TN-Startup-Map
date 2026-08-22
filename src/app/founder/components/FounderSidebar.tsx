@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink, Link } from 'react-router-dom';
-import { LayoutDashboard, Building2, ExternalLink, ShieldCheck, ChevronDown, Plus, PenTool } from 'lucide-react';
+import { LayoutDashboard, Building2, ExternalLink, ShieldCheck, ChevronDown, Plus, PenTool, Briefcase } from 'lucide-react';
 import { useAuth } from '../../../context/AuthContext';
 import { Startup } from '../../../types';
 
@@ -54,6 +54,7 @@ export const FounderSidebar: React.FC = () => {
   const links = [
     { label: 'Overview & Analytics', path: '/founder/dashboard', icon: LayoutDashboard },
     { label: 'Edit Startup Profile', path: '/founder/edit', icon: Building2 },
+    { label: 'Manage Job Openings', path: '/founder/jobs', icon: Briefcase },
     { label: 'Write Founder Story', path: '/blog/new', icon: PenTool },
   ];
 

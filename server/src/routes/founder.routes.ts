@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { founderController } from '../controllers/FounderController.js';
+import { jobController } from '../controllers/JobController.js';
 import { requireAuth } from '../middleware/authenticate.js';
 import { authorize } from '../middleware/authorize.js';
 import { requireStartupOwner } from '../middleware/checkStartupOwnership.js';
@@ -18,5 +19,11 @@ router.get('/startup/:id', requireStartupOwner, founderController.getMyStartupDe
 
 // 3. Update specific startup owned by founder (ownership verified by middleware)
 router.put('/startup/:id', requireStartupOwner, founderController.updateMyStartup.bind(founderController));
+
+// 4. Job listings management (founder manages own startup's jobs)
+router.post('/jobs', jobController.createJob.bind(jobController));
+router.get('/jobs/:startupId', jobController.getMyJobs.bind(jobController));
+router.put('/jobs/:id', jobController.updateJob.bind(jobController));
+router.post('/jobs/:id/close', jobController.closeJob.bind(jobController));
 
 export default router;

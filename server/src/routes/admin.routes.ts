@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { adminController } from '../controllers/AdminController.js';
+import { jobController } from '../controllers/JobController.js';
 import { requireAuth } from '../middleware/authenticate.js';
 import { authorize } from '../middleware/authorize.js';
 import { UserRole } from '../utils/constants.js';
@@ -24,5 +25,10 @@ router.post('/claims/:id/reject', adminController.rejectClaim.bind(adminControll
 // User management
 router.get('/users', adminController.getUsers.bind(adminController));
 router.patch('/users/:id/role', adminController.updateUserRole.bind(adminController));
+
+// Jobs moderation
+router.get('/jobs', jobController.adminListJobs.bind(jobController));
+router.post('/jobs/:id/hide', jobController.adminHideJob.bind(jobController));
+router.post('/jobs/:id/restore', jobController.adminRestoreJob.bind(jobController));
 
 export default router;
