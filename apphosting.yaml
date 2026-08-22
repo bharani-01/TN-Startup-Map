@@ -11,8 +11,6 @@ runConfig:
 env:
   - variable: NODE_ENV
     value: "production"
-  - variable: PORT
-    value: "8080"
   - variable: DATABASE_URL
     value: "postgresql://postgres.ajdhxuqpkwjbcbjxrwed:Tn_startup_mapss@aws-0-ap-southeast-1.pooler.supabase.com:6543/postgres?pgbouncer=true"
     availability:
