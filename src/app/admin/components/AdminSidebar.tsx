@@ -9,7 +9,9 @@ import {
   BookOpen,
   ExternalLink,
   Briefcase,
-  Activity
+  Activity,
+  MessageSquare,
+  Bug
 } from 'lucide-react';
 
 export const AdminSidebar: React.FC = () => {
@@ -19,7 +21,9 @@ export const AdminSidebar: React.FC = () => {
     { label: 'Founder Claims', path: '/admin/claims', icon: ShieldCheck },
     { label: 'Startup Entities', path: '/admin/startups', icon: Building2 },
     { label: 'Jobs Moderation', path: '/admin/jobs', icon: Briefcase },
+    { label: 'User Feedback', path: '/admin/feedback', icon: MessageSquare },
     { label: 'API Audit Logs', path: '/admin/audit-logs', icon: Activity },
+    { label: 'System Error Logs', path: '/admin/errors', icon: Bug },
     { label: 'Stories & Blogs', path: '/admin/blogs', icon: BookOpen },
     { label: 'User Roles & Access', path: '/admin/users', icon: Users },
   ];

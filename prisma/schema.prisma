@@ -170,6 +170,25 @@ enum AnalyticsEventType {
   SOCIAL_CLICK
 }
 
+enum FeedbackCategory {
+  GENERAL
+  DATA_ACCURACY
+  FEATURE_REQUEST
+  USER_EXPERIENCE
+  HIRING_PORTAL
+}
+
+enum ErrorSeverity {
+  CRITICAL
+  ERROR
+  WARNING
+}
+
+enum ErrorSource {
+  BACKEND
+  FRONTEND
+}
+
 // -----------------------------------------------------------------------------
 // DOMAIN 1: IDENTITY & ACCESS (7 Tables)
 // -----------------------------------------------------------------------------
@@ -205,6 +224,7 @@ model UserAccount {
   auditLogs       AuditLog[]     @relation("ActorAuditLogs")
   apiAccessLogs   ApiAccessLog[] @relation("ActorApiLogs")
   analyticsEvents AnalyticsEvent[] @relation("ActorAnalyticsEvents")
+  feedbacks       UserFeedback[] @relation("UserFeedbacks")
 
   @@index([role])
   @@index([deletedAt])
@@ -942,5 +962,55 @@ model ApiAccessLog {
   @@index([statusCode])
   @@index([createdAt(sort: Desc)])
   @@map("api_access_logs")
+}
+
+// -----------------------------------------------------------------------------
+// DOMAIN 9: USER FEEDBACK & SYSTEM ERROR LOGS (2 Tables)
+// -----------------------------------------------------------------------------
+
+model UserFeedback {
+  id          String           @id @default(uuid())
+  rating      Int              // 1 to 5
+  category    FeedbackCategory @default(GENERAL)
+  message     String?          @db.Text
+  userEmail   String?          @map("user_email")
+  userId      String?          @map("user_id")
+  user        UserAccount?     @relation("UserFeedbacks", fields: [userId], references: [id], onDelete: SetNull)
+  pageUrl     String?          @map("page_url")
+  userAgent   String?          @map("user_agent")
+  ipAddress   String?          @map("ip_address")
+  isResolved  Boolean          @default(false) @map("is_resolved")
+  adminNotes  String?          @db.Text @map("admin_notes")
+  createdAt   DateTime         @default(now()) @map("created_at")
+
+  @@index([category])
+  @@index([rating])
+  @@index([isResolved])
+  @@index([createdAt(sort: Desc)])
+  @@map("user_feedbacks")
+}
+
+model SystemErrorLog {
+  id          String        @id @default(uuid())
+  source      ErrorSource   @default(BACKEND)
+  severity    ErrorSeverity @default(ERROR)
+  message     String        @db.Text
+  stackTrace  String?       @db.Text @map("stack_trace")
+  route       String?
+  method      String?
+  statusCode  Int?          @map("status_code")
+  actorEmail  String?       @map("actor_email")
+  actorRole   String?       @map("actor_role")
+  ipAddress   String?       @map("ip_address")
+  userAgent   String?       @map("user_agent")
+  isResolved  Boolean       @default(false) @map("is_resolved")
+  adminNotes  String?       @db.Text @map("admin_notes")
+  createdAt   DateTime      @default(now()) @map("created_at")
+
+  @@index([source])
+  @@index([severity])
+  @@index([isResolved])
+  @@index([createdAt(sort: Desc)])
+  @@map("system_error_logs")
 }
 

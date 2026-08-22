@@ -38,6 +38,8 @@ import { AdminUsers } from './app/admin/pages/AdminUsers';
 import { AdminJobs } from './app/admin/pages/AdminJobs';
 import { AdminAuditLogs } from './app/admin/pages/AdminAuditLogs';
 import { AdminStartupDetail } from './app/admin/pages/AdminStartupDetail';
+import { AdminFeedback } from './app/admin/pages/AdminFeedback';
+import { AdminErrorLogs } from './app/admin/pages/AdminErrorLogs';
 
 export const router = createBrowserRouter([
   // Public Domain Routes
@@ -92,6 +94,8 @@ export const router = createBrowserRouter([
       { path: 'users', element: <AdminUsers /> },
       { path: 'jobs', element: <AdminJobs /> },
       { path: 'audit-logs', element: <AdminAuditLogs /> },
+      { path: 'feedback', element: <AdminFeedback /> },
+      { path: 'errors', element: <AdminErrorLogs /> },
     ],
   },
 

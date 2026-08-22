@@ -4,6 +4,7 @@ import { PublicNavbar } from '../components/PublicNavbar';
 import { PublicFooter } from '../components/PublicFooter';
 import { GlobalSearchModal } from '../search/GlobalSearchModal';
 import { CookieConsent } from '../components/CookieConsent';
+import { RevisitFeedbackPrompt } from '../components/RevisitFeedbackPrompt';
 
 export const PublicLayout: React.FC = () => {
   const [searchOpen, setSearchOpen] = useState(false);
@@ -36,6 +37,9 @@ export const PublicLayout: React.FC = () => {
 
       {/* Cookie & Privacy Consent Banner */}
       <CookieConsent />
+
+      {/* Revisit User Feedback Prompt */}
+      <RevisitFeedbackPrompt />
 
       {/* Command Palette Modal */}
       <GlobalSearchModal isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
