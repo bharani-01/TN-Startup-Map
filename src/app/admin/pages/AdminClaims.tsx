@@ -166,13 +166,13 @@ export const AdminClaims: React.FC = () => {
         </div>
 
         <div className="relative w-full sm:w-80">
-          <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-3" />
+          <Search className="w-4 h-4 text-slate-400 absolute left-3 top-2.5" />
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search claimant, startup, email..."
-            className="w-full pl-9 pr-4 py-2.5 text-xs bg-white/5 border border-white/10 rounded-full text-white placeholder-slate-400 focus:bg-white/10 focus:ring-2 focus:ring-[#0071E3]/20 focus:border-[#0071E3] transition-all"
+            className="w-full pl-9 pr-3 py-2 text-xs bg-white/5 border border-white/10 rounded-lg text-white placeholder-slate-400 focus:bg-white/10 focus:border-[#0071E3] transition-colors outline-none"
           />
         </div>
       </div>
@@ -181,9 +181,9 @@ export const AdminClaims: React.FC = () => {
       <div className="flex items-center gap-2 overflow-x-auto pb-1">
         <button
           onClick={() => setStatusFilter('PENDING_REVIEW')}
-          className={`px-4 py-2 rounded-2xl text-xs font-bold transition-all flex items-center gap-1.5 shrink-0 ${
+          className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-colors flex items-center gap-1.5 shrink-0 cursor-pointer ${
             statusFilter === 'PENDING_REVIEW'
-              ? 'bg-apple-amber text-black shadow-apple-sm'
+              ? 'bg-amber-400 text-black font-bold'
               : 'bg-white/5 text-slate-400 hover:text-white hover:bg-white/10'
           }`}
         >
@@ -193,9 +193,9 @@ export const AdminClaims: React.FC = () => {
 
         <button
           onClick={() => setStatusFilter('APPROVED')}
-          className={`px-4 py-2 rounded-2xl text-xs font-bold transition-all flex items-center gap-1.5 shrink-0 ${
+          className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-colors flex items-center gap-1.5 shrink-0 cursor-pointer ${
             statusFilter === 'APPROVED'
-              ? 'bg-apple-emerald text-white shadow-apple-sm'
+              ? 'bg-emerald-600 text-white font-bold'
               : 'bg-white/5 text-slate-400 hover:text-white hover:bg-white/10'
           }`}
         >
@@ -205,9 +205,9 @@ export const AdminClaims: React.FC = () => {
 
         <button
           onClick={() => setStatusFilter('REJECTED')}
-          className={`px-4 py-2 rounded-2xl text-xs font-bold transition-all flex items-center gap-1.5 shrink-0 ${
+          className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-colors flex items-center gap-1.5 shrink-0 cursor-pointer ${
             statusFilter === 'REJECTED'
-              ? 'bg-rose-600 text-white shadow-apple-sm'
+              ? 'bg-rose-600 text-white font-bold'
               : 'bg-white/5 text-slate-400 hover:text-white hover:bg-white/10'
           }`}
         >
@@ -217,9 +217,9 @@ export const AdminClaims: React.FC = () => {
 
         <button
           onClick={() => setStatusFilter('ALL')}
-          className={`px-4 py-2 rounded-2xl text-xs font-bold transition-all flex items-center gap-1.5 shrink-0 ${
+          className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-colors flex items-center gap-1.5 shrink-0 cursor-pointer ${
             statusFilter === 'ALL'
-              ? 'bg-[#0071E3] text-white shadow-apple-sm'
+              ? 'bg-[#0071E3] text-white font-bold'
               : 'bg-white/5 text-slate-400 hover:text-white hover:bg-white/10'
           }`}
         >
@@ -230,9 +230,9 @@ export const AdminClaims: React.FC = () => {
 
       {message && (
         <div
-          className={`p-4 rounded-2xl text-xs flex items-center gap-2 ${
+          className={`p-4 rounded-xl text-xs flex items-center gap-2 ${
             message.type === 'success'
-              ? 'bg-apple-emerald/10 border border-apple-emerald/20 text-apple-emerald'
+              ? 'bg-emerald-500/10 border border-emerald-500/20 text-emerald-400'
               : 'bg-rose-950/40 border border-rose-800 text-rose-300'
           }`}
         >
@@ -247,18 +247,18 @@ export const AdminClaims: React.FC = () => {
 
       {loading ? (
         <div className="py-20 text-center space-y-3">
-          <Loader2 className="w-8 h-8 text-apple-blue animate-spin mx-auto" />
-          <p className="text-xs text-apple-secondary">Loading claims queue...</p>
+          <Loader2 className="w-8 h-8 text-[#0071E3] animate-spin mx-auto" />
+          <p className="text-xs text-slate-400">Loading claims queue...</p>
         </div>
       ) : filteredClaims.length === 0 ? (
-        <div className="p-12 text-center bg-[#1c1c1e] rounded-3xl border border-white/10 space-y-3 shadow-apple-modal">
-          <ShieldCheck className="w-12 h-12 text-apple-emerald mx-auto" />
-          <h3 className="text-base font-bold text-white font-display">
+        <div className="p-12 text-center bg-[#1c1c1e] rounded-2xl border border-white/10 space-y-3 shadow-sm">
+          <ShieldCheck className="w-12 h-12 text-emerald-400 mx-auto" />
+          <h3 className="text-base font-bold text-white">
             {statusFilter === 'PENDING_REVIEW'
               ? 'No Claims Pending Review'
               : `No ${statusFilter.toLowerCase()} claims`}
           </h3>
-          <p className="text-xs text-apple-secondary max-w-sm mx-auto">
+          <p className="text-xs text-slate-400 max-w-sm mx-auto">
             {statusFilter === 'PENDING_REVIEW'
               ? 'All submitted founder claims have been verified and processed!'
               : `No claims match the current filter (${statusFilter}).`}
@@ -269,11 +269,11 @@ export const AdminClaims: React.FC = () => {
           {filteredClaims.map((claim) => (
             <div
               key={claim.id}
-              className="p-6 rounded-3xl bg-[#1c1c1e] border border-white/10 shadow-apple-modal space-y-4 hover:border-white/20 transition-colors"
+              className="p-6 rounded-2xl bg-[#1c1c1e] border border-white/10 shadow-sm space-y-4 hover:border-white/20 transition-colors"
             >
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-2xl bg-[#0071E3]/20 text-[#0071E3] font-display font-bold text-lg flex items-center justify-center shrink-0 shadow-apple-sm">
+                  <div className="w-12 h-12 rounded-xl bg-[#0071E3]/20 text-[#0071E3] font-bold text-lg flex items-center justify-center shrink-0 shadow-sm">
                     <ShieldCheck className="w-6 h-6 text-[#0071E3]" />
                   </div>
                   <div>
@@ -281,20 +281,20 @@ export const AdminClaims: React.FC = () => {
                       <h3 className="font-bold text-base text-white">
                         Claim for {claim.startupName || claim.startup?.name || 'Startup Listing'}
                       </h3>
-                      <span className={`px-3 py-0.5 rounded-full text-[10px] font-bold border ${
+                      <span className={`px-2 py-0.5 rounded-md text-[10px] font-mono font-bold border ${
                         claim.status === 'APPROVED'
-                          ? 'bg-apple-emerald/20 text-apple-emerald border-apple-emerald/30'
+                          ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30'
                           : claim.status === 'REJECTED'
                           ? 'bg-rose-900/30 text-rose-300 border-rose-700/30'
-                          : 'bg-apple-amber/20 text-apple-amber border-apple-amber/30'
+                          : 'bg-amber-400/20 text-amber-300 border-amber-400/30'
                       }`}>
-                        {claim.status === 'APPROVED' ? 'Approved & Assigned' : (claim.status === 'REJECTED' ? 'Rejected' : 'Pending Review')}
+                        {claim.status === 'APPROVED' ? 'APPROVED & ASSIGNED' : (claim.status === 'REJECTED' ? 'REJECTED' : 'PENDING REVIEW')}
                       </span>
-                      <span className="text-[11px] text-apple-secondary">
+                      <span className="text-[11px] text-slate-400">
                         Submitted {new Date(claim.createdAt).toLocaleDateString()}
                       </span>
                     </div>
-                    <p className="text-xs text-apple-secondary mt-1">
+                    <p className="text-xs text-slate-400 mt-1">
                       Claimant: <span className="text-white font-semibold">{claim.claimantName}</span> ({claim.claimantRole})
                     </p>
                   </div>
@@ -305,7 +305,7 @@ export const AdminClaims: React.FC = () => {
                     <button
                       onClick={() => handleReject(claim.id)}
                       disabled={actionLoading === claim.id}
-                      className="px-4 py-2 rounded-full border border-rose-500/30 bg-rose-500/10 text-rose-300 hover:bg-rose-500/20 text-xs font-semibold flex items-center gap-1.5 transition-all apple-press"
+                      className="px-3.5 py-1.5 rounded-lg border border-rose-500/30 bg-rose-500/10 text-rose-300 hover:bg-rose-500/20 text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer"
                     >
                       <XCircle className="w-3.5 h-3.5" />
                       <span>Reject</span>
@@ -314,7 +314,7 @@ export const AdminClaims: React.FC = () => {
                     <button
                       onClick={() => handleApprove(claim.id)}
                       disabled={actionLoading === claim.id}
-                      className="px-5 py-2 rounded-full bg-apple-emerald hover:bg-emerald-600 text-white text-xs font-semibold flex items-center gap-1.5 transition-all shadow-apple-sm apple-press"
+                      className="px-4 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold flex items-center gap-1.5 transition-colors shadow-sm cursor-pointer"
                     >
                       {actionLoading === claim.id ? (
                         <Loader2 className="w-3.5 h-3.5 animate-spin" />
@@ -389,7 +389,7 @@ export const AdminClaims: React.FC = () => {
 
             <button
               onClick={() => setCredentialsModal(null)}
-              className="w-full py-2.5 bg-apple-blue hover:bg-apple-blueHover text-white text-xs font-semibold rounded-full shadow-apple-sm apple-press"
+              className="w-full py-2.5 bg-[#0071E3] hover:bg-[#0077ED] text-white text-xs font-semibold rounded-lg shadow-sm transition-colors cursor-pointer"
             >
               Done
             </button>

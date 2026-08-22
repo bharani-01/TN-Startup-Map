@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { 
   BookOpen, 
   Search, 
-  Sparkles, 
   Trash2, 
   RotateCcw, 
   Eye, 
@@ -11,14 +10,11 @@ import {
   ShieldCheck, 
   Star, 
   ThumbsUp, 
-  Clock, 
-  Calendar, 
-  AlertCircle, 
   CheckCircle2, 
   Loader2,
   Building2
 } from 'lucide-react';
-import { BlogPost, BlogCategory } from '../../../types';
+import { BlogPost } from '../../../types';
 
 export const AdminBlogs: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'ACTIVE' | 'DELETED'>('ACTIVE');
@@ -68,64 +64,60 @@ export const AdminBlogs: React.FC = () => {
       const res = await fetch(`/api/blogs/${id}/feature`, { method: 'PATCH' });
       const data = await res.json();
       if (data.success) {
-        setBlogs(blogs.map((b) => (b.id === id ? { ...b, featured: !b.featured } : b)));
-        setActionSuccess('Article spotlight status updated');
-        setTimeout(() => setActionSuccess(null), 2500);
+        setActionSuccess('Spotlight status updated!');
+        setTimeout(() => setActionSuccess(null), 3000);
+        fetchBlogs();
       }
-    } catch (err: any) {
-      alert('Error updating feature status: ' + err.message);
+    } catch (err) {
+      console.error(err);
     }
   };
 
-  const handleSoftDelete = async (id: string, title: string) => {
-    if (!window.confirm(`Are you sure you want to soft-delete "${title}"? It can be restored at any time.`)) {
-      return;
-    }
+  const handleDelete = async (id: string) => {
+    if (!confirm('Are you sure you want to soft-delete this article?')) return;
     try {
       const res = await fetch(`/api/blogs/${id}`, { method: 'DELETE' });
       const data = await res.json();
       if (data.success) {
-        setBlogs(blogs.filter((b) => b.id !== id));
-        setActionSuccess(`Article "${title}" soft-deleted`);
-        setTimeout(() => setActionSuccess(null), 2500);
+        setActionSuccess('Article soft-deleted.');
+        setTimeout(() => setActionSuccess(null), 3000);
+        fetchBlogs();
       }
-    } catch (err: any) {
-      alert('Error deleting article: ' + err.message);
+    } catch (err) {
+      console.error(err);
     }
   };
 
-  const handleRestore = async (id: string, title: string) => {
+  const handleRestore = async (id: string) => {
     try {
       const res = await fetch(`/api/blogs/${id}/restore`, { method: 'POST' });
       const data = await res.json();
       if (data.success) {
-        setBlogs(blogs.filter((b) => b.id !== id));
-        setActionSuccess(`Article "${title}" restored to active directory`);
-        setTimeout(() => setActionSuccess(null), 2500);
+        setActionSuccess('Article restored.');
+        setTimeout(() => setActionSuccess(null), 3000);
+        fetchBlogs();
       }
-    } catch (err: any) {
-      alert('Error restoring article: ' + err.message);
+    } catch (err) {
+      console.error(err);
     }
   };
 
   return (
     <div className="space-y-6">
-      
-      {/* Header */}
+      {/* Top Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-extrabold text-[#1D1D1F] font-display flex items-center gap-2">
-            <BookOpen className="w-6 h-6 text-[#0071E3]" />
-            <span>Stories & Blog Moderation</span>
+          <h1 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
+            Stories & Blog Moderation
           </h1>
-          <p className="text-xs text-[#86868B]">
+          <p className="text-xs sm:text-sm text-slate-400 mt-1">
             Review, feature, curate, and moderate founder articles and ecosystem dispatches.
           </p>
         </div>
 
         <Link
           to="/blog/new"
-          className="px-5 py-2.5 bg-[#0071E3] hover:bg-[#0077ED] text-white text-xs font-bold rounded-full inline-flex items-center gap-1.5 shadow-apple-sm transition-all apple-press shrink-0"
+          className="px-4 py-2 bg-[#0071E3] hover:bg-[#0077ED] text-white text-xs font-semibold rounded-lg inline-flex items-center gap-1.5 shadow-sm transition-colors shrink-0"
         >
           <PenTool className="w-4 h-4" />
           <span>Write Official Story</span>
@@ -134,34 +126,34 @@ export const AdminBlogs: React.FC = () => {
 
       {/* Success Alert Banner */}
       {actionSuccess && (
-        <div className="p-3.5 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-2xl text-xs flex items-center gap-2 animate-in fade-in">
-          <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+        <div className="p-3.5 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 rounded-xl text-xs flex items-center gap-2 animate-in fade-in">
+          <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
           <span className="font-semibold">{actionSuccess}</span>
         </div>
       )}
 
       {/* Filter Tabs & Search Bar */}
-      <div className="bg-white rounded-3xl p-4 shadow-apple-card border border-black/[0.08] space-y-4">
+      <div className="bg-[#1c1c1e] rounded-2xl p-4 shadow-sm border border-white/10 space-y-4">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
           
           {/* Active vs Soft-Deleted Tabs */}
-          <div className="flex items-center gap-1 bg-black/[0.04] p-1 rounded-2xl">
+          <div className="flex items-center gap-1 bg-white/5 p-1 rounded-lg border border-white/10">
             <button
               onClick={() => setActiveTab('ACTIVE')}
-              className={`px-4 py-1.5 rounded-xl text-xs font-bold transition-all ${
+              className={`px-3.5 py-1.5 rounded-md text-xs font-semibold transition-colors cursor-pointer ${
                 activeTab === 'ACTIVE'
-                  ? 'bg-white text-[#1D1D1F] shadow-apple-sm'
-                  : 'text-[#86868B] hover:text-[#1D1D1F]'
+                  ? 'bg-white text-slate-900 shadow-sm'
+                  : 'text-slate-400 hover:text-white'
               }`}
             >
               Active Stories
             </button>
             <button
               onClick={() => setActiveTab('DELETED')}
-              className={`px-4 py-1.5 rounded-xl text-xs font-bold transition-all ${
+              className={`px-3.5 py-1.5 rounded-md text-xs font-semibold transition-colors cursor-pointer ${
                 activeTab === 'DELETED'
-                  ? 'bg-white text-rose-600 shadow-apple-sm'
-                  : 'text-[#86868B] hover:text-rose-600'
+                  ? 'bg-rose-600 text-white shadow-sm'
+                  : 'text-slate-400 hover:text-rose-400'
               }`}
             >
               Soft-Deleted / Archived
@@ -176,15 +168,15 @@ export const AdminBlogs: React.FC = () => {
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder="Search articles or authors..."
-                className="w-full pl-8 pr-3 py-1.5 text-xs bg-black/[0.02] focus:bg-white rounded-xl border border-black/[0.08] focus:outline-none focus:ring-2 focus:ring-[#0071E3]/20"
+                className="w-full pl-8 pr-3 py-1.5 text-xs bg-white/5 text-white focus:bg-white/10 rounded-lg border border-white/10 focus:outline-none focus:border-[#0071E3]"
               />
-              <Search className="w-3.5 h-3.5 text-[#86868B] absolute left-2.5 top-2.5" />
+              <Search className="w-3.5 h-3.5 text-slate-400 absolute left-2.5 top-2.5" />
             </div>
 
             <select
               value={categoryFilter}
               onChange={(e) => setCategoryFilter(e.target.value)}
-              className="px-3 py-1.5 text-xs font-semibold bg-black/[0.02] rounded-xl border border-black/[0.08] focus:outline-none focus:ring-2 focus:ring-[#0071E3]/20"
+              className="px-3 py-1.5 text-xs font-semibold bg-[#1c1c1e] text-white rounded-lg border border-white/10 focus:outline-none focus:border-[#0071E3] cursor-pointer"
             >
               <option value="all">All Categories</option>
               <option value="Founder Stories">Founder Stories</option>
@@ -200,36 +192,36 @@ export const AdminBlogs: React.FC = () => {
       </div>
 
       {/* Stories Table */}
-      <div className="bg-white rounded-3xl overflow-hidden shadow-apple-card border border-black/[0.08]">
+      <div className="bg-[#1c1c1e] rounded-2xl overflow-hidden shadow-sm border border-white/10">
         {loading ? (
           <div className="py-20 text-center space-y-2">
             <Loader2 className="w-7 h-7 text-[#0071E3] animate-spin mx-auto" />
-            <p className="text-xs text-[#86868B]">Loading articles...</p>
+            <p className="text-xs text-slate-400">Loading articles...</p>
           </div>
         ) : error ? (
-          <div className="p-8 text-center text-xs text-rose-600">{error}</div>
+          <div className="p-8 text-center text-xs text-rose-400">{error}</div>
         ) : blogs.length === 0 ? (
           <div className="p-12 text-center space-y-3">
-            <BookOpen className="w-8 h-8 text-[#86868B] mx-auto opacity-50" />
-            <p className="text-xs font-bold text-[#1D1D1F]">No articles in this view</p>
-            <p className="text-[11px] text-[#86868B]">No stories found matching your filter.</p>
+            <BookOpen className="w-8 h-8 text-slate-500 mx-auto opacity-50" />
+            <p className="text-xs font-bold text-white">No articles in this view</p>
+            <p className="text-[11px] text-slate-400">No stories found matching your filter.</p>
           </div>
         ) : (
           <div className="overflow-x-auto">
-            <table className="w-full text-left text-xs">
-              <thead className="bg-black/[0.02] border-b border-black/[0.06] text-[#86868B] font-bold">
+            <table className="w-full text-left text-xs text-slate-300">
+              <thead className="bg-black/30 border-b border-white/10 text-slate-400 font-bold text-[11px] uppercase tracking-wider">
                 <tr>
-                  <th className="py-3 px-4">Article</th>
-                  <th className="py-3 px-4">Category</th>
-                  <th className="py-3 px-4">Author / Venture</th>
-                  <th className="py-3 px-4 text-center">Claps</th>
-                  <th className="py-3 px-4 text-center">Spotlight</th>
-                  <th className="py-3 px-4 text-right">Actions</th>
+                  <th className="py-3.5 px-4">Article</th>
+                  <th className="py-3.5 px-4">Category</th>
+                  <th className="py-3.5 px-4">Author / Venture</th>
+                  <th className="py-3.5 px-4 text-center">Claps</th>
+                  <th className="py-3.5 px-4 text-center">Spotlight</th>
+                  <th className="py-3.5 px-4 text-right">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-black/[0.04]">
+              <tbody className="divide-y divide-white/5">
                 {blogs.map((b) => (
-                  <tr key={b.id} className="hover:bg-black/[0.01] transition-colors">
+                  <tr key={b.id} className="hover:bg-white/[0.03] transition-colors">
                     
                     {/* Article Info */}
                     <td className="py-3.5 px-4 max-w-xs">
@@ -238,18 +230,18 @@ export const AdminBlogs: React.FC = () => {
                           <img
                             src={b.coverImageUrl}
                             alt=""
-                            className="w-12 h-10 object-cover rounded-xl shrink-0 border border-black/[0.06]"
+                            className="w-12 h-10 object-cover rounded-lg shrink-0 border border-white/10"
                           />
                         )}
                         <div className="truncate">
                           <Link
                             to={`/blog/${b.slug}`}
                             target="_blank"
-                            className="font-bold text-[#1D1D1F] hover:text-[#0071E3] transition-colors line-clamp-1"
+                            className="font-bold text-white hover:text-[#0071E3] transition-colors line-clamp-1"
                           >
                             {b.title}
                           </Link>
-                          <p className="text-[10px] text-[#86868B]">
+                          <p className="text-[10px] text-slate-400">
                             {new Date(b.publishedAt).toLocaleDateString()} · {b.readTimeMinutes} min read
                           </p>
                         </div>
@@ -258,7 +250,7 @@ export const AdminBlogs: React.FC = () => {
 
                     {/* Category */}
                     <td className="py-3.5 px-4">
-                      <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-[#0071E3]/10 text-[#0071E3]">
+                      <span className="px-2 py-0.5 rounded-md text-[10px] font-mono font-bold bg-[#0071E3]/15 text-blue-300 border border-[#0071E3]/25">
                         {b.category}
                       </span>
                     </td>
@@ -266,11 +258,11 @@ export const AdminBlogs: React.FC = () => {
                     {/* Author & Startup */}
                     <td className="py-3.5 px-4">
                       <div>
-                        <div className="flex items-center gap-1.5 font-bold text-[#1D1D1F]">
+                        <div className="flex items-center gap-1.5 font-semibold text-white">
                           <span>{b.authorName}</span>
                           {b.isFounder && (
                             <span title="Verified Founder">
-                              <ShieldCheck className="w-3.5 h-3.5 text-[#34C759]" />
+                              <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
                             </span>
                           )}
                         </div>
@@ -285,7 +277,7 @@ export const AdminBlogs: React.FC = () => {
 
                     {/* Claps */}
                     <td className="py-3.5 px-4 text-center">
-                      <span className="inline-flex items-center gap-1 font-bold text-[#1D1D1F]">
+                      <span className="inline-flex items-center gap-1 font-bold text-white">
                         <ThumbsUp className="w-3 h-3 text-[#0071E3]" />
                         {b.clapsCount || 0}
                       </span>
@@ -296,12 +288,12 @@ export const AdminBlogs: React.FC = () => {
                       {activeTab === 'ACTIVE' && (
                         <button
                           onClick={() => handleToggleFeature(b.id)}
-                          className={`p-1.5 rounded-full transition-all apple-press ${
+                          className={`p-1.5 rounded-lg transition-colors cursor-pointer ${
                             b.featured
-                              ? 'bg-amber-400/20 text-amber-600'
-                              : 'text-[#86868B] hover:text-amber-500 hover:bg-black/[0.04]'
+                              ? 'bg-amber-400/20 text-amber-300 border border-amber-400/30'
+                              : 'bg-white/5 text-slate-500 hover:text-white border border-white/10'
                           }`}
-                          title={b.featured ? 'Remove from Homepage Spotlight' : 'Pin to Homepage Spotlight'}
+                          title={b.featured ? 'Featured on homepage' : 'Click to feature on homepage'}
                         >
                           <Star className={`w-4 h-4 ${b.featured ? 'fill-amber-400' : ''}`} />
                         </button>
@@ -310,37 +302,35 @@ export const AdminBlogs: React.FC = () => {
 
                     {/* Actions */}
                     <td className="py-3.5 px-4 text-right">
-                      <div className="flex items-center justify-end gap-2">
+                      <div className="flex items-center justify-end gap-1.5">
                         <Link
                           to={`/blog/${b.slug}`}
                           target="_blank"
-                          className="p-1.5 rounded-lg text-[#86868B] hover:text-[#0071E3] hover:bg-black/[0.04]"
-                          title="View Live Article"
+                          className="p-1.5 text-slate-400 hover:text-white hover:bg-white/10 rounded-lg transition-colors"
+                          title="View live article"
                         >
                           <Eye className="w-4 h-4" />
                         </Link>
 
                         {activeTab === 'ACTIVE' ? (
                           <button
-                            onClick={() => handleSoftDelete(b.id, b.title)}
-                            className="p-1.5 rounded-lg text-rose-500 hover:bg-rose-50 transition-colors"
-                            title="Soft-Delete Article"
+                            onClick={() => handleDelete(b.id)}
+                            className="p-1.5 text-rose-400 hover:text-rose-300 hover:bg-rose-500/20 rounded-lg transition-colors cursor-pointer"
+                            title="Soft delete article"
                           >
                             <Trash2 className="w-4 h-4" />
                           </button>
                         ) : (
                           <button
-                            onClick={() => handleRestore(b.id, b.title)}
-                            className="p-1.5 rounded-lg text-emerald-600 hover:bg-emerald-50 transition-colors flex items-center gap-1 font-bold text-[11px]"
-                            title="Restore Soft-Deleted Article"
+                            onClick={() => handleRestore(b.id)}
+                            className="p-1.5 text-emerald-400 hover:text-emerald-300 hover:bg-emerald-500/20 rounded-lg transition-colors cursor-pointer"
+                            title="Restore article"
                           >
-                            <RotateCcw className="w-3.5 h-3.5" />
-                            <span>Restore</span>
+                            <RotateCcw className="w-4 h-4" />
                           </button>
                         )}
                       </div>
                     </td>
-
                   </tr>
                 ))}
               </tbody>
@@ -348,7 +338,6 @@ export const AdminBlogs: React.FC = () => {
           </div>
         )}
       </div>
-
     </div>
   );
 };

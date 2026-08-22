@@ -45,10 +45,10 @@ export const AdminSidebar: React.FC = () => {
               to={link.path}
               end={link.path === '/admin'}
               className={({ isActive }) =>
-                `flex items-center gap-2.5 px-3.5 py-2.5 rounded-2xl text-xs font-semibold transition-all apple-press-subtle ${
+                `flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-semibold transition-colors ${
                   isActive
-                    ? 'bg-apple-blue text-white shadow-apple-sm'
-                    : 'text-apple-secondary hover:bg-white/5 hover:text-white'
+                    ? 'bg-[#0071E3] text-white'
+                    : 'text-slate-400 hover:bg-white/5 hover:text-white'
                 }`
               }
             >
@@ -64,10 +64,10 @@ export const AdminSidebar: React.FC = () => {
           href="/startups"
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center justify-between px-3.5 py-2 text-xs font-semibold text-apple-secondary hover:text-white rounded-xl hover:bg-white/5 transition-all"
+          className="flex items-center justify-between px-3 py-2 text-xs font-semibold text-slate-400 hover:text-white rounded-lg hover:bg-white/5 transition-colors"
         >
           <span>Live Directory</span>
-          <ExternalLink className="w-3.5 h-3.5 text-apple-tertiary" />
+          <ExternalLink className="w-3.5 h-3.5 text-slate-500" />
         </a>
       </div>
     </aside>

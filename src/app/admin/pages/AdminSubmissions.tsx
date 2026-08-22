@@ -198,13 +198,13 @@ export const AdminSubmissions: React.FC = () => {
         </div>
 
         <div className="relative w-full sm:w-80">
-          <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-3" />
+          <Search className="w-4 h-4 text-slate-400 absolute left-3 top-2.5" />
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search submission, founder, district..."
-            className="w-full pl-9 pr-4 py-2.5 text-xs bg-white/5 border border-white/10 rounded-full text-white placeholder-slate-400 focus:bg-white/10 focus:ring-2 focus:ring-[#0071E3]/20 focus:border-[#0071E3] transition-all"
+            className="w-full pl-9 pr-3 py-2 text-xs bg-white/5 border border-white/10 rounded-lg text-white placeholder-slate-400 focus:bg-white/10 focus:border-[#0071E3] transition-colors outline-none"
           />
         </div>
       </div>
@@ -213,9 +213,9 @@ export const AdminSubmissions: React.FC = () => {
       <div className="flex items-center gap-2 overflow-x-auto pb-1">
         <button
           onClick={() => setStatusFilter('PENDING_REVIEW')}
-          className={`px-4 py-2 rounded-2xl text-xs font-bold transition-all flex items-center gap-1.5 shrink-0 ${
+          className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-colors flex items-center gap-1.5 shrink-0 cursor-pointer ${
             statusFilter === 'PENDING_REVIEW'
-              ? 'bg-apple-amber text-black shadow-apple-sm'
+              ? 'bg-amber-400 text-black font-bold'
               : 'bg-white/5 text-slate-400 hover:text-white hover:bg-white/10'
           }`}
         >
@@ -225,9 +225,9 @@ export const AdminSubmissions: React.FC = () => {
 
         <button
           onClick={() => setStatusFilter('APPROVED')}
-          className={`px-4 py-2 rounded-2xl text-xs font-bold transition-all flex items-center gap-1.5 shrink-0 ${
+          className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-colors flex items-center gap-1.5 shrink-0 cursor-pointer ${
             statusFilter === 'APPROVED'
-              ? 'bg-apple-emerald text-white shadow-apple-sm'
+              ? 'bg-emerald-600 text-white font-bold'
               : 'bg-white/5 text-slate-400 hover:text-white hover:bg-white/10'
           }`}
         >
@@ -237,9 +237,9 @@ export const AdminSubmissions: React.FC = () => {
 
         <button
           onClick={() => setStatusFilter('REJECTED')}
-          className={`px-4 py-2 rounded-2xl text-xs font-bold transition-all flex items-center gap-1.5 shrink-0 ${
+          className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-colors flex items-center gap-1.5 shrink-0 cursor-pointer ${
             statusFilter === 'REJECTED'
-              ? 'bg-rose-600 text-white shadow-apple-sm'
+              ? 'bg-rose-600 text-white font-bold'
               : 'bg-white/5 text-slate-400 hover:text-white hover:bg-white/10'
           }`}
         >
@@ -249,9 +249,9 @@ export const AdminSubmissions: React.FC = () => {
 
         <button
           onClick={() => setStatusFilter('ALL')}
-          className={`px-4 py-2 rounded-2xl text-xs font-bold transition-all flex items-center gap-1.5 shrink-0 ${
+          className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-colors flex items-center gap-1.5 shrink-0 cursor-pointer ${
             statusFilter === 'ALL'
-              ? 'bg-[#0071E3] text-white shadow-apple-sm'
+              ? 'bg-[#0071E3] text-white font-bold'
               : 'bg-white/5 text-slate-400 hover:text-white hover:bg-white/10'
           }`}
         >
@@ -262,7 +262,7 @@ export const AdminSubmissions: React.FC = () => {
 
       {message && (
         <div
-          className={`p-4 rounded-2xl text-xs flex items-center gap-2 ${
+          className={`p-4 rounded-xl text-xs flex items-center gap-2 ${
             message.type === 'success'
               ? 'bg-apple-emerald/10 border border-apple-emerald/20 text-apple-emerald'
               : 'bg-rose-950/40 border border-rose-800 text-rose-300'
@@ -322,21 +322,21 @@ export const AdminSubmissions: React.FC = () => {
                     <div>
                       <div className="flex items-center gap-2 flex-wrap">
                         <h3 className="font-bold text-base text-white">{displayName}</h3>
-                        <span className={`px-3 py-0.5 rounded-full text-[10px] font-bold border ${
+                        <span className={`px-2 py-0.5 rounded-md text-[10px] font-mono font-bold border ${
                           sub?.status === 'APPROVED'
-                            ? 'bg-apple-emerald/20 text-apple-emerald border-apple-emerald/30'
+                            ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30'
                             : sub?.status === 'REJECTED'
                             ? 'bg-rose-900/30 text-rose-300 border-rose-700/30'
-                            : 'bg-apple-amber/20 text-apple-amber border-apple-amber/30'
+                            : 'bg-amber-400/20 text-amber-300 border-amber-400/30'
                         }`}>
-                          {sub?.status === 'APPROVED' ? 'Approved & Verified' : (sub?.status === 'REJECTED' ? 'Rejected' : 'Pending Review')}
+                          {sub?.status === 'APPROVED' ? 'APPROVED & VERIFIED' : (sub?.status === 'REJECTED' ? 'REJECTED' : 'PENDING REVIEW')}
                         </span>
-                        <span className="text-[11px] text-apple-secondary">
+                        <span className="text-[11px] text-slate-400">
                           Submitted {displayDate}
                         </span>
                       </div>
                       {displayTagline && (
-                        <p className="text-xs text-apple-secondary mt-1">{displayTagline}</p>
+                        <p className="text-xs text-slate-400 mt-1">{displayTagline}</p>
                       )}
                     </div>
                   </div>
@@ -345,10 +345,10 @@ export const AdminSubmissions: React.FC = () => {
                   <div className="flex items-center gap-2 self-end md:self-auto shrink-0 flex-wrap">
                     <button
                       onClick={() => setPreviewSub(sub)}
-                      className="px-4 py-2 rounded-full border border-white/20 bg-white/10 text-white hover:bg-white/15 text-xs font-semibold flex items-center gap-1.5 transition-all apple-press"
+                      className="px-3.5 py-1.5 rounded-lg border border-white/20 bg-white/10 text-white hover:bg-white/15 text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer"
                       title="Review complete submission profile"
                     >
-                      <Eye className="w-3.5 h-3.5 text-apple-blue" />
+                      <Eye className="w-3.5 h-3.5 text-[#0071E3]" />
                       <span>View Profile</span>
                     </button>
 
@@ -357,7 +357,7 @@ export const AdminSubmissions: React.FC = () => {
                         <button
                           onClick={() => handleReject(sub.id)}
                           disabled={actionLoading === sub.id}
-                          className="px-4 py-2 rounded-full border border-rose-500/30 bg-rose-500/10 text-rose-300 hover:bg-rose-500/20 text-xs font-semibold flex items-center gap-1.5 transition-all apple-press"
+                          className="px-3.5 py-1.5 rounded-lg border border-rose-500/30 bg-rose-500/10 text-rose-300 hover:bg-rose-500/20 text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer"
                         >
                           <XCircle className="w-3.5 h-3.5" />
                           <span>Reject</span>
@@ -366,7 +366,7 @@ export const AdminSubmissions: React.FC = () => {
                         <button
                           onClick={() => handleApprove(sub.id)}
                           disabled={actionLoading === sub.id}
-                          className="px-5 py-2 rounded-full bg-apple-emerald hover:bg-emerald-600 text-white text-xs font-semibold flex items-center gap-1.5 transition-all shadow-apple-sm apple-press"
+                          className="px-4 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold flex items-center gap-1.5 transition-colors shadow-sm cursor-pointer"
                         >
                           {actionLoading === sub.id ? (
                             <Loader2 className="w-3.5 h-3.5 animate-spin" />
@@ -669,7 +669,7 @@ export const AdminSubmissions: React.FC = () => {
 
             <button
               onClick={() => setCredentialsModal(null)}
-              className="w-full py-3 rounded-full bg-apple-blue hover:bg-apple-blueHover text-white font-bold text-xs shadow-apple-sm transition-all apple-press"
+              className="w-full py-2.5 rounded-lg bg-[#0071E3] hover:bg-[#0077ED] text-white font-bold text-xs shadow-sm transition-colors cursor-pointer"
             >
               Done & Close
             </button>

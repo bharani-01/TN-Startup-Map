@@ -96,12 +96,12 @@ export const AdminUsers: React.FC = () => {
                       {u.companyName || '—'}
                     </td>
                     <td className="py-4 px-4">
-                      <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold ${
+                      <span className={`px-2 py-0.5 rounded-md text-[10px] font-mono font-bold ${
                         u.role === 'ADMIN' || u.role === 'SUPER_ADMIN'
-                          ? 'bg-apple-amber/20 text-apple-amber border border-apple-amber/30'
+                          ? 'bg-amber-400/20 text-amber-300 border border-amber-400/30'
                           : u.role === 'FOUNDER'
-                          ? 'bg-apple-blue/20 text-apple-blue border border-apple-blue/30'
-                          : 'bg-white/5 text-apple-secondary border border-white/10'
+                          ? 'bg-blue-500/20 text-blue-300 border border-blue-500/30'
+                          : 'bg-white/5 text-slate-400 border border-white/10'
                       }`}>
                         {u.role}
                       </span>
@@ -111,7 +111,7 @@ export const AdminUsers: React.FC = () => {
                         value={u.role}
                         disabled={updatingId === u.id}
                         onChange={(e) => handleRoleChange(u.id, e.target.value as UserRole)}
-                        className="bg-black/50 border border-white/15 text-white text-xs rounded-xl px-3 py-1.5 focus:ring-2 focus:ring-apple-blue font-medium cursor-pointer"
+                        className="bg-black/50 border border-white/15 text-white text-xs rounded-lg px-3 py-1.5 focus:border-[#0071E3] font-medium cursor-pointer"
                       >
                         <option value="USER">USER</option>
                         <option value="FOUNDER">FOUNDER</option>

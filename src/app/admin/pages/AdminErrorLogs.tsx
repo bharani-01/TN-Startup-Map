@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { 
-  AlertTriangle, Bug, ShieldAlert, CheckCircle, Search, RefreshCw, 
-  Clock, Terminal, Copy, Check, ChevronDown, ChevronUp, User, Globe, AlertCircle 
+  Bug, AlertTriangle, Search, Filter, CheckCircle, AlertCircle, 
+  RefreshCw, Check, Clock, Globe, User, Terminal, ChevronDown, ChevronUp, Copy, X 
 } from 'lucide-react';
 
 interface ErrorLogItem {
@@ -22,19 +22,18 @@ interface ErrorLogItem {
   createdAt: string;
 }
 
-interface ErrorStats {
+interface ErrorLogStats {
   totalErrors: number;
-  criticalErrors: number;
-  warningErrors: number;
-  resolvedErrors: number;
   unresolvedErrors: number;
+  criticalErrors: number;
   backendErrors: number;
   frontendErrors: number;
+  resolvedErrors: number;
 }
 
 export const AdminErrorLogs: React.FC = () => {
   const [errors, setErrors] = useState<ErrorLogItem[]>([]);
-  const [stats, setStats] = useState<ErrorStats | null>(null);
+  const [stats, setStats] = useState<ErrorLogStats | null>(null);
   const [loading, setLoading] = useState(true);
   const [loadingMore, setLoadingMore] = useState(false);
   const [hasMore, setHasMore] = useState(true);
@@ -46,9 +45,14 @@ export const AdminErrorLogs: React.FC = () => {
   const [resolvedFilter, setResolvedFilter] = useState<string>('ALL');
   const [searchQuery, setSearchQuery] = useState('');
 
-  // Expanded stack trace map
+  // Expandable Stack Trace State
   const [expandedStacks, setExpandedStacks] = useState<Record<string, boolean>>({});
   const [copiedId, setCopiedId] = useState<string | null>(null);
+
+  // Notes Modal State
+  const [selectedError, setSelectedError] = useState<ErrorLogItem | null>(null);
+  const [adminNoteInput, setAdminNoteInput] = useState('');
+  const [isUpdating, setIsUpdating] = useState(false);
 
   const observerTarget = useRef<HTMLDivElement>(null);
   const offsetRef = useRef(0);
@@ -109,7 +113,7 @@ export const AdminErrorLogs: React.FC = () => {
         setHasMore(offsetRef.current < total);
       }
     } catch (err) {
-      console.error('Failed to fetch error logs:', err);
+      console.error('Failed to fetch errors:', err);
     } finally {
       setLoading(false);
       setLoadingMore(false);
@@ -129,34 +133,31 @@ export const AdminErrorLogs: React.FC = () => {
           fetchErrors(false);
         }
       },
-      { threshold: 0.2 }
+      { threshold: 0.5 }
     );
 
-    const current = observerTarget.current;
-    if (current) observer.observe(current);
+    if (observerTarget.current) {
+      observer.observe(observerTarget.current);
+    }
 
-    return () => {
-      if (current) observer.unobserve(current);
-    };
+    return () => observer.disconnect();
   }, [hasMore, loading, loadingMore, fetchErrors]);
 
   const handleToggleResolve = async (item: ErrorLogItem) => {
     try {
       const token = localStorage.getItem('token') || sessionStorage.getItem('token');
-      const newStatus = !item.isResolved;
-
       const res = await fetch(`/api/admin/errors/${item.id}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({ isResolved: newStatus }),
+        body: JSON.stringify({ isResolved: !item.isResolved }),
       });
 
       if (res.ok) {
         setErrors((prev) =>
-          prev.map((e) => (e.id === item.id ? { ...e, isResolved: newStatus } : e))
+          prev.map((e) => (e.id === item.id ? { ...e, isResolved: !item.isResolved } : e))
         );
         fetchStats();
       }
@@ -165,8 +166,35 @@ export const AdminErrorLogs: React.FC = () => {
     }
   };
 
-  const copyToClipboard = (id: string, text: string) => {
-    navigator.clipboard.writeText(text);
+  const handleSaveNotes = async () => {
+    if (!selectedError) return;
+    try {
+      setIsUpdating(true);
+      const token = localStorage.getItem('token') || sessionStorage.getItem('token');
+      const res = await fetch(`/api/admin/errors/${selectedError.id}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ adminNotes: adminNoteInput }),
+      });
+
+      if (res.ok) {
+        setErrors((prev) =>
+          prev.map((e) => (e.id === selectedError.id ? { ...e, adminNotes: adminNoteInput } : e))
+        );
+        setSelectedError(null);
+      }
+    } catch (err) {
+      console.error('Failed to save triage notes:', err);
+    } finally {
+      setIsUpdating(false);
+    }
+  };
+
+  const copyStackTrace = (id: string, trace: string) => {
+    navigator.clipboard.writeText(trace);
     setCopiedId(id);
     setTimeout(() => setCopiedId(null), 2000);
   };
@@ -179,19 +207,19 @@ export const AdminErrorLogs: React.FC = () => {
     switch (severity) {
       case 'CRITICAL':
         return (
-          <span className="px-2 py-0.5 rounded-md text-[10px] font-mono font-bold bg-rose-50 text-rose-700 border border-rose-200">
+          <span className="px-2 py-0.5 rounded-md text-[10px] font-mono font-bold bg-rose-500/20 text-rose-300 border border-rose-500/30">
             CRITICAL
           </span>
         );
       case 'WARNING':
         return (
-          <span className="px-2 py-0.5 rounded-md text-[10px] font-mono font-bold bg-amber-50 text-amber-700 border border-amber-200">
+          <span className="px-2 py-0.5 rounded-md text-[10px] font-mono font-bold bg-amber-400/20 text-amber-300 border border-amber-400/30">
             WARNING
           </span>
         );
       default:
         return (
-          <span className="px-2 py-0.5 rounded-md text-[10px] font-mono font-bold bg-orange-50 text-orange-700 border border-orange-200">
+          <span className="px-2 py-0.5 rounded-md text-[10px] font-mono font-bold bg-orange-500/20 text-orange-300 border border-orange-500/30">
             ERROR
           </span>
         );
@@ -199,16 +227,16 @@ export const AdminErrorLogs: React.FC = () => {
   };
 
   return (
-    <div className="space-y-6 max-w-7xl mx-auto">
+    <div className="space-y-6 max-w-7xl mx-auto text-left">
       
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-apple-text tracking-tight flex items-center gap-2.5">
-            <Bug className="w-6 h-6 text-rose-500" />
-            Full-Stack Error & Crash Triage
+          <h1 className="text-2xl sm:text-3xl font-bold text-white tracking-tight flex items-center gap-2.5">
+            <Bug className="w-6 h-6 text-rose-400" />
+            <span>Full-Stack Error & Crash Triage</span>
           </h1>
-          <p className="text-sm text-apple-secondary mt-1">
+          <p className="text-xs sm:text-sm text-slate-400 mt-1">
             Real-time capture of backend exceptions, 500 status codes, and uncaught frontend JavaScript crashes
           </p>
         </div>
@@ -218,76 +246,76 @@ export const AdminErrorLogs: React.FC = () => {
             fetchStats();
             fetchErrors(true);
           }}
-          className="px-4 py-2 rounded-2xl bg-white border border-apple-border text-apple-text text-sm font-semibold hover:bg-apple-card shadow-apple-subtle transition-all flex items-center gap-2 cursor-pointer self-start"
+          className="px-4 py-2 rounded-lg bg-white/5 border border-white/10 text-white text-xs font-semibold hover:bg-white/10 transition-colors flex items-center gap-2 cursor-pointer self-start"
         >
           <RefreshCw className="w-4 h-4" />
-          Refresh
+          <span>Refresh</span>
         </button>
       </div>
 
       {/* Metrics */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="p-5 rounded-3xl bg-white border border-apple-border shadow-apple-subtle space-y-2">
-          <span className="text-xs font-semibold text-apple-secondary uppercase tracking-wider block">
+        <div className="p-5 rounded-2xl bg-[#1c1c1e] border border-white/10 shadow-sm space-y-2">
+          <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider block">
             Unresolved Crashes
           </span>
           <div className="flex items-baseline gap-2">
-            <span className="text-3xl font-extrabold text-rose-600 font-display">
+            <span className="text-3xl font-extrabold text-rose-400">
               {stats?.unresolvedErrors || 0}
             </span>
           </div>
-          <p className="text-xs text-apple-secondary">Require investigation</p>
+          <p className="text-xs text-slate-400">Require investigation</p>
         </div>
 
-        <div className="p-5 rounded-3xl bg-white border border-apple-border shadow-apple-subtle space-y-2">
-          <span className="text-xs font-semibold text-apple-secondary uppercase tracking-wider block">
+        <div className="p-5 rounded-2xl bg-[#1c1c1e] border border-white/10 shadow-sm space-y-2">
+          <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider block">
             Critical Severity (5xx)
           </span>
           <div className="flex items-baseline gap-2">
-            <span className="text-3xl font-extrabold text-amber-600 font-display">
+            <span className="text-3xl font-extrabold text-amber-400">
               {stats?.criticalErrors || 0}
             </span>
           </div>
-          <p className="text-xs text-apple-secondary">Fatal server exceptions</p>
+          <p className="text-xs text-slate-400">Fatal server exceptions</p>
         </div>
 
-        <div className="p-5 rounded-3xl bg-white border border-apple-border shadow-apple-subtle space-y-2">
-          <span className="text-xs font-semibold text-apple-secondary uppercase tracking-wider block">
+        <div className="p-5 rounded-2xl bg-[#1c1c1e] border border-white/10 shadow-sm space-y-2">
+          <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider block">
             Frontend Crashes
           </span>
           <div className="flex items-baseline gap-2">
-            <span className="text-3xl font-extrabold text-apple-text font-display">
+            <span className="text-3xl font-extrabold text-white">
               {stats?.frontendErrors || 0}
             </span>
           </div>
-          <p className="text-xs text-apple-secondary">Client-side JS uncaught errors</p>
+          <p className="text-xs text-slate-400">Client-side JS uncaught errors</p>
         </div>
 
-        <div className="p-5 rounded-3xl bg-white border border-apple-border shadow-apple-subtle space-y-2">
-          <span className="text-xs font-semibold text-apple-secondary uppercase tracking-wider block">
+        <div className="p-5 rounded-2xl bg-[#1c1c1e] border border-white/10 shadow-sm space-y-2">
+          <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider block">
             Resolved Incidents
           </span>
           <div className="flex items-baseline gap-2">
-            <span className="text-3xl font-extrabold text-emerald-600 font-display">
+            <span className="text-3xl font-extrabold text-emerald-400">
               {stats?.resolvedErrors || 0}
             </span>
           </div>
-          <p className="text-xs text-apple-secondary">Marked fixed by admin</p>
+          <p className="text-xs text-slate-400">Marked fixed by admin</p>
         </div>
       </div>
 
       {/* Filter Toolbar */}
-      <div className="p-4 rounded-3xl bg-white border border-apple-border shadow-apple-subtle flex flex-col md:flex-row gap-3 items-center justify-between">
+      <div className="p-4 rounded-2xl bg-[#1c1c1e] border border-white/10 shadow-sm flex flex-col md:flex-row gap-3 items-center justify-between">
         
         {/* Search */}
         <div className="relative w-full md:w-80">
-          <Search className="w-4 h-4 text-apple-secondary absolute left-3.5 top-1/2 -translate-y-1/2" />
+          <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search error message, route, trace..."
-            className="w-full pl-9 pr-4 py-2 rounded-2xl bg-apple-card border border-apple-border text-xs text-apple-text placeholder:text-apple-secondary focus:outline-none focus:border-apple-blue transition-all"
+            className="w-full pl-9 pr-3 py-2 rounded-lg bg-white/5 border border-white/10 text-xs text-white placeholder:text-slate-500 focus:outline-none focus:border-[#0071E3] transition-colors"
           />
         </div>
 
@@ -296,32 +324,32 @@ export const AdminErrorLogs: React.FC = () => {
           <select
             value={severityFilter}
             onChange={(e) => setSeverityFilter(e.target.value)}
-            className="px-3 py-2 rounded-2xl bg-apple-card border border-apple-border text-xs font-semibold text-apple-text focus:outline-none cursor-pointer"
+            className="px-3 py-2 rounded-lg bg-white/5 border border-white/10 text-xs font-semibold text-white focus:outline-none focus:border-[#0071E3] cursor-pointer"
           >
-            <option value="ALL">All Severities</option>
-            <option value="CRITICAL">Critical Only</option>
-            <option value="ERROR">Error</option>
-            <option value="WARNING">Warning</option>
+            <option value="ALL" className="bg-[#1c1c1e]">All Severities</option>
+            <option value="CRITICAL" className="bg-[#1c1c1e]">Critical Only</option>
+            <option value="ERROR" className="bg-[#1c1c1e]">Error</option>
+            <option value="WARNING" className="bg-[#1c1c1e]">Warning</option>
           </select>
 
           <select
             value={sourceFilter}
             onChange={(e) => setSourceFilter(e.target.value)}
-            className="px-3 py-2 rounded-2xl bg-apple-card border border-apple-border text-xs font-semibold text-apple-text focus:outline-none cursor-pointer"
+            className="px-3 py-2 rounded-lg bg-white/5 border border-white/10 text-xs font-semibold text-white focus:outline-none focus:border-[#0071E3] cursor-pointer"
           >
-            <option value="ALL">All Sources</option>
-            <option value="BACKEND">Backend (API/DB)</option>
-            <option value="FRONTEND">Frontend (Client JS)</option>
+            <option value="ALL" className="bg-[#1c1c1e]">All Sources</option>
+            <option value="BACKEND" className="bg-[#1c1c1e]">Backend (API/DB)</option>
+            <option value="FRONTEND" className="bg-[#1c1c1e]">Frontend (Client JS)</option>
           </select>
 
           <select
             value={resolvedFilter}
             onChange={(e) => setResolvedFilter(e.target.value)}
-            className="px-3 py-2 rounded-2xl bg-apple-card border border-apple-border text-xs font-semibold text-apple-text focus:outline-none cursor-pointer"
+            className="px-3 py-2 rounded-lg bg-white/5 border border-white/10 text-xs font-semibold text-white focus:outline-none focus:border-[#0071E3] cursor-pointer"
           >
-            <option value="ALL">All Statuses</option>
-            <option value="UNRESOLVED">Pending / Open</option>
-            <option value="RESOLVED">Resolved</option>
+            <option value="ALL" className="bg-[#1c1c1e]">All Statuses</option>
+            <option value="UNRESOLVED" className="bg-[#1c1c1e]">Pending / Open</option>
+            <option value="RESOLVED" className="bg-[#1c1c1e]">Resolved</option>
           </select>
         </div>
 
@@ -330,21 +358,21 @@ export const AdminErrorLogs: React.FC = () => {
       {/* Error Stream */}
       <div className="space-y-3">
         {loading ? (
-          <div className="py-16 text-center text-apple-secondary text-sm">
-            <RefreshCw className="w-6 h-6 animate-spin mx-auto mb-2 text-rose-500" />
-            Loading system error logs...
+          <div className="py-16 text-center text-slate-400 text-sm bg-[#1c1c1e] rounded-2xl border border-white/10">
+            <RefreshCw className="w-6 h-6 animate-spin mx-auto mb-2 text-rose-400" />
+            <span>Loading system error logs...</span>
           </div>
         ) : errors.length === 0 ? (
-          <div className="py-16 text-center bg-white rounded-3xl border border-apple-border text-apple-secondary text-sm">
-            <CheckCircle className="w-8 h-8 text-emerald-500 mx-auto mb-2" />
-            No system error logs found. All systems operating cleanly!
+          <div className="py-16 text-center bg-[#1c1c1e] rounded-2xl border border-white/10 text-slate-400 text-sm space-y-2">
+            <CheckCircle className="w-8 h-8 text-emerald-400 mx-auto" />
+            <p>No system error logs found. All systems operating cleanly!</p>
           </div>
         ) : (
           errors.map((item) => (
             <div
               key={item.id}
-              className={`p-5 sm:p-6 rounded-3xl bg-white border transition-all space-y-3 shadow-apple-subtle ${
-                item.isResolved ? 'border-apple-border opacity-70' : 'border-rose-200/80 bg-rose-50/[0.02]'
+              className={`p-5 sm:p-6 rounded-2xl bg-[#1c1c1e] border transition-all space-y-3 shadow-sm ${
+                item.isResolved ? 'border-white/10 opacity-70' : 'border-rose-500/30 bg-rose-500/[0.02]'
               }`}
             >
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
@@ -352,19 +380,19 @@ export const AdminErrorLogs: React.FC = () => {
                   {getSeverityBadge(item.severity)}
 
                   <span className={`px-2 py-0.5 rounded-md text-[10px] font-mono font-bold ${
-                    item.source === 'BACKEND' ? 'bg-indigo-50 text-indigo-700 border border-indigo-200' : 'bg-sky-50 text-sky-700 border border-sky-200'
+                    item.source === 'BACKEND' ? 'bg-indigo-500/20 text-indigo-300 border border-indigo-500/30' : 'bg-sky-500/20 text-sky-300 border border-sky-500/30'
                   }`}>
                     {item.source}
                   </span>
 
                   {item.statusCode && (
-                    <span className="px-2 py-0.5 rounded-md text-[10px] font-mono font-bold bg-slate-100 text-slate-800 border border-slate-200">
+                    <span className="px-2 py-0.5 rounded-md text-[10px] font-mono font-bold bg-white/5 text-slate-300 border border-white/10">
                       HTTP {item.statusCode}
                     </span>
                   )}
 
                   {item.method && item.route && (
-                    <span className="text-xs font-mono font-semibold text-slate-900">
+                    <span className="text-xs font-mono font-semibold text-white">
                       {item.method} {item.route}
                     </span>
                   )}
@@ -372,86 +400,159 @@ export const AdminErrorLogs: React.FC = () => {
 
                 <div className="flex items-center gap-2">
                   <button
+                    onClick={() => {
+                      setSelectedError(item);
+                      setAdminNoteInput(item.adminNotes || '');
+                    }}
+                    className="px-3 py-1 rounded-md text-xs font-semibold bg-white/5 hover:bg-white/10 text-slate-300 border border-white/10 transition-colors cursor-pointer"
+                  >
+                    <span>{item.adminNotes ? 'Edit Notes' : 'Triage Note'}</span>
+                  </button>
+
+                  <button
                     onClick={() => handleToggleResolve(item)}
                     className={`px-3 py-1 rounded-md text-xs font-semibold transition-colors flex items-center gap-1.5 cursor-pointer ${
                       item.isResolved
-                        ? 'bg-amber-50 hover:bg-amber-100 text-amber-700 border border-amber-200'
+                        ? 'bg-amber-400/15 hover:bg-amber-400/25 text-amber-300 border border-amber-400/30'
                         : 'bg-emerald-600 hover:bg-emerald-700 text-white'
                     }`}
                   >
                     <Check className="w-3.5 h-3.5" />
-                    {item.isResolved ? 'Reopen' : 'Mark Resolved'}
+                    <span>{item.isResolved ? 'Reopen' : 'Mark Resolved'}</span>
                   </button>
                 </div>
               </div>
 
               {/* Error Message */}
-              <div className="p-3.5 rounded-2xl bg-rose-50/40 border border-rose-200/50 text-xs font-mono font-semibold text-rose-900 leading-relaxed">
+              <div className="bg-black/40 p-3.5 rounded-xl border border-white/5 font-mono text-xs text-rose-300 break-words">
                 {item.message}
               </div>
 
-              {/* Collapsible Stack Trace */}
+              {/* Stack Trace Collapsible */}
               {item.stackTrace && (
                 <div className="space-y-1.5">
-                  <button
-                    onClick={() => toggleStack(item.id)}
-                    className="text-xs font-semibold text-apple-blue hover:underline flex items-center gap-1 cursor-pointer"
-                  >
-                    {expandedStacks[item.id] ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
-                    {expandedStacks[item.id] ? 'Hide Stack Trace' : 'View Full Stack Trace'}
-                  </button>
+                  <div className="flex items-center justify-between">
+                    <button
+                      onClick={() => toggleStack(item.id)}
+                      className="text-xs font-mono text-slate-400 hover:text-white flex items-center gap-1 cursor-pointer transition-colors"
+                    >
+                      <Terminal className="w-3.5 h-3.5" />
+                      <span>{expandedStacks[item.id] ? 'Hide Stack Trace' : 'View Full Stack Trace'}</span>
+                      {expandedStacks[item.id] ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
+                    </button>
+
+                    {expandedStacks[item.id] && (
+                      <button
+                        onClick={() => copyStackTrace(item.id, item.stackTrace!)}
+                        className="px-2.5 py-1 rounded-md bg-white/5 hover:bg-white/15 text-slate-300 text-[10px] font-mono flex items-center gap-1 transition-colors cursor-pointer"
+                      >
+                        {copiedId === item.id ? <Check className="w-3 h-3 text-emerald-400" /> : <Copy className="w-3 h-3" />}
+                        <span>{copiedId === item.id ? 'Copied' : 'Copy Trace'}</span>
+                      </button>
+                    )}
+                  </div>
 
                   {expandedStacks[item.id] && (
-                    <div className="relative mt-2 p-4 rounded-2xl bg-[#1c1c1e] text-slate-200 text-[11px] font-mono leading-relaxed overflow-x-auto border border-white/10 shadow-inner">
-                      <button
-                        onClick={() => copyToClipboard(item.id, item.stackTrace || '')}
-                        className="absolute right-3 top-3 p-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-slate-300 transition-all flex items-center gap-1 text-[10px] cursor-pointer"
-                        title="Copy Stack Trace"
-                      >
-                        {copiedId === item.id ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
-                        <span>{copiedId === item.id ? 'Copied' : 'Copy'}</span>
-                      </button>
-                      <pre className="pr-16">{item.stackTrace}</pre>
-                    </div>
+                    <pre className="p-3.5 rounded-xl bg-black/60 border border-white/10 text-[11px] font-mono text-slate-300 overflow-x-auto whitespace-pre leading-relaxed scrollbar-thin">
+                      {item.stackTrace}
+                    </pre>
                   )}
                 </div>
               )}
 
-              {/* Metadata Footer */}
-              <div className="flex flex-wrap items-center gap-4 text-[11px] text-apple-secondary pt-1 border-t border-black/[0.04]">
-                <span className="flex items-center gap-1">
-                  <Clock className="w-3.5 h-3.5" />
-                  {new Date(item.createdAt).toLocaleString()}
-                </span>
-
-                {item.actorEmail && (
-                  <span className="flex items-center gap-1 font-medium text-[#1D1D1F]">
-                    <User className="w-3.5 h-3.5 text-apple-blue" />
-                    {item.actorEmail} ({item.actorRole || 'ANON'})
+              {/* Context Footer */}
+              <div className="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-white/5 text-[11px] text-slate-500 font-mono">
+                <div className="flex flex-wrap items-center gap-3">
+                  {item.actorEmail && (
+                    <span className="flex items-center gap-1 text-slate-400">
+                      <User className="w-3 h-3" />
+                      {item.actorEmail} ({item.actorRole || 'USER'})
+                    </span>
+                  )}
+                  {item.ipAddress && (
+                    <span className="flex items-center gap-1">
+                      <Globe className="w-3 h-3" />
+                      {item.ipAddress}
+                    </span>
+                  )}
+                  <span className="flex items-center gap-1">
+                    <Clock className="w-3 h-3" />
+                    {new Date(item.createdAt).toLocaleString('en-IN', {
+                      dateStyle: 'medium',
+                      timeStyle: 'medium',
+                    })}
                   </span>
-                )}
+                </div>
 
-                {item.ipAddress && (
-                  <span className="font-mono text-[10px]">
-                    IP: {item.ipAddress}
-                  </span>
+                {item.adminNotes && (
+                  <div className="bg-amber-400/10 border border-amber-400/20 text-amber-300 px-3 py-1 rounded-md text-xs font-sans">
+                    <strong className="font-semibold text-amber-200">Triage Note:</strong> {item.adminNotes}
+                  </div>
                 )}
               </div>
-
             </div>
           ))
         )}
 
-        {/* Infinite Scroll Trigger */}
+        {/* Sentinel for Infinite Scroll */}
         <div ref={observerTarget} className="py-4 text-center">
           {loadingMore && (
-            <p className="text-xs text-apple-secondary flex items-center justify-center gap-2">
-              <RefreshCw className="w-3.5 h-3.5 animate-spin text-rose-500" />
-              Loading more error logs...
-            </p>
+            <div className="inline-flex items-center gap-2 text-xs text-slate-400 font-mono bg-[#1c1c1e] px-4 py-2 rounded-lg border border-white/10">
+              <RefreshCw className="w-3.5 h-3.5 animate-spin text-[#0071E3]" />
+              <span>Loading more error logs...</span>
+            </div>
           )}
         </div>
       </div>
+
+      {/* Admin Notes Dialog Modal */}
+      {selectedError && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in">
+          <div className="bg-[#1c1c1e] text-white rounded-2xl border border-white/20 p-6 max-w-lg w-full space-y-4 shadow-2xl">
+            <div className="flex items-center justify-between border-b border-white/10 pb-3">
+              <h3 className="font-bold text-base text-white flex items-center gap-2">
+                <Bug className="w-5 h-5 text-rose-400" />
+                <span>Error Triage Note</span>
+              </h3>
+              <button
+                onClick={() => setSelectedError(null)}
+                className="p-1 rounded-lg text-slate-400 hover:text-white hover:bg-white/10 transition-colors"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+
+            <p className="text-xs text-slate-400">
+              Add internal investigation notes, hotfix PR links, or resolution status.
+            </p>
+
+            <textarea
+              rows={4}
+              value={adminNoteInput}
+              onChange={(e) => setAdminNoteInput(e.target.value)}
+              placeholder="e.g. Fixed null check in AuditLogRepository. Verified on staging."
+              className="w-full p-3 rounded-lg bg-white/5 border border-white/10 text-xs text-white placeholder:text-slate-500 focus:outline-none focus:border-[#0071E3] transition-colors font-mono"
+            />
+
+            <div className="flex items-center justify-end gap-2.5 pt-2">
+              <button
+                onClick={() => setSelectedError(null)}
+                className="px-4 py-2 rounded-lg bg-white/5 hover:bg-white/10 text-slate-300 text-xs font-semibold transition-colors"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleSaveNotes}
+                disabled={isUpdating}
+                className="px-4 py-2 rounded-lg bg-[#0071E3] hover:bg-[#0077ED] text-white text-xs font-semibold transition-colors flex items-center gap-1.5"
+              >
+                {isUpdating ? <RefreshCw className="w-3.5 h-3.5 animate-spin" /> : <Check className="w-3.5 h-3.5" />}
+                <span>Save Note</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
     </div>
   );

@@ -95,13 +95,13 @@ export const AdminStartups: React.FC = () => {
         </div>
 
         <div className="relative w-full sm:w-80">
-          <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-3" />
+          <Search className="w-4 h-4 text-slate-400 absolute left-3 top-2.5" />
           <input
             type="text"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search startup, district, or sector..."
-            className="w-full pl-9 pr-4 py-2.5 text-xs bg-white/5 border border-white/10 rounded-full text-white placeholder-slate-400 focus:bg-white/10 focus:ring-2 focus:ring-[#0071E3]/20 focus:border-[#0071E3] transition-all"
+            className="w-full pl-9 pr-3 py-2 text-xs bg-white/5 border border-white/10 rounded-lg text-white placeholder-slate-400 focus:bg-white/10 focus:border-[#0071E3] transition-colors outline-none"
           />
         </div>
       </div>
@@ -110,9 +110,9 @@ export const AdminStartups: React.FC = () => {
       <div className="flex items-center gap-2">
         <button
           onClick={() => setActiveTab('active')}
-          className={`px-4 py-2 rounded-2xl text-xs font-bold transition-all ${
+          className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-colors cursor-pointer ${
             activeTab === 'active'
-              ? 'bg-[#0071E3] text-white shadow-apple-sm'
+              ? 'bg-[#0071E3] text-white font-bold'
               : 'bg-white/5 text-slate-400 hover:text-white hover:bg-white/10'
           }`}
         >
@@ -121,9 +121,9 @@ export const AdminStartups: React.FC = () => {
 
         <button
           onClick={() => setActiveTab('archived')}
-          className={`px-4 py-2 rounded-2xl text-xs font-bold transition-all flex items-center gap-1.5 ${
+          className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-colors flex items-center gap-1.5 cursor-pointer ${
             activeTab === 'archived'
-              ? 'bg-rose-600 text-white shadow-apple-sm'
+              ? 'bg-rose-600 text-white font-bold'
               : 'bg-white/5 text-slate-400 hover:text-white hover:bg-white/10'
           }`}
         >
@@ -138,17 +138,17 @@ export const AdminStartups: React.FC = () => {
           <p className="text-xs text-slate-400">Loading startup directory database...</p>
         </div>
       ) : (
-        <div className="bg-[#1c1c1e] border border-white/10 rounded-3xl overflow-hidden shadow-apple-modal">
+        <div className="bg-[#1c1c1e] border border-white/10 rounded-2xl overflow-hidden shadow-sm">
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs text-slate-300">
               <thead className="bg-black/30 border-b border-white/10 text-[10px] font-bold text-slate-400 uppercase tracking-wider">
                 <tr>
-                  <th className="py-4 px-5">Startup</th>
-                  <th className="py-4 px-4">District</th>
-                  <th className="py-4 px-4">Sectors</th>
-                  <th className="py-4 px-4">Stage</th>
-                  <th className="py-4 px-4">Status</th>
-                  <th className="py-4 px-5 text-right">Actions</th>
+                  <th className="py-3.5 px-5">Startup</th>
+                  <th className="py-3.5 px-4">District</th>
+                  <th className="py-3.5 px-4">Sectors</th>
+                  <th className="py-3.5 px-4">Stage</th>
+                  <th className="py-3.5 px-4">Status</th>
+                  <th className="py-3.5 px-5 text-right">Actions</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-white/5">
@@ -163,7 +163,7 @@ export const AdminStartups: React.FC = () => {
                     <tr key={startup.id} className="hover:bg-white/[0.03] transition-colors">
                       <td className="py-4 px-5">
                         <div className="flex items-center gap-3">
-                          <div className="w-9 h-9 rounded-2xl bg-white/10 text-white font-bold flex items-center justify-center text-xs shrink-0">
+                          <div className="w-9 h-9 rounded-lg bg-white/10 text-white font-bold flex items-center justify-center text-xs shrink-0">
                             {startup.name.charAt(0)}
                           </div>
                           <div>
@@ -184,57 +184,57 @@ export const AdminStartups: React.FC = () => {
                         {startup.sectors.join(', ')}
                       </td>
                       <td className="py-4 px-4">
-                        <span className="px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-white/5 text-slate-300 border border-white/10">
+                        <span className="px-2 py-0.5 rounded-md text-[10px] font-semibold bg-white/5 text-slate-300 border border-white/10">
                           {startup.stage}
                         </span>
                       </td>
                       <td className="py-4 px-4">
                         {activeTab === 'archived' ? (
-                          <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-rose-400">
+                          <span className="inline-flex items-center gap-1 text-[10px] font-mono font-bold text-rose-400 bg-rose-500/10 px-1.5 py-0.5 rounded border border-rose-500/20">
                             <span>SOFT_DELETED</span>
                           </span>
                         ) : (
-                          <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-[#34C759]">
-                            <ShieldCheck className="w-3.5 h-3.5" />
+                          <span className="inline-flex items-center gap-1 text-[10px] font-mono font-bold text-emerald-300 bg-emerald-500/10 px-1.5 py-0.5 rounded border border-emerald-500/20">
+                            <ShieldCheck className="w-3 h-3 text-emerald-400" />
                             <span>{startup.verificationStatus}</span>
                           </span>
                         )}
                       </td>
                       <td className="py-4 px-5 text-right">
-                        <div className="flex items-center justify-end gap-2">
+                        <div className="flex items-center justify-end gap-1.5">
                           <Link
                             to={`/admin/startups/${startup.id}`}
-                            className="p-2 text-[#0071E3] hover:text-white hover:bg-[#0071E3]/20 rounded-full transition-all apple-press"
+                            className="p-1.5 text-[#0071E3] hover:text-white hover:bg-[#0071E3]/20 rounded-lg transition-colors cursor-pointer"
                             title="Open Dossier & Analytics"
                           >
-                            <Activity className="w-3.5 h-3.5" />
+                            <Activity className="w-4 h-4" />
                           </Link>
 
                           <a
                             href={`/startups/${startup.slug}`}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="p-2 text-slate-400 hover:text-white hover:bg-white/10 rounded-full transition-all apple-press"
+                            className="p-1.5 text-slate-400 hover:text-white hover:bg-white/10 rounded-lg transition-colors"
                             title="View Public Profile"
                           >
-                            <ExternalLink className="w-3.5 h-3.5" />
+                            <ExternalLink className="w-4 h-4" />
                           </a>
 
                           {activeTab === 'active' ? (
                             <button
                               onClick={() => handleSoftDelete(startup.id, startup.name)}
-                              className="p-2 text-rose-400 hover:text-rose-300 hover:bg-rose-950/40 rounded-full transition-all apple-press"
+                              className="p-1.5 text-rose-400 hover:text-rose-300 hover:bg-rose-950/40 rounded-lg transition-colors cursor-pointer"
                               title="Soft Delete (Non-destructive Archive)"
                             >
-                              <Trash2 className="w-3.5 h-3.5" />
+                              <Trash2 className="w-4 h-4" />
                             </button>
                           ) : (
                             <button
                               onClick={() => handleRestore(startup.id, startup.name)}
-                              className="p-2 text-[#34C759] hover:text-emerald-300 hover:bg-emerald-950/40 rounded-full transition-all apple-press flex items-center gap-1"
+                              className="p-1.5 text-emerald-400 hover:text-emerald-300 hover:bg-emerald-950/40 rounded-lg transition-colors cursor-pointer flex items-center gap-1"
                               title="Restore to Active Directory"
                             >
-                              <RotateCcw className="w-3.5 h-3.5" />
+                              <RotateCcw className="w-4 h-4" />
                             </button>
                           )}
                         </div>
