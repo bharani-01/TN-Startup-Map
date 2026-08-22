@@ -52,27 +52,27 @@ export const DistrictDetailPage: React.FC = () => {
       <div className="max-w-md mx-auto px-4 py-24 text-center space-y-4">
         <h2 className="text-xl font-bold text-[#1D1D1F] font-display">District Not Found</h2>
         <button
-          onClick={() => navigate('/districts')}
-          className="px-5 py-2.5 bg-[#1D1D1F] text-white text-xs font-semibold rounded-full inline-flex items-center gap-1.5 shadow-apple-sm apple-press"
+          onClick={() => navigate('/map')}
+          className="px-5 py-2.5 bg-[#1D1D1F] text-white text-xs font-semibold rounded-full inline-flex items-center gap-1.5 shadow-2xs apple-press cursor-pointer"
         >
           <ArrowLeft className="w-4 h-4" />
-          <span>Back to District Explorer</span>
+          <span>Back to Spatial Map</span>
         </button>
       </div>
     );
   }
 
   return (
-    <div className="max-w-[1536px] mx-auto px-4 sm:px-8 lg:px-12 py-8 sm:py-12 space-y-8">
+    <div className="max-w-[1720px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 py-8 sm:py-12 space-y-8">
       
       {/* Top Back Navigation Pill */}
       <div>
         <Link
-          to="/districts"
-          className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#1D1D1F] bg-white px-4 py-2 rounded-full border border-black/[0.08] shadow-apple-sm hover:bg-slate-50 transition-all apple-press"
+          to="/map"
+          className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#1D1D1F] bg-white/80 px-4 py-2 rounded-full border border-black/[0.08] shadow-2xs hover:bg-white transition-all apple-press cursor-pointer"
         >
           <ArrowLeft className="w-3.5 h-3.5" />
-          <span>All 38 Districts</span>
+          <span>Spatial Map & Districts</span>
         </Link>
       </div>
 

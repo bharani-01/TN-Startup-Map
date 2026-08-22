@@ -1,13 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { useOutletContext, Link } from 'react-router-dom';
 import { Compass, ArrowRight, Layers, MapPin, Sparkles } from 'lucide-react';
 import { HeroSection } from '../components/HeroSection';
 import { FeaturedLeaders } from '../components/FeaturedLeaders';
+import { SectorExplorer } from '../components/SectorExplorer';
 import { StartupMap } from '../map/StartupMap';
-import { DistrictCard } from '../components/DistrictCard';
-import { NearMeSection } from '../components/NearMeSection';
-import { RecentlyAdded } from '../components/RecentlyAdded';
-import { RecentlyFunded } from '../components/RecentlyFunded';
 import { TrendingStartups } from '../components/TrendingStartups';
 import { Startup, District, Sector, EcosystemStats, BlogPost } from '../../../types';
 
@@ -67,154 +64,77 @@ export const HomePage: React.FC = () => {
           {/* 2. Featured Innovation Leaders Showcase */}
           <FeaturedLeaders />
 
-      {/* 3. Sectors Explorer Strip */}
-      {sectors.length > 0 && (
-        <section className="max-w-[1536px] mx-auto px-4 sm:px-8 lg:px-12">
-          <div className="flex items-center justify-between gap-4 mb-3">
-            <h3 className="text-xs sm:text-sm font-semibold text-[#86868B] uppercase tracking-wider">
-              Explore by Industry Sector
-            </h3>
-            <Link to="/startups" className="text-xs sm:text-sm font-semibold text-[#0071E3] hover:text-[#0077ED] apple-press">
-              View All Sectors →
-            </Link>
-          </div>
-
-          <div className="flex items-center gap-2.5 overflow-x-auto pb-1 no-scrollbar scrollbar-none">
-            {sectors.map((sec) => (
-              <Link
-                key={sec.id}
-                to={`/startups?sector=${encodeURIComponent(sec.name)}`}
-                className="group flex items-center gap-2 px-3.5 py-2 bg-white hover:bg-slate-50 rounded-full border border-black/[0.07] hover:border-[#0071E3]/40 shadow-2xs hover:shadow-apple-sm shrink-0 transition-all text-xs font-semibold text-[#1D1D1F] hover:text-[#0071E3] apple-press-subtle"
-              >
-                <div
-                  className="w-2 h-2 rounded-full shadow-2xs"
-                  style={{ backgroundColor: sec.color || '#0071E3' }}
-                />
-                <span>{sec.name}</span>
-                <span className="text-[10px] font-bold text-[#86868B] group-hover:text-[#0071E3] bg-black/[0.04] px-1.5 py-0.2 rounded-full">
-                  {sec.startupsCount || 0}
-                </span>
-              </Link>
-            ))}
-          </div>
-        </section>
-      )}
+          {/* 3. Interactive Master-Detail Sector Explorer */}
+          <SectorExplorer sectors={sectors} startups={startups} />
 
       {/* 4. Interactive Map Spatial Intelligence Layer Preview */}
-      <section className="max-w-[1536px] mx-auto px-4 sm:px-8 lg:px-12">
-        <div className="apple-glass-card rounded-3xl p-6 sm:p-10 space-y-6 border border-white/80 shadow-apple-card">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-            <div>
-              <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#0071E3]/10 text-[#0071E3] text-xs sm:text-sm font-semibold mb-2">
-                <Compass className="w-4 h-4" />
-                <span>Spatial Intelligence Layer</span>
-              </div>
-              <h2 className="text-2xl sm:text-3xl font-bold font-display text-[#1D1D1F] tracking-tight">
-                Interactive Tamil Nadu Startup Map
-              </h2>
-              <p className="text-sm text-[#86868B] mt-1 max-w-2xl">
-                Explore clusters, district boundaries, and verified innovation ventures across Tamil Nadu.
-              </p>
-            </div>
-
-            <Link
-              to="/map"
-              className="px-6 py-2.5 rounded-full bg-[#1D1D1F] hover:bg-black text-white text-xs sm:text-sm font-semibold shadow-apple-sm flex items-center justify-center gap-2 transition-all shrink-0 apple-press"
-            >
-              <span>Launch Full-Screen Map</span>
-              <ArrowRight className="w-4 h-4" />
-            </Link>
+      <section className="max-w-[1536px] mx-auto px-4 sm:px-8 lg:px-12 space-y-6">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div className="space-y-1">
+            <p className="text-[11px] sm:text-xs font-extrabold uppercase tracking-[0.2em] text-[#86868B] font-mono">
+              Spatial Intelligence Layer
+            </p>
+            <h2 className="text-2xl sm:text-3xl font-bold font-display text-[#1D1D1F] tracking-tight">
+              Interactive Tamil Nadu Startup Map
+            </h2>
+            <p className="text-sm text-[#86868B] max-w-2xl">
+              Explore clusters, district boundaries, and verified innovation ventures across Tamil Nadu.
+            </p>
           </div>
 
-          {/* Embedded Map Container */}
-          <div className="h-[480px] sm:h-[600px] w-full rounded-2xl overflow-hidden shadow-inner border border-black/[0.06]">
-            <StartupMap
-              startups={startups}
-              districts={districts}
-              height="100%"
-              showDistrictLayer={true}
-            />
-          </div>
+          <Link
+            to="/map"
+            className="px-6 py-2.5 rounded-full bg-[#1D1D1F] hover:bg-black text-white text-xs sm:text-sm font-semibold shadow-apple-sm flex items-center justify-center gap-2 transition-all shrink-0 apple-press"
+          >
+            <span>Launch Full-Screen Map</span>
+            <ArrowRight className="w-4 h-4" />
+          </Link>
+        </div>
+
+        {/* Seamless Embedded Map Viewport (No floating card box) */}
+        <div className="h-[480px] sm:h-[600px] w-full rounded-3xl overflow-hidden border border-black/[0.08] shadow-2xs">
+          <StartupMap
+            startups={startups}
+            districts={districts}
+            height="100%"
+            showDistrictLayer={true}
+          />
         </div>
       </section>
 
       {/* 5. Trending Startups Section */}
       <TrendingStartups startups={trendingStartups} />
 
-      {/* 6. Hyperlocal "Near Me" Section */}
-      <NearMeSection />
-
-      {/* 7. Tamil Nadu District Hubs */}
-      <section className="max-w-[1536px] mx-auto px-4 sm:px-8 lg:px-12">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
-          <div>
-            <div className="flex items-center gap-2.5">
-              <span className="p-2 rounded-2xl bg-[#5856D6]/10 text-[#5856D6]">
-                <Layers className="w-5 h-5" />
-              </span>
-              <h2 className="text-2xl sm:text-3xl font-bold font-display text-[#1D1D1F] tracking-tight">
-                Tamil Nadu District Hubs
-              </h2>
-            </div>
-            <p className="text-sm text-[#86868B] mt-1 max-w-2xl">
-              From Chennai's SaaS corridor to Hosur's EV ecosystem and Coimbatore's advanced engineering.
-            </p>
-          </div>
-
-          <Link
-            to="/districts"
-            className="text-sm font-semibold text-[#0071E3] hover:text-[#0077ED] flex items-center gap-1 shrink-0 apple-press"
-          >
-            <span>View All 38 Districts</span>
-            <ArrowRight className="w-4 h-4" />
-          </Link>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {districts.slice(0, 8).map((district) => (
-            <DistrictCard key={district.id} district={district} />
-          ))}
-        </div>
-      </section>
-
-      {/* 8. Recently Added Startups */}
-      <RecentlyAdded startups={recentStartups} />
-
-      {/* 9. Recently Funded Rounds */}
-      <RecentlyFunded startups={startups} />
-
-      {/* 10. Ecosystem Stories & Founder Insights */}
+      {/* 6. Ecosystem Stories & Founder Insights */}
       {featuredBlogs.length > 0 && (
-        <section className="max-w-[1536px] mx-auto px-4 sm:px-8 lg:px-12">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
-            <div>
-              <div className="flex items-center gap-2.5">
-                <span className="p-2 rounded-2xl bg-[#0071E3]/10 text-[#0071E3]">
-                  <Sparkles className="w-5 h-5" />
-                </span>
-                <h2 className="text-2xl sm:text-3xl font-bold font-display text-[#1D1D1F] tracking-tight">
-                  Ecosystem Stories & Founder Insights
-                </h2>
-              </div>
-              <p className="text-sm text-[#86868B] mt-1 max-w-2xl">
+        <section className="max-w-[1720px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 space-y-6">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+            <div className="space-y-1.5 text-left">
+              <p className="text-[11px] sm:text-xs font-extrabold uppercase tracking-[0.2em] text-[#86868B] font-mono">
+                Knowledge & Deep Intel • Founder Insights
+              </p>
+              <h2 className="font-art font-extrabold text-2xl sm:text-3xl lg:text-4xl text-[#1D1D1F] tracking-tight">
+                Ecosystem Stories
+              </h2>
+              <p className="text-xs sm:text-sm text-[#86868B] max-w-2xl font-normal">
                 Engineering breakthroughs, manufacturing playbooks, and venture building stories from Tamil Nadu founders.
               </p>
             </div>
 
             <Link
               to="/blog"
-              className="text-sm font-semibold text-[#0071E3] hover:text-[#0077ED] flex items-center gap-1 shrink-0 apple-press"
+              className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-white hover:bg-slate-50 text-[#1D1D1F] hover:text-[#0071E3] font-semibold text-xs sm:text-sm border border-black/[0.08] shadow-2xs transition-all apple-press shrink-0 self-start sm:self-auto"
             >
               <span>Explore All Stories</span>
-              <ArrowRight className="w-4 h-4" />
+              <ArrowRight className="w-3.5 h-3.5" />
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2">
             {featuredBlogs.map((b) => (
               <article
                 key={b.id}
-                className="bg-white rounded-3xl overflow-hidden border border-black/[0.08] shadow-apple-card hover:shadow-apple-card-hover transition-all flex flex-col justify-between group"
+                className="bg-white/90 hover:bg-white rounded-3xl overflow-hidden border border-black/[0.06] hover:border-[#0071E3]/40 shadow-2xs hover:shadow-apple-sm transition-all duration-300 flex flex-col justify-between group text-left"
               >
                 <div>
                   <Link to={`/blog/${b.slug}`} className="block h-48 relative overflow-hidden bg-slate-900">

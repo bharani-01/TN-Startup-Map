@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, useSearchParams, Link } from 'react-router-dom';
 import { 
   Building2, 
   Save, 
@@ -28,13 +28,31 @@ import {
   Send,
   UserCheck,
   Palette,
-  Check
+  Check,
+  Award,
+  TrendingUp,
+  ShieldCheck,
+  Video,
+  FileCheck,
+  Newspaper,
+  DollarSign
 } from 'lucide-react';
 import { useAuth } from '../../../context/AuthContext';
-import { Startup, FounderInfo, CompanyPost, CustomProfileSection, BANNER_PRESETS } from '../../../types';
+import { 
+  Startup, 
+  FounderInfo, 
+  CompanyPost, 
+  CustomProfileSection, 
+  StartupMilestone, 
+  StartupAward, 
+  StartupClient, 
+  StartupPress, 
+  BANNER_PRESETS 
+} from '../../../types';
 
 export const FounderEditProfile: React.FC = () => {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const { user, token } = useAuth();
   const [startup, setStartup] = useState<Startup | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
@@ -45,9 +63,10 @@ export const FounderEditProfile: React.FC = () => {
   const [transferLoading, setTransferLoading] = useState<boolean>(false);
   const [targetTransferEmail, setTargetTransferEmail] = useState<string>('');
 
+  const initialTab = (searchParams.get('tab') as any) || 'brand';
   const [activeTab, setActiveTab] = useState<
-    'brand' | 'banner' | 'contact' | 'tech' | 'team' | 'gallery' | 'posts' | 'sections' | 'transfer'
-  >('brand');
+    'brand' | 'business' | 'milestones' | 'clients' | 'credentials' | 'team' | 'tech' | 'gallery' | 'posts' | 'sections' | 'transfer'
+  >(initialTab);
 
   // Form State
   const [formData, setFormData] = useState({
@@ -77,7 +96,30 @@ export const FounderEditProfile: React.FC = () => {
     },
     teamSize: '1-10',
     stage: 'Seed' as any,
+    fundingType: 'Bootstrapped' as any,
+    totalFundingInr: '',
+    totalFundingUsd: '',
     isHiring: false,
+    
+    // Extended fields
+    businessModel: '',
+    revenueModel: '',
+    revenueRange: '',
+    targetMarket: '',
+    customerSegments: [] as string[],
+    incubator: '',
+    accelerator: '',
+    dpiitNumber: '',
+    demoVideoUrl: '',
+    pitchDeckUrl: '',
+    competitiveEdge: '',
+    isProfitable: false,
+    
+    // Lists
+    milestones: [] as StartupMilestone[],
+    awards: [] as StartupAward[],
+    keyClients: [] as StartupClient[],
+    pressMentions: [] as StartupPress[],
     techStack: [] as string[],
     galleryImages: [] as string[],
     founders: [] as FounderInfo[],
@@ -88,6 +130,37 @@ export const FounderEditProfile: React.FC = () => {
   // Helper inputs
   const [newTech, setNewTech] = useState('');
   const [newGalleryUrl, setNewGalleryUrl] = useState('');
+
+  // New milestone state
+  const [newMilestone, setNewMilestone] = useState<StartupMilestone>({
+    title: '',
+    description: '',
+    date: new Date().toISOString().split('T')[0],
+    category: 'Product Milestone',
+  });
+
+  // New award state
+  const [newAward, setNewAward] = useState<StartupAward>({
+    title: '',
+    organization: '',
+    year: new Date().getFullYear(),
+    url: '',
+  });
+
+  // New client state
+  const [newClient, setNewClient] = useState<StartupClient>({
+    name: '',
+    logoUrl: '',
+    website: '',
+  });
+
+  // New press mention state
+  const [newPress, setNewPress] = useState<StartupPress>({
+    title: '',
+    publication: '',
+    url: '',
+    publishedDate: new Date().toISOString().split('T')[0],
+  });
 
   // New post modal state
   const [newPost, setNewPost] = useState<Partial<CompanyPost>>({
@@ -151,7 +224,7 @@ export const FounderEditProfile: React.FC = () => {
             twitter: s.twitter || '',
             github: s.github || '',
             logoUrl: s.logoUrl || '',
-            bannerUrl: s.bannerUrl || BANNER_PRESETS[0].url,
+            bannerUrl: s.bannerUrl || '',
             socialLinks: {
               linkedin: s.socialLinks?.linkedin || s.linkedin || '',
               twitter: s.socialLinks?.twitter || s.twitter || '',
@@ -164,18 +237,35 @@ export const FounderEditProfile: React.FC = () => {
             },
             teamSize: s.teamSize || '1-10',
             stage: s.stage || 'Seed',
+            fundingType: s.fundingType || 'Bootstrapped',
+            totalFundingInr: s.totalFundingInr || '',
+            totalFundingUsd: s.totalFundingUsd || '',
             isHiring: Boolean(s.isHiring),
+            businessModel: s.businessModel || '',
+            revenueModel: s.revenueModel || '',
+            revenueRange: s.revenueRange || '',
+            targetMarket: s.targetMarket || '',
+            customerSegments: s.customerSegments || [],
+            incubator: s.incubator || '',
+            accelerator: s.accelerator || '',
+            dpiitNumber: s.dpiitNumber || '',
+            demoVideoUrl: s.demoVideoUrl || '',
+            pitchDeckUrl: s.pitchDeckUrl || '',
+            competitiveEdge: s.competitiveEdge || '',
+            isProfitable: Boolean(s.isProfitable),
+            milestones: s.milestones || [],
+            awards: s.awards || [],
+            keyClients: s.keyClients || [],
+            pressMentions: s.pressMentions || [],
             techStack: s.techStack || [],
             galleryImages: s.galleryImages || [],
             founders: s.founders || [],
             posts: s.posts || [],
             customSections: s.customSections || [],
           });
-        } else {
-          setError(data.message || 'Could not load startup profile');
         }
-      } catch (err: any) {
-        setError(err.message || 'Network error');
+      } catch (err) {
+        console.error('Error fetching startup for editing:', err);
       } finally {
         setLoading(false);
       }
@@ -184,42 +274,144 @@ export const FounderEditProfile: React.FC = () => {
     fetchStartup();
   }, [user, activeStartupId]);
 
+  const handleChange = (field: string, value: any) => {
+    setFormData((prev) => ({ ...prev, [field]: value }));
+  };
+
+  const handleSocialChange = (platform: string, value: string) => {
+    setFormData((prev) => ({
+      ...prev,
+      socialLinks: { ...prev.socialLinks, [platform]: value },
+    }));
+  };
+
   const handleAddTech = () => {
     if (!newTech.trim()) return;
     if (!formData.techStack.includes(newTech.trim())) {
-      setFormData((prev) => ({
-        ...prev,
-        techStack: [...prev.techStack, newTech.trim()],
-      }));
+      setFormData((prev) => ({ ...prev, techStack: [...prev.techStack, newTech.trim()] }));
     }
     setNewTech('');
   };
 
-  const handleRemoveTech = (tag: string) => {
-    setFormData((prev) => ({
-      ...prev,
-      techStack: prev.techStack.filter((t) => t !== tag),
-    }));
+  const handleRemoveTech = (item: string) => {
+    setFormData((prev) => ({ ...prev, techStack: prev.techStack.filter((t) => t !== item) }));
   };
 
   const handleAddGalleryImage = () => {
     if (!newGalleryUrl.trim()) return;
-    setFormData((prev) => ({
-      ...prev,
-      galleryImages: [...prev.galleryImages, newGalleryUrl.trim()],
-    }));
+    setFormData((prev) => ({ ...prev, galleryImages: [...prev.galleryImages, newGalleryUrl.trim()] }));
     setNewGalleryUrl('');
   };
 
-  const handleRemoveGalleryImage = (index: number) => {
+  const handleRemoveGalleryImage = (idx: number) => {
     setFormData((prev) => ({
       ...prev,
-      galleryImages: prev.galleryImages.filter((_, i) => i !== index),
+      galleryImages: prev.galleryImages.filter((_, i) => i !== idx),
     }));
   };
 
+  // Milestone handlers
+  const handleAddMilestone = () => {
+    if (!newMilestone.title.trim()) return;
+    setFormData((prev) => ({
+      ...prev,
+      milestones: [
+        ...prev.milestones,
+        { ...newMilestone, id: `mls-${Date.now()}` }
+      ]
+    }));
+    setNewMilestone({
+      title: '',
+      description: '',
+      date: new Date().toISOString().split('T')[0],
+      category: 'Product Milestone',
+    });
+  };
+
+  const handleRemoveMilestone = (idx: number) => {
+    setFormData((prev) => ({
+      ...prev,
+      milestones: prev.milestones.filter((_, i) => i !== idx)
+    }));
+  };
+
+  // Award handlers
+  const handleAddAward = () => {
+    if (!newAward.title.trim()) return;
+    setFormData((prev) => ({
+      ...prev,
+      awards: [
+        ...prev.awards,
+        { ...newAward, id: `awd-${Date.now()}` }
+      ]
+    }));
+    setNewAward({
+      title: '',
+      organization: '',
+      year: new Date().getFullYear(),
+      url: '',
+    });
+  };
+
+  const handleRemoveAward = (idx: number) => {
+    setFormData((prev) => ({
+      ...prev,
+      awards: prev.awards.filter((_, i) => i !== idx)
+    }));
+  };
+
+  // Client handlers
+  const handleAddClient = () => {
+    if (!newClient.name.trim()) return;
+    setFormData((prev) => ({
+      ...prev,
+      keyClients: [
+        ...prev.keyClients,
+        { ...newClient, id: `clt-${Date.now()}` }
+      ]
+    }));
+    setNewClient({
+      name: '',
+      logoUrl: '',
+      website: '',
+    });
+  };
+
+  const handleRemoveClient = (idx: number) => {
+    setFormData((prev) => ({
+      ...prev,
+      keyClients: prev.keyClients.filter((_, i) => i !== idx)
+    }));
+  };
+
+  // Press handlers
+  const handleAddPress = () => {
+    if (!newPress.title.trim() || !newPress.publication.trim()) return;
+    setFormData((prev) => ({
+      ...prev,
+      pressMentions: [
+        ...prev.pressMentions,
+        { ...newPress, id: `prs-${Date.now()}` }
+      ]
+    }));
+    setNewPress({
+      title: '',
+      publication: '',
+      url: '',
+      publishedDate: new Date().toISOString().split('T')[0],
+    });
+  };
+
+  const handleRemovePress = (idx: number) => {
+    setFormData((prev) => ({
+      ...prev,
+      pressMentions: prev.pressMentions.filter((_, i) => i !== idx)
+    }));
+  };
+
+  // Founder handlers
   const handleAddFounder = () => {
-    if (!newFounder.name || !newFounder.role) return;
+    if (!newFounder.name?.trim() || !newFounder.role?.trim()) return;
     setFormData((prev) => ({
       ...prev,
       founders: [
@@ -243,94 +435,68 @@ export const FounderEditProfile: React.FC = () => {
     }));
   };
 
-  const handleAddPost = () => {
-    if (!newPost.title || !newPost.content) return;
-    const post: CompanyPost = {
-      id: `post-${Date.now()}`,
-      title: newPost.title!,
-      content: newPost.content!,
-      date: newPost.date || new Date().toISOString().split('T')[0],
-      tag: newPost.tag || 'Milestone',
-      linkUrl: newPost.linkUrl || '',
-    };
+  // Custom section handlers
+  const handleAddSection = () => {
+    if (!newSection.title?.trim() || !newSection.content?.trim()) return;
     setFormData((prev) => ({
       ...prev,
-      posts: [post, ...prev.posts],
-    }));
-    setNewPost({ title: '', content: '', tag: 'Milestone', date: new Date().toISOString().split('T')[0], linkUrl: '' });
-  };
-
-  const handleRemovePost = (id: string) => {
-    setFormData((prev) => ({
-      ...prev,
-      posts: prev.posts.filter((p) => p.id !== id),
-    }));
-  };
-
-  const handleAddCustomSection = () => {
-    if (!newSection.title || !newSection.content) return;
-    const section: CustomProfileSection = {
-      id: `sec-${Date.now()}`,
-      title: newSection.title!,
-      content: newSection.content!,
-    };
-    setFormData((prev) => ({
-      ...prev,
-      customSections: [...prev.customSections, section],
+      customSections: [
+        ...prev.customSections,
+        {
+          id: `sec-${Date.now()}`,
+          title: newSection.title!,
+          content: newSection.content!,
+        },
+      ],
     }));
     setNewSection({ title: '', content: '' });
   };
 
-  const handleRemoveCustomSection = (id: string) => {
+  const handleRemoveSection = (id: string) => {
     setFormData((prev) => ({
       ...prev,
       customSections: prev.customSections.filter((s) => s.id !== id),
     }));
   };
 
-  const handleTransferOwnership = async () => {
-    if (!targetTransferEmail.trim()) {
-      alert('Please enter the target founder email address.');
-      return;
-    }
-    const confirmed = window.confirm(
-      `Are you sure you want to transfer ownership of "${formData.name}" to ${targetTransferEmail}? You will no longer manage this startup.`
-    );
-    if (!confirmed || !startup) return;
-
-    setTransferLoading(true);
-    setError(null);
-    try {
-      const res = await fetch(`/api/startups/${startup.id}/transfer`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
+  // Company post handlers
+  const handleAddPost = () => {
+    if (!newPost.title?.trim() || !newPost.content?.trim()) return;
+    setFormData((prev) => ({
+      ...prev,
+      posts: [
+        {
+          id: `post-${Date.now()}`,
+          title: newPost.title!,
+          content: newPost.content!,
+          tag: newPost.tag || 'Milestone',
+          date: newPost.date || new Date().toISOString().split('T')[0],
+          linkUrl: newPost.linkUrl || '',
         },
-        body: JSON.stringify({ targetEmail: targetTransferEmail.trim() }),
-      });
-      const data = await res.json();
-      if (data.success) {
-        setTransferSuccess(`Company ownership successfully transferred to ${targetTransferEmail}!`);
-        setTargetTransferEmail('');
-        setTimeout(() => {
-          navigate('/founder/dashboard');
-        }, 2500);
-      } else {
-        setError(data.message || 'Transfer failed');
-      }
-    } catch (err: any) {
-      setError(err.message || 'Network error during company transfer');
-    } finally {
-      setTransferLoading(false);
-    }
+        ...(prev.posts || []),
+      ],
+    }));
+    setNewPost({
+      title: '',
+      content: '',
+      tag: 'Milestone',
+      date: new Date().toISOString().split('T')[0],
+      linkUrl: '',
+    });
   };
 
-  const handleSubmit = async (e?: React.FormEvent) => {
-    if (e) e.preventDefault();
+  const handleRemovePost = (id: string) => {
+    setFormData((prev) => ({
+      ...prev,
+      posts: (prev.posts || []).filter((p) => p.id !== id),
+    }));
+  };
+
+  const handleSave = async () => {
     if (!startup) return;
     setSaving(true);
     setError(null);
+    setSaved(false);
 
     try {
       const res = await fetch(`/api/startups/${startup.id}`, {
@@ -341,568 +507,1010 @@ export const FounderEditProfile: React.FC = () => {
         },
         body: JSON.stringify(formData),
       });
+
       const data = await res.json();
-      if (data.success) {
-        setSaved(true);
-        setTimeout(() => setSaved(false), 3500);
-      } else {
-        setError(data.message || 'Failed to save updates');
+      if (!data.success) {
+        throw new Error(data.message || 'Failed to update startup profile');
       }
+
+      setSaved(true);
+      setTimeout(() => setSaved(false), 3000);
     } catch (err: any) {
-      setError(err.message || 'Network error while saving updates');
+      setError(err.message || 'Network error while saving profile');
     } finally {
       setSaving(false);
     }
   };
 
+  const handleTransferOwnership = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!startup || !targetTransferEmail.trim()) return;
+    setTransferLoading(true);
+    setTransferSuccess(null);
+    setError(null);
+
+    try {
+      const res = await fetch(`/api/startups/${startup.id}/transfer`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ targetEmail: targetTransferEmail.trim() }),
+      });
+
+      const data = await res.json();
+      if (!data.success) {
+        throw new Error(data.message || 'Ownership transfer failed');
+      }
+
+      setTransferSuccess(data.message || 'Company profile transferred successfully.');
+      setTargetTransferEmail('');
+    } catch (err: any) {
+      setError(err.message || 'Error executing ownership transfer');
+    } finally {
+      setTransferLoading(false);
+    }
+  };
+
+  const tabs = [
+    { id: 'brand', label: 'Core Identity', icon: Building2 },
+    { id: 'business', label: 'Business & Market', icon: DollarSign },
+    { id: 'milestones', label: 'Milestones & Awards', icon: Award },
+    { id: 'clients', label: 'Clients & Press', icon: Newspaper },
+    { id: 'credentials', label: 'Credentials & Media', icon: ShieldCheck },
+    { id: 'team', label: 'Founders & Team', icon: Users },
+    { id: 'tech', label: 'Tech Stack', icon: Code },
+    { id: 'gallery', label: 'Product Media', icon: ImageIcon },
+    { id: 'posts', label: 'Company Posts', icon: MessageSquare },
+    { id: 'sections', label: 'Custom Sections', icon: Layers },
+    { id: 'transfer', label: 'Transfer Access', icon: UserCheck },
+  ];
+
   if (loading) {
     return (
-      <div className="py-36 text-center space-y-3">
+      <div className="py-20 text-center space-y-3">
         <Loader2 className="w-8 h-8 text-[#0071E3] animate-spin mx-auto" />
-        <p className="text-xs text-[#86868B] font-medium">Loading startup studio data...</p>
+        <p className="text-xs text-[#86868B]">Loading startup editor...</p>
       </div>
     );
   }
 
-  const tabs = [
-    { id: 'brand', label: 'Identity & Story', icon: Building2 },
-    { id: 'banner', label: 'Banner Design', icon: Palette },
-    { id: 'contact', label: 'Contact & Socials', icon: Share2 },
-    { id: 'tech', label: 'Tech Stack', icon: Code },
-    { id: 'team', label: 'Leadership', icon: Users },
-    { id: 'gallery', label: 'Media Gallery', icon: ImageIcon },
-    { id: 'posts', label: 'Milestones & News', icon: MessageSquare },
-    { id: 'sections', label: 'Custom Sections', icon: Layers },
-    { id: 'transfer', label: 'Company Transfer', icon: UserCheck },
-  ];
+  if (!startup) {
+    return (
+      <div className="p-8 text-center bg-white rounded-3xl border border-black/[0.08] shadow-apple-card space-y-3">
+        <AlertCircle className="w-10 h-10 text-amber-500 mx-auto" />
+        <h2 className="text-lg font-bold text-[#1D1D1F]">No Linked Venture Found</h2>
+        <p className="text-xs text-[#86868B]">You must have a verified or claimed startup to edit its details.</p>
+        <Link to="/founder" className="inline-block px-5 py-2 rounded-full bg-[#0071E3] text-white text-xs font-semibold">
+          Return to Dashboard
+        </Link>
+      </div>
+    );
+  }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6 pb-20">
-      
-      {/* Top Action Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white/80 backdrop-blur-xl p-6 rounded-3xl border border-black/[0.08] shadow-apple-sm">
-        <div>
-          <div className="flex items-center gap-2">
-            <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-[#0071E3]/10 text-[#0071E3]">
-              Founder Studio
-            </span>
-            <span className="text-xs text-[#86868B] font-medium">Live Profile Editor</span>
+    <div className="space-y-6">
+      {/* Top Bar Navigation & Actions */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-black/[0.06] pb-4">
+        <div className="flex items-center gap-3">
+          <button
+            onClick={() => navigate('/founder')}
+            className="p-2 rounded-xl bg-white hover:bg-black/[0.04] border border-black/[0.08] text-[#1D1D1F] transition-all"
+          >
+            <ArrowLeft className="w-4 h-4" />
+          </button>
+          <div>
+            <h1 className="font-display font-extrabold text-xl sm:text-2xl text-[#1D1D1F]">
+              Edit Profile: {startup.name}
+            </h1>
+            <p className="text-xs text-[#86868B]">
+              Update your public presence, verified metrics, milestones, and credentials on the Tamil Nadu map.
+            </p>
           </div>
-          <h1 className="text-2xl sm:text-3xl font-extrabold font-display text-[#1D1D1F] tracking-tight mt-1">
-            Edit Company Profile
-          </h1>
-          <p className="text-xs sm:text-sm text-[#86868B] mt-0.5">
-            Customize how {formData.name || 'your startup'} appears across the Tamil Nadu Startup Map.
-          </p>
         </div>
 
-        <div className="flex items-center gap-3 shrink-0">
+        <div className="flex items-center gap-3">
           <Link
-            to="/founder/dashboard"
-            className="px-4 py-2.5 rounded-2xl border border-black/[0.08] bg-white text-xs font-semibold text-[#1D1D1F] hover:bg-slate-50 transition-all apple-press"
+            to={`/startups/${startup.slug}`}
+            target="_blank"
+            className="px-4 py-2 rounded-full bg-white hover:bg-slate-50 border border-black/[0.08] text-[#1D1D1F] font-semibold text-xs flex items-center gap-1.5 transition-all shadow-2xs apple-press"
           >
-            Cancel
+            <ExternalLink className="w-3.5 h-3.5" />
+            <span>Preview Live</span>
           </Link>
+
           <button
-            type="submit"
+            onClick={handleSave}
             disabled={saving}
-            className="px-6 py-2.5 rounded-2xl bg-[#0071E3] hover:bg-[#0077ED] text-white font-bold text-xs transition-all shadow-md flex items-center gap-2 apple-press border border-[#0071E3]"
+            className="px-5 py-2 rounded-full bg-[#0071E3] hover:bg-[#0077ED] text-white font-semibold text-xs flex items-center gap-1.5 shadow-apple-sm transition-all apple-press disabled:opacity-50"
           >
-            {saving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
-            <span>Save Profile</span>
+            {saving ? (
+              <>
+                <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                <span>Saving...</span>
+              </>
+            ) : saved ? (
+              <>
+                <Check className="w-3.5 h-3.5 text-white" />
+                <span>Saved!</span>
+              </>
+            ) : (
+              <>
+                <Save className="w-3.5 h-3.5" />
+                <span>Save Changes</span>
+              </>
+            )}
           </button>
         </div>
       </div>
 
-      {saved && (
-        <div className="p-4 rounded-2xl bg-[#34C759]/10 border border-[#34C759]/20 text-[#34C759] text-xs flex items-center gap-2 shadow-2xs animate-in fade-in">
-          <CheckCircle2 className="w-4 h-4 shrink-0 text-[#34C759]" />
-          <span className="font-bold">Profile updates saved and published successfully!</span>
-        </div>
-      )}
-
       {error && (
-        <div className="p-4 rounded-2xl bg-rose-50 border border-rose-200 text-rose-700 text-xs flex items-center gap-2 animate-in fade-in">
+        <div className="p-4 rounded-2xl bg-rose-50 border border-rose-200 text-rose-700 text-xs flex items-center gap-2">
           <AlertCircle className="w-4 h-4 shrink-0" />
           <span>{error}</span>
         </div>
       )}
 
-      {transferSuccess && (
-        <div className="p-4 rounded-2xl bg-emerald-50 border border-emerald-300 text-emerald-800 text-xs flex items-center gap-2 animate-in fade-in">
-          <CheckCircle2 className="w-4 h-4 shrink-0 text-emerald-600" />
-          <span className="font-bold">{transferSuccess}</span>
+      {saved && (
+        <div className="p-4 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs flex items-center gap-2">
+          <CheckCircle2 className="w-4 h-4 shrink-0" />
+          <span>Profile changes successfully published to the live platform.</span>
         </div>
       )}
 
-      {/* Segmented Tab Navigation Bar */}
-      <div className="flex items-center gap-1.5 overflow-x-auto bg-black/[0.04] p-1.5 rounded-2xl border border-black/[0.04] no-scrollbar scrollbar-none">
-        {tabs.map((tab) => {
-          const Icon = tab.icon;
-          const isActive = activeTab === tab.id;
+      {/* Main Tab Navigation Header */}
+      <div className="flex items-center gap-2 overflow-x-auto p-1.5 bg-black/[0.03] rounded-2xl border border-black/[0.04] scrollbar-none">
+        {tabs.map((t) => {
+          const Icon = t.icon;
+          const isActive = activeTab === t.id;
           return (
             <button
-              key={tab.id}
-              type="button"
-              onClick={() => setActiveTab(tab.id as any)}
-              className={`flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-xs font-bold shrink-0 transition-all apple-press-subtle ${
+              key={t.id}
+              onClick={() => setActiveTab(t.id as any)}
+              className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-bold transition-all whitespace-nowrap ${
                 isActive
-                  ? 'bg-white text-[#1D1D1F] shadow-apple-sm'
-                  : 'text-[#86868B] hover:text-[#1D1D1F] hover:bg-black/[0.03]'
+                  ? 'bg-white text-[#0071E3] shadow-apple-sm'
+                  : 'text-[#86868B] hover:text-[#1D1D1F] hover:bg-white/50'
               }`}
             >
-              <Icon className={`w-4 h-4 ${isActive ? 'text-[#0071E3]' : 'text-[#86868B]'}`} />
-              <span>{tab.label}</span>
+              <Icon className="w-3.5 h-3.5" />
+              <span>{t.label}</span>
             </button>
           );
         })}
       </div>
 
-      {/* Tab Panels Container */}
-      <div className="bg-white/95 backdrop-blur-2xl rounded-3xl border border-black/[0.08] shadow-apple-card p-6 sm:p-8 space-y-6">
+      {/* Form Container */}
+      <div className="bg-white rounded-3xl border border-black/[0.08] shadow-apple-card p-6 sm:p-8 space-y-6">
         
-        {/* TAB 1: Brand & Identity */}
+        {/* TAB 1: CORE IDENTITY */}
         {activeTab === 'brand' && (
           <div className="space-y-5 text-xs">
             <h3 className="font-display font-bold text-base text-[#1D1D1F] border-b border-black/[0.06] pb-3">
-              Brand Assets & Core Identity
+              Core Identity & Location
             </h3>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block font-bold text-[#1D1D1F] mb-1">Company Name *</label>
+                <label className="block font-bold text-[#1D1D1F] mb-1">Company Name</label>
                 <input
                   type="text"
                   value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  placeholder="e.g. AgniKul Cosmos"
-                  className="w-full px-3.5 py-2.5 rounded-2xl border border-black/[0.08] bg-black/[0.02] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#0071E3]/20"
+                  onChange={(e) => handleChange('name', e.target.value)}
+                  className="w-full px-4 py-2.5 rounded-2xl border border-black/[0.08] bg-black/[0.02] focus:bg-white focus:ring-2 focus:ring-[#0071E3]/20"
                 />
               </div>
 
               <div>
-                <label className="block font-bold text-[#1D1D1F] mb-1">One-Line Tagline *</label>
-                <input
-                  type="text"
-                  value={formData.tagline}
-                  onChange={(e) => setFormData({ ...formData, tagline: e.target.value })}
-                  placeholder="e.g. Making space accessible to everyone"
-                  className="w-full px-3.5 py-2.5 rounded-2xl border border-black/[0.08] bg-black/[0.02] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#0071E3]/20"
-                />
-              </div>
-            </div>
-
-            <div>
-              <label className="block font-bold text-[#1D1D1F] mb-1">Short Description (Directory Summary)</label>
-              <textarea
-                rows={3}
-                value={formData.description}
-                onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                placeholder="High-level description of what your startup builds and solves..."
-                className="w-full px-3.5 py-2.5 rounded-2xl border border-black/[0.08] bg-black/[0.02] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#0071E3]/20 leading-relaxed"
-              />
-            </div>
-
-            <div>
-              <label className="block font-bold text-[#1D1D1F] mb-1">Extended Story & Deep Dive</label>
-              <textarea
-                rows={4}
-                value={formData.extendedBio}
-                onChange={(e) => setFormData({ ...formData, extendedBio: e.target.value })}
-                placeholder="Detailed founder narrative, technological breakthroughs, origins, and mission..."
-                className="w-full px-3.5 py-2.5 rounded-2xl border border-black/[0.08] bg-black/[0.02] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#0071E3]/20 leading-relaxed"
-              />
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <label className="block font-bold text-[#1D1D1F] mb-1">Official Website URL</label>
+                <label className="block font-bold text-[#1D1D1F] mb-1">Official Website</label>
                 <input
                   type="url"
                   value={formData.website}
-                  onChange={(e) => setFormData({ ...formData, website: e.target.value })}
-                  placeholder="https://..."
-                  className="w-full px-3.5 py-2.5 rounded-2xl border border-black/[0.08] bg-black/[0.02] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#0071E3]/20"
+                  onChange={(e) => handleChange('website', e.target.value)}
+                  className="w-full px-4 py-2.5 rounded-2xl border border-black/[0.08] bg-black/[0.02] focus:bg-white focus:ring-2 focus:ring-[#0071E3]/20"
                 />
               </div>
+            </div>
 
+            <div>
+              <label className="block font-bold text-[#1D1D1F] mb-1">One-Line Tagline</label>
+              <input
+                type="text"
+                value={formData.tagline}
+                onChange={(e) => handleChange('tagline', e.target.value)}
+                placeholder="e.g. Making space accessible with single-piece 3D-printed rocket engines"
+                className="w-full px-4 py-2.5 rounded-2xl border border-black/[0.08] bg-black/[0.02] focus:bg-white focus:ring-2 focus:ring-[#0071E3]/20"
+              />
+            </div>
+
+            <div>
+              <label className="block font-bold text-[#1D1D1F] mb-1">Company Description</label>
+              <textarea
+                rows={4}
+                value={formData.description}
+                onChange={(e) => handleChange('description', e.target.value)}
+                className="w-full px-4 py-2.5 rounded-2xl border border-black/[0.08] bg-black/[0.02] focus:bg-white focus:ring-2 focus:ring-[#0071E3]/20 leading-relaxed"
+              />
+            </div>
+
+            <div>
+              <label className="block font-bold text-[#1D1D1F] mb-1">Extended Bio / Background Narrative</label>
+              <textarea
+                rows={4}
+                value={formData.extendedBio}
+                onChange={(e) => handleChange('extendedBio', e.target.value)}
+                placeholder="In-depth founding story, mission philosophy, and technical architecture..."
+                className="w-full px-4 py-2.5 rounded-2xl border border-black/[0.08] bg-black/[0.02] focus:bg-white focus:ring-2 focus:ring-[#0071E3]/20 leading-relaxed"
+              />
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <label className="block font-bold text-[#1D1D1F] mb-1">Logo Image URL</label>
                 <input
                   type="url"
                   value={formData.logoUrl}
-                  onChange={(e) => setFormData({ ...formData, logoUrl: e.target.value })}
-                  placeholder="https://.../logo.png"
-                  className="w-full px-3.5 py-2.5 rounded-2xl border border-black/[0.08] bg-black/[0.02] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#0071E3]/20"
+                  onChange={(e) => handleChange('logoUrl', e.target.value)}
+                  placeholder="https://..."
+                  className="w-full px-4 py-2.5 rounded-2xl border border-black/[0.08] bg-black/[0.02] focus:bg-white focus:ring-2 focus:ring-[#0071E3]/20"
+                />
+              </div>
+
+              <div>
+                <label className="block font-bold text-[#1D1D1F] mb-1">Cover Banner URL</label>
+                <input
+                  type="url"
+                  value={formData.bannerUrl}
+                  onChange={(e) => handleChange('bannerUrl', e.target.value)}
+                  placeholder="https://images.unsplash.com/..."
+                  className="w-full px-4 py-2.5 rounded-2xl border border-black/[0.08] bg-black/[0.02] focus:bg-white focus:ring-2 focus:ring-[#0071E3]/20"
                 />
               </div>
             </div>
 
-            <div className="flex items-center gap-3 pt-2">
-              <label className="flex items-center gap-2.5 cursor-pointer select-none">
-                <input
-                  type="checkbox"
-                  checked={formData.isHiring}
-                  onChange={(e) => setFormData({ ...formData, isHiring: e.target.checked })}
-                  className="w-4 h-4 rounded text-[#0071E3] focus:ring-[#0071E3]"
-                />
-                <span className="font-bold text-[#1D1D1F]">Actively Recruiting & Hiring in Tamil Nadu</span>
-              </label>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div>
+                <label className="block font-bold text-[#1D1D1F] mb-1">Current Stage</label>
+                <select
+                  value={formData.stage}
+                  onChange={(e) => handleChange('stage', e.target.value)}
+                  className="w-full px-4 py-2.5 rounded-2xl border border-black/[0.08] bg-black/[0.02] focus:bg-white focus:ring-2 focus:ring-[#0071E3]/20 font-medium"
+                >
+                  <option value="Idea">Idea</option>
+                  <option value="Pre-seed">Pre-seed</option>
+                  <option value="Seed">Seed</option>
+                  <option value="Series A">Series A</option>
+                  <option value="Series B+">Series B+</option>
+                  <option value="Bootstrapped">Bootstrapped</option>
+                  <option value="Acquired">Acquired</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="block font-bold text-[#1D1D1F] mb-1">Team Size</label>
+                <select
+                  value={formData.teamSize}
+                  onChange={(e) => handleChange('teamSize', e.target.value)}
+                  className="w-full px-4 py-2.5 rounded-2xl border border-black/[0.08] bg-black/[0.02] focus:bg-white focus:ring-2 focus:ring-[#0071E3]/20 font-medium"
+                >
+                  <option value="1-10">1-10 Employees</option>
+                  <option value="11-50">11-50 Employees</option>
+                  <option value="51-200">51-200 Employees</option>
+                  <option value="201-500">201-500 Employees</option>
+                  <option value="500+">500+ Employees</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="block font-bold text-[#1D1D1F] mb-1">Actively Hiring?</label>
+                <div className="pt-2">
+                  <label className="inline-flex items-center gap-2 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      checked={formData.isHiring}
+                      onChange={(e) => handleChange('isHiring', e.target.checked)}
+                      className="w-4 h-4 rounded text-[#0071E3] focus:ring-[#0071E3]"
+                    />
+                    <span className="font-semibold text-[#1D1D1F]">Display "Hiring" Beacon</span>
+                  </label>
+                </div>
+              </div>
             </div>
           </div>
         )}
 
-        {/* TAB 2: Banner Design & Curated Presets */}
-        {activeTab === 'banner' && (
-          <div className="space-y-6 text-xs">
+        {/* TAB 2: BUSINESS & MARKET */}
+        {activeTab === 'business' && (
+          <div className="space-y-5 text-xs">
             <div className="border-b border-black/[0.06] pb-3">
-              <h3 className="font-display font-bold text-base text-[#1D1D1F] flex items-center gap-2">
-                <Palette className="w-4 h-4 text-[#0071E3]" />
-                <span>Profile Background Banner</span>
+              <h3 className="font-display font-bold text-base text-[#1D1D1F]">
+                Business Model & Market Classification
               </h3>
               <p className="text-xs text-[#86868B] mt-0.5">
-                Set a custom banner URL or pick from curated Tamil Nadu ecosystem presets.
+                These fields allow institutional investors, angels, and corporate procurement teams to benchmark your venture.
               </p>
             </div>
 
-            {/* Live Banner Preview Card */}
-            <div className="space-y-2">
-              <label className="block font-bold text-[#1D1D1F]">Live Banner Preview</label>
-              <div className="relative rounded-3xl overflow-hidden aspect-[21/6] bg-slate-900 border border-black/[0.1] shadow-apple-card">
-                <img
-                  src={formData.bannerUrl || BANNER_PRESETS[0].url}
-                  alt="Banner preview"
-                  className="w-full h-full object-cover object-center"
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label className="block font-bold text-[#1D1D1F] mb-1">Business Model Type</label>
+                <input
+                  type="text"
+                  value={formData.businessModel}
+                  onChange={(e) => handleChange('businessModel', e.target.value)}
+                  placeholder="e.g. B2B SaaS, B2C Marketplace, D2C Hardware, B2B2C..."
+                  className="w-full px-4 py-2.5 rounded-2xl border border-black/[0.08] bg-black/[0.02] focus:bg-white focus:ring-2 focus:ring-[#0071E3]/20"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex items-end p-6">
-                  <div className="flex items-center gap-3">
-                    <div className="w-12 h-12 rounded-2xl bg-white p-1 border border-black/[0.08] shadow-apple-sm flex items-center justify-center">
-                      {formData.logoUrl ? (
-                        <img src={formData.logoUrl} alt="Logo" className="w-full h-full object-contain rounded-xl" />
-                      ) : (
-                        <span className="font-bold text-base text-[#1D1D1F]">{formData.name.charAt(0) || 'S'}</span>
-                      )}
-                    </div>
-                    <div className="text-white">
-                      <p className="font-bold text-base">{formData.name || 'Startup Name'}</p>
-                      <p className="text-xs text-white/80">{formData.tagline || 'Tagline preview'}</p>
-                    </div>
-                  </div>
-                </div>
+              </div>
+
+              <div>
+                <label className="block font-bold text-[#1D1D1F] mb-1">Revenue Model</label>
+                <input
+                  type="text"
+                  value={formData.revenueModel}
+                  onChange={(e) => handleChange('revenueModel', e.target.value)}
+                  placeholder="e.g. Annual Recurring Subscription, Transaction Fee (2.5%), Usage-based API..."
+                  className="w-full px-4 py-2.5 rounded-2xl border border-black/[0.08] bg-black/[0.02] focus:bg-white focus:ring-2 focus:ring-[#0071E3]/20"
+                />
               </div>
             </div>
 
-            {/* Custom Banner Input */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label className="block font-bold text-[#1D1D1F] mb-1">Estimated Annual Revenue Range</label>
+                <select
+                  value={formData.revenueRange}
+                  onChange={(e) => handleChange('revenueRange', e.target.value)}
+                  className="w-full px-4 py-2.5 rounded-2xl border border-black/[0.08] bg-black/[0.02] focus:bg-white focus:ring-2 focus:ring-[#0071E3]/20 font-medium"
+                >
+                  <option value="">Select Revenue Bracket (Optional)</option>
+                  <option value="Pre-revenue">Pre-revenue (R&D Stage)</option>
+                  <option value="< ₹1 Crore">&lt; ₹1 Crore ($0 - $120K)</option>
+                  <option value="₹1 - 10 Crore">₹1 - 10 Crore ($120K - $1.2M)</option>
+                  <option value="₹10 - 50 Crore">₹10 - 50 Crore ($1.2M - $6M)</option>
+                  <option value="₹50 - 250 Crore">₹50 - 250 Crore ($6M - $30M)</option>
+                  <option value="₹250 Crore+">₹250 Crore+ ($30M+ Scale)</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="block font-bold text-[#1D1D1F] mb-1">Target Geographic Market</label>
+                <input
+                  type="text"
+                  value={formData.targetMarket}
+                  onChange={(e) => handleChange('targetMarket', e.target.value)}
+                  placeholder="e.g. Pan-India, North America & Europe, South East Asia..."
+                  className="w-full px-4 py-2.5 rounded-2xl border border-black/[0.08] bg-black/[0.02] focus:bg-white focus:ring-2 focus:ring-[#0071E3]/20"
+                />
+              </div>
+            </div>
+
             <div>
-              <label className="block font-bold text-[#1D1D1F] mb-1">Custom Image URL</label>
-              <input
-                type="url"
-                value={formData.bannerUrl}
-                onChange={(e) => setFormData({ ...formData, bannerUrl: e.target.value })}
-                placeholder="https://.../your-custom-banner.jpg"
-                className="w-full px-4 py-2.5 rounded-2xl border border-black/[0.08] bg-black/[0.02] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#0071E3]/20 font-mono text-xs"
+              <label className="block font-bold text-[#1D1D1F] mb-1">Company Profitability Status</label>
+              <div className="flex items-center gap-4 pt-1">
+                <label className="inline-flex items-center gap-2 cursor-pointer">
+                  <input
+                    type="radio"
+                    name="isProfitable"
+                    checked={formData.isProfitable === true}
+                    onChange={() => handleChange('isProfitable', true)}
+                    className="text-[#0071E3] focus:ring-[#0071E3]"
+                  />
+                  <span className="font-semibold text-[#1D1D1F]">Profitable / Cash-flow Positive</span>
+                </label>
+                <label className="inline-flex items-center gap-2 cursor-pointer">
+                  <input
+                    type="radio"
+                    name="isProfitable"
+                    checked={formData.isProfitable === false}
+                    onChange={() => handleChange('isProfitable', false)}
+                    className="text-[#0071E3] focus:ring-[#0071E3]"
+                  />
+                  <span className="font-semibold text-[#1D1D1F]">Growth Investing / Pre-profit</span>
+                </label>
+              </div>
+            </div>
+
+            <div>
+              <label className="block font-bold text-[#1D1D1F] mb-1">Competitive Advantage / Moat Narrative</label>
+              <textarea
+                rows={3}
+                value={formData.competitiveEdge}
+                onChange={(e) => handleChange('competitiveEdge', e.target.value)}
+                placeholder="What is your proprietary unfair advantage? e.g. Patented hardware architecture, exclusive Tamil Nadu distribution tie-ups, proprietary datasets..."
+                className="w-full px-4 py-2.5 rounded-2xl border border-black/[0.08] bg-black/[0.02] focus:bg-white focus:ring-2 focus:ring-[#0071E3]/20 leading-relaxed"
               />
             </div>
-
-            {/* Curated Presets Grid */}
-            <div className="space-y-3 pt-2">
-              <label className="block font-bold text-[#1D1D1F]">
-                Curated Tamil Nadu Ecosystem Banner Presets
-              </label>
-              
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-                {BANNER_PRESETS.map((preset) => {
-                  const isSelected = formData.bannerUrl === preset.url;
-                  return (
-                    <div
-                      key={preset.id}
-                      onClick={() => setFormData({ ...formData, bannerUrl: preset.url })}
-                      className={`group cursor-pointer rounded-2xl overflow-hidden border-2 transition-all p-1.5 bg-white shadow-2xs hover:shadow-apple-sm ${
-                        isSelected
-                          ? 'border-[#0071E3] ring-2 ring-[#0071E3]/20 shadow-apple-sm'
-                          : 'border-black/[0.08] hover:border-black/[0.2]'
-                      }`}
-                    >
-                      <div className="relative aspect-video rounded-xl overflow-hidden bg-slate-100">
-                        <img
-                          src={preset.previewUrl}
-                          alt={preset.name}
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                        />
-                        {isSelected && (
-                          <div className="absolute top-2 right-2 px-2 py-0.5 rounded-full bg-[#0071E3] text-white text-[10px] font-bold flex items-center gap-1 shadow-apple-sm">
-                            <Check className="w-3 h-3" />
-                            <span>Active</span>
-                          </div>
-                        )}
-                        <span className="absolute bottom-2 left-2 px-2 py-0.5 rounded-md bg-black/70 backdrop-blur-md text-white text-[9px] font-semibold">
-                          {preset.category}
-                        </span>
-                      </div>
-                      <div className="p-2">
-                        <p className="font-bold text-xs text-[#1D1D1F] truncate">{preset.name}</p>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-
           </div>
         )}
 
-        {/* TAB 3: Contact & Comprehensive Social Networks */}
-        {activeTab === 'contact' && (
+        {/* TAB 3: MILESTONES & AWARDS */}
+        {activeTab === 'milestones' && (
           <div className="space-y-6 text-xs">
+            {/* MILESTONES SECTION */}
+            <div className="space-y-4">
+              <div className="border-b border-black/[0.06] pb-3 flex items-center justify-between">
+                <div>
+                  <h3 className="font-display font-bold text-base text-[#1D1D1F]">
+                    Company Milestones & Growth Timeline
+                  </h3>
+                  <p className="text-xs text-[#86868B]">
+                    Chronological timeline of your venture's key accomplishments, launches, and scale events.
+                  </p>
+                </div>
+                <span className="px-2.5 py-1 rounded-full bg-[#0071E3]/10 text-[#0071E3] font-bold text-xs">
+                  {formData.milestones.length} Recorded
+                </span>
+              </div>
+
+              {/* Add Milestone Form */}
+              <div className="p-4 rounded-2xl bg-black/[0.02] border border-black/[0.06] space-y-3">
+                <div className="font-bold text-[#1D1D1F] text-xs">Add New Milestone</div>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                  <div className="sm:col-span-2">
+                    <input
+                      type="text"
+                      placeholder="Milestone Title (e.g. Maiden Orbital Flight Launch)"
+                      value={newMilestone.title}
+                      onChange={(e) => setNewMilestone({ ...newMilestone, title: e.target.value })}
+                      className="w-full px-3 py-2 rounded-xl border border-black/[0.08] bg-white text-xs"
+                    />
+                  </div>
+                  <div>
+                    <input
+                      type="date"
+                      value={newMilestone.date}
+                      onChange={(e) => setNewMilestone({ ...newMilestone, date: e.target.value })}
+                      className="w-full px-3 py-2 rounded-xl border border-black/[0.08] bg-white text-xs"
+                    />
+                  </div>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                  <div className="sm:col-span-2">
+                    <input
+                      type="text"
+                      placeholder="Description / Context (e.g. Successfully launched Agnibaan SOrTeD from Sriharikota)"
+                      value={newMilestone.description || ''}
+                      onChange={(e) => setNewMilestone({ ...newMilestone, description: e.target.value })}
+                      className="w-full px-3 py-2 rounded-xl border border-black/[0.08] bg-white text-xs"
+                    />
+                  </div>
+                  <div>
+                    <select
+                      value={newMilestone.category || 'Product Milestone'}
+                      onChange={(e) => setNewMilestone({ ...newMilestone, category: e.target.value })}
+                      className="w-full px-3 py-2 rounded-xl border border-black/[0.08] bg-white text-xs"
+                    >
+                      <option value="Mission Milestone">Mission Milestone</option>
+                      <option value="Product Innovation">Product Innovation</option>
+                      <option value="Fundraising">Fundraising</option>
+                      <option value="Facility Expansion">Facility Expansion</option>
+                      <option value="User Milestone">User Milestone</option>
+                      <option value="Intellectual Property">Intellectual Property</option>
+                    </select>
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  onClick={handleAddMilestone}
+                  className="px-4 py-2 bg-[#1D1D1F] hover:bg-black text-white font-semibold text-xs rounded-xl flex items-center gap-1.5 transition-all shadow-2xs"
+                >
+                  <Plus className="w-3.5 h-3.5" />
+                  <span>Add Milestone</span>
+                </button>
+              </div>
+
+              {/* Milestones List */}
+              <div className="space-y-2">
+                {formData.milestones.map((m, idx) => (
+                  <div key={idx} className="p-3.5 rounded-2xl bg-white border border-black/[0.06] flex items-center justify-between gap-3 shadow-2xs">
+                    <div className="space-y-0.5">
+                      <div className="flex items-center gap-2">
+                        <span className="font-bold text-[#1D1D1F]">{m.title}</span>
+                        {m.category && (
+                          <span className="px-2 py-0.5 rounded-md bg-black/[0.04] text-[#86868B] text-[10px] font-semibold">
+                            {m.category}
+                          </span>
+                        )}
+                        <span className="text-[10px] text-[#86868B] font-mono">{m.date}</span>
+                      </div>
+                      {m.description && (
+                        <p className="text-[#86868B] text-[11px] leading-normal">{m.description}</p>
+                      )}
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => handleRemoveMilestone(idx)}
+                      className="p-1.5 rounded-lg text-rose-500 hover:bg-rose-50 transition-colors shrink-0"
+                    >
+                      <Trash2 className="w-4 h-4" />
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* AWARDS SECTION */}
+            <div className="space-y-4 pt-4 border-t border-black/[0.06]">
+              <div className="border-b border-black/[0.06] pb-3 flex items-center justify-between">
+                <div>
+                  <h3 className="font-display font-bold text-base text-[#1D1D1F]">
+                    Honors, Citations & Recognitions
+                  </h3>
+                  <p className="text-xs text-[#86868B]">
+                    Document national awards, state recognitions (StartupTN), and industry citations.
+                  </p>
+                </div>
+                <span className="px-2.5 py-1 rounded-full bg-amber-500/10 text-amber-700 font-bold text-xs">
+                  {formData.awards.length} Recorded
+                </span>
+              </div>
+
+              {/* Add Award Form */}
+              <div className="p-4 rounded-2xl bg-black/[0.02] border border-black/[0.06] space-y-3">
+                <div className="font-bold text-[#1D1D1F] text-xs">Add Recognition / Award</div>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                  <div>
+                    <input
+                      type="text"
+                      placeholder="Award Name (e.g. National Startup Award)"
+                      value={newAward.title}
+                      onChange={(e) => setNewAward({ ...newAward, title: e.target.value })}
+                      className="w-full px-3 py-2 rounded-xl border border-black/[0.08] bg-white text-xs"
+                    />
+                  </div>
+                  <div>
+                    <input
+                      type="text"
+                      placeholder="Conferring Organization (e.g. DPIIT, Govt. of India)"
+                      value={newAward.organization || ''}
+                      onChange={(e) => setNewAward({ ...newAward, organization: e.target.value })}
+                      className="w-full px-3 py-2 rounded-xl border border-black/[0.08] bg-white text-xs"
+                    />
+                  </div>
+                  <div>
+                    <input
+                      type="number"
+                      placeholder="Year (e.g. 2024)"
+                      value={newAward.year || ''}
+                      onChange={(e) => setNewAward({ ...newAward, year: Number(e.target.value) || undefined })}
+                      className="w-full px-3 py-2 rounded-xl border border-black/[0.08] bg-white text-xs"
+                    />
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  onClick={handleAddAward}
+                  className="px-4 py-2 bg-[#1D1D1F] hover:bg-black text-white font-semibold text-xs rounded-xl flex items-center gap-1.5 transition-all shadow-2xs"
+                >
+                  <Plus className="w-3.5 h-3.5" />
+                  <span>Add Award</span>
+                </button>
+              </div>
+
+              {/* Awards List */}
+              <div className="space-y-2">
+                {formData.awards.map((a, idx) => (
+                  <div key={idx} className="p-3.5 rounded-2xl bg-white border border-black/[0.06] flex items-center justify-between gap-3 shadow-2xs">
+                    <div className="space-y-0.5">
+                      <div className="flex items-center gap-2">
+                        <span className="font-bold text-[#1D1D1F]">{a.title}</span>
+                        {a.year && (
+                          <span className="px-2 py-0.5 rounded-md bg-amber-500/10 text-amber-700 text-[10px] font-semibold">
+                            {a.year}
+                          </span>
+                        )}
+                      </div>
+                      {a.organization && (
+                        <p className="text-[#86868B] text-[11px]">{a.organization}</p>
+                      )}
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => handleRemoveAward(idx)}
+                      className="p-1.5 rounded-lg text-rose-500 hover:bg-rose-50 transition-colors shrink-0"
+                    >
+                      <Trash2 className="w-4 h-4" />
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* TAB 4: CLIENTS & PRESS */}
+        {activeTab === 'clients' && (
+          <div className="space-y-6 text-xs">
+            {/* CLIENTS SECTION */}
+            <div className="space-y-4">
+              <div className="border-b border-black/[0.06] pb-3 flex items-center justify-between">
+                <div>
+                  <h3 className="font-display font-bold text-base text-[#1D1D1F]">
+                    Key Customers & Enterprise Client Logos
+                  </h3>
+                  <p className="text-xs text-[#86868B]">
+                    Highlight prominent commercial partners and enterprise customers using your solution.
+                  </p>
+                </div>
+                <span className="px-2.5 py-1 rounded-full bg-[#0071E3]/10 text-[#0071E3] font-bold text-xs">
+                  {formData.keyClients.length} Added
+                </span>
+              </div>
+
+              {/* Add Client Form */}
+              <div className="p-4 rounded-2xl bg-black/[0.02] border border-black/[0.06] space-y-3">
+                <div className="font-bold text-[#1D1D1F] text-xs">Add Customer / Client</div>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                  <div>
+                    <input
+                      type="text"
+                      placeholder="Client Name (e.g. Amazon India)"
+                      value={newClient.name}
+                      onChange={(e) => setNewClient({ ...newClient, name: e.target.value })}
+                      className="w-full px-3 py-2 rounded-xl border border-black/[0.08] bg-white text-xs"
+                    />
+                  </div>
+                  <div>
+                    <input
+                      type="url"
+                      placeholder="Client Website (https://...)"
+                      value={newClient.website || ''}
+                      onChange={(e) => setNewClient({ ...newClient, website: e.target.value })}
+                      className="w-full px-3 py-2 rounded-xl border border-black/[0.08] bg-white text-xs"
+                    />
+                  </div>
+                  <div>
+                    <input
+                      type="url"
+                      placeholder="Client Logo URL (Optional)"
+                      value={newClient.logoUrl || ''}
+                      onChange={(e) => setNewClient({ ...newClient, logoUrl: e.target.value })}
+                      className="w-full px-3 py-2 rounded-xl border border-black/[0.08] bg-white text-xs"
+                    />
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  onClick={handleAddClient}
+                  className="px-4 py-2 bg-[#1D1D1F] hover:bg-black text-white font-semibold text-xs rounded-xl flex items-center gap-1.5 transition-all shadow-2xs"
+                >
+                  <Plus className="w-3.5 h-3.5" />
+                  <span>Add Customer Logo</span>
+                </button>
+              </div>
+
+              {/* Clients List */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                {formData.keyClients.map((c, idx) => (
+                  <div key={idx} className="p-3 rounded-2xl bg-white border border-black/[0.06] flex items-center justify-between gap-3 shadow-2xs">
+                    <div className="space-y-0.5 truncate">
+                      <span className="font-bold text-[#1D1D1F] block truncate">{c.name}</span>
+                      {c.website && (
+                        <span className="text-[10px] text-[#0071E3] truncate block">{c.website}</span>
+                      )}
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => handleRemoveClient(idx)}
+                      className="p-1.5 rounded-lg text-rose-500 hover:bg-rose-50 transition-colors shrink-0"
+                    >
+                      <Trash2 className="w-4 h-4" />
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* PRESS MENTIONS SECTION */}
+            <div className="space-y-4 pt-4 border-t border-black/[0.06]">
+              <div className="border-b border-black/[0.06] pb-3 flex items-center justify-between">
+                <div>
+                  <h3 className="font-display font-bold text-base text-[#1D1D1F]">
+                    Press & Media Coverage
+                  </h3>
+                  <p className="text-xs text-[#86868B]">
+                    Links to news articles, launch announcements, and media features.
+                  </p>
+                </div>
+                <span className="px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-700 font-bold text-xs">
+                  {formData.pressMentions.length} Articles
+                </span>
+              </div>
+
+              {/* Add Press Form */}
+              <div className="p-4 rounded-2xl bg-black/[0.02] border border-black/[0.06] space-y-3">
+                <div className="font-bold text-[#1D1D1F] text-xs">Add News / Press Link</div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <input
+                      type="text"
+                      placeholder="Headline / Article Title"
+                      value={newPress.title}
+                      onChange={(e) => setNewPress({ ...newPress, title: e.target.value })}
+                      className="w-full px-3 py-2 rounded-xl border border-black/[0.08] bg-white text-xs"
+                    />
+                  </div>
+                  <div>
+                    <input
+                      type="text"
+                      placeholder="Publication Name (e.g. The Hindu, Mint, TechCrunch)"
+                      value={newPress.publication}
+                      onChange={(e) => setNewPress({ ...newPress, publication: e.target.value })}
+                      className="w-full px-3 py-2 rounded-xl border border-black/[0.08] bg-white text-xs"
+                    />
+                  </div>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <input
+                      type="url"
+                      placeholder="Article URL (https://...)"
+                      value={newPress.url}
+                      onChange={(e) => setNewPress({ ...newPress, url: e.target.value })}
+                      className="w-full px-3 py-2 rounded-xl border border-black/[0.08] bg-white text-xs"
+                    />
+                  </div>
+                  <div>
+                    <input
+                      type="date"
+                      value={newPress.publishedDate || ''}
+                      onChange={(e) => setNewPress({ ...newPress, publishedDate: e.target.value })}
+                      className="w-full px-3 py-2 rounded-xl border border-black/[0.08] bg-white text-xs"
+                    />
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  onClick={handleAddPress}
+                  className="px-4 py-2 bg-[#1D1D1F] hover:bg-black text-white font-semibold text-xs rounded-xl flex items-center gap-1.5 transition-all shadow-2xs"
+                >
+                  <Plus className="w-3.5 h-3.5" />
+                  <span>Add Article Link</span>
+                </button>
+              </div>
+
+              {/* Press List */}
+              <div className="space-y-2">
+                {formData.pressMentions.map((p, idx) => (
+                  <div key={idx} className="p-3.5 rounded-2xl bg-white border border-black/[0.06] flex items-center justify-between gap-3 shadow-2xs">
+                    <div className="space-y-0.5 truncate">
+                      <div className="flex items-center gap-2">
+                        <span className="font-bold text-[#1D1D1F] truncate">{p.title}</span>
+                        <span className="px-2 py-0.5 rounded-md bg-black/[0.04] text-[#86868B] text-[10px] font-semibold">
+                          {p.publication}
+                        </span>
+                      </div>
+                      <a href={p.url} target="_blank" rel="noopener noreferrer" className="text-[10px] text-[#0071E3] hover:underline flex items-center gap-1">
+                        <span>{p.url}</span>
+                        <ExternalLink className="w-3 h-3" />
+                      </a>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => handleRemovePress(idx)}
+                      className="p-1.5 rounded-lg text-rose-500 hover:bg-rose-50 transition-colors shrink-0"
+                    >
+                      <Trash2 className="w-4 h-4" />
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* TAB 5: CREDENTIALS & MEDIA */}
+        {activeTab === 'credentials' && (
+          <div className="space-y-5 text-xs">
             <div className="border-b border-black/[0.06] pb-3">
-              <h3 className="font-display font-bold text-base text-[#1D1D1F] flex items-center gap-2">
-                <Share2 className="w-4 h-4 text-[#0071E3]" />
-                <span>Contact Info & Community Channels</span>
+              <h3 className="font-display font-bold text-base text-[#1D1D1F]">
+                Ecosystem Credentials & Investor Media
               </h3>
               <p className="text-xs text-[#86868B] mt-0.5">
-                Provide public channels for investors, candidates, and ecosystem partners to reach your venture.
+                Official accreditation, government recognition (DPIIT), incubator affiliation, and investor deck links.
               </p>
             </div>
 
-            {/* Direct Contact Details */}
-            <div className="space-y-3">
-              <h4 className="font-bold text-xs uppercase tracking-wider text-[#86868B]">Official Direct Inquiries</h4>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label className="block font-bold text-[#1D1D1F] mb-1">Official Inquiries Email</label>
-                  <div className="relative">
-                    <Mail className="w-4 h-4 text-[#86868B] absolute left-3.5 top-3" />
-                    <input
-                      type="email"
-                      value={formData.contactEmail}
-                      onChange={(e) => setFormData({ ...formData, contactEmail: e.target.value })}
-                      placeholder="contact@yourstartup.com"
-                      className="w-full pl-10 pr-4 py-2.5 rounded-2xl border border-black/[0.08] bg-black/[0.02] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#0071E3]/20"
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block font-bold text-[#1D1D1F] mb-1">Press / Office Phone</label>
-                  <div className="relative">
-                    <Phone className="w-4 h-4 text-[#86868B] absolute left-3.5 top-3" />
-                    <input
-                      type="tel"
-                      value={formData.contactPhone}
-                      onChange={(e) => setFormData({ ...formData, contactPhone: e.target.value })}
-                      placeholder="+91 44 1234 5678"
-                      className="w-full pl-10 pr-4 py-2.5 rounded-2xl border border-black/[0.08] bg-black/[0.02] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#0071E3]/20"
-                    />
-                  </div>
-                </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label className="block font-bold text-[#1D1D1F] mb-1">DPIIT Recognition Number</label>
+                <input
+                  type="text"
+                  value={formData.dpiitNumber}
+                  onChange={(e) => handleChange('dpiitNumber', e.target.value)}
+                  placeholder="e.g. DIPP29841"
+                  className="w-full px-4 py-2.5 rounded-2xl border border-black/[0.08] bg-black/[0.02] focus:bg-white focus:ring-2 focus:ring-[#0071E3]/20 font-mono"
+                />
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                <div className="sm:col-span-2">
-                  <label className="block font-bold text-[#1D1D1F] mb-1">HQ Address / Facility</label>
-                  <div className="relative">
-                    <MapPin className="w-4 h-4 text-[#86868B] absolute left-3.5 top-3" />
-                    <input
-                      type="text"
-                      value={formData.address}
-                      onChange={(e) => setFormData({ ...formData, address: e.target.value })}
-                      placeholder="e.g. Module 4, IIT Madras Research Park, Taramani"
-                      className="w-full pl-10 pr-4 py-2.5 rounded-2xl border border-black/[0.08] bg-black/[0.02] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#0071E3]/20"
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block font-bold text-[#1D1D1F] mb-1">Postal PIN Code</label>
-                  <input
-                    type="text"
-                    value={formData.pincode}
-                    onChange={(e) => setFormData({ ...formData, pincode: e.target.value })}
-                    placeholder="600113"
-                    className="w-full px-4 py-2.5 rounded-2xl border border-black/[0.08] bg-black/[0.02] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#0071E3]/20"
-                  />
-                </div>
+              <div>
+                <label className="block font-bold text-[#1D1D1F] mb-1">Incubation Center / Institution</label>
+                <input
+                  type="text"
+                  value={formData.incubator}
+                  onChange={(e) => handleChange('incubator', e.target.value)}
+                  placeholder="e.g. IIT Madras Incubation Cell (IITMIC), PSG-STEP, Forge..."
+                  className="w-full px-4 py-2.5 rounded-2xl border border-black/[0.08] bg-black/[0.02] focus:bg-white focus:ring-2 focus:ring-[#0071E3]/20"
+                />
               </div>
             </div>
 
-            {/* Social & Community Channels */}
-            <div className="space-y-4 pt-3 border-t border-black/[0.06]">
-              <h4 className="font-bold text-xs uppercase tracking-wider text-[#86868B]">
-                Social & Community Links (GitHub, X, Slack, Discord, FB, YouTube)
-              </h4>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label className="block font-bold text-[#1D1D1F] mb-1">Accelerator Program (Optional)</label>
+                <input
+                  type="text"
+                  value={formData.accelerator}
+                  onChange={(e) => handleChange('accelerator', e.target.value)}
+                  placeholder="e.g. Y Combinator, Techstars, IN-SPACe Accelerator..."
+                  className="w-full px-4 py-2.5 rounded-2xl border border-black/[0.08] bg-black/[0.02] focus:bg-white focus:ring-2 focus:ring-[#0071E3]/20"
+                />
+              </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label className="block font-bold text-[#1D1D1F] mb-1">GitHub Organization / Repo</label>
-                  <input
-                    type="url"
-                    value={formData.socialLinks.github}
-                    onChange={(e) =>
-                      setFormData({
-                        ...formData,
-                        socialLinks: { ...formData.socialLinks, github: e.target.value },
-                      })
-                    }
-                    placeholder="https://github.com/your-org"
-                    className="w-full px-4 py-2.5 rounded-2xl border border-black/[0.08] bg-black/[0.02] focus:bg-white focus:ring-2 focus:ring-[#0071E3]/20"
-                  />
-                </div>
-
-                <div>
-                  <label className="block font-bold text-[#1D1D1F] mb-1">X (Formerly Twitter)</label>
-                  <input
-                    type="url"
-                    value={formData.socialLinks.twitter}
-                    onChange={(e) =>
-                      setFormData({
-                        ...formData,
-                        socialLinks: { ...formData.socialLinks, twitter: e.target.value },
-                      })
-                    }
-                    placeholder="https://x.com/yourhandle"
-                    className="w-full px-4 py-2.5 rounded-2xl border border-black/[0.08] bg-black/[0.02] focus:bg-white focus:ring-2 focus:ring-[#0071E3]/20"
-                  />
-                </div>
-
-                <div>
-                  <label className="block font-bold text-[#1D1D1F] mb-1">LinkedIn Page</label>
-                  <input
-                    type="url"
-                    value={formData.socialLinks.linkedin}
-                    onChange={(e) =>
-                      setFormData({
-                        ...formData,
-                        socialLinks: { ...formData.socialLinks, linkedin: e.target.value },
-                      })
-                    }
-                    placeholder="https://linkedin.com/company/yourstartup"
-                    className="w-full px-4 py-2.5 rounded-2xl border border-black/[0.08] bg-black/[0.02] focus:bg-white focus:ring-2 focus:ring-[#0071E3]/20"
-                  />
-                </div>
-
-                <div>
-                  <label className="block font-bold text-[#1D1D1F] mb-1">Facebook / Meta Page</label>
-                  <input
-                    type="url"
-                    value={formData.socialLinks.facebook}
-                    onChange={(e) =>
-                      setFormData({
-                        ...formData,
-                        socialLinks: { ...formData.socialLinks, facebook: e.target.value },
-                      })
-                    }
-                    placeholder="https://facebook.com/yourpage"
-                    className="w-full px-4 py-2.5 rounded-2xl border border-black/[0.08] bg-black/[0.02] focus:bg-white focus:ring-2 focus:ring-[#0071E3]/20"
-                  />
-                </div>
-
-                <div>
-                  <label className="block font-bold text-[#1D1D1F] mb-1">Slack Community Invite URL</label>
-                  <input
-                    type="url"
-                    value={formData.socialLinks.slack}
-                    onChange={(e) =>
-                      setFormData({
-                        ...formData,
-                        socialLinks: { ...formData.socialLinks, slack: e.target.value },
-                      })
-                    }
-                    placeholder="https://join.slack.com/t/..."
-                    className="w-full px-4 py-2.5 rounded-2xl border border-black/[0.08] bg-black/[0.02] focus:bg-white focus:ring-2 focus:ring-[#0071E3]/20"
-                  />
-                </div>
-
-                <div>
-                  <label className="block font-bold text-[#1D1D1F] mb-1">Discord Community Server</label>
-                  <input
-                    type="url"
-                    value={formData.socialLinks.discord}
-                    onChange={(e) =>
-                      setFormData({
-                        ...formData,
-                        socialLinks: { ...formData.socialLinks, discord: e.target.value },
-                      })
-                    }
-                    placeholder="https://discord.gg/..."
-                    className="w-full px-4 py-2.5 rounded-2xl border border-black/[0.08] bg-black/[0.02] focus:bg-white focus:ring-2 focus:ring-[#0071E3]/20"
-                  />
-                </div>
-
-                <div>
-                  <label className="block font-bold text-[#1D1D1F] mb-1">YouTube Channel / Demos</label>
-                  <input
-                    type="url"
-                    value={formData.socialLinks.youtube}
-                    onChange={(e) =>
-                      setFormData({
-                        ...formData,
-                        socialLinks: { ...formData.socialLinks, youtube: e.target.value },
-                      })
-                    }
-                    placeholder="https://youtube.com/@yourchannel"
-                    className="w-full px-4 py-2.5 rounded-2xl border border-black/[0.08] bg-black/[0.02] focus:bg-white focus:ring-2 focus:ring-[#0071E3]/20"
-                  />
-                </div>
-
-                <div>
-                  <label className="block font-bold text-[#1D1D1F] mb-1">Engineering Blog / Substack</label>
-                  <input
-                    type="url"
-                    value={formData.socialLinks.blog}
-                    onChange={(e) =>
-                      setFormData({
-                        ...formData,
-                        socialLinks: { ...formData.socialLinks, blog: e.target.value },
-                      })
-                    }
-                    placeholder="https://blog.yourstartup.com"
-                    className="w-full px-4 py-2.5 rounded-2xl border border-black/[0.08] bg-black/[0.02] focus:bg-white focus:ring-2 focus:ring-[#0071E3]/20"
-                  />
-                </div>
+              <div>
+                <label className="block font-bold text-[#1D1D1F] mb-1">Demo / Product Video URL (YouTube / Loom)</label>
+                <input
+                  type="url"
+                  value={formData.demoVideoUrl}
+                  onChange={(e) => handleChange('demoVideoUrl', e.target.value)}
+                  placeholder="https://youtube.com/watch?v=... or https://loom.com/share/..."
+                  className="w-full px-4 py-2.5 rounded-2xl border border-black/[0.08] bg-black/[0.02] focus:bg-white focus:ring-2 focus:ring-[#0071E3]/20"
+                />
               </div>
             </div>
 
+            <div>
+              <label className="block font-bold text-[#1D1D1F] mb-1">Investor Pitch Deck Link (DocSend / Google Drive)</label>
+              <input
+                type="url"
+                value={formData.pitchDeckUrl}
+                onChange={(e) => handleChange('pitchDeckUrl', e.target.value)}
+                placeholder="https://docsend.com/view/..."
+                className="w-full px-4 py-2.5 rounded-2xl border border-black/[0.08] bg-black/[0.02] focus:bg-white focus:ring-2 focus:ring-[#0071E3]/20"
+              />
+            </div>
           </div>
         )}
 
-        {/* TAB 4: Tech Stack */}
+        {/* TAB 6: FOUNDERS & TEAM */}
+        {activeTab === 'team' && (
+          <div className="space-y-6 text-xs">
+            <div className="border-b border-black/[0.06] pb-3 flex items-center justify-between">
+              <div>
+                <h3 className="font-display font-bold text-base text-[#1D1D1F]">
+                  Founding Team & Leadership
+                </h3>
+                <p className="text-xs text-[#86868B]">
+                  Profiles of the core founders, their roles, alma maters, and LinkedIn links.
+                </p>
+              </div>
+              <span className="px-2.5 py-1 rounded-full bg-[#0071E3]/10 text-[#0071E3] font-bold text-xs">
+                {formData.founders.length} Documented
+              </span>
+            </div>
+
+            {/* Add Founder Form */}
+            <div className="p-4 rounded-2xl bg-black/[0.02] border border-black/[0.06] space-y-3">
+              <div className="font-bold text-[#1D1D1F] text-xs">Add Founder / Key Leader</div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <input
+                    type="text"
+                    placeholder="Full Name (e.g. Srinath Ravichandran)"
+                    value={newFounder.name || ''}
+                    onChange={(e) => setNewFounder({ ...newFounder, name: e.target.value })}
+                    className="w-full px-3 py-2 rounded-xl border border-black/[0.08] bg-white text-xs"
+                  />
+                </div>
+                <div>
+                  <input
+                    type="text"
+                    placeholder="Role Title (e.g. Co-Founder & CEO)"
+                    value={newFounder.role || ''}
+                    onChange={(e) => setNewFounder({ ...newFounder, role: e.target.value })}
+                    className="w-full px-3 py-2 rounded-xl border border-black/[0.08] bg-white text-xs"
+                  />
+                </div>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <input
+                    type="text"
+                    placeholder="Alma Mater (e.g. IIT Madras, CEG Guindy)"
+                    value={newFounder.education || ''}
+                    onChange={(e) => setNewFounder({ ...newFounder, education: e.target.value })}
+                    className="w-full px-3 py-2 rounded-xl border border-black/[0.08] bg-white text-xs"
+                  />
+                </div>
+                <div>
+                  <input
+                    type="url"
+                    placeholder="LinkedIn Profile URL"
+                    value={newFounder.linkedin || ''}
+                    onChange={(e) => setNewFounder({ ...newFounder, linkedin: e.target.value })}
+                    className="w-full px-3 py-2 rounded-xl border border-black/[0.08] bg-white text-xs"
+                  />
+                </div>
+              </div>
+              <button
+                type="button"
+                onClick={handleAddFounder}
+                className="px-4 py-2 bg-[#1D1D1F] hover:bg-black text-white font-semibold text-xs rounded-xl flex items-center gap-1.5 transition-all shadow-2xs"
+              >
+                <Plus className="w-3.5 h-3.5" />
+                <span>Add Founder Member</span>
+              </button>
+            </div>
+
+            {/* Founders List */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {formData.founders.map((f, idx) => (
+                <div key={idx} className="p-4 rounded-2xl bg-white border border-black/[0.06] flex items-start justify-between gap-3 shadow-2xs">
+                  <div className="space-y-1">
+                    <span className="font-bold text-xs text-[#1D1D1F] block">{f.name}</span>
+                    <span className="text-[11px] text-[#0071E3] font-semibold block">{f.role}</span>
+                    {f.education && (
+                      <span className="text-[10px] text-[#86868B] block">{f.education}</span>
+                    )}
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => handleRemoveFounder(idx)}
+                    className="p-1.5 rounded-lg text-rose-500 hover:bg-rose-50 transition-colors shrink-0"
+                  >
+                    <Trash2 className="w-4 h-4" />
+                  </button>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* TAB 7: TECH STACK */}
         {activeTab === 'tech' && (
           <div className="space-y-5 text-xs">
-            <h3 className="font-display font-bold text-base text-[#1D1D1F] border-b border-black/[0.06] pb-3">
-              Engineering Architecture & Technology Stack
-            </h3>
+            <div className="border-b border-black/[0.06] pb-3">
+              <h3 className="font-display font-bold text-base text-[#1D1D1F]">
+                Engineering & Technology Stack
+              </h3>
+              <p className="text-xs text-[#86868B] mt-0.5">
+                Frameworks, programming languages, proprietary hardware tools, and cloud infrastructure.
+              </p>
+            </div>
 
-            <div className="flex items-center gap-2">
+            <div className="flex gap-2">
               <input
                 type="text"
+                placeholder="Add technology tag (e.g. Additive Manufacturing, RTOS, PyTorch, Rust, AWS...)"
                 value={newTech}
                 onChange={(e) => setNewTech(e.target.value)}
-                placeholder="e.g. PyTorch, Rust, 3D Printing, React, SolidWorks..."
-                className="flex-1 px-4 py-2.5 rounded-2xl border border-black/[0.08] bg-black/[0.02] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#0071E3]/20"
+                onKeyDown={(e) => e.key === 'Enter' && (e.preventDefault(), handleAddTech())}
+                className="flex-1 px-4 py-2.5 rounded-2xl border border-black/[0.08] bg-black/[0.02] focus:bg-white text-xs"
               />
               <button
                 type="button"
                 onClick={handleAddTech}
-                className="px-5 py-2.5 bg-[#0071E3] hover:bg-[#0077ED] text-white font-bold rounded-2xl shadow-apple-sm transition-all apple-press flex items-center gap-1.5"
+                className="px-5 py-2.5 bg-[#1D1D1F] hover:bg-black text-white font-semibold text-xs rounded-2xl shadow-apple-sm transition-all"
               >
-                <Plus className="w-3.5 h-3.5" />
-                <span>Add Tech</span>
+                Add Tag
               </button>
             </div>
 
             <div className="flex flex-wrap gap-2 pt-2">
-              {formData.techStack.map((tech) => (
+              {formData.techStack.map((tech, idx) => (
                 <span
-                  key={tech}
-                  className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-black/[0.04] border border-black/[0.06] font-bold text-[#1D1D1F]"
+                  key={idx}
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-black/[0.04] text-[#1D1D1F] font-semibold text-xs border border-black/[0.05]"
                 >
                   <span>{tech}</span>
                   <button
                     type="button"
                     onClick={() => handleRemoveTech(tech)}
-                    className="text-[#86868B] hover:text-rose-600 ml-1"
+                    className="text-[#86868B] hover:text-rose-600 transition-colors"
                   >
-                    <Trash2 className="w-3 h-3" />
+                    &times;
                   </button>
                 </span>
               ))}
@@ -910,144 +1518,43 @@ export const FounderEditProfile: React.FC = () => {
           </div>
         )}
 
-        {/* TAB 5: Leadership & Key Team Members */}
-        {activeTab === 'team' && (
-          <div className="space-y-6 text-xs">
-            <div className="flex items-center justify-between border-b border-black/[0.06] pb-3">
-              <div>
-                <h3 className="font-display font-bold text-base text-[#1D1D1F]">
-                  Leadership & Key Team Members
-                </h3>
-                <p className="text-xs text-[#86868B] mt-0.5">Showcase founders, executive officers, and scientific advisors.</p>
-              </div>
-              <span className="px-2.5 py-0.5 rounded-full bg-[#0071E3]/10 text-[#0071E3] font-bold text-xs">
-                {formData.founders.length} Members
-              </span>
-            </div>
-
-            {/* Add Team Member Card Box */}
-            <div className="p-5 rounded-3xl bg-black/[0.02] border border-black/[0.06] space-y-3">
-              <h4 className="font-bold text-[#1D1D1F] text-xs flex items-center gap-1.5">
-                <Users className="w-3.5 h-3.5 text-[#0071E3]" />
-                <span>Add New Team Member / Founder</span>
-              </h4>
-              
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <input
-                  type="text"
-                  placeholder="Full Name *"
-                  value={newFounder.name}
-                  onChange={(e) => setNewFounder({ ...newFounder, name: e.target.value })}
-                  className="px-3.5 py-2 rounded-2xl border border-black/[0.08] bg-white focus:outline-none focus:ring-2 focus:ring-[#0071E3]/20"
-                />
-                <input
-                  type="text"
-                  placeholder="Role (e.g. Co-Founder & CEO) *"
-                  value={newFounder.role}
-                  onChange={(e) => setNewFounder({ ...newFounder, role: e.target.value })}
-                  className="px-3.5 py-2 rounded-2xl border border-black/[0.08] bg-white focus:outline-none focus:ring-2 focus:ring-[#0071E3]/20"
-                />
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <input
-                  type="url"
-                  placeholder="LinkedIn Profile URL"
-                  value={newFounder.linkedin}
-                  onChange={(e) => setNewFounder({ ...newFounder, linkedin: e.target.value })}
-                  className="px-3.5 py-2 rounded-2xl border border-black/[0.08] bg-white focus:outline-none focus:ring-2 focus:ring-[#0071E3]/20"
-                />
-                <input
-                  type="text"
-                  placeholder="Education / Alma Mater (e.g. IIT Madras)"
-                  value={newFounder.education}
-                  onChange={(e) => setNewFounder({ ...newFounder, education: e.target.value })}
-                  className="px-3.5 py-2 rounded-2xl border border-black/[0.08] bg-white focus:outline-none focus:ring-2 focus:ring-[#0071E3]/20"
-                />
-              </div>
-
-              <textarea
-                placeholder="Short biographical summary / background..."
-                rows={2}
-                value={newFounder.bio}
-                onChange={(e) => setNewFounder({ ...newFounder, bio: e.target.value })}
-                className="w-full px-3.5 py-2 rounded-2xl border border-black/[0.08] bg-white focus:outline-none focus:ring-2 focus:ring-[#0071E3]/20 leading-relaxed"
-              />
-
-              <button
-                type="button"
-                onClick={handleAddFounder}
-                className="px-5 py-2.5 bg-[#0071E3] hover:bg-[#0077ED] text-white font-bold rounded-2xl shadow-apple-sm transition-all apple-press flex items-center gap-1.5"
-              >
-                <Plus className="w-3.5 h-3.5" />
-                <span>+ Add Team Member</span>
-              </button>
-            </div>
-
-            {/* Existing Founders List */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              {formData.founders.map((f, i) => (
-                <div key={i} className="p-4 rounded-2xl bg-white border border-black/[0.08] shadow-apple-sm space-y-1.5 relative">
-                  <button
-                    type="button"
-                    onClick={() => handleRemoveFounder(i)}
-                    className="absolute top-3 right-3 text-[#86868B] hover:text-rose-600 p-1"
-                    title="Remove member"
-                  >
-                    <Trash2 className="w-3.5 h-3.5" />
-                  </button>
-                  <p className="font-bold text-[#1D1D1F] text-sm">{f.name}</p>
-                  <p className="text-[#0071E3] font-bold text-xs">{f.role}</p>
-                  {f.education && <p className="text-[#86868B] text-[11px]">{f.education}</p>}
-                  {f.bio && <p className="text-[#86868B] text-[11px] line-clamp-2 mt-1">{f.bio}</p>}
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* TAB 6: Media & Product Screenshots */}
+        {/* TAB 8: GALLERY & MEDIA */}
         {activeTab === 'gallery' && (
-          <div className="space-y-6 text-xs">
-            <div className="flex items-center justify-between border-b border-black/[0.06] pb-3">
-              <div>
-                <h3 className="font-display font-bold text-base text-[#1D1D1F]">
-                  Media & Product Screenshots
-                </h3>
-                <p className="text-xs text-[#86868B] mt-0.5">Add high-resolution product visuals, facility photos, and patents.</p>
-              </div>
-              <span className="px-2.5 py-0.5 rounded-full bg-[#0071E3]/10 text-[#0071E3] font-bold text-xs">
-                {formData.galleryImages.length} Images
-              </span>
+          <div className="space-y-5 text-xs">
+            <div className="border-b border-black/[0.06] pb-3">
+              <h3 className="font-display font-bold text-base text-[#1D1D1F]">
+                Product Photos & Factory Gallery
+              </h3>
+              <p className="text-xs text-[#86868B] mt-0.5">
+                High-resolution imagery of your hardware, cleanrooms, office corridors, or app screenshots.
+              </p>
             </div>
 
-            <div className="flex items-center gap-2">
+            <div className="flex gap-2">
               <input
                 type="url"
+                placeholder="Paste high-res image URL (https://images.unsplash.com/...)"
                 value={newGalleryUrl}
                 onChange={(e) => setNewGalleryUrl(e.target.value)}
-                placeholder="https://.../product-screenshot.png"
-                className="flex-1 px-4 py-2.5 rounded-2xl border border-black/[0.08] bg-black/[0.02] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#0071E3]/20"
+                className="flex-1 px-4 py-2.5 rounded-2xl border border-black/[0.08] bg-black/[0.02] focus:bg-white text-xs"
               />
               <button
                 type="button"
                 onClick={handleAddGalleryImage}
-                className="px-5 py-2.5 bg-[#0071E3] hover:bg-[#0077ED] text-white font-bold rounded-2xl shadow-apple-sm transition-all apple-press flex items-center gap-1.5 shrink-0"
+                className="px-5 py-2.5 bg-[#1D1D1F] hover:bg-black text-white font-semibold text-xs rounded-2xl shadow-apple-sm transition-all"
               >
-                <Plus className="w-3.5 h-3.5" />
-                <span>+ Add Screenshot / Media</span>
+                Add Photo
               </button>
             </div>
 
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 pt-2">
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-2">
               {formData.galleryImages.map((img, idx) => (
-                <div key={idx} className="relative rounded-2xl overflow-hidden aspect-video bg-slate-100 border border-black/[0.08] shadow-apple-sm group">
-                  <img src={img} alt="Product" className="w-full h-full object-cover" />
+                <div key={idx} className="relative group rounded-2xl overflow-hidden border border-black/[0.08] aspect-video bg-slate-100">
+                  <img src={img} alt={`Gallery ${idx}`} className="w-full h-full object-cover" />
                   <button
                     type="button"
                     onClick={() => handleRemoveGalleryImage(idx)}
-                    className="absolute top-2 right-2 p-1.5 bg-black/60 text-white rounded-full hover:bg-rose-600 transition-colors"
-                    title="Remove image"
+                    className="absolute top-2 right-2 p-1.5 rounded-xl bg-black/70 text-white hover:bg-rose-600 transition-colors"
                   >
                     <Trash2 className="w-3.5 h-3.5" />
                   </button>
@@ -1057,247 +1564,197 @@ export const FounderEditProfile: React.FC = () => {
           </div>
         )}
 
-        {/* TAB 7: Company Milestones & News Releases */}
+        {/* TAB 9: COMPANY POSTS */}
         {activeTab === 'posts' && (
-          <div className="space-y-6 text-xs">
-            <div className="flex items-center justify-between border-b border-black/[0.06] pb-3">
-              <div>
-                <h3 className="font-display font-bold text-base text-[#1D1D1F]">
-                  Company Milestones & News Releases
-                </h3>
-                <p className="text-xs text-[#86868B] mt-0.5">Post funding announcements, product launches, and regulatory approvals.</p>
-              </div>
-              <span className="px-2.5 py-0.5 rounded-full bg-[#0071E3]/10 text-[#0071E3] font-bold text-xs">
-                {formData.posts.length} Milestones
-              </span>
-            </div>
-
-            {/* Add Milestone Card Box */}
-            <div className="p-5 rounded-3xl bg-black/[0.02] border border-black/[0.06] space-y-3">
-              <h4 className="font-bold text-[#1D1D1F] text-xs flex items-center gap-1.5">
-                <MessageSquare className="w-3.5 h-3.5 text-[#0071E3]" />
-                <span>Publish New Milestone / News Release</span>
-              </h4>
-
-              <input
-                type="text"
-                placeholder="Update Title (e.g. Closed $20M Series B Funding) *"
-                value={newPost.title}
-                onChange={(e) => setNewPost({ ...newPost, title: e.target.value })}
-                className="w-full px-3.5 py-2 rounded-2xl border border-black/[0.08] bg-white focus:outline-none focus:ring-2 focus:ring-[#0071E3]/20"
-              />
-
-              <textarea
-                placeholder="Content & details of this achievement or press release..."
-                rows={3}
-                value={newPost.content}
-                onChange={(e) => setNewPost({ ...newPost, content: e.target.value })}
-                className="w-full px-3.5 py-2 rounded-2xl border border-black/[0.08] bg-white focus:outline-none focus:ring-2 focus:ring-[#0071E3]/20 leading-relaxed"
-              />
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <input
-                  type="url"
-                  placeholder="External Press Link URL"
-                  value={newPost.linkUrl}
-                  onChange={(e) => setNewPost({ ...newPost, linkUrl: e.target.value })}
-                  className="px-3.5 py-2 rounded-2xl border border-black/[0.08] bg-white focus:outline-none focus:ring-2 focus:ring-[#0071E3]/20"
-                />
-                <input
-                  type="text"
-                  placeholder="Category Tag (e.g. Funding, Product, Launch, Award)"
-                  value={newPost.tag}
-                  onChange={(e) => setNewPost({ ...newPost, tag: e.target.value })}
-                  className="px-3.5 py-2 rounded-2xl border border-black/[0.08] bg-white focus:outline-none focus:ring-2 focus:ring-[#0071E3]/20"
-                />
-              </div>
-
-              <button
-                type="button"
-                onClick={handleAddPost}
-                className="px-5 py-2.5 bg-[#0071E3] hover:bg-[#0077ED] text-white font-bold rounded-2xl shadow-apple-sm transition-all apple-press flex items-center gap-1.5"
-              >
-                <Plus className="w-3.5 h-3.5" />
-                <span>+ Add Company Milestone / News</span>
-              </button>
-            </div>
-
-            {/* Existing Posts List */}
-            <div className="space-y-3">
-              {formData.posts.map((post) => (
-                <div key={post.id} className="p-4 rounded-2xl bg-white border border-black/[0.08] shadow-apple-sm space-y-1.5 relative">
-                  <button
-                    type="button"
-                    onClick={() => handleRemovePost(post.id)}
-                    className="absolute top-3 right-3 text-[#86868B] hover:text-rose-600 p-1"
-                    title="Remove milestone"
-                  >
-                    <Trash2 className="w-3.5 h-3.5" />
-                  </button>
-                  <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-[#0071E3]/10 text-[#0071E3]">
-                    {post.tag}
-                  </span>
-                  <h4 className="font-bold text-[#1D1D1F] text-sm">{post.title}</h4>
-                  <p className="text-[#86868B] text-xs leading-relaxed">{post.content}</p>
-                  {post.linkUrl && (
-                    <a
-                      href={post.linkUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-[#0071E3] font-bold text-[11px] flex items-center gap-1 hover:underline pt-1"
-                    >
-                      <span>Read Press Article</span>
-                      <ExternalLink className="w-3 h-3" />
-                    </a>
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* TAB 8: Custom Sections */}
-        {activeTab === 'sections' && (
-          <div className="space-y-6 text-xs">
-            <div className="flex items-center justify-between border-b border-black/[0.06] pb-3">
-              <div>
-                <h3 className="font-display font-bold text-base text-[#1D1D1F]">
-                  Custom Content Modules
-                </h3>
-                <p className="text-xs text-[#86868B] mt-0.5">Create custom profile sections (e.g. Patent Portfolio, Research Grants, ESG).</p>
-              </div>
-              <span className="px-2.5 py-0.5 rounded-full bg-[#0071E3]/10 text-[#0071E3] font-bold text-xs">
-                {formData.customSections.length} Sections
-              </span>
-            </div>
-
-            <div className="p-5 rounded-3xl bg-black/[0.02] border border-black/[0.06] space-y-3">
-              <h4 className="font-bold text-[#1D1D1F] text-xs">Add Custom Section</h4>
-              <input
-                type="text"
-                placeholder="Section Title (e.g. Patent Portfolio, ESG Impact) *"
-                value={newSection.title}
-                onChange={(e) => setNewSection({ ...newSection, title: e.target.value })}
-                className="w-full px-3.5 py-2 rounded-2xl border border-black/[0.08] bg-white focus:outline-none focus:ring-2 focus:ring-[#0071E3]/20"
-              />
-              <textarea
-                placeholder="Description / detailed content for this section..."
-                rows={3}
-                value={newSection.content}
-                onChange={(e) => setNewSection({ ...newSection, content: e.target.value })}
-                className="w-full px-3.5 py-2 rounded-2xl border border-black/[0.08] bg-white focus:outline-none focus:ring-2 focus:ring-[#0071E3]/20 leading-relaxed"
-              />
-              <button
-                type="button"
-                onClick={handleAddCustomSection}
-                className="px-5 py-2.5 bg-[#0071E3] hover:bg-[#0077ED] text-white font-bold rounded-2xl shadow-apple-sm transition-all apple-press flex items-center gap-1.5"
-              >
-                <Plus className="w-3.5 h-3.5" />
-                <span>+ Add Custom Section</span>
-              </button>
-            </div>
-
-            <div className="space-y-3">
-              {formData.customSections.map((sec) => (
-                <div key={sec.id} className="p-4 rounded-2xl bg-white border border-black/[0.08] shadow-apple-sm space-y-1.5 relative">
-                  <button
-                    type="button"
-                    onClick={() => handleRemoveCustomSection(sec.id)}
-                    className="absolute top-3 right-3 text-[#86868B] hover:text-rose-600 p-1"
-                    title="Remove section"
-                  >
-                    <Trash2 className="w-3.5 h-3.5" />
-                  </button>
-                  <h4 className="font-bold text-[#1D1D1F] text-sm">{sec.title}</h4>
-                  <p className="text-[#86868B] text-xs leading-relaxed">{sec.content}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* TAB 9: Transfer Company Ownership */}
-        {activeTab === 'transfer' && (
-          <div className="space-y-6 text-xs">
+          <div className="space-y-5 text-xs">
             <div className="border-b border-black/[0.06] pb-3">
-              <h3 className="font-display font-bold text-base text-[#1D1D1F] flex items-center gap-2 text-rose-700">
-                <UserCheck className="w-4 h-4 text-rose-600" />
-                <span>Transfer Company Ownership</span>
+              <h3 className="font-display font-bold text-base text-[#1D1D1F]">
+                Founder Updates & Ecosystem Posts
               </h3>
               <p className="text-xs text-[#86868B] mt-0.5">
-                Hand over management rights of <strong>{formData.name}</strong> to a verified co-founder or new company administrator.
+                Publish milestones, hiring notices, and product updates on your company profile stream.
               </p>
             </div>
 
-            <div className="p-5 rounded-3xl bg-rose-50/60 border border-rose-200/80 space-y-4">
-              <div className="flex items-start gap-3">
-                <div className="p-2 rounded-2xl bg-rose-100 text-rose-700 shrink-0">
-                  <AlertCircle className="w-4 h-4" />
-                </div>
-                <div className="space-y-1">
-                  <h4 className="font-bold text-xs text-rose-900">Transfer Guidelines & Safeguards</h4>
-                  <p className="text-[11px] text-rose-800 leading-relaxed">
-                    Transferring company ownership immediately grants the recipient full management rights over this profile, team members, metrics, and hiring status. The recipient must already have a registered account on the platform.
-                  </p>
-                </div>
+            {/* Add Post Form */}
+            <div className="p-4 rounded-2xl bg-black/[0.02] border border-black/[0.06] space-y-3">
+              <div className="font-bold text-[#1D1D1F]">Create New Update</div>
+              <input
+                type="text"
+                placeholder="Post Headline (e.g. Agnibaan Maiden Flight Mission Completed)"
+                value={newPost.title}
+                onChange={(e) => setNewPost({ ...newPost, title: e.target.value })}
+                className="w-full px-3 py-2 rounded-xl border border-black/[0.08] bg-white text-xs"
+              />
+              <textarea
+                rows={3}
+                placeholder="Full announcement content..."
+                value={newPost.content}
+                onChange={(e) => setNewPost({ ...newPost, content: e.target.value })}
+                className="w-full px-3 py-2 rounded-xl border border-black/[0.08] bg-white text-xs leading-relaxed"
+              />
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <input
+                  type="text"
+                  placeholder="Category Tag (e.g. Mission Milestone, Hiring Update)"
+                  value={newPost.tag}
+                  onChange={(e) => setNewPost({ ...newPost, tag: e.target.value })}
+                  className="w-full px-3 py-2 rounded-xl border border-black/[0.08] bg-white text-xs"
+                />
+                <input
+                  type="url"
+                  placeholder="External Announcement URL (Optional)"
+                  value={newPost.linkUrl}
+                  onChange={(e) => setNewPost({ ...newPost, linkUrl: e.target.value })}
+                  className="w-full px-3 py-2 rounded-xl border border-black/[0.08] bg-white text-xs"
+                />
               </div>
-
-              <div className="space-y-2 pt-2 border-t border-rose-200/60">
-                <label className="block font-bold text-[#1D1D1F]">
-                  Target Recipient Email Address *
-                </label>
-                <div className="flex items-center gap-3">
-                  <input
-                    type="email"
-                    value={targetTransferEmail}
-                    onChange={(e) => setTargetTransferEmail(e.target.value)}
-                    placeholder="cofounder@yourcompany.com"
-                    className="flex-1 px-4 py-2.5 rounded-2xl border border-black/[0.08] bg-white focus:outline-none focus:ring-2 focus:ring-rose-500/20"
-                  />
-                  <button
-                    type="button"
-                    onClick={handleTransferOwnership}
-                    disabled={transferLoading || !targetTransferEmail.trim()}
-                    className="px-6 py-2.5 rounded-2xl bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs shadow-apple-sm transition-all apple-press flex items-center gap-1.5 shrink-0 disabled:opacity-50"
-                  >
-                    {transferLoading ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Send className="w-3.5 h-3.5" />}
-                    <span>Confirm & Transfer</span>
-                  </button>
-                </div>
-              </div>
+              <button
+                type="button"
+                onClick={handleAddPost}
+                className="px-4 py-2 bg-[#1D1D1F] hover:bg-black text-white font-semibold text-xs rounded-xl flex items-center gap-1.5 shadow-2xs"
+              >
+                <Plus className="w-3.5 h-3.5" />
+                <span>Publish Update</span>
+              </button>
             </div>
 
+            {/* Posts List */}
+            <div className="space-y-3">
+              {(formData.posts || []).map((p) => (
+                <div key={p.id} className="p-4 rounded-2xl bg-white border border-black/[0.06] space-y-2 shadow-2xs">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <span className="font-bold text-xs text-[#1D1D1F]">{p.title}</span>
+                      {p.tag && (
+                        <span className="px-2 py-0.5 rounded-md bg-[#0071E3]/10 text-[#0071E3] font-bold text-[10px]">
+                          {p.tag}
+                        </span>
+                      )}
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => handleRemovePost(p.id)}
+                      className="p-1 rounded-lg text-rose-500 hover:bg-rose-50"
+                    >
+                      <Trash2 className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
+                  <p className="text-[#86868B] text-[11px] leading-relaxed">{p.content}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* TAB 10: CUSTOM SECTIONS */}
+        {activeTab === 'sections' && (
+          <div className="space-y-5 text-xs">
+            <div className="border-b border-black/[0.06] pb-3">
+              <h3 className="font-display font-bold text-base text-[#1D1D1F]">
+                Dynamic Custom Profile Sections
+              </h3>
+              <p className="text-xs text-[#86868B] mt-0.5">
+                Add unlimited custom content blocks (e.g. ESG Metrics, Patent Specifications, R&D Labs).
+              </p>
+            </div>
+
+            {/* Add Section Form */}
+            <div className="p-4 rounded-2xl bg-black/[0.02] border border-black/[0.06] space-y-3">
+              <div className="font-bold text-[#1D1D1F]">Add Custom Block</div>
+              <input
+                type="text"
+                placeholder="Section Title (e.g. Patented Technology & Innovation)"
+                value={newSection.title || ''}
+                onChange={(e) => setNewSection({ ...newSection, title: e.target.value })}
+                className="w-full px-3 py-2 rounded-xl border border-black/[0.08] bg-white text-xs"
+              />
+              <textarea
+                rows={3}
+                placeholder="Section Content / Narrative description..."
+                value={newSection.content || ''}
+                onChange={(e) => setNewSection({ ...newSection, content: e.target.value })}
+                className="w-full px-3 py-2 rounded-xl border border-black/[0.08] bg-white text-xs leading-relaxed"
+              />
+              <button
+                type="button"
+                onClick={handleAddSection}
+                className="px-4 py-2 bg-[#1D1D1F] hover:bg-black text-white font-semibold text-xs rounded-xl flex items-center gap-1.5 shadow-2xs"
+              >
+                <Plus className="w-3.5 h-3.5" />
+                <span>Add Custom Section</span>
+              </button>
+            </div>
+
+            {/* Sections List */}
+            <div className="space-y-3">
+              {formData.customSections.map((sec) => (
+                <div key={sec.id} className="p-4 rounded-2xl bg-white border border-black/[0.06] space-y-2 shadow-2xs">
+                  <div className="flex items-center justify-between">
+                    <span className="font-bold text-xs text-[#1D1D1F]">{sec.title}</span>
+                    <button
+                      type="button"
+                      onClick={() => handleRemoveSection(sec.id)}
+                      className="p-1 rounded-lg text-rose-500 hover:bg-rose-50"
+                    >
+                      <Trash2 className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
+                  <p className="text-[#86868B] text-[11px] leading-relaxed">{sec.content}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* TAB 11: TRANSFER OWNERSHIP */}
+        {activeTab === 'transfer' && (
+          <div className="space-y-5 text-xs max-w-xl">
+            <div className="border-b border-black/[0.06] pb-3">
+              <h3 className="font-display font-bold text-base text-[#1D1D1F]">
+                Transfer Profile Ownership
+              </h3>
+              <p className="text-xs text-[#86868B] mt-0.5">
+                Transfer management access of this startup entity to a co-founder or corporate communications team.
+              </p>
+            </div>
+
+            {transferSuccess && (
+              <div className="p-4 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs flex items-center gap-2">
+                <CheckCircle2 className="w-4 h-4 shrink-0" />
+                <span>{transferSuccess}</span>
+              </div>
+            )}
+
+            <form onSubmit={handleTransferOwnership} className="space-y-4">
+              <div>
+                <label className="block font-bold text-[#1D1D1F] mb-1">Recipient Account Email</label>
+                <input
+                  type="email"
+                  required
+                  placeholder="cofounder@yourcompany.com"
+                  value={targetTransferEmail}
+                  onChange={(e) => setTargetTransferEmail(e.target.value)}
+                  className="w-full px-4 py-2.5 rounded-2xl border border-black/[0.08] bg-black/[0.02] focus:bg-white text-xs"
+                />
+              </div>
+
+              <div className="p-4 rounded-2xl bg-amber-50 border border-amber-200 text-amber-800 text-[11px] leading-relaxed">
+                <strong>Important Notice:</strong> Transferring ownership will immediately grant full editing and publishing rights to the recipient account.
+              </div>
+
+              <button
+                type="submit"
+                disabled={transferLoading}
+                className="px-5 py-2.5 bg-rose-600 hover:bg-rose-700 text-white font-semibold text-xs rounded-full shadow-apple-sm transition-all disabled:opacity-50"
+              >
+                {transferLoading ? 'Transferring Ownership...' : 'Execute Ownership Transfer'}
+              </button>
+            </form>
           </div>
         )}
 
       </div>
-
-      {/* Sticky Bottom Floating Action Bar (Always Visible While Scrolling) */}
-      <div className="sticky bottom-6 z-40 bg-white/95 backdrop-blur-2xl p-4 rounded-3xl border border-black/[0.08] shadow-apple-card flex items-center justify-between gap-4">
-        <div className="flex items-center gap-2 text-xs">
-          <span className="w-2.5 h-2.5 rounded-full bg-[#34C759] animate-pulse" />
-          <span className="font-bold text-[#1D1D1F]">Founder Studio Editor</span>
-          <span className="text-[#86868B] hidden sm:inline">• Unsaved changes will publish directly to public profile</span>
-        </div>
-
-        <div className="flex items-center gap-3">
-          <Link
-            to="/founder/dashboard"
-            className="px-4 py-2.5 rounded-2xl border border-black/[0.08] bg-white text-xs font-semibold text-[#1D1D1F] hover:bg-slate-50 transition-all apple-press"
-          >
-            Cancel
-          </Link>
-          <button
-            type="submit"
-            disabled={saving}
-            className="px-6 py-2.5 rounded-2xl bg-[#0071E3] hover:bg-[#0077ED] text-white font-bold text-xs transition-all shadow-md flex items-center gap-2 apple-press border border-[#0071E3]"
-          >
-            {saving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
-            <span>Save & Publish Changes</span>
-          </button>
-        </div>
-      </div>
-
-    </form>
+    </div>
   );
 };

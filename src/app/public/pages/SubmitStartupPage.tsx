@@ -13,12 +13,13 @@ import {
   DollarSign,
   Globe,
   FileText,
-  Compass,
   Navigation,
   Layers,
   Sparkles,
   Phone,
-  Mail
+  Mail,
+  Zap,
+  Edit3
 } from 'lucide-react';
 import { useAuth } from '../../../context/AuthContext';
 import { District, Sector } from '../../../types';
@@ -33,36 +34,28 @@ export const SubmitStartupPage: React.FC = () => {
   const [submitted, setSubmitted] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
-  // Form State
+  // Streamlined Form State (Basic Details to Join)
   const [formData, setFormData] = useState({
-    // Step 1: Basic Info
+    // Step 1: Venture Identity & District
     name: '',
     website: '',
     tagline: '',
-    description: '',
-    linkedin: '',
-    
-    // Step 2: Choose Location & Map Coordinates
     district: 'Chennai',
     city: '',
-    address: '',
-    pincode: '',
-    latitude: '13.0827',
-    longitude: '80.2707',
-
-    // Step 3: Sectors & Tech
     sectors: ['SaaS'] as string[],
     stage: 'Seed',
     fundingType: 'Bootstrapped',
-    foundedYear: 2024,
     teamSize: '1-10',
-
-    // Step 4: Founder & Verification Details
+    foundedYear: new Date().getFullYear(),
+    latitude: '13.0827',
+    longitude: '80.2707',
+    
+    // Step 2: Founder / Submitter
     founderName: user?.name || '',
     founderEmail: user?.email || '',
     founderPhone: '',
+    founderRole: 'Founder / Co-Founder',
     founderLinkedin: '',
-    sourceUrl: '',
   });
 
   useEffect(() => {
@@ -115,29 +108,19 @@ export const SubmitStartupPage: React.FC = () => {
         setError('One-line pitch / tagline is required');
         return false;
       }
-      return true;
-    }
-    if (currentStep === 2) {
-      if (!formData.district) {
-        setError('Please select a Tamil Nadu district');
-        return false;
-      }
       if (!formData.city.trim()) {
         setError('City / locality / tech corridor is required');
         return false;
       }
-      return true;
-    }
-    if (currentStep === 3) {
       if (formData.sectors.length === 0) {
         setError('Select at least one industry sector');
         return false;
       }
       return true;
     }
-    if (currentStep === 4) {
+    if (currentStep === 2) {
       if (!formData.founderName.trim()) {
-        setError('Founder name is required');
+        setError('Founder / Submitter name is required');
         return false;
       }
       if (!formData.founderEmail.trim()) {
@@ -151,7 +134,7 @@ export const SubmitStartupPage: React.FC = () => {
 
   const handleNext = () => {
     if (validateStep(step)) {
-      setStep((s) => Math.min(5, s + 1));
+      setStep((s) => Math.min(3, s + 1));
     }
   };
 
@@ -163,7 +146,10 @@ export const SubmitStartupPage: React.FC = () => {
       const res = await fetch('/api/submissions', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          ...formData,
+          description: formData.tagline,
+        }),
       });
 
       const data = await res.json();
@@ -180,11 +166,9 @@ export const SubmitStartupPage: React.FC = () => {
   };
 
   const stepsHeader = [
-    { num: 1, label: 'Identity', icon: Building2 },
-    { num: 2, label: 'Choose Location', icon: MapPin },
-    { num: 3, label: 'Sectors & Stage', icon: Layers },
-    { num: 4, label: 'Founder & Team', icon: Users },
-    { num: 5, label: 'Review & Confirm', icon: ShieldCheck },
+    { num: 1, label: 'Venture & Hub', icon: Building2 },
+    { num: 2, label: 'Founder Access', icon: Users },
+    { num: 3, label: 'Confirm & Join', icon: ShieldCheck },
   ];
 
   if (submitted) {
@@ -196,16 +180,16 @@ export const SubmitStartupPage: React.FC = () => {
         
         <div className="space-y-2">
           <h1 className="text-2xl sm:text-3xl font-extrabold font-display text-[#1D1D1F]">
-            Startup Submitted for Verification!
+            Venture Registered Successfully
           </h1>
           <p className="text-xs sm:text-sm text-[#86868B] max-w-lg mx-auto leading-relaxed">
-            Thank you for listing <strong>{formData.name}</strong>. Your submission is now in the administrative review queue. Once approved, it will be published to the interactive Tamil Nadu map with verified badges.
+            <strong>{formData.name}</strong> has been submitted. You can now access your Founder Dashboard to enrich your profile with milestones, client logos, awards, and verified business metrics.
           </p>
         </div>
 
         <div className="p-6 bg-white rounded-3xl border border-black/[0.08] max-w-md mx-auto text-left text-xs space-y-2.5 text-[#86868B] shadow-apple-card">
           <div className="flex justify-between border-b border-black/[0.05] pb-2">
-            <span>Startup Name:</span>
+            <span>Startup:</span>
             <span className="font-bold text-[#1D1D1F]">{formData.name}</span>
           </div>
           <div className="flex justify-between border-b border-black/[0.05] pb-2">
@@ -217,50 +201,25 @@ export const SubmitStartupPage: React.FC = () => {
             <span className="font-bold text-[#0071E3]">{formData.sectors.join(', ')}</span>
           </div>
           <div className="flex justify-between">
-            <span>Review Status:</span>
-            <span className="font-bold text-amber-600">PENDING_ADMIN_REVIEW</span>
+            <span>Status:</span>
+            <span className="font-bold text-[#34C759]">REGISTERED · PENDING_REVIEW</span>
           </div>
         </div>
 
-        <div className="pt-4 flex items-center justify-center gap-3">
+        <div className="pt-4 flex flex-wrap items-center justify-center gap-3">
+          <Link
+            to="/founder"
+            className="px-6 py-2.5 bg-[#0071E3] hover:bg-[#0077ED] text-white font-bold text-xs rounded-full shadow-apple-sm apple-press flex items-center gap-1.5"
+          >
+            <Edit3 className="w-3.5 h-3.5" />
+            <span>Open Founder Dashboard</span>
+          </Link>
           <Link
             to="/startups"
-            className="px-6 py-2.5 bg-[#1D1D1F] hover:bg-black text-white font-bold text-xs rounded-full shadow-apple-sm apple-press"
+            className="px-6 py-2.5 bg-white hover:bg-slate-50 text-[#1D1D1F] font-bold text-xs rounded-full border border-black/[0.08] shadow-2xs apple-press"
           >
             Explore Directory
           </Link>
-          <button
-            onClick={() => {
-              setSubmitted(false);
-              setStep(1);
-              setFormData({
-                name: '',
-                website: '',
-                tagline: '',
-                description: '',
-                linkedin: '',
-                district: 'Chennai',
-                city: '',
-                address: '',
-                pincode: '',
-                latitude: '13.0827',
-                longitude: '80.2707',
-                sectors: ['SaaS'],
-                founderName: user?.name || '',
-                founderEmail: user?.email || '',
-                founderPhone: '',
-                founderLinkedin: '',
-                foundedYear: 2024,
-                stage: 'Seed',
-                fundingType: 'Bootstrapped',
-                teamSize: '1-10',
-                sourceUrl: '',
-              });
-            }}
-            className="px-6 py-2.5 bg-white hover:bg-slate-50 text-[#1D1D1F] font-bold text-xs rounded-full border border-black/[0.08] shadow-2xs apple-press"
-          >
-            Submit Another Startup
-          </button>
         </div>
       </div>
     );
@@ -272,19 +231,19 @@ export const SubmitStartupPage: React.FC = () => {
       {/* Header */}
       <div className="text-center space-y-2">
         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-black/[0.08] text-xs font-semibold text-[#0071E3] shadow-apple-sm">
-          <Sparkles className="w-3.5 h-3.5" />
-          <span>Tamil Nadu Innovation Directory</span>
+          <Zap className="w-3.5 h-3.5" />
+          <span>Quick 45-Second Onboarding</span>
         </div>
         <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold font-display text-[#1D1D1F] tracking-tight">
-          List Your Venture
+          Join the Tamil Nadu Startup Map
         </h1>
-        <p className="text-xs sm:text-sm text-[#86868B] max-w-xl mx-auto">
-          Get verified, connect with regional incubators, and gain spatial visibility across all 38 districts of Tamil Nadu.
+        <p className="text-xs sm:text-sm text-[#86868B] max-w-xl mx-auto leading-relaxed">
+          Provide basic details to get mapped immediately. You can complete your full business model, milestones, client logos, and funding cap table anytime in your Founder Dashboard.
         </p>
       </div>
 
-      {/* 5-Step Stepper Bar */}
-      <div className="grid grid-cols-5 gap-2 p-2 bg-white/80 backdrop-blur-xl rounded-2xl border border-black/[0.07] shadow-apple-sm">
+      {/* 3-Step Stepper Bar */}
+      <div className="grid grid-cols-3 gap-2 p-2 bg-white/80 backdrop-blur-xl rounded-2xl border border-black/[0.07] shadow-apple-sm">
         {stepsHeader.map((s) => {
           const Icon = s.icon;
           const isCompleted = step > s.num;
@@ -298,7 +257,7 @@ export const SubmitStartupPage: React.FC = () => {
                   setStep(s.num);
                 }
               }}
-              className={`flex flex-col items-center justify-center p-2 rounded-xl text-center transition-all ${
+              className={`flex flex-col sm:flex-row items-center justify-center gap-2 p-2 rounded-xl text-center transition-all ${
                 isCurrent
                   ? 'bg-[#0071E3] text-white shadow-apple-sm'
                   : isCompleted
@@ -306,15 +265,12 @@ export const SubmitStartupPage: React.FC = () => {
                   : 'text-[#86868B] hover:bg-black/[0.02]'
               }`}
             >
-              <div className="flex items-center gap-1">
-                {isCompleted ? (
-                  <CheckCircle2 className="w-3.5 h-3.5" />
-                ) : (
-                  <Icon className="w-3.5 h-3.5" />
-                )}
-                <span className="hidden md:inline font-bold text-[11px]">{s.label}</span>
-              </div>
-              <span className="md:hidden text-[10px] font-bold mt-0.5">Step {s.num}</span>
+              {isCompleted ? (
+                <CheckCircle2 className="w-3.5 h-3.5" />
+              ) : (
+                <Icon className="w-3.5 h-3.5" />
+              )}
+              <span className="font-bold text-xs">{s.label}</span>
             </button>
           );
         })}
@@ -328,83 +284,53 @@ export const SubmitStartupPage: React.FC = () => {
       )}
 
       {/* Main Form Container */}
-      <div className="bg-white/95 backdrop-blur-2xl rounded-3xl border border-black/[0.08] shadow-apple-card p-6 sm:p-8 space-y-6">
+      <div className="bg-white rounded-3xl border border-black/[0.08] shadow-apple-card p-6 sm:p-8 space-y-6">
         
-        {/* STEP 1: Basic Info & Pitch */}
+        {/* STEP 1: Basic Venture Identity & District */}
         {step === 1 && (
           <div className="space-y-4 text-xs">
-            <h3 className="font-display font-bold text-base text-[#1D1D1F] border-b border-black/[0.06] pb-3">
-              Step 1: Startup Identity & Web Presence
-            </h3>
+            <div className="border-b border-black/[0.06] pb-3">
+              <h3 className="font-display font-bold text-base text-[#1D1D1F]">
+                Step 1: Venture Identity & District Location
+              </h3>
+              <p className="text-xs text-[#86868B] mt-0.5">
+                Fill the fundamental details to place your entity on the 38-district Tamil Nadu map.
+              </p>
+            </div>
 
-            <div>
-              <label className="block font-bold text-[#1D1D1F] mb-1">Startup Name *</label>
-              <input
-                type="text"
-                value={formData.name}
-                onChange={(e) => handleChange('name', e.target.value)}
-                placeholder="e.g. AgniKul Cosmos, Ather Energy, Netcon..."
-                className="w-full px-4 py-2.5 rounded-2xl border border-black/[0.08] bg-black/[0.02] focus:bg-white focus:ring-2 focus:ring-[#0071E3]/20"
-              />
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label className="block font-bold text-[#1D1D1F] mb-1">Company Name *</label>
+                <input
+                  type="text"
+                  value={formData.name}
+                  onChange={(e) => handleChange('name', e.target.value)}
+                  placeholder="e.g. AgniKul Cosmos, Freshworks, Ather Energy..."
+                  className="w-full px-4 py-2.5 rounded-2xl border border-black/[0.08] bg-black/[0.02] focus:bg-white focus:ring-2 focus:ring-[#0071E3]/20"
+                />
+              </div>
+
+              <div>
+                <label className="block font-bold text-[#1D1D1F] mb-1">Official Website URL *</label>
+                <input
+                  type="url"
+                  value={formData.website}
+                  onChange={(e) => handleChange('website', e.target.value)}
+                  placeholder="https://yourstartup.com"
+                  className="w-full px-4 py-2.5 rounded-2xl border border-black/[0.08] bg-black/[0.02] focus:bg-white focus:ring-2 focus:ring-[#0071E3]/20"
+                />
+              </div>
             </div>
 
             <div>
-              <label className="block font-bold text-[#1D1D1F] mb-1">One-Line Pitch / Tagline *</label>
+              <label className="block font-bold text-[#1D1D1F] mb-1">One-Line Tagline / Pitch *</label>
               <input
                 type="text"
                 value={formData.tagline}
                 onChange={(e) => handleChange('tagline', e.target.value)}
-                placeholder="e.g. Making space accessible with 3D-printed rocket engines"
+                placeholder="e.g. Making space accessible with single-piece 3D-printed rocket engines"
                 className="w-full px-4 py-2.5 rounded-2xl border border-black/[0.08] bg-black/[0.02] focus:bg-white focus:ring-2 focus:ring-[#0071E3]/20"
               />
-            </div>
-
-            <div>
-              <label className="block font-bold text-[#1D1D1F] mb-1">Official Website URL *</label>
-              <input
-                type="url"
-                value={formData.website}
-                onChange={(e) => handleChange('website', e.target.value)}
-                placeholder="https://yourstartup.com"
-                className="w-full px-4 py-2.5 rounded-2xl border border-black/[0.08] bg-black/[0.02] focus:bg-white focus:ring-2 focus:ring-[#0071E3]/20"
-              />
-            </div>
-
-            <div>
-              <label className="block font-bold text-[#1D1D1F] mb-1">Company Description</label>
-              <textarea
-                rows={3}
-                value={formData.description}
-                onChange={(e) => handleChange('description', e.target.value)}
-                placeholder="Brief summary of your product, technology, problem solved, and traction..."
-                className="w-full px-4 py-2.5 rounded-2xl border border-black/[0.08] bg-black/[0.02] focus:bg-white focus:ring-2 focus:ring-[#0071E3]/20 leading-relaxed"
-              />
-            </div>
-
-            <div>
-              <label className="block font-bold text-[#1D1D1F] mb-1">Company LinkedIn Profile (Optional)</label>
-              <input
-                type="url"
-                value={formData.linkedin}
-                onChange={(e) => handleChange('linkedin', e.target.value)}
-                placeholder="https://linkedin.com/company/yourstartup"
-                className="w-full px-4 py-2.5 rounded-2xl border border-black/[0.08] bg-black/[0.02] focus:bg-white focus:ring-2 focus:ring-[#0071E3]/20"
-              />
-            </div>
-          </div>
-        )}
-
-        {/* STEP 2: Choose Location & Map Pin (Dedicated Step!) */}
-        {step === 2 && (
-          <div className="space-y-5 text-xs">
-            <div className="border-b border-black/[0.06] pb-3">
-              <h3 className="font-display font-bold text-base text-[#1D1D1F] flex items-center gap-2">
-                <MapPin className="w-4 h-4 text-[#0071E3]" />
-                <span>Step 2: Choose Location & Map Coordinates</span>
-              </h3>
-              <p className="text-xs text-[#86868B] mt-0.5">
-                Pinpoint your startup headquarters or incubation center on the Tamil Nadu Spatial Map.
-              </p>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -417,95 +343,39 @@ export const SubmitStartupPage: React.FC = () => {
                 >
                   {districts.map((d) => (
                     <option key={d.id} value={d.name}>
-                      {d.name} ({d.startupsCount || 0} Startups)
+                      {d.name}
                     </option>
                   ))}
                 </select>
               </div>
 
               <div>
-                <label className="block font-bold text-[#1D1D1F] mb-1">City / Tech Hub / Locality *</label>
+                <label className="block font-bold text-[#1D1D1F] mb-1">City / Locality / Tech Hub *</label>
                 <input
                   type="text"
                   value={formData.city}
                   onChange={(e) => handleChange('city', e.target.value)}
-                  placeholder="e.g. OMR, Guindy, Peelamedu, Hosur SIPCOT, Madurai IT Park..."
+                  placeholder="e.g. OMR, IITM Research Park, Hosur SIPCOT..."
                   className="w-full px-4 py-2.5 rounded-2xl border border-black/[0.08] bg-black/[0.02] focus:bg-white focus:ring-2 focus:ring-[#0071E3]/20"
                 />
               </div>
             </div>
 
+            {/* Sectors Selection */}
             <div>
-              <label className="block font-bold text-[#1D1D1F] mb-1">Office Address / Incubation Facility (Optional)</label>
-              <input
-                type="text"
-                value={formData.address}
-                onChange={(e) => handleChange('address', e.target.value)}
-                placeholder="e.g. IITM Research Park, Module 4, Kanagam Road, Taramani"
-                className="w-full px-4 py-2.5 rounded-2xl border border-black/[0.08] bg-black/[0.02] focus:bg-white focus:ring-2 focus:ring-[#0071E3]/20"
-              />
-            </div>
-
-            {/* Coordinates & Map Pin Box */}
-            <div className="p-4 rounded-2xl bg-blue-50/50 border border-blue-100 space-y-3">
-              <div className="flex items-center justify-between">
-                <span className="font-bold text-[#0071E3] flex items-center gap-1.5">
-                  <Navigation className="w-3.5 h-3.5" />
-                  <span>Map GPS Coordinates</span>
-                </span>
-                <span className="text-[10px] text-[#86868B] font-medium">Auto-generated for {formData.district}</span>
-              </div>
-
-              <div className="grid grid-cols-2 gap-3">
-                <div>
-                  <label className="block text-[11px] font-semibold text-[#86868B] mb-1">Latitude</label>
-                  <input
-                    type="text"
-                    value={formData.latitude}
-                    onChange={(e) => handleChange('latitude', e.target.value)}
-                    placeholder="13.0827"
-                    className="w-full px-3 py-2 rounded-xl border border-black/[0.08] bg-white font-mono text-xs"
-                  />
-                </div>
-                <div>
-                  <label className="block text-[11px] font-semibold text-[#86868B] mb-1">Longitude</label>
-                  <input
-                    type="text"
-                    value={formData.longitude}
-                    onChange={(e) => handleChange('longitude', e.target.value)}
-                    placeholder="80.2707"
-                    className="w-full px-3 py-2 rounded-xl border border-black/[0.08] bg-white font-mono text-xs"
-                  />
-                </div>
-              </div>
-            </div>
-
-          </div>
-        )}
-
-        {/* STEP 3: Sectors, Stage & Funding */}
-        {step === 3 && (
-          <div className="space-y-5 text-xs">
-            <h3 className="font-display font-bold text-base text-[#1D1D1F] border-b border-black/[0.06] pb-3">
-              Step 3: Industry Sectors & Growth Stage
-            </h3>
-
-            <div>
-              <label className="block font-bold text-[#1D1D1F] mb-2">
-                Industry Sectors * (Select one or more)
-              </label>
-              <div className="flex flex-wrap gap-2">
+              <label className="block font-bold text-[#1D1D1F] mb-1">Primary Industry Sectors (Select at least 1) *</label>
+              <div className="flex flex-wrap gap-2 pt-1">
                 {sectorsList.map((sec) => {
-                  const selected = formData.sectors.includes(sec.name);
+                  const isSelected = formData.sectors.includes(sec.name);
                   return (
                     <button
                       key={sec.id}
                       type="button"
                       onClick={() => handleSectorToggle(sec.name)}
-                      className={`px-3.5 py-2 rounded-full text-xs font-bold transition-all ${
-                        selected
-                          ? 'bg-[#0071E3] text-white shadow-apple-sm'
-                          : 'bg-black/[0.04] text-[#1D1D1F] hover:bg-black/[0.08]'
+                      className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all ${
+                        isSelected
+                          ? 'bg-[#0071E3] text-white shadow-2xs'
+                          : 'bg-black/[0.03] text-[#86868B] hover:text-[#1D1D1F] border border-black/[0.04]'
                       }`}
                     >
                       {sec.name}
@@ -515,50 +385,21 @@ export const SubmitStartupPage: React.FC = () => {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
               <div>
                 <label className="block font-bold text-[#1D1D1F] mb-1">Venture Stage</label>
                 <select
                   value={formData.stage}
                   onChange={(e) => handleChange('stage', e.target.value)}
-                  className="w-full px-4 py-2.5 rounded-2xl border border-black/[0.08] bg-black/[0.02] focus:bg-white text-[#1D1D1F] font-semibold"
+                  className="w-full px-4 py-2.5 rounded-2xl border border-black/[0.08] bg-black/[0.02] focus:bg-white font-medium"
                 >
-                  <option value="Idea">Idea / Research</option>
-                  <option value="Pre-seed">Pre-Seed</option>
+                  <option value="Idea">Idea</option>
+                  <option value="Pre-seed">Pre-seed</option>
                   <option value="Seed">Seed</option>
                   <option value="Series A">Series A</option>
                   <option value="Series B+">Series B+</option>
-                  <option value="Bootstrapped">Profitable / Bootstrapped</option>
+                  <option value="Bootstrapped">Bootstrapped</option>
                 </select>
-              </div>
-
-              <div>
-                <label className="block font-bold text-[#1D1D1F] mb-1">Funding Structure</label>
-                <select
-                  value={formData.fundingType}
-                  onChange={(e) => handleChange('fundingType', e.target.value)}
-                  className="w-full px-4 py-2.5 rounded-2xl border border-black/[0.08] bg-black/[0.02] focus:bg-white text-[#1D1D1F] font-semibold"
-                >
-                  <option value="Bootstrapped">Bootstrapped / Self-funded</option>
-                  <option value="Angel">Angel Funded</option>
-                  <option value="Pre-seed">Institutional Pre-Seed</option>
-                  <option value="Seed">Institutional Seed</option>
-                  <option value="Venture funded">Institutional Venture Backed</option>
-                </select>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <label className="block font-bold text-[#1D1D1F] mb-1">Founded Year</label>
-                <input
-                  type="number"
-                  value={formData.foundedYear}
-                  onChange={(e) => handleChange('foundedYear', parseInt(e.target.value) || 2024)}
-                  min={2000}
-                  max={2030}
-                  className="w-full px-4 py-2.5 rounded-2xl border border-black/[0.08] bg-black/[0.02] focus:bg-white font-medium"
-                />
               </div>
 
               <div>
@@ -566,24 +407,39 @@ export const SubmitStartupPage: React.FC = () => {
                 <select
                   value={formData.teamSize}
                   onChange={(e) => handleChange('teamSize', e.target.value)}
-                  className="w-full px-4 py-2.5 rounded-2xl border border-black/[0.08] bg-black/[0.02] focus:bg-white text-[#1D1D1F] font-semibold"
+                  className="w-full px-4 py-2.5 rounded-2xl border border-black/[0.08] bg-black/[0.02] focus:bg-white font-medium"
                 >
-                  <option value="1-10">1-10 Employees</option>
-                  <option value="11-50">11-50 Employees</option>
-                  <option value="51-200">51-200 Employees</option>
-                  <option value="200+">200+ Employees</option>
+                  <option value="1-10">1-10 Members</option>
+                  <option value="11-50">11-50 Members</option>
+                  <option value="51-200">51-200 Members</option>
+                  <option value="200+">200+ Members</option>
                 </select>
+              </div>
+
+              <div>
+                <label className="block font-bold text-[#1D1D1F] mb-1">Founded Year</label>
+                <input
+                  type="number"
+                  value={formData.foundedYear}
+                  onChange={(e) => handleChange('foundedYear', Number(e.target.value))}
+                  className="w-full px-4 py-2.5 rounded-2xl border border-black/[0.08] bg-black/[0.02] focus:bg-white"
+                />
               </div>
             </div>
           </div>
         )}
 
-        {/* STEP 4: Founder Verification */}
-        {step === 4 && (
+        {/* STEP 2: Founder / Submitter Details */}
+        {step === 2 && (
           <div className="space-y-4 text-xs">
-            <h3 className="font-display font-bold text-base text-[#1D1D1F] border-b border-black/[0.06] pb-3">
-              Step 4: Founder Verification & Credentials
-            </h3>
+            <div className="border-b border-black/[0.06] pb-3">
+              <h3 className="font-display font-bold text-base text-[#1D1D1F]">
+                Step 2: Founder Access & Verification Details
+              </h3>
+              <p className="text-xs text-[#86868B] mt-0.5">
+                We link your entity to this founder email for profile management and verified badges.
+              </p>
+            </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
@@ -593,123 +449,115 @@ export const SubmitStartupPage: React.FC = () => {
                   value={formData.founderName}
                   onChange={(e) => handleChange('founderName', e.target.value)}
                   placeholder="e.g. Srinath Ravichandran"
-                  className="w-full px-4 py-2.5 rounded-2xl border border-black/[0.08] bg-black/[0.02] focus:bg-white font-medium"
+                  className="w-full px-4 py-2.5 rounded-2xl border border-black/[0.08] bg-black/[0.02] focus:bg-white focus:ring-2 focus:ring-[#0071E3]/20"
                 />
               </div>
 
               <div>
-                <label className="block font-bold text-[#1D1D1F] mb-1">Founder Contact Email *</label>
+                <label className="block font-bold text-[#1D1D1F] mb-1">Corporate Email Address *</label>
                 <input
                   type="email"
                   value={formData.founderEmail}
                   onChange={(e) => handleChange('founderEmail', e.target.value)}
-                  placeholder="founder@yourstartup.com"
-                  className="w-full px-4 py-2.5 rounded-2xl border border-black/[0.08] bg-black/[0.02] focus:bg-white font-medium"
+                  placeholder="founder@yourcompany.com"
+                  className="w-full px-4 py-2.5 rounded-2xl border border-black/[0.08] bg-black/[0.02] focus:bg-white focus:ring-2 focus:ring-[#0071E3]/20"
                 />
               </div>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block font-bold text-[#1D1D1F] mb-1">Contact Phone (Optional)</label>
+                <label className="block font-bold text-[#1D1D1F] mb-1">Your Role / Designation</label>
                 <input
-                  type="tel"
-                  value={formData.founderPhone}
-                  onChange={(e) => handleChange('founderPhone', e.target.value)}
-                  placeholder="+91 98765 43210"
-                  className="w-full px-4 py-2.5 rounded-2xl border border-black/[0.08] bg-black/[0.02] focus:bg-white font-medium"
+                  type="text"
+                  value={formData.founderRole}
+                  onChange={(e) => handleChange('founderRole', e.target.value)}
+                  placeholder="e.g. Co-Founder & CEO"
+                  className="w-full px-4 py-2.5 rounded-2xl border border-black/[0.08] bg-black/[0.02] focus:bg-white focus:ring-2 focus:ring-[#0071E3]/20"
                 />
               </div>
 
               <div>
-                <label className="block font-bold text-[#1D1D1F] mb-1">Founder LinkedIn URL</label>
+                <label className="block font-bold text-[#1D1D1F] mb-1">Founder LinkedIn Profile (Optional)</label>
                 <input
                   type="url"
                   value={formData.founderLinkedin}
                   onChange={(e) => handleChange('founderLinkedin', e.target.value)}
-                  placeholder="https://linkedin.com/in/founder"
-                  className="w-full px-4 py-2.5 rounded-2xl border border-black/[0.08] bg-black/[0.02] focus:bg-white font-medium"
+                  placeholder="https://linkedin.com/in/..."
+                  className="w-full px-4 py-2.5 rounded-2xl border border-black/[0.08] bg-black/[0.02] focus:bg-white focus:ring-2 focus:ring-[#0071E3]/20"
                 />
               </div>
             </div>
+          </div>
+        )}
 
-            <div>
-              <label className="block font-bold text-[#1D1D1F] mb-1">Verification Reference / Press URL (Optional)</label>
-              <input
-                type="url"
-                value={formData.sourceUrl}
-                onChange={(e) => handleChange('sourceUrl', e.target.value)}
-                placeholder="https://yourstory.com/or-press-release"
-                className="w-full px-4 py-2.5 rounded-2xl border border-black/[0.08] bg-black/[0.02] focus:bg-white font-medium"
-              />
+        {/* STEP 3: Review & Confirm */}
+        {step === 3 && (
+          <div className="space-y-4 text-xs">
+            <div className="border-b border-black/[0.06] pb-3">
+              <h3 className="font-display font-bold text-base text-[#1D1D1F]">
+                Step 3: Review Basic Submission
+              </h3>
+              <p className="text-xs text-[#86868B] mt-0.5">
+                Confirm your venture details before publishing to the directory queue.
+              </p>
+            </div>
+
+            <div className="p-4 rounded-2xl bg-black/[0.02] border border-black/[0.05] space-y-2.5">
+              <div className="flex justify-between border-b border-black/[0.04] pb-2">
+                <span className="text-[#86868B]">Venture Name:</span>
+                <span className="font-bold text-[#1D1D1F]">{formData.name}</span>
+              </div>
+              <div className="flex justify-between border-b border-black/[0.04] pb-2">
+                <span className="text-[#86868B]">Tagline:</span>
+                <span className="font-medium text-[#1D1D1F] text-right">{formData.tagline}</span>
+              </div>
+              <div className="flex justify-between border-b border-black/[0.04] pb-2">
+                <span className="text-[#86868B]">Hub Location:</span>
+                <span className="font-bold text-[#0071E3]">{formData.city}, {formData.district}</span>
+              </div>
+              <div className="flex justify-between border-b border-black/[0.04] pb-2">
+                <span className="text-[#86868B]">Industry Sectors:</span>
+                <span className="font-semibold text-[#1D1D1F]">{formData.sectors.join(', ')}</span>
+              </div>
+              <div className="flex justify-between border-b border-black/[0.04] pb-2">
+                <span className="text-[#86868B]">Founder Submitter:</span>
+                <span className="font-bold text-[#1D1D1F]">{formData.founderName} ({formData.founderEmail})</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-[#86868B]">Stage:</span>
+                <span className="font-bold text-[#1D1D1F]">{formData.stage}</span>
+              </div>
+            </div>
+
+            <div className="p-4 rounded-2xl bg-blue-50/60 border border-blue-100 text-blue-800 text-[11px] leading-relaxed">
+              <strong>Progressive Completion:</strong> After joining, you will be directed to your Founder Dashboard where you can add milestones, enterprise client logos, awards, and complete your data profile.
             </div>
           </div>
         )}
 
-        {/* STEP 5: Review & Confirm */}
-        {step === 5 && (
-          <div className="space-y-5 text-xs">
-            <h3 className="font-display font-bold text-base text-[#1D1D1F] border-b border-black/[0.06] pb-3">
-              Step 5: Review & Confirm Your Submission
-            </h3>
-
-            <div className="p-5 bg-black/[0.02] rounded-3xl border border-black/[0.06] space-y-4">
-              <div className="flex items-start justify-between">
-                <div>
-                  <h4 className="text-lg font-bold text-[#1D1D1F]">{formData.name}</h4>
-                  <p className="text-xs text-[#86868B]">{formData.tagline}</p>
-                </div>
-                <span className="px-3 py-1 rounded-full text-[11px] font-bold bg-[#0071E3]/10 text-[#0071E3]">
-                  {formData.stage}
-                </span>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 text-xs border-t border-black/[0.05]">
-                <div>
-                  <span className="text-[#86868B] block text-[11px]">Location Pin:</span>
-                  <span className="font-bold text-[#1D1D1F]">{formData.city}, {formData.district}</span>
-                </div>
-                <div>
-                  <span className="text-[#86868B] block text-[11px]">Sectors:</span>
-                  <span className="font-bold text-[#0071E3]">{formData.sectors.join(', ')}</span>
-                </div>
-                <div>
-                  <span className="text-[#86868B] block text-[11px]">Founder:</span>
-                  <span className="font-bold text-[#1D1D1F]">{formData.founderName} ({formData.founderEmail})</span>
-                </div>
-                <div>
-                  <span className="text-[#86868B] block text-[11px]">Website:</span>
-                  <span className="font-bold text-[#0071E3] truncate block">{formData.website}</span>
-                </div>
-              </div>
-            </div>
-
-            <p className="text-[11px] text-[#86868B] leading-relaxed">
-              By clicking "Submit for Verification", you confirm that this venture is headquartered or operates an R&D/engineering center within Tamil Nadu.
-            </p>
-          </div>
-        )}
-
-        {/* Action Controls */}
+        {/* Navigation Buttons */}
         <div className="flex items-center justify-between pt-4 border-t border-black/[0.06]">
           {step > 1 ? (
             <button
               type="button"
               onClick={() => setStep((s) => s - 1)}
-              className="flex items-center gap-1.5 px-4 py-2.5 rounded-2xl border border-black/[0.08] text-xs font-semibold text-[#1D1D1F] hover:bg-black/[0.03] transition-all apple-press"
+              className="px-5 py-2.5 rounded-full border border-black/[0.08] bg-white text-[#1D1D1F] font-semibold text-xs hover:bg-slate-50 flex items-center gap-1.5 shadow-2xs apple-press"
             >
               <ArrowLeft className="w-3.5 h-3.5" />
               <span>Back</span>
             </button>
-          ) : <div />}
+          ) : (
+            <div />
+          )}
 
-          {step < 5 ? (
+          {step < 3 ? (
             <button
               type="button"
               onClick={handleNext}
-              className="flex items-center gap-1.5 px-6 py-2.5 rounded-2xl bg-[#0071E3] hover:bg-[#0077ED] text-white text-xs font-bold transition-all shadow-apple-sm apple-press"
+              className="px-6 py-2.5 rounded-full bg-[#0071E3] hover:bg-[#0077ED] text-white font-semibold text-xs flex items-center gap-1.5 shadow-apple-sm transition-all apple-press"
             >
-              <span>Continue</span>
+              <span>Next Step</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </button>
           ) : (
@@ -717,20 +565,24 @@ export const SubmitStartupPage: React.FC = () => {
               type="button"
               onClick={handleSubmit}
               disabled={loading}
-              className="flex items-center gap-2 px-8 py-3 rounded-2xl bg-[#34C759] hover:bg-emerald-600 text-white text-xs font-bold transition-all shadow-md apple-press"
+              className="px-7 py-2.5 rounded-full bg-[#1D1D1F] hover:bg-black text-white font-semibold text-xs flex items-center gap-1.5 shadow-apple-sm transition-all apple-press disabled:opacity-50"
             >
               {loading ? (
-                <Loader2 className="w-4 h-4 animate-spin" />
+                <>
+                  <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                  <span>Submitting Venture...</span>
+                </>
               ) : (
-                <ShieldCheck className="w-4 h-4" />
+                <>
+                  <ShieldCheck className="w-3.5 h-3.5 text-[#34C759]" />
+                  <span>Confirm & Join Directory</span>
+                </>
               )}
-              <span>Submit for Verification</span>
             </button>
           )}
         </div>
 
       </div>
-
     </div>
   );
 };

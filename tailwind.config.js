@@ -66,6 +66,19 @@ export default {
           '"Plus Jakarta Sans"',
           'sans-serif'
         ],
+        art: [
+          'Syne',
+          '-apple-system',
+          'BlinkMacSystemFont',
+          'sans-serif'
+        ],
+        editorial: [
+          '"Instrument Serif"',
+          'Didot',
+          'Bodoni MT',
+          'Georgia',
+          'serif'
+        ],
         tech: ['Space Grotesk', 'sans-serif'],
         mono: ['SF Mono', 'JetBrains Mono', 'Fira Code', 'monospace'],
       },

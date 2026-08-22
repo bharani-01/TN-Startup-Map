@@ -293,6 +293,10 @@ model Startup {
   claims             Claim[]
   bookmarks          Bookmark[]
   customSections     CustomSection[]
+  milestones         StartupMilestone[]
+  awards             StartupAward[]
+  clients            StartupClient[]
+  pressMentions      StartupPress[]
 
   @@index([trendingScore(sort: Desc)])
   @@index([stage])
@@ -303,18 +307,30 @@ model Startup {
 }
 
 model StartupDetail {
-  id             String    @id @default(uuid())
-  startupId      String    @unique @map("startup_id")
-  startup        Startup   @relation(fields: [startupId], references: [id], onDelete: Cascade)
-  description    String
-  extendedBio    String?   @map("extended_bio")
-  brandColor     String?   @map("brand_color")
-  logoUrl        String?   @map("logo_url")
-  bannerUrl      String?   @map("banner_url")
-  source         String    @default("Platform Verification")
-  sourceUrl      String?   @map("source_url")
-  lastVerifiedAt DateTime  @default(now()) @map("last_verified_at")
-  updatedAt      DateTime  @updatedAt @map("updated_at")
+  id               String    @id @default(uuid())
+  startupId        String    @unique @map("startup_id")
+  startup          Startup   @relation(fields: [startupId], references: [id], onDelete: Cascade)
+  description      String
+  extendedBio      String?   @map("extended_bio")
+  brandColor       String?   @map("brand_color")
+  logoUrl          String?   @map("logo_url")
+  bannerUrl        String?   @map("banner_url")
+  businessModel    String?   @map("business_model")
+  revenueModel     String?   @map("revenue_model")
+  revenueRange     String?   @map("revenue_range")
+  targetMarket     String?   @map("target_market")
+  customerSegments String[]  @map("customer_segments")
+  incubator        String?   @map("incubator")
+  accelerator      String?   @map("accelerator")
+  dpiitNumber      String?   @map("dpiit_number")
+  demoVideoUrl     String?   @map("demo_video_url")
+  pitchDeckUrl     String?   @map("pitch_deck_url")
+  competitiveEdge  String?   @map("competitive_edge")
+  isProfitable     Boolean?  @map("is_profitable")
+  source           String    @default("Platform Verification")
+  sourceUrl        String?   @map("source_url")
+  lastVerifiedAt   DateTime  @default(now()) @map("last_verified_at")
+  updatedAt        DateTime  @updatedAt @map("updated_at")
 
   @@map("startup_details")
 }
@@ -399,6 +415,8 @@ model Founder {
   roleTitle         String       @map("role_title")
   bio               String?
   email             String?
+  linkedin          String?
+  twitter           String?
   avatarUrl         String?      @map("avatar_url")
   education         String?
   previousCompanies String?      @map("previous_companies")
@@ -439,6 +457,62 @@ model FundingRoundInvestor {
   @@id([fundingRoundId, investorId])
   @@index([investorId])
   @@map("funding_round_investors")
+}
+
+model StartupMilestone {
+  id           String   @id @default(uuid())
+  startupId    String   @map("startup_id")
+  startup      Startup  @relation(fields: [startupId], references: [id], onDelete: Cascade)
+  title        String
+  description  String?
+  date         DateTime
+  category     String?
+  displayOrder Int      @default(0) @map("display_order")
+  createdAt    DateTime @default(now()) @map("created_at")
+
+  @@index([startupId, date(sort: Desc)])
+  @@map("startup_milestones")
+}
+
+model StartupAward {
+  id           String   @id @default(uuid())
+  startupId    String   @map("startup_id")
+  startup      Startup  @relation(fields: [startupId], references: [id], onDelete: Cascade)
+  title        String
+  organization String?
+  year         Int?
+  url          String?
+  createdAt    DateTime @default(now()) @map("created_at")
+
+  @@index([startupId])
+  @@map("startup_awards")
+}
+
+model StartupClient {
+  id           String   @id @default(uuid())
+  startupId    String   @map("startup_id")
+  startup      Startup  @relation(fields: [startupId], references: [id], onDelete: Cascade)
+  name         String
+  logoUrl      String?  @map("logo_url")
+  website      String?
+  displayOrder Int      @default(0) @map("display_order")
+
+  @@index([startupId])
+  @@map("startup_clients")
+}
+
+model StartupPress {
+  id            String    @id @default(uuid())
+  startupId     String    @map("startup_id")
+  startup       Startup   @relation(fields: [startupId], references: [id], onDelete: Cascade)
+  title         String
+  publication   String
+  url           String
+  publishedDate DateTime? @map("published_date")
+  createdAt     DateTime  @default(now()) @map("created_at")
+
+  @@index([startupId])
+  @@map("startup_press")
 }
 
 // -----------------------------------------------------------------------------

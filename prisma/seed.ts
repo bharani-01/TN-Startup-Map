@@ -242,16 +242,44 @@ async function main() {
       where: { startupId: startupRecord.id },
       update: {
         description: stp.description,
+        extendedBio: stp.extendedBio,
         logoUrl: stp.logoUrl,
+        bannerUrl: stp.bannerUrl,
         brandColor: stp.brandColor,
+        businessModel: stp.businessModel,
+        revenueModel: stp.revenueModel,
+        revenueRange: stp.revenueRange,
+        targetMarket: stp.targetMarket,
+        customerSegments: stp.customerSegments || [],
+        incubator: stp.incubator,
+        accelerator: stp.accelerator,
+        dpiitNumber: stp.dpiitNumber,
+        demoVideoUrl: stp.demoVideoUrl,
+        pitchDeckUrl: stp.pitchDeckUrl,
+        competitiveEdge: stp.competitiveEdge,
+        isProfitable: stp.isProfitable,
         source: stp.source || 'Platform Verification',
         sourceUrl: stp.sourceUrl,
       },
       create: {
         startupId: startupRecord.id,
         description: stp.description,
+        extendedBio: stp.extendedBio,
         logoUrl: stp.logoUrl,
+        bannerUrl: stp.bannerUrl,
         brandColor: stp.brandColor,
+        businessModel: stp.businessModel,
+        revenueModel: stp.revenueModel,
+        revenueRange: stp.revenueRange,
+        targetMarket: stp.targetMarket,
+        customerSegments: stp.customerSegments || [],
+        incubator: stp.incubator,
+        accelerator: stp.accelerator,
+        dpiitNumber: stp.dpiitNumber,
+        demoVideoUrl: stp.demoVideoUrl,
+        pitchDeckUrl: stp.pitchDeckUrl,
+        competitiveEdge: stp.competitiveEdge,
+        isProfitable: stp.isProfitable,
         source: stp.source || 'Platform Verification',
         sourceUrl: stp.sourceUrl,
       },
@@ -326,10 +354,11 @@ async function main() {
           where: { id: founderId },
           update: {
             name: f.name,
-            roleTitle: f.role || 'Founder',
+            roleTitle: f.role || f.roleTitle || 'Founder',
             bio: f.bio,
-            linkedin: f.linkedin,
             avatarUrl: f.avatarUrl,
+            education: f.education,
+            previousCompanies: f.previousCompanies,
             displayOrder: i,
           },
           create: {
@@ -337,13 +366,33 @@ async function main() {
             publicId: generatePublicId('fnd'),
             startupId: startupRecord.id,
             name: f.name,
-            roleTitle: f.role || 'Founder',
+            roleTitle: f.role || f.roleTitle || 'Founder',
             bio: f.bio,
-            linkedin: f.linkedin,
             avatarUrl: f.avatarUrl,
+            education: f.education,
+            previousCompanies: f.previousCompanies,
             displayOrder: i,
           },
         });
+
+        if (f.linkedin) {
+          await prisma.socialLink.upsert({
+            where: {
+              entityType_entityId_platform: {
+                entityType: 'FOUNDER',
+                entityId: founderId,
+                platform: 'LINKEDIN',
+              },
+            },
+            update: { url: f.linkedin },
+            create: {
+              entityType: 'FOUNDER',
+              entityId: founderId,
+              platform: 'LINKEDIN',
+              url: f.linkedin,
+            },
+          });
+        }
       }
     }
 
@@ -367,6 +416,108 @@ async function main() {
             amountInr: r.amountInr,
             amountUsd: r.amountUsd,
             roundDate: r.date ? new Date(r.date) : new Date(),
+          },
+        });
+      }
+    }
+
+    // Milestones table
+    if (stp.milestones && Array.isArray(stp.milestones)) {
+      for (let i = 0; i < stp.milestones.length; i++) {
+        const m = stp.milestones[i];
+        const milestoneId = `mls-${startupRecord.slug}-${i + 1}`;
+        await prisma.startupMilestone.upsert({
+          where: { id: milestoneId },
+          update: {
+            title: m.title,
+            description: m.description,
+            date: m.date ? new Date(m.date) : new Date(),
+            category: m.category,
+            displayOrder: i,
+          },
+          create: {
+            id: milestoneId,
+            startupId: startupRecord.id,
+            title: m.title,
+            description: m.description,
+            date: m.date ? new Date(m.date) : new Date(),
+            category: m.category,
+            displayOrder: i,
+          },
+        });
+      }
+    }
+
+    // Awards table
+    if (stp.awards && Array.isArray(stp.awards)) {
+      for (let i = 0; i < stp.awards.length; i++) {
+        const a = stp.awards[i];
+        const awardId = `awd-${startupRecord.slug}-${i + 1}`;
+        await prisma.startupAward.upsert({
+          where: { id: awardId },
+          update: {
+            title: a.title,
+            organization: a.organization,
+            year: a.year,
+            url: a.url,
+          },
+          create: {
+            id: awardId,
+            startupId: startupRecord.id,
+            title: a.title,
+            organization: a.organization,
+            year: a.year,
+            url: a.url,
+          },
+        });
+      }
+    }
+
+    // Key Clients table
+    if (stp.keyClients && Array.isArray(stp.keyClients)) {
+      for (let i = 0; i < stp.keyClients.length; i++) {
+        const c = stp.keyClients[i];
+        const clientId = `clt-${startupRecord.slug}-${i + 1}`;
+        await prisma.startupClient.upsert({
+          where: { id: clientId },
+          update: {
+            name: c.name,
+            logoUrl: c.logoUrl,
+            website: c.website,
+            displayOrder: i,
+          },
+          create: {
+            id: clientId,
+            startupId: startupRecord.id,
+            name: c.name,
+            logoUrl: c.logoUrl,
+            website: c.website,
+            displayOrder: i,
+          },
+        });
+      }
+    }
+
+    // Press Mentions table
+    if (stp.pressMentions && Array.isArray(stp.pressMentions)) {
+      for (let i = 0; i < stp.pressMentions.length; i++) {
+        const p = stp.pressMentions[i];
+        const pressId = `prs-${startupRecord.slug}-${i + 1}`;
+        await prisma.startupPress.upsert({
+          where: { id: pressId },
+          update: {
+            title: p.title,
+            publication: p.publication,
+            url: p.url,
+            publishedDate: p.publishedDate ? new Date(p.publishedDate) : undefined,
+          },
+          create: {
+            id: pressId,
+            startupId: startupRecord.id,
+            title: p.title,
+            publication: p.publication,
+            url: p.url,
+            publishedDate: p.publishedDate ? new Date(p.publishedDate) : undefined,
           },
         });
       }

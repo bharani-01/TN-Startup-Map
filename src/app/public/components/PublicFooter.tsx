@@ -54,8 +54,8 @@ export const PublicFooter: React.FC = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/districts" className="hover:text-apple-blue transition-colors">
-                  District Clusters
+                <Link to="/map" className="hover:text-[#0071E3] transition-colors">
+                  Spatial Map & Clusters
                 </Link>
               </li>
               <li>

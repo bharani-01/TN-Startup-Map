@@ -59,6 +59,39 @@ export interface StartupMediaItem {
   displayOrder?: number;
 }
 
+export interface StartupMilestone {
+  id?: string;
+  title: string;
+  description?: string;
+  date: string;
+  category?: string;
+  displayOrder?: number;
+}
+
+export interface StartupAward {
+  id?: string;
+  title: string;
+  organization?: string;
+  year?: number;
+  url?: string;
+}
+
+export interface StartupClient {
+  id?: string;
+  name: string;
+  logoUrl?: string;
+  website?: string;
+  displayOrder?: number;
+}
+
+export interface StartupPress {
+  id?: string;
+  title: string;
+  publication: string;
+  url: string;
+  publishedDate?: string;
+}
+
 export interface Startup {
   id: string; // UUID primary key
   publicId?: string; // Cryptographic public ID (stp_...)
@@ -108,6 +141,25 @@ export interface Startup {
   customSections?: CustomProfileSection[];
   founders: FounderInfo[];
   fundingRounds: FundingRoundInfo[];
+  
+  // Extended custom profile fields
+  businessModel?: string;
+  revenueModel?: string;
+  revenueRange?: string;
+  targetMarket?: string;
+  customerSegments?: string[];
+  incubator?: string;
+  accelerator?: string;
+  dpiitNumber?: string;
+  demoVideoUrl?: string;
+  pitchDeckUrl?: string;
+  competitiveEdge?: string;
+  isProfitable?: boolean;
+  milestones?: StartupMilestone[];
+  awards?: StartupAward[];
+  keyClients?: StartupClient[];
+  pressMentions?: StartupPress[];
+
   verificationStatus: VerificationStatus;
   source: string;
   sourceUrl?: string;

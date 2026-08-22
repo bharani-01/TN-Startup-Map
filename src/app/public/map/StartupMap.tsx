@@ -418,8 +418,33 @@ export const StartupMap: React.FC<StartupMapProps> = ({
     });
   };
 
+  const [isScrollZoomEnabled, setIsScrollZoomEnabled] = useState<boolean>(false);
+
+  const handleEnableZoom = () => {
+    if (!isScrollZoomEnabled) {
+      setIsScrollZoomEnabled(true);
+      if (mapRef.current) {
+        mapRef.current.scrollWheelZoom.enable();
+      }
+    }
+  };
+
+  const handleDisableZoom = () => {
+    if (isScrollZoomEnabled) {
+      setIsScrollZoomEnabled(false);
+      if (mapRef.current) {
+        mapRef.current.scrollWheelZoom.disable();
+      }
+    }
+  };
+
   return (
-    <div className="relative w-full h-full" style={{ height }}>
+    <div 
+      className="relative w-full h-full" 
+      style={{ height }}
+      onClick={handleEnableZoom}
+      onMouseLeave={handleDisableZoom}
+    >
       {/* Floating Apple Controls Pill */}
       <div className="absolute top-4 right-4 z-[400] flex items-center gap-2">
         <button
@@ -441,6 +466,17 @@ export const StartupMap: React.FC<StartupMapProps> = ({
         </button>
       </div>
 
+      {/* Tap/Click to Zoom Status Badge */}
+      <div className="absolute bottom-4 left-4 z-[400] pointer-events-none">
+        <div className={`px-3 py-1.5 rounded-full text-[10px] sm:text-[11px] font-semibold backdrop-blur-md transition-all duration-300 ${
+          isScrollZoomEnabled 
+            ? 'bg-[#1D1D1F]/90 text-white shadow-apple-sm opacity-90' 
+            : 'bg-white/90 text-[#86868B] border border-black/[0.08] shadow-2xs opacity-75'
+        }`}>
+          {isScrollZoomEnabled ? '✓ Scroll zoom active' : 'Tap or click map to enable scroll zoom'}
+        </div>
+      </div>
+
       {locationError && (
         <div className="absolute top-16 right-4 z-[400] px-3.5 py-2 rounded-2xl bg-rose-50 border border-rose-200 text-rose-700 text-xs shadow-apple-sm animate-in fade-in">
           {locationError}
@@ -453,7 +489,7 @@ export const StartupMap: React.FC<StartupMapProps> = ({
         zoom={mapZoom}
         className="w-full h-full z-10"
         ref={mapRef}
-        scrollWheelZoom={true}
+        scrollWheelZoom={false}
         zoomControl={false}
       >
         <ZoomControl position="bottomright" />

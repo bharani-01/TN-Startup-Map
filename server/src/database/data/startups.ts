@@ -107,6 +107,85 @@ export const INITIAL_STARTUPS: Startup[] = [
         ]
       }
     ],
+    // Extended profile data
+    businessModel: 'B2B & Government Aerospace',
+    revenueModel: 'Payload Launch Contracts & Commercial Spacecraft Integration',
+    revenueRange: '₹10 - 50 Cr (Pre-commercial Launch Ops)',
+    targetMarket: 'Global Small Satellite Operators & IN-SPACe Domestic Missions',
+    customerSegments: ['Commercial SmallSat Operators', 'Defense & Research Labs', 'Earth Observation Constellations'],
+    incubator: 'IIT Madras Incubation Cell (IITMIC)',
+    accelerator: 'IN-SPACe SpaceTech Accelerator',
+    dpiitNumber: 'DIPP29841',
+    demoVideoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+    competitiveEdge: 'World-first single-piece 3D-printed semi-cryogenic engine (Agnilet) reducing launch turnaround time from months to two weeks.',
+    isProfitable: false,
+    milestones: [
+      {
+        title: 'Maiden Sub-Orbital Test Flight (SOrTeD)',
+        description: 'Successfully launched Agnibaan SOrTeD from India’s first private launchpad at Sriharikota, validating the Agnilet 3D engine.',
+        date: '2024-05-30',
+        category: 'Mission Milestone',
+      },
+      {
+        title: 'Inaugurated Rocket Factory-1',
+        description: 'Commissioned India’s first custom rocket factory facility in Chennai capable of fabricating two rocket engines per week.',
+        date: '2022-11-04',
+        category: 'Facility Expansion',
+      },
+      {
+        title: 'Secured Series B $14.2M Round',
+        description: 'Raised Series B from Celesta Capital and Mayfield to scale orbital launch vehicle hardware testing.',
+        date: '2023-10-17',
+        category: 'Fundraising',
+      },
+      {
+        title: 'Patent Granted for Single-Piece 3D Printed Engine',
+        description: 'Official patent issued by the Indian Patent Office for single-piece 3D-printed rocket combustion chambers.',
+        date: '2022-07-15',
+        category: 'Intellectual Property',
+      }
+    ],
+    awards: [
+      {
+        title: 'National Startup Award - Space Sector Winner',
+        organization: 'Department for Promotion of Industry and Internal Trade (DPIIT)',
+        year: 2021,
+      },
+      {
+        title: 'Economic Times Startup of the Year (Top Innovator)',
+        organization: 'The Economic Times',
+        year: 2022,
+      },
+      {
+        title: 'TN Global Investors Meet DeepTech Pioneer Citation',
+        organization: 'Government of Tamil Nadu',
+        year: 2024,
+      }
+    ],
+    keyClients: [
+      {
+        name: 'IN-SPACe (Indian National Space Promotion and Authorization Center)',
+        website: 'https://inspace.gov.in',
+      },
+      {
+        name: 'IIT Madras National Aerospace Propulsion Lab',
+        website: 'https://iitm.ac.in',
+      }
+    ],
+    pressMentions: [
+      {
+        title: 'AgniKul Cosmos becomes world first to launch with single-piece 3D printed rocket engine',
+        publication: 'The Hindu',
+        url: 'https://www.thehindu.com',
+        publishedDate: '2024-05-30',
+      },
+      {
+        title: 'How a Chennai startup built an orbital space rocket from scratch at IIT Madras',
+        publication: 'Mint',
+        url: 'https://www.livemint.com',
+        publishedDate: '2023-11-12',
+      }
+    ],
     createdAt: '2025-01-01T00:00:00.000Z',
     updatedAt: '2025-01-01T00:00:00.000Z',
   },
@@ -172,6 +251,60 @@ export const INITIAL_STARTUPS: Startup[] = [
     lastVerifiedAt: '2025-01-15T00:00:00.000Z',
     trendingScore: 99,
     isHiring: true,
+    // Extended profile data
+    businessModel: 'B2B SaaS',
+    revenueModel: 'Tiered Subscription (Freemium & Enterprise)',
+    revenueRange: '₹3,000 Cr+ ($500M+ ARR)',
+    targetMarket: 'Global (North America, Europe, APAC, India)',
+    customerSegments: ['Mid-Market Enterprises', 'SMBs', 'Fast-Growing Startups'],
+    competitiveEdge: 'Unified Neo platform integrating CRM, ITSM, and Generative AI (Freddy AI) for end-to-end customer support at 1/3 the cost of legacy software.',
+    isProfitable: true,
+    milestones: [
+      {
+        title: 'NASDAQ IPO Listing ($13B Valuation)',
+        description: 'First Indian SaaS company founded in Chennai to list on NASDAQ (Ticker: FRSH).',
+        date: '2021-09-22',
+        category: 'IPO / Listing',
+      },
+      {
+        title: 'Crossed $500M Annual Recurring Revenue (ARR)',
+        description: 'Surpassed half-a-billion ARR milestone serving over 60,000 customers globally.',
+        date: '2023-08-01',
+        category: 'Financial Milestone',
+      },
+      {
+        title: 'Launched Freddy AI Autonomous Service Platform',
+        description: 'Rolled out GenAI-driven enterprise bots resolving 70% of customer support queries autonomously.',
+        date: '2023-11-15',
+        category: 'Product Innovation',
+      }
+    ],
+    awards: [
+      {
+        title: 'Gartner Magic Quadrant Leader for CRM Customer Engagement',
+        organization: 'Gartner Research',
+        year: 2023,
+      },
+      {
+        title: 'Forbes Cloud 100 List',
+        organization: 'Forbes',
+        year: 2021,
+      }
+    ],
+    keyClients: [
+      { name: 'Bridgestone', website: 'https://bridgestone.com' },
+      { name: 'Delivery Hero', website: 'https://deliveryhero.com' },
+      { name: 'Klarna', website: 'https://klarna.com' },
+      { name: 'Multichoice', website: 'https://multichoice.com' }
+    ],
+    pressMentions: [
+      {
+        title: 'How Girish Mathrubootham built Freshworks from Chennai into a global SaaS powerhouse',
+        publication: 'Forbes India',
+        url: 'https://forbesindia.com',
+        publishedDate: '2021-09-23',
+      }
+    ],
     createdAt: '2025-01-01T00:00:00.000Z',
     updatedAt: '2025-01-01T00:00:00.000Z',
   },
@@ -219,9 +352,72 @@ export const INITIAL_STARTUPS: Startup[] = [
     verificationStatus: VerificationStatus.VERIFIED,
     source: 'Official Press & Global Recognition',
     sourceUrl: 'https://zoho.com',
-    lastVerifiedAt: '2025-01-10T00:00:00.000Z',
-    trendingScore: 99,
+    lastVerifiedAt: '2025-01-01T00:00:00.000Z',
+    trendingScore: 100,
     isHiring: true,
+    bannerUrl: 'https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=1600&q=80',
+    techStack: ['Java', 'C++', 'Python', 'Custom RDBMS', 'Proprietary Cloud Data Centers', 'Zia AI'],
+    businessModel: 'B2B Enterprise & SMB Suite',
+    revenueModel: 'Zoho One All-in-One Subscription & Individual App Licenses',
+    revenueRange: '₹8,000 Cr+ ($1 Billion+ Profitable Revenue)',
+    targetMarket: 'Global (180+ Countries across US, Europe, India, LATAM, MEA)',
+    customerSegments: ['Global Enterprises', 'SMBs', 'Rural & Regional Businesses', 'Governments'],
+    dpiitNumber: 'DIPP00018',
+    demoVideoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+    competitiveEdge: 'Full-stack software sovereignty: Zoho builds its own data centers, compilers, and AI models with zero external debt or VC control, providing unparalleled privacy and cost efficiency.',
+    isProfitable: true,
+    milestones: [
+      {
+        title: 'Crossed $1 Billion Annual Revenue',
+        description: 'Became the first Indian product software company to surpass $1B in annual revenue purely bootstrapped.',
+        date: '2022-11-10',
+        category: 'Revenue Milestone',
+      },
+      {
+        title: 'Tenkasi Rural Hub Expansion',
+        description: 'Pioneered rural tech incubation and employment model with major development campus in Mathalamparai, Tenkasi.',
+        date: '2019-10-01',
+        category: 'Rural Innovation',
+      },
+      {
+        title: 'Crossed 100 Million Global Users',
+        description: 'Reached landmark of over 100 million registered users across Zoho apps in 150+ countries.',
+        date: '2023-09-05',
+        category: 'User Milestone',
+      }
+    ],
+    awards: [
+      {
+        title: 'Padma Shri Award in Trade & Industry (Sridhar Vembu)',
+        organization: 'Government of India',
+        year: 2021,
+      },
+      {
+        title: 'Ernst & Young Entrepreneur of the Year',
+        organization: 'EY India',
+        year: 2019,
+      }
+    ],
+    keyClients: [
+      { name: 'Amazon India', website: 'https://amazon.in' },
+      { name: 'L’Oréal', website: 'https://loreal.com' },
+      { name: 'IIFL Finance', website: 'https://iifl.com' },
+      { name: 'Renault-Nissan', website: 'https://renault.co.in' }
+    ],
+    pressMentions: [
+      {
+        title: 'How Sridhar Vembu built Zoho into a $1 billion software powerhouse from a Tamil Nadu village',
+        publication: 'Bloomberg',
+        url: 'https://bloomberg.com',
+        publishedDate: '2023-03-14',
+      },
+      {
+        title: 'The Bootstrapped Titan: Inside Zoho’s Tenkasi Model',
+        publication: 'The Economic Times',
+        url: 'https://economictimes.indiatimes.com',
+        publishedDate: '2023-10-20',
+      }
+    ],
     createdAt: '2025-01-01T00:00:00.000Z',
     updatedAt: '2025-01-01T00:00:00.000Z',
   },

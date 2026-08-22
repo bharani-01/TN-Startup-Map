@@ -2,13 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { 
   Building2, 
-  Search, 
   Grid3X3, 
   List, 
   Loader2, 
   ChevronLeft, 
   ChevronRight, 
-  RotateCcw 
+  RotateCcw,
+  Sparkles
 } from 'lucide-react';
 import { StartupCard } from '../components/StartupCard';
 import { StartupFilters } from '../components/StartupFilters';
@@ -109,133 +109,151 @@ export const StartupsPage: React.FC = () => {
   };
 
   return (
-    <div className="max-w-[1536px] mx-auto px-4 sm:px-8 lg:px-12 py-8 sm:py-12 space-y-8">
-      
-      {/* Page Header */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-        <div>
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#0071E3]/10 text-[#0071E3] text-xs font-semibold mb-2">
-            <Building2 className="w-3.5 h-3.5" />
-            <span>Tamil Nadu Ecosystem Directory</span>
+    <div className="relative min-h-screen pb-24 bg-[#F5F5F7]">
+      {/* Precision Blueprint Tech Grid Canvas Background */}
+      <div className="absolute inset-0 bg-grid-pattern opacity-60 pointer-events-none z-0" />
+
+      {/* Main Content Layer */}
+      <div className="relative z-10 max-w-[1720px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 py-8 sm:py-12 space-y-8">
+        
+        {/* SOTA Canvas-Native Page Header (Unboxed, Pure Art & Editorial) */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 text-left">
+          <div className="space-y-2.5">
+            {/* Live Beacon Status */}
+            <div className="flex items-center gap-2">
+              <span className="relative flex h-2 w-2 shrink-0">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#0071E3] opacity-75" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-[#0071E3]" />
+              </span>
+              <span className="text-[11px] sm:text-xs font-mono font-extrabold uppercase tracking-[0.2em] text-[#86868B]">
+                Indexed Intelligence • All 38 Districts
+              </span>
+            </div>
+
+            {/* Majestic Headline */}
+            <h1 className="font-art font-extrabold text-3xl sm:text-5xl lg:text-6xl text-[#1D1D1F] tracking-[-0.035em] leading-[1.08] pb-1">
+              Verified Tamil Nadu <br />
+              <span className="inline-block font-editorial italic font-normal text-3xl sm:text-5xl lg:text-6xl text-[#0071E3] pr-3 sm:pr-5 pb-1">
+                Startup Directory
+              </span>
+            </h1>
+
+            <p className="font-sans text-xs sm:text-sm text-[#555558] max-w-2xl font-normal leading-relaxed">
+              Explore 500+ verified technology companies, deeptech spin-offs, and high-velocity startups across all 38 districts of Tamil Nadu.
+            </p>
           </div>
-          <h1 className="text-2xl sm:text-4xl font-extrabold font-display text-[#1D1D1F] tracking-tight">
-            Discover Tamil Nadu Startups
-          </h1>
-          <p className="text-xs sm:text-sm text-[#86868B] mt-1">
-            Browse, filter, and discover verified technology ventures across all 38 districts.
-          </p>
+
+          {/* View Mode Segmented Control (Canvas Native) */}
+          <div className="flex items-center gap-1 bg-white/80 p-1.5 rounded-full border border-black/[0.06] shadow-2xs self-start md:self-auto">
+            <button
+              onClick={() => setViewMode('grid')}
+              className={`px-4 py-1.5 rounded-full text-xs font-semibold flex items-center gap-1.5 transition-all apple-press-subtle cursor-pointer ${
+                viewMode === 'grid'
+                  ? 'bg-[#1D1D1F] text-white shadow-2xs'
+                  : 'text-[#86868B] hover:text-[#1D1D1F]'
+              }`}
+              title="Grid View"
+            >
+              <Grid3X3 className="w-3.5 h-3.5" />
+              <span>Grid</span>
+            </button>
+            <button
+              onClick={() => setViewMode('list')}
+              className={`px-4 py-1.5 rounded-full text-xs font-semibold flex items-center gap-1.5 transition-all apple-press-subtle cursor-pointer ${
+                viewMode === 'list'
+                  ? 'bg-[#1D1D1F] text-white shadow-2xs'
+                  : 'text-[#86868B] hover:text-[#1D1D1F]'
+              }`}
+              title="List View"
+            >
+              <List className="w-3.5 h-3.5" />
+              <span>List</span>
+            </button>
+          </div>
         </div>
 
-        {/* View Mode Segmented Control */}
-        <div className="flex items-center gap-1 bg-black/[0.04] p-1.5 rounded-full border border-black/[0.04] self-start md:self-auto">
-          <button
-            onClick={() => setViewMode('grid')}
-            className={`px-4 py-1.5 rounded-full text-xs font-semibold flex items-center gap-1.5 transition-all apple-press-subtle ${
-              viewMode === 'grid'
-                ? 'bg-white text-[#1D1D1F] shadow-apple-sm'
-                : 'text-[#86868B] hover:text-[#1D1D1F]'
-            }`}
-            title="Grid View"
-          >
-            <Grid3X3 className="w-3.5 h-3.5" />
-            <span>Grid</span>
-          </button>
-          <button
-            onClick={() => setViewMode('list')}
-            className={`px-4 py-1.5 rounded-full text-xs font-semibold flex items-center gap-1.5 transition-all apple-press-subtle ${
-              viewMode === 'list'
-                ? 'bg-white text-[#1D1D1F] shadow-apple-sm'
-                : 'text-[#86868B] hover:text-[#1D1D1F]'
-            }`}
-            title="List View"
-          >
-            <List className="w-3.5 h-3.5" />
-            <span>List</span>
-          </button>
-        </div>
+        {/* Multi-facet Filter Toolbar (Zero Floating Containers) */}
+        <StartupFilters
+          filters={filters}
+          onChange={(newFilters) => {
+            setFilters(newFilters);
+            setPage(1);
+          }}
+          onReset={handleResetFilters}
+          districts={districts}
+          sectors={sectors}
+          totalResults={totalStartups}
+        />
+
+        {/* Startup Grid / Stream */}
+        {loading ? (
+          <div className="py-24 text-center space-y-3">
+            <Loader2 className="w-8 h-8 text-[#0071E3] animate-spin mx-auto" />
+            <p className="text-xs text-[#86868B] font-mono">Loading verified startups from database...</p>
+          </div>
+        ) : startups.length === 0 ? (
+          <div className="py-16 text-center rounded-3xl border border-black/[0.06] bg-white/60 p-8 space-y-4 shadow-2xs">
+            <Building2 className="w-12 h-12 text-[#86868B] mx-auto" />
+            <h3 className="text-lg font-bold text-[#1D1D1F] font-art">No Startups Found</h3>
+            <p className="text-xs text-[#86868B] max-w-md mx-auto">
+              No ventures match your active filters. Try clearing some filters or searching for another sector or district.
+            </p>
+            <button
+              onClick={handleResetFilters}
+              className="px-5 py-2.5 bg-[#1D1D1F] text-white text-xs font-semibold rounded-full inline-flex items-center gap-1.5 shadow-2xs apple-press cursor-pointer"
+            >
+              <RotateCcw className="w-3.5 h-3.5" />
+              <span>Reset All Filters</span>
+            </button>
+          </div>
+        ) : viewMode === 'grid' ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 sm:gap-6">
+            {startups.map((startup) => (
+              <StartupCard key={startup.id} startup={startup} viewMode="grid" />
+            ))}
+          </div>
+        ) : (
+          <div className="space-y-3">
+            {startups.map((startup) => (
+              <StartupCard key={startup.id} startup={startup} viewMode="list" />
+            ))}
+          </div>
+        )}
+
+        {/* Pagination Controls (Canvas Native) */}
+        {totalPages > 1 && (
+          <div className="flex items-center justify-between border-t border-black/[0.06] pt-6 text-xs text-[#86868B]">
+            <p className="font-mono">
+              Page <span className="font-bold text-[#1D1D1F]">{page}</span> of{' '}
+              <span className="font-bold text-[#1D1D1F]">{totalPages}</span> ({totalStartups} total indexed)
+            </p>
+
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => setPage((p) => Math.max(1, p - 1))}
+                disabled={page === 1}
+                className="p-2 rounded-full border border-black/[0.08] bg-white text-[#1D1D1F] disabled:opacity-40 disabled:cursor-not-allowed hover:bg-slate-50 transition-all apple-press shadow-2xs cursor-pointer"
+                title="Previous page"
+              >
+                <ChevronLeft className="w-4 h-4" />
+              </button>
+
+              <span className="px-3.5 py-1 bg-white/90 border border-black/[0.06] rounded-full font-bold font-mono text-[#1D1D1F] shadow-2xs">
+                {page} / {totalPages}
+              </span>
+
+              <button
+                onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+                disabled={page === totalPages}
+                className="p-2 rounded-full border border-black/[0.08] bg-white text-[#1D1D1F] disabled:opacity-40 disabled:cursor-not-allowed hover:bg-slate-50 transition-all apple-press shadow-2xs cursor-pointer"
+                title="Next page"
+              >
+                <ChevronRight className="w-4 h-4" />
+              </button>
+            </div>
+          </div>
+        )}
       </div>
-
-      {/* Multi-facet Filter Panel */}
-      <StartupFilters
-        filters={filters}
-        onChange={(newFilters) => {
-          setFilters(newFilters);
-          setPage(1);
-        }}
-        onReset={handleResetFilters}
-        districts={districts}
-        sectors={sectors}
-        totalResults={totalStartups}
-      />
-
-      {/* Startup Grid / Stream */}
-      {loading ? (
-        <div className="py-24 text-center space-y-3">
-          <Loader2 className="w-8 h-8 text-[#0071E3] animate-spin mx-auto" />
-          <p className="text-xs text-[#86868B] font-medium">Loading startups from Tamil Nadu database...</p>
-        </div>
-      ) : startups.length === 0 ? (
-        <div className="py-16 text-center apple-glass-card rounded-3xl border border-black/[0.06] p-8 space-y-4 shadow-apple-sm">
-          <Building2 className="w-12 h-12 text-apple-tertiary mx-auto" />
-          <h3 className="text-lg font-bold text-[#1D1D1F] font-display">No Startups Found</h3>
-          <p className="text-xs text-[#86868B] max-w-md mx-auto">
-            No ventures match your active filters. Try clearing some filters or searching for another term.
-          </p>
-          <button
-            onClick={handleResetFilters}
-            className="px-5 py-2.5 bg-[#1D1D1F] text-white text-xs font-semibold rounded-full inline-flex items-center gap-1.5 shadow-apple-sm apple-press"
-          >
-            <RotateCcw className="w-3.5 h-3.5" />
-            <span>Reset All Filters</span>
-          </button>
-        </div>
-      ) : viewMode === 'grid' ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {startups.map((startup) => (
-            <StartupCard key={startup.id} startup={startup} viewMode="grid" />
-          ))}
-        </div>
-      ) : (
-        <div className="space-y-4">
-          {startups.map((startup) => (
-            <StartupCard key={startup.id} startup={startup} viewMode="list" />
-          ))}
-        </div>
-      )}
-
-      {/* Pagination Controls */}
-      {totalPages > 1 && (
-        <div className="flex items-center justify-between border-t border-black/[0.06] pt-6 text-xs text-[#86868B]">
-          <p>
-            Showing page <span className="font-bold text-[#1D1D1F]">{page}</span> of{' '}
-            <span className="font-bold text-[#1D1D1F]">{totalPages}</span> ({totalStartups} total)
-          </p>
-
-          <div className="flex items-center gap-2">
-            <button
-              onClick={() => setPage((p) => Math.max(1, p - 1))}
-              disabled={page === 1}
-              className="p-2 rounded-full border border-black/[0.08] bg-white text-[#1D1D1F] disabled:opacity-40 disabled:cursor-not-allowed hover:bg-slate-50 transition-all apple-press shadow-2xs"
-              title="Previous page"
-            >
-              <ChevronLeft className="w-4 h-4" />
-            </button>
-
-            <span className="px-3 py-1 bg-black/[0.04] rounded-full font-bold text-[#1D1D1F]">
-              {page} / {totalPages}
-            </span>
-
-            <button
-              onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
-              disabled={page === totalPages}
-              className="p-2 rounded-full border border-black/[0.08] bg-white text-[#1D1D1F] disabled:opacity-40 disabled:cursor-not-allowed hover:bg-slate-50 transition-all apple-press shadow-2xs"
-              title="Next page"
-            >
-              <ChevronRight className="w-4 h-4" />
-            </button>
-          </div>
-        </div>
-      )}
     </div>
   );
 };

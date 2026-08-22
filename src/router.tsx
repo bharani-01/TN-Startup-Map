@@ -42,7 +42,7 @@ export const router = createBrowserRouter([
       { path: 'map', element: <MapPage /> },
       { path: 'startups', element: <StartupsPage /> },
       { path: 'startups/:slug', element: <StartupDetailPage /> },
-      { path: 'districts', element: <DistrictExplorerPage /> },
+      { path: 'districts', element: <Navigate to="/map" replace /> },
       { path: 'districts/:slug', element: <DistrictDetailPage /> },
       { path: 'blog', element: <BlogListPage /> },
       { path: 'blog/new', element: <WriteArticlePage /> },

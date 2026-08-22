@@ -28,7 +28,13 @@ import {
   Send,
   MessageCircle,
   Copy,
-  Hash
+  Hash,
+  Newspaper,
+  CheckCircle2,
+  FileText,
+  TrendingUp,
+  Target,
+  Zap
 } from 'lucide-react';
 import { Startup, BANNER_PRESETS } from '../../../types';
 import { ClaimModal } from '../components/ClaimModal';
@@ -143,77 +149,65 @@ export const StartupDetailPage: React.FC = () => {
 
   const handleBookmarkToggle = () => {
     if (!startup) return;
-    const res = toggleBookmark(startup.id);
-    if (res.requiresAuth) {
-      navigate(`/login?redirect=${encodeURIComponent(window.location.pathname)}`);
-    }
+    toggleBookmark(startup.id);
   };
-
-  const domain = React.useMemo(() => {
-    if (!startup?.website) return '';
-    try {
-      const url = new URL(startup.website.startsWith('http') ? startup.website : `https://${startup.website}`);
-      return url.hostname.replace('www.', '');
-    } catch {
-      return '';
-    }
-  }, [startup?.website]);
-
-  const effectiveLogo = React.useMemo(() => {
-    if (startup?.logoUrl && !startup.logoUrl.includes('clearbit.com')) {
-      return startup.logoUrl;
-    }
-    if (domain) {
-      return `https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://${domain}&size=128`;
-    }
-    return '';
-  }, [startup?.logoUrl, domain]);
-
-  const effectiveBanner = startup?.bannerUrl || BANNER_PRESETS[0].url;
-  const socials = startup?.socialLinks || {};
 
   if (loading) {
     return (
-      <div className="py-36 text-center space-y-3">
-        <Loader2 className="w-8 h-8 text-[#0071E3] animate-spin mx-auto" />
-        <p className="text-xs text-[#86868B] font-medium">Loading verified startup profile...</p>
+      <div className="min-h-screen bg-[#F5F5F7] flex flex-col items-center justify-center p-4 space-y-4">
+        <Loader2 className="w-8 h-8 text-[#0071E3] animate-spin" />
+        <p className="text-xs font-mono text-[#86868B]">Hydrating startup record...</p>
       </div>
     );
   }
 
   if (error || !startup) {
     return (
-      <div className="max-w-md mx-auto px-4 py-24 text-center space-y-4">
-        <h2 className="text-xl font-bold text-[#1D1D1F] font-display">Startup Not Found</h2>
-        <p className="text-xs text-[#86868B]">{error || 'This startup profile does not exist or has been archived.'}</p>
-        <button
-          onClick={() => navigate('/startups')}
-          className="px-5 py-2.5 bg-[#1D1D1F] text-white text-xs font-semibold rounded-full inline-flex items-center gap-1.5 shadow-apple-sm apple-press"
-        >
-          <ArrowLeft className="w-4 h-4" />
-          <span>Back to Directory</span>
-        </button>
+      <div className="min-h-screen bg-[#F5F5F7] flex flex-col items-center justify-center p-4">
+        <div className="max-w-md w-full p-8 rounded-3xl bg-white/80 backdrop-blur-xl border border-black/[0.08] shadow-apple-card text-center space-y-4">
+          <div className="w-12 h-12 rounded-2xl bg-rose-50 border border-rose-100 flex items-center justify-center mx-auto text-rose-600">
+            <Building2 className="w-6 h-6" />
+          </div>
+          <h2 className="text-lg font-bold font-art text-[#1D1D1F]">
+            {error || 'Startup Entity Not Found'}
+          </h2>
+          <p className="text-xs text-[#86868B] leading-relaxed">
+            The requested venture may have been restructured or moved in the Tamil Nadu directory.
+          </p>
+          <div className="pt-2 flex items-center justify-center gap-3">
+            <Link
+              to="/startups"
+              className="px-5 py-2.5 rounded-full bg-[#0071E3] text-white font-semibold text-xs shadow-apple-sm apple-press"
+            >
+              Browse All Startups
+            </Link>
+          </div>
+        </div>
       </div>
     );
   }
 
+  const effectiveBanner = startup.bannerUrl || BANNER_PRESETS[0].url;
+  const effectiveLogo = startup.logoUrl || `https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=${startup.website}&size=128`;
+  const socials = startup.socialLinks || {};
+
   return (
-    <div className="min-h-screen bg-[#F5F5F7] pb-24">
-      
+    <div className="relative min-h-screen bg-[#F5F5F7] pb-24 text-left">
+      {/* Precision Blueprint Tech Grid Canvas Background */}
+      <div className="absolute inset-0 bg-grid-pattern opacity-60 pointer-events-none z-0" />
+
       {/* Top Breadcrumbs & Action Bar */}
-      <div className="bg-white/80 backdrop-blur-xl border-b border-black/[0.06] sticky top-16 z-30">
-        <div className="max-w-[1536px] mx-auto px-4 sm:px-8 lg:px-12 py-3 flex items-center justify-between text-xs">
-          <div className="flex items-center gap-2 text-[#86868B]">
-            <Link to="/startups" className="hover:text-[#1D1D1F] flex items-center gap-1 font-medium apple-press-subtle">
+      <div className="relative z-20 bg-white/70 backdrop-blur-xl border-b border-black/[0.06] sticky top-16">
+        <div className="max-w-[1720px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 py-3 flex items-center justify-between text-xs">
+          <div className="flex items-center gap-2 text-[#86868B] font-mono">
+            <Link to="/startups" className="hover:text-[#1D1D1F] flex items-center gap-1 font-semibold apple-press-subtle">
               <ArrowLeft className="w-3.5 h-3.5" />
-              <span>Startups</span>
+              <span>Directory</span>
             </Link>
             <span>/</span>
-            <Link to={`/districts/${startup.districtSlug}`} className="hover:text-[#1D1D1F] font-medium">
-              {startup.district}
-            </Link>
+            <span className="text-[#1D1D1F] font-bold">{startup.district}</span>
             <span>/</span>
-            <span className="font-semibold text-[#1D1D1F] truncate max-w-[180px] sm:max-w-none">
+            <span className="font-bold text-[#0071E3] truncate max-w-[180px] sm:max-w-none">
               {startup.name}
             </span>
           </div>
@@ -221,7 +215,7 @@ export const StartupDetailPage: React.FC = () => {
           <div className="flex items-center gap-2">
             <button
               onClick={handleShare}
-              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-black/[0.08] bg-white text-[#1D1D1F] hover:bg-slate-50 font-semibold shadow-apple-sm apple-press"
+              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-black/[0.08] bg-white text-[#1D1D1F] hover:bg-slate-50 font-semibold shadow-2xs apple-press cursor-pointer"
             >
               {copied ? <Check className="w-3.5 h-3.5 text-[#34C759]" /> : <Share2 className="w-3.5 h-3.5 text-[#86868B]" />}
               <span>{copied ? 'Copied Link' : 'Share'}</span>
@@ -229,10 +223,10 @@ export const StartupDetailPage: React.FC = () => {
 
             <button
               onClick={handleBookmarkToggle}
-              className={`p-2 rounded-full border transition-all apple-press ${
+              className={`p-2 rounded-full border transition-all apple-press cursor-pointer ${
                 isBookmarked
-                  ? 'bg-[#0071E3]/10 border-[#0071E3]/30 text-[#0071E3] shadow-apple-sm'
-                  : 'border-black/[0.08] bg-white text-[#86868B] hover:text-[#1D1D1F] hover:bg-slate-50 shadow-apple-sm'
+                  ? 'bg-[#0071E3]/10 border-[#0071E3]/30 text-[#0071E3] shadow-2xs'
+                  : 'border-black/[0.08] bg-white text-[#86868B] hover:text-[#1D1D1F] hover:bg-slate-50 shadow-2xs'
               }`}
               title={isBookmarked ? 'Saved to Bookmarks' : 'Save profile'}
             >
@@ -242,26 +236,25 @@ export const StartupDetailPage: React.FC = () => {
         </div>
       </div>
 
-      {/* Hero Header with Background Banner */}
-      <div className="bg-white border-b border-black/[0.06] relative">
+      {/* Hero Header with Background Canvas Banner */}
+      <div className="relative z-10">
         
         {/* Full-Bleed Top Banner */}
         <div className="w-full h-44 sm:h-64 lg:h-72 bg-slate-900 relative overflow-hidden">
           <img 
             src={effectiveBanner} 
             alt={`${startup.name} banner`} 
-            className="w-full h-full object-cover object-center" 
+            className="w-full h-full object-cover object-center opacity-90" 
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#F5F5F7] via-black/25 to-transparent" />
         </div>
 
-        <div className="max-w-[1536px] mx-auto px-4 sm:px-8 lg:px-12 pb-6">
+        <div className="max-w-[1720px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 pb-6">
           <div className="flex flex-col md:flex-row md:items-start justify-between gap-6 relative z-10">
             
-            {/* Squircle Logo Avatar (Overlaps Banner) + Title (Clean on White Surface) */}
+            {/* Logo Avatar + Title Layer */}
             <div className="flex flex-col sm:flex-row sm:items-start gap-4 sm:gap-6">
-              {/* Only the Logo Squircle overlaps the banner */}
-              <div className="-mt-12 sm:-mt-14 w-24 h-24 sm:w-28 sm:h-28 rounded-3xl bg-white p-2 shadow-apple-card border-2 border-white shrink-0 flex items-center justify-center overflow-hidden z-20">
+              <div className="-mt-14 sm:-mt-16 w-24 h-24 sm:w-28 sm:h-28 rounded-3xl bg-white p-2 shadow-2xs border border-black/[0.08] shrink-0 flex items-center justify-center overflow-hidden z-20">
                 {effectiveLogo && !logoError ? (
                   <img 
                     src={effectiveLogo} 
@@ -270,31 +263,31 @@ export const StartupDetailPage: React.FC = () => {
                     className="w-full h-full object-contain rounded-2xl" 
                   />
                 ) : (
-                  <div className="w-full h-full rounded-2xl bg-[#0071E3] text-white font-display font-extrabold text-3xl flex items-center justify-center shadow-inner">
+                  <div className="w-full h-full rounded-2xl bg-[#0071E3] text-white font-art font-extrabold text-3xl flex items-center justify-center shadow-inner">
                     {startup.name.charAt(0)}
                   </div>
                 )}
               </div>
 
-              {/* Startup Name, Verification Badge & Tagline (100% High Contrast on White Background) */}
+              {/* Startup Name, Verification Status & Tagline */}
               <div className="pt-1 sm:pt-2 space-y-1.5">
                 <div className="flex items-center gap-2.5 flex-wrap">
-                  <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold font-display text-[#1D1D1F] tracking-tight">
+                  <h1 className="text-2xl sm:text-4xl font-extrabold font-art text-[#1D1D1F] tracking-tight">
                     {startup.name}
                   </h1>
                   {startup.verificationStatus === 'VERIFIED' && (
-                    <span className="inline-flex items-center gap-1 px-3 py-0.5 rounded-full text-xs font-semibold bg-[#34C759]/10 text-[#34C759] border border-[#34C759]/20">
-                      <ShieldCheck className="w-3.5 h-3.5 text-[#34C759] fill-[#34C759]/10" />
-                      <span>Verified</span>
+                    <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold text-[#34C759] font-mono">
+                      <ShieldCheck className="w-3.5 h-3.5 text-[#34C759]" />
+                      <span>Verified TN Entity</span>
                     </span>
                   )}
                   {startup.isHiring && (
-                    <span className="px-3 py-0.5 rounded-full text-xs font-bold bg-amber-500/10 text-amber-600 border border-amber-500/20">
+                    <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold font-mono bg-amber-500/10 text-amber-600 border border-amber-500/20">
                       HIRING
                     </span>
                   )}
                 </div>
-                <p className="text-xs sm:text-sm text-[#86868B] font-normal max-w-2xl leading-relaxed">
+                <p className="text-xs sm:text-sm text-[#555558] font-normal max-w-2xl leading-relaxed">
                   {startup.tagline}
                 </p>
               </div>
@@ -306,20 +299,19 @@ export const StartupDetailPage: React.FC = () => {
                 href={startup.website}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full bg-[#0071E3] hover:bg-[#0077ED] text-white font-semibold text-xs shadow-apple-sm transition-all apple-press"
+                className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full bg-[#0071E3] hover:bg-[#0077ED] text-white font-semibold text-xs shadow-2xs transition-all apple-press"
               >
                 <Globe className="w-3.5 h-3.5" />
                 <span>Visit Website</span>
                 <ExternalLink className="w-3 h-3 text-white/80" />
               </a>
 
-              {/* Comprehensive Social Badges */}
               {(socials.linkedin || startup.linkedin) && (
                 <a
                   href={socials.linkedin || startup.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-2.5 rounded-full border border-black/[0.08] bg-white text-[#86868B] hover:text-[#0071E3] hover:bg-slate-50 transition-all shadow-apple-sm apple-press"
+                  className="p-2.5 rounded-full border border-black/[0.08] bg-white text-[#86868B] hover:text-[#0071E3] hover:bg-slate-50 transition-all shadow-2xs apple-press"
                   title="LinkedIn"
                 >
                   <LinkedinIcon className="w-4 h-4" />
@@ -331,7 +323,7 @@ export const StartupDetailPage: React.FC = () => {
                   href={socials.twitter || startup.twitter}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-2.5 rounded-full border border-black/[0.08] bg-white text-[#86868B] hover:text-[#1D1D1F] hover:bg-slate-50 transition-all shadow-apple-sm apple-press"
+                  className="p-2.5 rounded-full border border-black/[0.08] bg-white text-[#86868B] hover:text-[#1D1D1F] hover:bg-slate-50 transition-all shadow-2xs apple-press"
                   title="X (Twitter)"
                 >
                   <TwitterIcon className="w-4 h-4" />
@@ -343,7 +335,7 @@ export const StartupDetailPage: React.FC = () => {
                   href={socials.github || startup.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-2.5 rounded-full border border-black/[0.08] bg-white text-[#86868B] hover:text-[#1D1D1F] hover:bg-slate-50 transition-all shadow-apple-sm apple-press"
+                  className="p-2.5 rounded-full border border-black/[0.08] bg-white text-[#86868B] hover:text-[#1D1D1F] hover:bg-slate-50 transition-all shadow-2xs apple-press"
                   title="GitHub"
                 >
                   <GithubIcon className="w-4 h-4" />
@@ -355,34 +347,10 @@ export const StartupDetailPage: React.FC = () => {
                   href={socials.facebook}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-2.5 rounded-full border border-black/[0.08] bg-white text-[#86868B] hover:text-blue-600 hover:bg-slate-50 transition-all shadow-apple-sm apple-press"
+                  className="p-2.5 rounded-full border border-black/[0.08] bg-white text-[#86868B] hover:text-blue-600 hover:bg-slate-50 transition-all shadow-2xs apple-press"
                   title="Facebook"
                 >
                   <FacebookIcon className="w-4 h-4" />
-                </a>
-              )}
-
-              {socials.slack && (
-                <a
-                  href={socials.slack}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-2.5 rounded-full border border-black/[0.08] bg-white text-[#86868B] hover:text-purple-600 hover:bg-slate-50 transition-all shadow-apple-sm apple-press"
-                  title="Slack Community"
-                >
-                  <SlackIcon className="w-4 h-4" />
-                </a>
-              )}
-
-              {socials.discord && (
-                <a
-                  href={socials.discord}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-2.5 rounded-full border border-black/[0.08] bg-white text-[#86868B] hover:text-indigo-600 hover:bg-slate-50 transition-all shadow-apple-sm apple-press"
-                  title="Discord Server"
-                >
-                  <DiscordIcon className="w-4 h-4" />
                 </a>
               )}
 
@@ -391,111 +359,97 @@ export const StartupDetailPage: React.FC = () => {
                   href={socials.youtube}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-2.5 rounded-full border border-black/[0.08] bg-white text-[#86868B] hover:text-red-600 hover:bg-slate-50 transition-all shadow-apple-sm apple-press"
+                  className="p-2.5 rounded-full border border-black/[0.08] bg-white text-[#86868B] hover:text-red-600 hover:bg-slate-50 transition-all shadow-2xs apple-press"
                   title="YouTube"
                 >
                   <YoutubeIcon className="w-4 h-4" />
                 </a>
               )}
-
-              {socials.blog && (
-                <a
-                  href={socials.blog}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-2.5 rounded-full border border-black/[0.08] bg-white text-[#86868B] hover:text-[#0071E3] hover:bg-slate-50 transition-all shadow-apple-sm apple-press"
-                  title="Engineering Blog"
-                >
-                  <MessageSquare className="w-4 h-4" />
-                </a>
-              )}
             </div>
 
           </div>
         </div>
       </div>
 
-      {/* Key Metrics Quick Ribbon */}
-      <div className="bg-white/90 backdrop-blur-xl border-b border-black/[0.06]">
-        <div className="max-w-[1536px] mx-auto px-4 sm:px-8 lg:px-12 py-4">
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 text-xs">
-            <div>
-              <span className="text-[11px] font-semibold text-[#86868B] block">Total Funding</span>
-              <span className="font-extrabold text-[#1D1D1F] text-sm mt-0.5 block">
-                {startup.totalFundingInr || startup.fundingType}
-              </span>
-            </div>
+      {/* Key Metrics Quick Bar (Seamless Canvas Embedded) */}
+      <div className="relative z-10 max-w-[1720px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 py-3">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 py-3 px-5 rounded-2xl bg-white/70 border border-black/[0.06] backdrop-blur-md shadow-2xs text-xs">
+          <div>
+            <span className="text-[11px] font-mono text-[#86868B] block">Total Capital</span>
+            <span className="font-extrabold font-art text-[#1D1D1F] text-sm mt-0.5 block truncate">
+              {startup.totalFundingInr || startup.fundingType}
+            </span>
+          </div>
 
-            <div>
-              <span className="text-[11px] font-semibold text-[#86868B] block">Venture Stage</span>
-              <span className="font-extrabold text-[#1D1D1F] text-sm mt-0.5 block">
-                {startup.stage}
-              </span>
-            </div>
+          <div>
+            <span className="text-[11px] font-mono text-[#86868B] block">Venture Stage</span>
+            <span className="font-extrabold text-[#1D1D1F] text-sm mt-0.5 block">
+              {startup.stage}
+            </span>
+          </div>
 
-            <div>
-              <span className="text-[11px] font-semibold text-[#86868B] block">Founded</span>
-              <span className="font-extrabold text-[#1D1D1F] text-sm mt-0.5 block">
-                {startup.foundedYear}
-              </span>
-            </div>
+          <div>
+            <span className="text-[11px] font-mono text-[#86868B] block">Founded Year</span>
+            <span className="font-extrabold text-[#1D1D1F] text-sm mt-0.5 block">
+              {startup.foundedYear}
+            </span>
+          </div>
 
-            <div>
-              <span className="text-[11px] font-semibold text-[#86868B] block">Team Size</span>
-              <span className="font-extrabold text-[#1D1D1F] text-sm mt-0.5 block">
-                {startup.teamSize} members
-              </span>
-            </div>
+          <div>
+            <span className="text-[11px] font-mono text-[#86868B] block">Team Members</span>
+            <span className="font-extrabold text-[#1D1D1F] text-sm mt-0.5 block">
+              {startup.teamSize}
+            </span>
+          </div>
 
-            <div>
-              <span className="text-[11px] font-semibold text-[#86868B] block">District Hub</span>
-              <span className="font-extrabold text-[#0071E3] text-sm mt-0.5 block">
-                {startup.district}
-              </span>
-            </div>
+          <div>
+            <span className="text-[11px] font-mono text-[#86868B] block">District Base</span>
+            <span className="font-extrabold text-[#0071E3] text-sm mt-0.5 block">
+              {startup.district}
+            </span>
+          </div>
 
-            <div>
-              <span className="text-[11px] font-semibold text-[#86868B] block">Funding Type</span>
-              <span className="font-extrabold text-[#1D1D1F] text-sm mt-0.5 block">
-                {startup.fundingType}
-              </span>
-            </div>
+          <div>
+            <span className="text-[11px] font-mono text-[#86868B] block">Business Model</span>
+            <span className="font-extrabold text-[#1D1D1F] text-sm mt-0.5 block truncate">
+              {startup.businessModel || startup.fundingType}
+            </span>
           </div>
         </div>
       </div>
 
-      {/* Main Content (2-Column Architecture) */}
-      <div className="max-w-[1536px] mx-auto px-4 sm:px-8 lg:px-12 py-8 sm:py-12">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      {/* Main Content (2-Column Architecture, Zero Floating Box Containers) */}
+      <div className="relative z-10 max-w-[1720px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 py-6 sm:py-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
           
-          {/* Left Column (2 Cols): Overview, Tech Stack, Gallery, Milestones, Team, Custom Sections */}
-          <div className="lg:col-span-2 space-y-6">
+          {/* Left Column (8 Cols): Overview, Business, Milestones, Awards, Tech, Team */}
+          <div className="lg:col-span-8 space-y-8">
             
-            {/* About / Overview Card */}
-            <div className="p-6 sm:p-8 bg-white rounded-3xl border border-black/[0.08] shadow-apple-card space-y-4">
-              <h2 className="text-base font-bold text-[#1D1D1F] font-display flex items-center gap-2">
-                <Building2 className="w-4 h-4 text-[#0071E3]" />
-                <span>About {startup.name}</span>
-              </h2>
+            {/* About / Overview */}
+            <div className="space-y-3 pb-6 border-b border-black/[0.06]">
+              <div className="flex items-center gap-2 text-xs font-mono font-extrabold uppercase tracking-[0.2em] text-[#86868B]">
+                <Building2 className="w-3.5 h-3.5 text-[#0071E3]" />
+                <span>Executive Overview</span>
+              </div>
 
-              <p className="text-xs sm:text-sm text-[#1D1D1F] leading-relaxed font-normal">
+              <p className="font-sans text-sm sm:text-base text-[#1D1D1F] leading-relaxed font-normal">
                 {startup.description}
               </p>
 
               {startup.extendedBio && (
-                <div className="pt-3 border-t border-black/[0.05] text-xs sm:text-sm text-[#86868B] leading-relaxed space-y-2">
+                <div className="pt-2 text-xs sm:text-sm text-[#555558] leading-relaxed space-y-2">
                   <p>{startup.extendedBio}</p>
                 </div>
               )}
 
               {/* Sectors Cloud */}
-              <div className="pt-3 flex flex-wrap items-center gap-2 text-xs">
-                <span className="text-[11px] font-semibold text-[#86868B] mr-1">Sectors:</span>
+              <div className="pt-2 flex flex-wrap items-center gap-1.5 text-xs">
+                <span className="text-[11px] font-mono font-semibold text-[#86868B] mr-1">Industry Verticals:</span>
                 {startup.sectors.map((sec) => (
                   <Link
                     key={sec}
                     to={`/startups?sector=${encodeURIComponent(sec)}`}
-                    className="px-3 py-1 rounded-full bg-[#0071E3]/10 border border-[#0071E3]/20 text-[#0071E3] font-semibold text-[11px] hover:bg-[#0071E3]/15 transition-all apple-press-subtle"
+                    className="px-3 py-1 rounded-full bg-white/80 border border-black/[0.06] text-[#1D1D1F] font-semibold text-[11px] hover:text-[#0071E3] hover:border-[#0071E3]/40 transition-all apple-press-subtle shadow-2xs"
                   >
                     {sec}
                   </Link>
@@ -503,18 +457,216 @@ export const StartupDetailPage: React.FC = () => {
               </div>
             </div>
 
-            {/* Tech Stack Chips Cloud */}
+            {/* Business Model & Market Classification */}
+            {(startup.businessModel || startup.revenueModel || startup.revenueRange || startup.targetMarket || startup.competitiveEdge) && (
+              <div className="space-y-4 pb-6 border-b border-black/[0.06]">
+                <div className="flex items-center gap-2 text-xs font-mono font-extrabold uppercase tracking-[0.2em] text-[#86868B]">
+                  <Layers className="w-3.5 h-3.5 text-[#5856D6]" />
+                  <span>Market Position & Commercial Architecture</span>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                  {startup.businessModel && (
+                    <div className="p-3.5 rounded-2xl bg-white/70 border border-black/[0.05] shadow-2xs space-y-1">
+                      <span className="text-[10px] font-mono font-semibold text-[#86868B] uppercase tracking-wider block">
+                        Business Model
+                      </span>
+                      <span className="font-bold text-xs text-[#1D1D1F] block">{startup.businessModel}</span>
+                    </div>
+                  )}
+
+                  {startup.revenueModel && (
+                    <div className="p-3.5 rounded-2xl bg-white/70 border border-black/[0.05] shadow-2xs space-y-1">
+                      <span className="text-[10px] font-mono font-semibold text-[#86868B] uppercase tracking-wider block">
+                        Revenue Model
+                      </span>
+                      <span className="font-bold text-xs text-[#1D1D1F] block truncate">{startup.revenueModel}</span>
+                    </div>
+                  )}
+
+                  {startup.revenueRange && (
+                    <div className="p-3.5 rounded-2xl bg-white/70 border border-black/[0.05] shadow-2xs space-y-1">
+                      <span className="text-[10px] font-mono font-semibold text-[#86868B] uppercase tracking-wider block">
+                        Annual Scale
+                      </span>
+                      <span className="font-bold text-xs text-[#34C759] block">{startup.revenueRange}</span>
+                    </div>
+                  )}
+
+                  {startup.targetMarket && (
+                    <div className="p-3.5 rounded-2xl bg-white/70 border border-black/[0.05] shadow-2xs space-y-1">
+                      <span className="text-[10px] font-mono font-semibold text-[#86868B] uppercase tracking-wider block">
+                        Target Geography
+                      </span>
+                      <span className="font-bold text-xs text-[#1D1D1F] block truncate">{startup.targetMarket}</span>
+                    </div>
+                  )}
+
+                  {startup.isProfitable !== undefined && (
+                    <div className="p-3.5 rounded-2xl bg-white/70 border border-black/[0.05] shadow-2xs space-y-1">
+                      <span className="text-[10px] font-mono font-semibold text-[#86868B] uppercase tracking-wider block">
+                        Profitability Status
+                      </span>
+                      <span className="font-bold text-xs text-[#1D1D1F] block">
+                        {startup.isProfitable ? 'Cash-Flow Positive' : 'Growth Investing'}
+                      </span>
+                    </div>
+                  )}
+                </div>
+
+                {startup.competitiveEdge && (
+                  <div className="p-4 rounded-2xl bg-[#0071E3]/[0.03] border border-[#0071E3]/15 space-y-1">
+                    <div className="flex items-center gap-1.5 text-[11px] font-bold text-[#0071E3]">
+                      <Zap className="w-3.5 h-3.5" />
+                      <span>Proprietary Unfair Advantage / Moat</span>
+                    </div>
+                    <p className="text-xs text-[#1D1D1F] leading-relaxed">
+                      {startup.competitiveEdge}
+                    </p>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* Milestones Timeline */}
+            {startup.milestones && startup.milestones.length > 0 && (
+              <div className="space-y-4 pb-6 border-b border-black/[0.06]">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2 text-xs font-mono font-extrabold uppercase tracking-[0.2em] text-[#86868B]">
+                    <TrendingUp className="w-3.5 h-3.5 text-[#0071E3]" />
+                    <span>Company Growth Milestones</span>
+                  </div>
+                  <span className="text-xs font-mono text-[#86868B]">
+                    {startup.milestones.length} logged
+                  </span>
+                </div>
+
+                <div className="space-y-3 pt-1">
+                  {startup.milestones.map((m, idx) => (
+                    <div key={idx} className="p-4 rounded-2xl bg-white/70 border border-black/[0.05] space-y-1.5 shadow-2xs text-xs">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                          <span className="font-art font-extrabold text-[#1D1D1F] text-sm">{m.title}</span>
+                          {m.category && (
+                            <span className="px-2 py-0.5 rounded-md bg-[#0071E3]/10 text-[#0071E3] font-bold text-[10px]">
+                              {m.category}
+                            </span>
+                          )}
+                        </div>
+                        <span className="font-mono text-[#86868B] text-[11px] shrink-0">{m.date}</span>
+                      </div>
+                      {m.description && (
+                        <p className="text-[#555558] leading-relaxed">{m.description}</p>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Honors & Awards */}
+            {startup.awards && startup.awards.length > 0 && (
+              <div className="space-y-4 pb-6 border-b border-black/[0.06]">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2 text-xs font-mono font-extrabold uppercase tracking-[0.2em] text-[#86868B]">
+                    <Award className="w-3.5 h-3.5 text-amber-600" />
+                    <span>Honors & State Recognitions</span>
+                  </div>
+                  <span className="text-xs font-mono text-amber-700">
+                    {startup.awards.length} citations
+                  </span>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+                  {startup.awards.map((a, idx) => (
+                    <div key={idx} className="p-4 rounded-2xl bg-white/70 border border-black/[0.05] space-y-1 shadow-2xs text-xs">
+                      <div className="flex items-start justify-between gap-2">
+                        <span className="font-art font-extrabold text-[#1D1D1F] text-xs leading-snug">{a.title}</span>
+                        {a.year && (
+                          <span className="px-2 py-0.5 rounded-md bg-amber-500/10 text-amber-700 font-bold text-[10px] shrink-0">
+                            {a.year}
+                          </span>
+                        )}
+                      </div>
+                      {a.organization && (
+                        <p className="text-[#86868B] text-[11px]">{a.organization}</p>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Key Clients / Enterprise Customers */}
+            {startup.keyClients && startup.keyClients.length > 0 && (
+              <div className="space-y-4 pb-6 border-b border-black/[0.06]">
+                <div className="flex items-center gap-2 text-xs font-mono font-extrabold uppercase tracking-[0.2em] text-[#86868B]">
+                  <Target className="w-3.5 h-3.5 text-[#0071E3]" />
+                  <span>Key Clients & Enterprise Users</span>
+                </div>
+
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-1">
+                  {startup.keyClients.map((c, idx) => (
+                    <div key={idx} className="p-3.5 rounded-2xl bg-white/70 border border-black/[0.05] text-center space-y-1 shadow-2xs">
+                      <span className="font-bold text-xs text-[#1D1D1F] block truncate">{c.name}</span>
+                      {c.website && (
+                        <a href={c.website} target="_blank" rel="noopener noreferrer" className="text-[10px] text-[#0071E3] hover:underline flex items-center justify-center gap-0.5">
+                          <span>Partner Link</span>
+                          <ExternalLink className="w-2.5 h-2.5" />
+                        </a>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Press Coverage */}
+            {startup.pressMentions && startup.pressMentions.length > 0 && (
+              <div className="space-y-4 pb-6 border-b border-black/[0.06]">
+                <div className="flex items-center gap-2 text-xs font-mono font-extrabold uppercase tracking-[0.2em] text-[#86868B]">
+                  <Newspaper className="w-3.5 h-3.5 text-[#0071E3]" />
+                  <span>Featured Press & Media Coverage</span>
+                </div>
+
+                <div className="space-y-2.5 pt-1">
+                  {startup.pressMentions.map((p, idx) => (
+                    <div key={idx} className="p-4 rounded-2xl bg-white/70 border border-black/[0.05] flex items-center justify-between gap-3 text-xs shadow-2xs">
+                      <div className="space-y-1 truncate">
+                        <div className="flex items-center gap-2">
+                          <span className="font-bold text-[#1D1D1F] text-xs truncate">{p.title}</span>
+                          <span className="px-2 py-0.5 rounded-md bg-black/[0.04] text-[#86868B] font-bold text-[10px] shrink-0">
+                            {p.publication}
+                          </span>
+                        </div>
+                      </div>
+                      <a
+                        href={p.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="px-3 py-1.5 rounded-full bg-white border border-black/[0.08] text-[#0071E3] font-semibold text-xs hover:bg-slate-50 flex items-center gap-1 shrink-0"
+                      >
+                        <span>Read</span>
+                        <ExternalLink className="w-3 h-3" />
+                      </a>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Tech Stack */}
             {startup.techStack && startup.techStack.length > 0 && (
-              <div className="p-6 sm:p-8 bg-white rounded-3xl border border-black/[0.08] shadow-apple-card space-y-3">
-                <h3 className="text-sm font-bold text-[#1D1D1F] font-display flex items-center gap-2">
-                  <Code className="w-4 h-4 text-purple-600" />
-                  <span>Technology Stack & Architecture</span>
-                </h3>
+              <div className="space-y-3 pb-6 border-b border-black/[0.06]">
+                <div className="flex items-center gap-2 text-xs font-mono font-extrabold uppercase tracking-[0.2em] text-[#86868B]">
+                  <Code className="w-3.5 h-3.5 text-[#5856D6]" />
+                  <span>Technology Stack & Technical Architecture</span>
+                </div>
                 <div className="flex flex-wrap gap-2 pt-1">
                   {startup.techStack.map((tech) => (
                     <span
                       key={tech}
-                      className="px-3.5 py-1.5 rounded-full bg-black/[0.03] border border-black/[0.06] text-[#1D1D1F] text-xs font-semibold"
+                      className="px-3.5 py-1.5 rounded-full bg-white/80 border border-black/[0.06] text-[#1D1D1F] text-xs font-semibold shadow-2xs"
                     >
                       {tech}
                     </span>
@@ -523,25 +675,25 @@ export const StartupDetailPage: React.FC = () => {
               </div>
             )}
 
-            {/* Product & Media Gallery */}
+            {/* Media & Product Gallery */}
             {startup.galleryImages && startup.galleryImages.length > 0 && (
-              <div className="p-6 sm:p-8 bg-white rounded-3xl border border-black/[0.08] shadow-apple-card space-y-4">
+              <div className="space-y-3 pb-6 border-b border-black/[0.06]">
                 <div className="flex items-center justify-between">
-                  <h3 className="text-sm font-bold text-[#1D1D1F] font-display flex items-center gap-2">
-                    <ImageIcon className="w-4 h-4 text-[#0071E3]" />
+                  <div className="flex items-center gap-2 text-xs font-mono font-extrabold uppercase tracking-[0.2em] text-[#86868B]">
+                    <ImageIcon className="w-3.5 h-3.5 text-[#0071E3]" />
                     <span>Media & Product Gallery</span>
-                  </h3>
-                  <span className="text-xs text-[#86868B] font-medium">
-                    {startup.galleryImages.length} photos
+                  </div>
+                  <span className="text-xs font-mono text-[#86868B]">
+                    {startup.galleryImages.length} assets
                   </span>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1">
                   {startup.galleryImages.map((imgUrl, i) => (
                     <div 
                       key={i} 
                       onClick={() => setActiveGalleryModal(imgUrl)}
-                      className="group relative rounded-2xl overflow-hidden aspect-video bg-slate-100 cursor-pointer border border-black/[0.08] hover:border-[#0071E3] transition-all shadow-apple-sm apple-press-subtle"
+                      className="group relative rounded-2xl overflow-hidden aspect-video bg-slate-100 cursor-pointer border border-black/[0.08] hover:border-[#0071E3] transition-all shadow-2xs apple-press-subtle"
                     >
                       <img 
                         src={imgUrl} 
@@ -554,75 +706,24 @@ export const StartupDetailPage: React.FC = () => {
               </div>
             )}
 
-            {/* Updates & Timeline Feed */}
-            {startup.posts && startup.posts.length > 0 && (
-              <div className="p-6 sm:p-8 bg-white rounded-3xl border border-black/[0.08] shadow-apple-card space-y-5">
-                <h3 className="text-sm font-bold text-[#1D1D1F] font-display flex items-center gap-2">
-                  <MessageSquare className="w-4 h-4 text-[#0071E3]" />
-                  <span>Company Milestones & News Releases</span>
-                </h3>
-
-                <div className="space-y-4">
-                  {startup.posts.map((post) => (
-                    <div key={post.id} className="p-5 rounded-2xl bg-black/[0.02] border border-black/[0.05] space-y-2 text-xs">
-                      <div className="flex items-center justify-between">
-                        <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-[#0071E3]/10 text-[#0071E3]">
-                          {post.tag || 'Milestone'}
-                        </span>
-                        <span className="text-[#86868B] font-medium">{post.date}</span>
-                      </div>
-                      <h4 className="font-bold text-sm text-[#1D1D1F]">{post.title}</h4>
-                      <p className="text-[#86868B] leading-relaxed">{post.content}</p>
-                      {post.linkUrl && (
-                        <a
-                          href={post.linkUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1 text-[#0071E3] font-bold text-xs hover:underline pt-1"
-                        >
-                          <span>Read Source Article</span>
-                          <ExternalLink className="w-3 h-3" />
-                        </a>
-                      )}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* Custom Sections */}
-            {startup.customSections && startup.customSections.length > 0 && (
-              <div className="space-y-6">
-                {startup.customSections.map((sec) => (
-                  <div key={sec.id} className="p-6 sm:p-8 bg-white rounded-3xl border border-black/[0.08] shadow-apple-card space-y-3">
-                    <h3 className="text-sm font-bold text-[#1D1D1F] font-display flex items-center gap-2">
-                      <Layers className="w-4 h-4 text-[#0071E3]" />
-                      <span>{sec.title}</span>
-                    </h3>
-                    <p className="text-xs sm:text-sm text-[#86868B] leading-relaxed">{sec.content}</p>
-                  </div>
-                ))}
-              </div>
-            )}
-
             {/* Leadership & Founders Spotlight */}
             {startup.founders && startup.founders.length > 0 && (
-              <div className="p-6 sm:p-8 bg-white rounded-3xl border border-black/[0.08] shadow-apple-card space-y-5">
-                <h3 className="text-sm font-bold text-[#1D1D1F] font-display flex items-center gap-2">
-                  <Users className="w-4 h-4 text-[#0071E3]" />
+              <div className="space-y-4 pb-6 border-b border-black/[0.06]">
+                <div className="flex items-center gap-2 text-xs font-mono font-extrabold uppercase tracking-[0.2em] text-[#86868B]">
+                  <Users className="w-3.5 h-3.5 text-[#0071E3]" />
                   <span>Leadership & Founders</span>
-                </h3>
+                </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
                   {startup.founders.map((f, i) => (
-                    <div key={i} className="p-4 rounded-2xl bg-black/[0.02] border border-black/[0.05] space-y-2">
+                    <div key={i} className="p-4 rounded-2xl bg-white/70 border border-black/[0.05] space-y-2 shadow-2xs">
                       <div className="flex items-start justify-between gap-2">
                         <div className="flex items-center gap-2.5">
-                          <div className="w-10 h-10 rounded-2xl bg-[#1D1D1F] text-white font-bold text-xs flex items-center justify-center shadow-2xs">
+                          <div className="w-9 h-9 rounded-xl bg-[#1D1D1F] text-white font-bold text-xs flex items-center justify-center">
                             {f.name.charAt(0)}
                           </div>
                           <div>
-                            <h4 className="font-bold text-[#1D1D1F] text-xs">{f.name}</h4>
+                            <h4 className="font-art font-extrabold text-[#1D1D1F] text-xs">{f.name}</h4>
                             <p className="text-[11px] font-semibold text-[#0071E3]">{f.role}</p>
                           </div>
                         </div>
@@ -646,7 +747,7 @@ export const StartupDetailPage: React.FC = () => {
                       )}
 
                       {f.bio && (
-                        <p className="text-[11px] text-[#86868B] leading-relaxed pt-1">
+                        <p className="text-[11px] text-[#555558] leading-relaxed pt-1">
                           {f.bio}
                         </p>
                       )}
@@ -658,35 +759,35 @@ export const StartupDetailPage: React.FC = () => {
 
             {/* Funding Timeline */}
             {startup.fundingRounds && startup.fundingRounds.length > 0 && (
-              <div className="p-6 sm:p-8 bg-white rounded-3xl border border-black/[0.08] shadow-apple-card space-y-5">
+              <div className="space-y-4">
                 <div className="flex items-center justify-between">
-                  <h3 className="text-sm font-bold text-[#1D1D1F] font-display flex items-center gap-2">
-                    <DollarSign className="w-4 h-4 text-[#34C759]" />
-                    <span>Funding History & Rounds</span>
-                  </h3>
-                  <span className="text-xs font-semibold text-[#34C759] bg-[#34C759]/10 px-3 py-1 rounded-full border border-[#34C759]/20">
+                  <div className="flex items-center gap-2 text-xs font-mono font-extrabold uppercase tracking-[0.2em] text-[#86868B]">
+                    <DollarSign className="w-3.5 h-3.5 text-[#34C759]" />
+                    <span>Funding Milestones & Cap Table</span>
+                  </div>
+                  <span className="text-xs font-mono font-bold text-[#34C759]">
                     Total: {startup.totalFundingInr || startup.totalFundingUsd}
                   </span>
                 </div>
 
-                <div className="space-y-3">
+                <div className="space-y-2.5 pt-1">
                   {startup.fundingRounds.map((round, idx) => (
-                    <div key={idx} className="p-4 rounded-2xl bg-black/[0.02] border border-black/[0.05] flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+                    <div key={idx} className="p-4 rounded-2xl bg-white/70 border border-black/[0.05] flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs shadow-2xs">
                       <div>
                         <div className="flex items-center gap-2">
-                          <span className="font-bold text-[#1D1D1F] text-sm">{round.roundType}</span>
+                          <span className="font-art font-extrabold text-[#1D1D1F] text-sm">{round.roundType}</span>
                           <span className="text-[#86868B]">•</span>
-                          <span className="text-[#86868B] font-medium">{round.date}</span>
+                          <span className="font-mono text-[#86868B] text-xs">{round.date}</span>
                         </div>
                         {round.investors && round.investors.length > 0 && (
                           <p className="text-[11px] text-[#86868B] mt-1">
-                            <span className="font-medium text-[#1D1D1F]">Investors:</span> {round.investors.join(', ')}
+                            <span className="font-medium text-[#1D1D1F]">Key Investors:</span> {round.investors.join(', ')}
                           </p>
                         )}
                       </div>
 
                       <div className="text-right shrink-0">
-                        <span className="font-extrabold text-sm text-[#34C759] block">
+                        <span className="font-art font-extrabold text-sm text-[#34C759] block">
                           {round.amountInr || round.amountUsd || 'Undisclosed'}
                         </span>
                       </div>
@@ -698,21 +799,21 @@ export const StartupDetailPage: React.FC = () => {
 
           </div>
 
-          {/* Right Column (1 Col): Spatial Map, Contact HQ Card, & Founder Claim */}
-          <div className="space-y-6">
+          {/* Right Column (4 Cols): Spatial Map, Contact HQ, & Registry Record */}
+          <div className="lg:col-span-4 space-y-6">
             
-            {/* Contact & Official HQ Card (New Expanded Feature!) */}
-            <div className="bg-white rounded-3xl border border-black/[0.08] shadow-apple-card p-6 space-y-4 text-xs">
-              <h3 className="text-sm font-bold text-[#1D1D1F] font-display flex items-center gap-2">
-                <Mail className="w-4 h-4 text-[#0071E3]" />
-                <span>Contact & Headquarters</span>
-              </h3>
+            {/* Contact & Official HQ Module */}
+            <div className="p-5 rounded-2xl bg-white/80 border border-black/[0.06] shadow-2xs space-y-3 text-xs">
+              <div className="flex items-center gap-2 text-xs font-mono font-extrabold uppercase tracking-[0.2em] text-[#86868B]">
+                <Mail className="w-3.5 h-3.5 text-[#0071E3]" />
+                <span>Contact & Facility</span>
+              </div>
 
-              <div className="space-y-3">
+              <div className="space-y-2.5 pt-1">
                 {startup.contactEmail ? (
-                  <div className="p-3 bg-black/[0.02] rounded-2xl border border-black/[0.04] space-y-1">
-                    <span className="text-[10px] font-bold text-[#86868B] uppercase tracking-wider block">
-                      Direct Inquiries Email
+                  <div className="p-3 bg-black/[0.02] rounded-xl border border-black/[0.04] space-y-1">
+                    <span className="text-[10px] font-mono font-bold text-[#86868B] uppercase tracking-wider block">
+                      Direct Inquiry Channel
                     </span>
                     <div className="flex items-center justify-between">
                       <a
@@ -724,7 +825,7 @@ export const StartupDetailPage: React.FC = () => {
                       <button
                         type="button"
                         onClick={handleCopyEmail}
-                        className="p-1 rounded-md text-[#86868B] hover:text-[#1D1D1F]"
+                        className="p-1 rounded-md text-[#86868B] hover:text-[#1D1D1F] cursor-pointer"
                         title="Copy email"
                       >
                         {emailCopied ? <Check className="w-3.5 h-3.5 text-[#34C759]" /> : <Copy className="w-3.5 h-3.5" />}
@@ -734,7 +835,7 @@ export const StartupDetailPage: React.FC = () => {
                 ) : (
                   <a
                     href={`mailto:inquiry@${startup.website.replace(/^https?:\/\//, '').replace(/\/.*$/, '')}`}
-                    className="p-3 bg-black/[0.02] rounded-2xl border border-black/[0.04] flex items-center justify-between text-[#0071E3] font-bold hover:bg-black/[0.04] transition-all"
+                    className="p-3 bg-black/[0.02] rounded-xl border border-black/[0.04] flex items-center justify-between text-[#0071E3] font-bold hover:bg-black/[0.04] transition-all"
                   >
                     <span>Send Partnership Inquiry</span>
                     <Send className="w-3.5 h-3.5" />
@@ -742,9 +843,9 @@ export const StartupDetailPage: React.FC = () => {
                 )}
 
                 {startup.contactPhone && (
-                  <div className="p-3 bg-black/[0.02] rounded-2xl border border-black/[0.04] space-y-1">
-                    <span className="text-[10px] font-bold text-[#86868B] uppercase tracking-wider block">
-                      Office / Press Line
+                  <div className="p-3 bg-black/[0.02] rounded-xl border border-black/[0.04] space-y-1">
+                    <span className="text-[10px] font-mono font-bold text-[#86868B] uppercase tracking-wider block">
+                      Press & Office Line
                     </span>
                     <a
                       href={`tel:${startup.contactPhone}`}
@@ -756,9 +857,9 @@ export const StartupDetailPage: React.FC = () => {
                 )}
 
                 {startup.address && (
-                  <div className="p-3 bg-black/[0.02] rounded-2xl border border-black/[0.04] space-y-1">
-                    <span className="text-[10px] font-bold text-[#86868B] uppercase tracking-wider block">
-                      Office Facility & Address
+                  <div className="p-3 bg-black/[0.02] rounded-xl border border-black/[0.04] space-y-1">
+                    <span className="text-[10px] font-mono font-bold text-[#86868B] uppercase tracking-wider block">
+                      Physical Facility Address
                     </span>
                     <p className="font-semibold text-xs text-[#1D1D1F] leading-relaxed">
                       {startup.address}
@@ -769,14 +870,14 @@ export const StartupDetailPage: React.FC = () => {
               </div>
             </div>
 
-            {/* Spatial Location & Map Card */}
-            <div className="bg-white rounded-3xl border border-black/[0.08] shadow-apple-card p-6 space-y-4">
-              <h3 className="text-sm font-bold text-[#1D1D1F] font-display flex items-center gap-2">
-                <MapPin className="w-4 h-4 text-[#0071E3]" />
+            {/* Spatial Location & Map Module */}
+            <div className="p-5 rounded-2xl bg-white/80 border border-black/[0.06] shadow-2xs space-y-3">
+              <div className="flex items-center gap-2 text-xs font-mono font-extrabold uppercase tracking-[0.2em] text-[#86868B]">
+                <MapPin className="w-3.5 h-3.5 text-[#0071E3]" />
                 <span>Spatial Location</span>
-              </h3>
+              </div>
 
-              <div className="h-48 rounded-2xl overflow-hidden border border-black/[0.06]">
+              <div className="h-44 rounded-xl overflow-hidden border border-black/[0.06]">
                 <StartupMap
                   startups={[startup]}
                   height="100%"
@@ -784,11 +885,11 @@ export const StartupDetailPage: React.FC = () => {
                 />
               </div>
 
-              <div className="space-y-1.5 text-xs">
-                <p className="font-bold text-[#1D1D1F]">{startup.city || startup.district}</p>
-                <p className="text-[#86868B]">{startup.district} District, Tamil Nadu</p>
+              <div className="space-y-1 text-xs pt-1">
+                <p className="font-art font-extrabold text-[#1D1D1F]">{startup.city || startup.district}</p>
+                <p className="text-[#86868B] text-[11px]">{startup.district} District, Tamil Nadu</p>
                 <Link
-                  to={`/districts/${startup.districtSlug}`}
+                  to={`/map?district=${startup.districtSlug}`}
                   className="inline-flex items-center gap-1 text-[#0071E3] font-semibold text-xs hover:underline pt-1"
                 >
                   <span>Explore {startup.district} Innovation Hub</span>
@@ -797,22 +898,46 @@ export const StartupDetailPage: React.FC = () => {
               </div>
             </div>
 
-            {/* Platform Verification Card */}
-            <div className="bg-white rounded-3xl border border-black/[0.08] shadow-apple-card p-6 space-y-3 text-xs">
-              <h4 className="font-bold text-[#1D1D1F] flex items-center gap-2">
-                <ShieldCheck className="w-4 h-4 text-[#34C759]" />
+            {/* Ecosystem Accreditation & Registry Record */}
+            <div className="p-5 rounded-2xl bg-white/80 border border-black/[0.06] shadow-2xs space-y-3 text-xs">
+              <div className="flex items-center gap-2 text-xs font-mono font-extrabold uppercase tracking-[0.2em] text-[#34C759]">
+                <ShieldCheck className="w-3.5 h-3.5 text-[#34C759]" />
                 <span>Official Registry Record</span>
-              </h4>
-              <p className="text-[#86868B] leading-relaxed">
-                This venture is registered on the Tamil Nadu Spatial Innovation Map.
+              </div>
+              <p className="text-[#86868B] text-xs leading-relaxed">
+                Verified entity on the Tamil Nadu Spatial Innovation Map.
               </p>
-              <div className="p-3 bg-black/[0.02] rounded-2xl border border-black/[0.04] space-y-1 text-[11px] text-[#86868B]">
-                <p><span className="font-medium text-[#1D1D1F]">Source:</span> {startup.source}</p>
-                <p><span className="font-medium text-[#1D1D1F]">Status:</span> {startup.verificationStatus}</p>
+
+              <div className="space-y-2 pt-1 font-mono text-[11px]">
+                {startup.dpiitNumber && (
+                  <div className="p-2.5 bg-black/[0.02] rounded-xl border border-black/[0.04]">
+                    <span className="text-[#86868B] block text-[10px]">DPIIT Recognition:</span>
+                    <span className="font-bold text-[#1D1D1F]">{startup.dpiitNumber}</span>
+                  </div>
+                )}
+
+                {startup.incubator && (
+                  <div className="p-2.5 bg-black/[0.02] rounded-xl border border-black/[0.04]">
+                    <span className="text-[#86868B] block text-[10px]">Incubation Center:</span>
+                    <span className="font-bold text-[#1D1D1F]">{startup.incubator}</span>
+                  </div>
+                )}
+
+                {startup.accelerator && (
+                  <div className="p-2.5 bg-black/[0.02] rounded-xl border border-black/[0.04]">
+                    <span className="text-[#86868B] block text-[10px]">Accelerator Program:</span>
+                    <span className="font-bold text-[#1D1D1F]">{startup.accelerator}</span>
+                  </div>
+                )}
+
+                <div className="p-2.5 bg-black/[0.02] rounded-xl border border-black/[0.04]">
+                  <span className="text-[#86868B] block text-[10px]">Verification Source:</span>
+                  <span className="font-bold text-[#1D1D1F]">{startup.source}</span>
+                </div>
               </div>
 
               <div className="pt-2 border-t border-black/[0.05] flex items-center justify-between text-[11px]">
-                <span className="text-[#86868B]">Need to update or claim?</span>
+                <span className="text-[#86868B]">Need to update record?</span>
                 <Link
                   to={`/support?tab=claim&startup=${startup.slug}`}
                   className="text-[#0071E3] font-semibold hover:underline flex items-center gap-1"
@@ -840,7 +965,7 @@ export const StartupDetailPage: React.FC = () => {
           onClick={() => setActiveGalleryModal(null)}
           className="fixed inset-0 z-50 bg-black/80 backdrop-blur-xl flex items-center justify-center p-4 animate-in fade-in"
         >
-          <div className="max-w-4xl max-h-[85vh] rounded-3xl overflow-hidden shadow-apple-modal bg-white p-2 border border-white/20">
+          <div className="max-w-4xl max-h-[85vh] rounded-3xl overflow-hidden shadow-2xl bg-white p-2 border border-white/20">
             <img src={activeGalleryModal} alt="Preview" className="max-w-full max-h-[80vh] object-contain rounded-2xl" />
           </div>
         </div>

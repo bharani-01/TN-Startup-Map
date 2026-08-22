@@ -49,7 +49,7 @@ class SpatialDatabase {
     try {
       await prisma.$connect();
       this.isConnected = true;
-      logger.info('🐘 Connected to PostgreSQL Database via Prisma ORM (35 Decomposed Models Active)');
+      logger.info('Connected to PostgreSQL Database via Prisma ORM (39 Decomposed Models Active)');
       await this.syncFromDatabase();
     } catch (err: any) {
       this.usePrisma = false;
@@ -128,6 +128,10 @@ class SpatialDatabase {
             founders: true,
             fundingRounds: { include: { investors: { include: { investor: true } } } },
             customSections: true,
+            milestones: true,
+            awards: true,
+            clients: true,
+            pressMentions: true,
           },
         }).catch(() => []) : [],
         p.submission?.findMany ? p.submission.findMany({ include: { reviews: true } }).catch(() => []) : [],
@@ -273,6 +277,45 @@ class SpatialDatabase {
           sectors: sectorsList,
           founders: foundersList,
           fundingRounds: roundsList,
+          businessModel: detail?.businessModel || undefined,
+          revenueModel: detail?.revenueModel || undefined,
+          revenueRange: detail?.revenueRange || undefined,
+          targetMarket: detail?.targetMarket || undefined,
+          customerSegments: detail?.customerSegments || [],
+          incubator: detail?.incubator || undefined,
+          accelerator: detail?.accelerator || undefined,
+          dpiitNumber: detail?.dpiitNumber || undefined,
+          demoVideoUrl: detail?.demoVideoUrl || undefined,
+          pitchDeckUrl: detail?.pitchDeckUrl || undefined,
+          competitiveEdge: detail?.competitiveEdge || undefined,
+          isProfitable: detail?.isProfitable ?? undefined,
+          milestones: (st.milestones || []).map((m: any) => ({
+            id: m.id,
+            title: m.title,
+            description: m.description || undefined,
+            date: m.date ? m.date.toISOString() : new Date().toISOString(),
+            category: m.category || undefined,
+          })),
+          awards: (st.awards || []).map((a: any) => ({
+            id: a.id,
+            title: a.title,
+            organization: a.organization || undefined,
+            year: a.year || undefined,
+            url: a.url || undefined,
+          })),
+          keyClients: (st.clients || []).map((c: any) => ({
+            id: c.id,
+            name: c.name,
+            logoUrl: c.logoUrl || undefined,
+            website: c.website || undefined,
+          })),
+          pressMentions: (st.pressMentions || []).map((p: any) => ({
+            id: p.id,
+            title: p.title,
+            publication: p.publication,
+            url: p.url,
+            publishedDate: p.publishedDate ? p.publishedDate.toISOString() : undefined,
+          })),
           verificationStatus: st.verificationStatus as any,
           source: detail?.source || 'Platform Verification',
           sourceUrl: detail?.sourceUrl || undefined,
@@ -369,7 +412,7 @@ class SpatialDatabase {
       });
 
       this.recomputeCounts();
-      logger.info(`✅ Loaded ${this.startups.size} startups, ${this.blogs.size} stories, ${this.districts.size} districts, ${this.sectors.size} sectors, ${this.investors.size} investors from PostgreSQL 35-table database.`);
+      logger.info(`Loaded ${this.startups.size} startups, ${this.blogs.size} stories, ${this.districts.size} districts, ${this.sectors.size} sectors, ${this.investors.size} investors from PostgreSQL 39-table database.`);
     } catch (err: any) {
       logger.error(`Error syncing from database: ${err.message}`);
       this.seedInMemory();
