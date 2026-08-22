@@ -17,7 +17,24 @@ import { AuditLog, CreateAuditLogDTO } from '../models/AuditLog.js';
 import { Notification } from '../models/Notification.js';
 import { generatePublicId } from '../utils/publicId.js';
 
-export const prisma = new PrismaClient();
+let dbUrl = process.env.DATABASE_URL?.trim();
+if (dbUrl) {
+  if ((dbUrl.startsWith('"') && dbUrl.endsWith('"')) || (dbUrl.startsWith("'") && dbUrl.endsWith("'"))) {
+    dbUrl = dbUrl.slice(1, -1).trim();
+  }
+}
+
+export const prisma = new PrismaClient(
+  dbUrl
+    ? {
+        datasources: {
+          db: {
+            url: dbUrl,
+          },
+        },
+      }
+    : undefined
+);
 
 class SpatialDatabase {
   private static instance: SpatialDatabase;
