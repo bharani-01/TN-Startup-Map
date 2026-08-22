@@ -101,20 +101,29 @@ export class StartupRepository {
   }
 
   async findById(id: string): Promise<Startup | null> {
+    if (!id) return null;
+    const q = id.toLowerCase().trim();
     let s = db.startups.get(id);
     if (!s) {
-      s = Array.from(db.startups.values()).find((item) => item.publicId === id || item.id === id);
+      s = Array.from(db.startups.values()).find(
+        (item) =>
+          item.id === id ||
+          item.publicId === id ||
+          (item.slug && item.slug.toLowerCase() === q)
+      );
     }
     if (!s || s.isDeleted) return null;
     return s;
   }
 
   async findBySlug(slug: string): Promise<Startup | null> {
+    if (!slug) return null;
+    const q = slug.toLowerCase().trim();
     const s = Array.from(db.startups.values()).find(
       (item) =>
-        (item.slug.toLowerCase() === slug.toLowerCase() ||
-          item.id === slug ||
-          item.publicId === slug) &&
+        (item.id === slug ||
+          item.publicId === slug ||
+          (item.slug && item.slug.toLowerCase() === q)) &&
         !item.isDeleted
     );
     return s || null;
@@ -231,13 +240,94 @@ export class StartupRepository {
 
     db.startups.set(id, startup);
     db.recomputeCounts();
+
+    try {
+      const stageMap: Record<string, string> = {
+        Idea: 'IDEA',
+        'Pre-Seed': 'PRE_SEED',
+        Seed: 'SEED',
+        'Series A': 'SERIES_A',
+        'Series B+': 'SERIES_B_PLUS',
+        Bootstrapped: 'BOOTSTRAPPED',
+        Acquired: 'ACQUIRED',
+      };
+
+      const fundingMap: Record<string, string> = {
+        Bootstrapped: 'BOOTSTRAPPED',
+        Angel: 'ANGEL',
+        'Pre-Seed': 'PRE_SEED',
+        Seed: 'SEED',
+        'Venture Funded': 'VENTURE_FUNDED',
+      };
+
+      const districtObj = await (prisma as any).district?.findFirst({
+        where: { OR: [{ slug: startup.districtSlug }, { name: startup.district }] },
+      });
+
+      await (prisma as any).startup?.create({
+        data: {
+          id: startup.id,
+          publicId: startup.publicId,
+          slug: startup.slug,
+          name: startup.name,
+          tagline: startup.tagline || startup.name,
+          website: startup.website || '',
+          stage: (stageMap[startup.stage] || 'SEED') as any,
+          fundingType: (fundingMap[startup.fundingType] || 'BOOTSTRAPPED') as any,
+          foundedYear: startup.foundedYear || new Date().getFullYear(),
+          teamSize: startup.teamSize || '1-10',
+          verificationStatus: 'VERIFIED',
+          claimedByUserId: startup.claimedByUserId || undefined,
+          trendingScore: startup.trendingScore || 70,
+          isHiring: Boolean(startup.isHiring),
+          details: {
+            create: {
+              description: startup.description || startup.tagline || startup.name,
+              extendedBio: startup.extendedBio || undefined,
+              brandColor: startup.brandColor || undefined,
+              logoUrl: startup.logoUrl || undefined,
+              bannerUrl: startup.bannerUrl || undefined,
+              businessModel: startup.businessModel || undefined,
+              revenueModel: startup.revenueModel || undefined,
+              source: startup.source || 'Platform Verification',
+              sourceUrl: startup.sourceUrl || undefined,
+            },
+          },
+          location: {
+            create: {
+              districtId: districtObj?.id || undefined,
+              city: startup.city || startup.district || 'Chennai',
+              address: startup.address || undefined,
+              pincode: startup.pincode || undefined,
+              latitude: startup.latitude || 13.0827,
+              longitude: startup.longitude || 80.2707,
+            },
+          },
+          founders: startup.founders && startup.founders.length > 0 ? {
+            create: startup.founders.map((f) => ({
+              publicId: generatePublicId('fnd'),
+              name: f.name,
+              role: f.role || 'Founder',
+              bio: f.bio || undefined,
+              linkedin: f.linkedin || undefined,
+            })),
+          } : undefined,
+        },
+      });
+    } catch (err: any) {
+      // Memory fallback active
+    }
+
     return startup;
   }
 
   async update(id: string, data: Partial<Startup>): Promise<Startup | null> {
+    const q = id.toLowerCase();
     let existing = db.startups.get(id);
     if (!existing) {
-      existing = Array.from(db.startups.values()).find((s) => s.publicId === id || s.id === id);
+      existing = Array.from(db.startups.values()).find(
+        (s) => s.id === id || s.publicId === id || s.slug.toLowerCase() === q
+      );
     }
     if (!existing) return null;
 
@@ -248,30 +338,65 @@ export class StartupRepository {
     };
     db.startups.set(existing.id, updated);
     db.recomputeCounts();
+
+    // Async sync to database
+    try {
+      if (data.tagline !== undefined || data.description !== undefined || data.website !== undefined) {
+        await (prisma as any).startupDetails?.updateMany({
+          where: { startupId: existing.id },
+          data: {
+            tagline: data.tagline || undefined,
+            description: data.description || undefined,
+          },
+        });
+      }
+    } catch {
+      // Memory synced
+    }
+
     return updated;
   }
 
   async delete(id: string, deletedByUserId?: string): Promise<boolean> {
+    const q = id.toLowerCase();
     let existing = db.startups.get(id);
     if (!existing) {
-      existing = Array.from(db.startups.values()).find((s) => s.publicId === id || s.id === id);
+      existing = Array.from(db.startups.values()).find(
+        (s) => s.id === id || s.publicId === id || s.slug.toLowerCase() === q
+      );
     }
     if (!existing) return false;
 
     existing.isDeleted = true;
     existing.deletedAt = new Date().toISOString();
-    existing.deletedByUserId = deletedByUserId || 'admin';
+    existing.deletedByUserId = deletedByUserId || null;
     existing.updatedAt = new Date().toISOString();
-    
+
     db.startups.set(existing.id, existing);
     db.recomputeCounts();
+
+    try {
+      await (prisma as any).startup?.update({
+        where: { id: existing.id },
+        data: {
+          deletedAt: new Date(existing.deletedAt),
+          deletedByUserId: existing.deletedByUserId || undefined,
+        },
+      });
+    } catch {
+      // Memory synced
+    }
+
     return true;
   }
 
   async restore(id: string): Promise<Startup | null> {
+    const q = id.toLowerCase();
     let existing = db.startups.get(id);
     if (!existing) {
-      existing = Array.from(db.startups.values()).find((s) => s.publicId === id || s.id === id);
+      existing = Array.from(db.startups.values()).find(
+        (s) => s.id === id || s.publicId === id || s.slug.toLowerCase() === q
+      );
     }
     if (!existing) return null;
 
@@ -282,6 +407,19 @@ export class StartupRepository {
 
     db.startups.set(existing.id, existing);
     db.recomputeCounts();
+
+    try {
+      await (prisma as any).startup?.update({
+        where: { id: existing.id },
+        data: {
+          deletedAt: null,
+          deletedByUserId: null,
+        },
+      });
+    } catch {
+      // Memory synced
+    }
+
     return existing;
   }
 }

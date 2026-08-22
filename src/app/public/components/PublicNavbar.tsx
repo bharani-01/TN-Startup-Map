@@ -14,7 +14,10 @@ import {
   Briefcase,
   ChevronDown,
   Bookmark,
-  BookOpen
+  BookOpen,
+  LayoutDashboard,
+  Edit3,
+  PenTool
 } from 'lucide-react';
 import { useAuth } from '../../../context/AuthContext';
 import { useBookmarks } from '../../../context/BookmarkContext';
@@ -26,7 +29,7 @@ interface PublicNavbarProps {
 export const PublicNavbar: React.FC<PublicNavbarProps> = ({ onOpenSearch }) => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { user, isAuthenticated, isFounder, isAdmin, logout } = useAuth();
+  const { user, isAuthenticated, isFounder, isAdmin, isUser, logout } = useAuth();
   const { count: bookmarkedCount } = useBookmarks();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [userDropdownOpen, setUserDropdownOpen] = useState(false);
@@ -157,61 +160,112 @@ export const PublicNavbar: React.FC<PublicNavbarProps> = ({ onOpenSearch }) => {
                 </button>
 
                 {userDropdownOpen && (
-                  <div 
-                    className="absolute right-0 mt-2 w-56 rounded-3xl apple-glass-elevated py-2 z-50 animate-in fade-in"
+                    <div 
+                    className="absolute right-0 mt-2 w-64 rounded-3xl apple-glass-elevated py-2 z-50 shadow-apple-card border border-black/[0.08] animate-in fade-in"
                     onMouseLeave={() => setUserDropdownOpen(false)}
                   >
-                    <div className="px-4 py-2.5 border-b border-black/[0.06]">
-                      <div className="flex items-center justify-between">
+                    {/* User Header */}
+                    <div className="px-4 py-3 border-b border-black/[0.06] bg-black/[0.02]">
+                      <div className="flex items-center justify-between gap-2">
                         <p className="text-xs font-bold text-[#1D1D1F] truncate">{user.name}</p>
-                        {user.displayId && (
-                          <span className="font-mono text-[9px] font-bold text-[#0071E3] bg-[#0071E3]/10 px-1.5 py-0.5 rounded">
-                            {user.displayId}
-                          </span>
-                        )}
+                        <span className={`text-[9px] font-bold px-2 py-0.5 rounded-full border ${
+                          isAdmin 
+                            ? 'bg-amber-50 text-amber-700 border-amber-200' 
+                            : isFounder 
+                            ? 'bg-emerald-50 text-emerald-700 border-emerald-200' 
+                            : 'bg-blue-50 text-blue-700 border-blue-200'
+                        }`}>
+                          {user.role}
+                        </span>
                       </div>
-                      <p className="text-[11px] text-[#86868B] truncate">{user.email}</p>
+                      <p className="text-[11px] text-[#86868B] truncate mt-0.5">{user.email}</p>
                     </div>
 
-                    <Link
-                      to="/bookmarks"
-                      onClick={() => setUserDropdownOpen(false)}
-                      className="flex items-center justify-between px-4 py-2 text-xs font-medium text-[#1D1D1F] hover:bg-black/[0.04] transition-colors"
-                    >
-                      <div className="flex items-center gap-2.5">
-                        <Bookmark className="w-3.5 h-3.5 text-[#0071E3]" />
-                        <span>Saved Startups</span>
-                      </div>
-                      {bookmarkedCount > 0 && (
-                        <span className="px-1.5 py-0.2 rounded-full text-[10px] font-bold bg-[#0071E3] text-white">
-                          {bookmarkedCount}
-                        </span>
-                      )}
-                    </Link>
-
+                    {/* Founder Studio Links - Only for Founders and Admins */}
                     {isFounder && (
-                      <Link
-                        to="/founder/dashboard"
-                        onClick={() => setUserDropdownOpen(false)}
-                        className="flex items-center gap-2.5 px-4 py-2 text-xs font-medium text-[#1D1D1F] hover:bg-black/[0.04] transition-colors"
-                      >
-                        <Briefcase className="w-3.5 h-3.5 text-[#0071E3]" />
-                        <span>Founder Portal</span>
-                      </Link>
+                      <div className="py-1 border-b border-black/[0.06]">
+                        <span className="px-4 py-1 text-[10px] font-bold text-[#86868B] uppercase tracking-wider block">
+                          Founder Studio
+                        </span>
+                        <Link
+                          to="/founder/dashboard"
+                          onClick={() => setUserDropdownOpen(false)}
+                          className="flex items-center gap-2.5 px-4 py-2 text-xs font-semibold text-[#1D1D1F] hover:bg-[#0071E3]/5 hover:text-[#0071E3] transition-colors"
+                        >
+                          <LayoutDashboard className="w-3.5 h-3.5 text-[#0071E3]" />
+                          <span>Founder Dashboard</span>
+                        </Link>
+                        <Link
+                          to="/founder/edit"
+                          onClick={() => setUserDropdownOpen(false)}
+                          className="flex items-center gap-2.5 px-4 py-2 text-xs font-medium text-[#1D1D1F] hover:bg-[#0071E3]/5 hover:text-[#0071E3] transition-colors"
+                        >
+                          <Edit3 className="w-3.5 h-3.5 text-[#86868B]" />
+                          <span>Edit Company Profile</span>
+                        </Link>
+                        <Link
+                          to="/blog/new"
+                          onClick={() => setUserDropdownOpen(false)}
+                          className="flex items-center gap-2.5 px-4 py-2 text-xs font-medium text-[#1D1D1F] hover:bg-[#0071E3]/5 hover:text-[#0071E3] transition-colors"
+                        >
+                          <PenTool className="w-3.5 h-3.5 text-[#86868B]" />
+                          <span>Write Founder Story</span>
+                        </Link>
+                      </div>
                     )}
 
+                    {/* Community Member Links */}
+                    {isUser && (
+                      <div className="py-1 border-b border-black/[0.06]">
+                        <span className="px-4 py-1 text-[10px] font-bold text-[#86868B] uppercase tracking-wider block">
+                          Community Hub
+                        </span>
+                        <Link
+                          to="/submit"
+                          onClick={() => setUserDropdownOpen(false)}
+                          className="flex items-center gap-2.5 px-4 py-2 text-xs font-semibold text-[#1D1D1F] hover:bg-[#0071E3]/5 hover:text-[#0071E3] transition-colors"
+                        >
+                          <Plus className="w-3.5 h-3.5 text-[#0071E3]" />
+                          <span>Submit Your Startup</span>
+                        </Link>
+                      </div>
+                    )}
+
+                    {/* Saved & Quick Links */}
+                    <div className="py-1 border-b border-black/[0.06]">
+                      <Link
+                        to="/bookmarks"
+                        onClick={() => setUserDropdownOpen(false)}
+                        className="flex items-center justify-between px-4 py-2 text-xs font-medium text-[#1D1D1F] hover:bg-black/[0.04] transition-colors"
+                      >
+                        <div className="flex items-center gap-2.5">
+                          <Bookmark className="w-3.5 h-3.5 text-[#0071E3]" />
+                          <span>Saved Startups</span>
+                        </div>
+                        {bookmarkedCount > 0 && (
+                          <span className="px-1.5 py-0.2 rounded-full text-[10px] font-bold bg-[#0071E3] text-white">
+                            {bookmarkedCount}
+                          </span>
+                        )}
+                      </Link>
+                    </div>
+
+                    {/* Admin Console (If Admin) */}
                     {isAdmin && (
-                      <Link
-                        to="/admin"
-                        onClick={() => setUserDropdownOpen(false)}
-                        className="flex items-center gap-2.5 px-4 py-2 text-xs font-medium text-[#1D1D1F] hover:bg-black/[0.04] transition-colors"
-                      >
-                        <ShieldCheck className="w-3.5 h-3.5 text-amber-600" />
-                        <span>Admin Console</span>
-                      </Link>
+                      <div className="py-1 border-b border-black/[0.06]">
+                        <Link
+                          to="/admin"
+                          onClick={() => setUserDropdownOpen(false)}
+                          className="flex items-center gap-2.5 px-4 py-2 text-xs font-semibold text-amber-700 hover:bg-amber-50/60 transition-colors"
+                        >
+                          <ShieldCheck className="w-3.5 h-3.5 text-amber-600" />
+                          <span>Admin Console</span>
+                        </Link>
+                      </div>
                     )}
 
-                    <div className="pt-1 border-t border-black/[0.06]">
+                    {/* Sign Out */}
+                    <div className="pt-1">
                       <button
                         onClick={() => {
                           logout();
@@ -324,20 +378,48 @@ export const PublicNavbar: React.FC<PublicNavbarProps> = ({ onOpenSearch }) => {
             {isAuthenticated && user ? (
               <div className="space-y-1 pt-2">
                 {isFounder && (
+                  <>
+                    <Link
+                      to="/founder/dashboard"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="flex items-center gap-2.5 px-3.5 py-2 text-xs font-semibold text-[#1D1D1F] rounded-xl hover:bg-black/[0.04]"
+                    >
+                      <LayoutDashboard className="w-4 h-4 text-[#0071E3]" />
+                      <span>Founder Dashboard</span>
+                    </Link>
+                    <Link
+                      to="/founder/edit"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="flex items-center gap-2.5 px-3.5 py-2 text-xs font-medium text-[#1D1D1F] rounded-xl hover:bg-black/[0.04]"
+                    >
+                      <Edit3 className="w-4 h-4 text-[#86868B]" />
+                      <span>Edit Company Profile</span>
+                    </Link>
+                    <Link
+                      to="/blog/new"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="flex items-center gap-2.5 px-3.5 py-2 text-xs font-medium text-[#1D1D1F] rounded-xl hover:bg-black/[0.04]"
+                    >
+                      <PenTool className="w-4 h-4 text-[#86868B]" />
+                      <span>Write Founder Story</span>
+                    </Link>
+                  </>
+                )}
+                {isUser && (
                   <Link
-                    to="/founder/dashboard"
+                    to="/submit"
                     onClick={() => setMobileMenuOpen(false)}
                     className="flex items-center gap-2.5 px-3.5 py-2 text-xs font-semibold text-[#1D1D1F] rounded-xl hover:bg-black/[0.04]"
                   >
-                    <Briefcase className="w-4 h-4 text-[#0071E3]" />
-                    <span>Founder Dashboard</span>
+                    <Plus className="w-4 h-4 text-[#0071E3]" />
+                    <span>Submit Your Startup</span>
                   </Link>
                 )}
                 {isAdmin && (
                   <Link
                     to="/admin"
                     onClick={() => setMobileMenuOpen(false)}
-                    className="flex items-center gap-2.5 px-3.5 py-2 text-xs font-semibold text-[#1D1D1F] rounded-xl hover:bg-black/[0.04]"
+                    className="flex items-center gap-2.5 px-3.5 py-2 text-xs font-semibold text-amber-700 rounded-xl hover:bg-amber-50"
                   >
                     <ShieldCheck className="w-4 h-4 text-amber-600" />
                     <span>Admin Console</span>

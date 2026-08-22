@@ -213,11 +213,11 @@ export const FeaturedLeaders: React.FC = () => {
             Tamil Nadu Venture Corridor • Innovation Radar
           </p>
 
-          {/* SOTA Art Typography Headline */}
+          {/* SOTA Display Headline */}
           <div className="space-y-2">
-            <h2 className="font-art font-extrabold text-3xl sm:text-4xl lg:text-[44px] xl:text-[52px] text-[#1D1D1F] tracking-[-0.035em] leading-[1.08] pb-1">
+            <h2 className="font-display font-bold text-3xl sm:text-4xl lg:text-[44px] xl:text-[50px] text-[#1D1D1F] tracking-[-0.035em] leading-[1.08] pb-1">
               Spotlight on Tamil Nadu <br />
-              <span className="inline-block font-editorial italic font-normal text-4xl sm:text-5xl lg:text-[52px] xl:text-[60px] text-[#0071E3] pr-3 sm:pr-5 pb-1">
+              <span className="inline-block text-4xl sm:text-5xl lg:text-[50px] xl:text-[56px] text-[#0071E3] pr-3 sm:pr-5 pb-1">
                 Innovation Leaders
               </span>
             </h2>
@@ -231,7 +231,7 @@ export const FeaturedLeaders: React.FC = () => {
           {/* Verified Ecosystem KPI Badges (Real Metrics) */}
           <div className="grid grid-cols-3 gap-3 sm:gap-4 max-w-lg pt-1">
             <div className="p-3.5 rounded-2xl bg-white/80 border border-black/[0.06] shadow-2xs backdrop-blur-sm">
-              <div className="text-lg sm:text-xl font-extrabold font-art text-[#1D1D1F] tracking-tight">
+              <div className="text-lg sm:text-xl font-bold font-display text-[#1D1D1F] tracking-tight">
                 $14B+
               </div>
               <div className="text-[10px] sm:text-[11px] text-[#86868B] font-semibold mt-0.5 leading-tight">
@@ -240,7 +240,7 @@ export const FeaturedLeaders: React.FC = () => {
             </div>
 
             <div className="p-3.5 rounded-2xl bg-white/80 border border-black/[0.06] shadow-2xs backdrop-blur-sm">
-              <div className="text-lg sm:text-xl font-extrabold font-art text-[#0071E3] tracking-tight">
+              <div className="text-lg sm:text-xl font-bold font-display text-[#0071E3] tracking-tight">
                 #1 SaaS & EV
               </div>
               <div className="text-[10px] sm:text-[11px] text-[#86868B] font-semibold mt-0.5 leading-tight">
@@ -249,7 +249,7 @@ export const FeaturedLeaders: React.FC = () => {
             </div>
 
             <div className="p-3.5 rounded-2xl bg-white/80 border border-black/[0.06] shadow-2xs backdrop-blur-sm">
-              <div className="text-lg sm:text-xl font-extrabold font-art text-[#5856D6] tracking-tight">
+              <div className="text-lg sm:text-xl font-bold font-display text-[#5856D6] tracking-tight">
                 38 Hubs
               </div>
               <div className="text-[10px] sm:text-[11px] text-[#86868B] font-semibold mt-0.5 leading-tight">
@@ -485,7 +485,7 @@ export const FeaturedLeaders: React.FC = () => {
                     className="w-full h-full object-contain"
                   />
                 </div>
-                <p className="font-art font-extrabold text-[11px] sm:text-xs text-[#1D1D1F] group-hover:text-[#0071E3] transition-colors truncate max-w-[95px] sm:max-w-[110px]">
+                <p className="font-bold text-[11px] sm:text-xs text-[#1D1D1F] group-hover:text-[#0071E3] transition-colors truncate max-w-[95px] sm:max-w-[110px]">
                   {activeLeader.shortName}
                 </p>
                 <span className="text-[9px] font-mono text-[#0071E3] font-semibold truncate max-w-[90px]">
@@ -506,7 +506,7 @@ export const FeaturedLeaders: React.FC = () => {
                   </div>
                   <div>
                     <div className="flex items-center gap-2">
-                      <h4 className="font-art font-extrabold text-sm sm:text-base text-[#1D1D1F]">
+                      <h4 className="font-display font-bold text-sm sm:text-base text-[#1D1D1F]">
                         {activeLeader.name}
                       </h4>
                       <span className="px-2 py-0.5 rounded-full text-[9px] font-mono font-bold bg-[#0071E3]/10 text-[#0071E3]">

@@ -53,8 +53,7 @@ class SpatialDatabase {
       await this.syncFromDatabase();
     } catch (err: any) {
       this.usePrisma = false;
-      logger.warn(`PostgreSQL direct connection fallback: ${err.message}. Initializing in-memory spatial cache with cryptographic IDs.`);
-      this.seedInMemory();
+      logger.warn(`PostgreSQL connection failed: ${err.message}. App will serve empty state until DB is available.`);
     }
   }
 
@@ -149,8 +148,7 @@ class SpatialDatabase {
       ]);
 
       if (!dbStartups || dbStartups.length === 0) {
-        logger.info('Database empty or not yet migrated. Seeding initial data in-memory...');
-        this.seedInMemory();
+        logger.info('Database is empty. Serving empty state — seed the database to populate startup data.');
         return;
       }
 
@@ -316,6 +314,13 @@ class SpatialDatabase {
             url: p.url,
             publishedDate: p.publishedDate ? p.publishedDate.toISOString() : undefined,
           })),
+          contactEmail: loc?.contactEmail || detail?.contactEmail || foundersList.find((f: any) => f.email)?.email || undefined,
+          contactPhone: loc?.contactPhone || undefined,
+          address: loc?.address || undefined,
+          pincode: loc?.pincode || undefined,
+          linkedin: loc?.linkedin || undefined,
+          twitter: loc?.twitter || undefined,
+          github: loc?.github || undefined,
           verificationStatus: st.verificationStatus as any,
           source: detail?.source || 'Platform Verification',
           sourceUrl: detail?.sourceUrl || undefined,
@@ -329,6 +334,25 @@ class SpatialDatabase {
           createdAt: st.createdAt.toISOString(),
           updatedAt: st.updatedAt.toISOString(),
         });
+      });
+
+      // Cross-link user claimed startups from startup entity ownership
+      this.startups.forEach((s) => {
+        if (s.claimedByUserId) {
+          const u = this.users.get(s.claimedByUserId) || Array.from(this.users.values()).find((usr) => usr.publicId === s.claimedByUserId);
+          if (u) {
+            u.claimedStartupId = u.claimedStartupId || s.id;
+            u.claimedStartupIds = Array.from(new Set([...(u.claimedStartupIds || []), s.id]));
+          }
+        }
+        if (s.contactEmail) {
+          const normEmail = s.contactEmail.toLowerCase().trim();
+          const u = Array.from(this.users.values()).find((usr) => usr.email.toLowerCase() === normEmail);
+          if (u) {
+            u.claimedStartupId = u.claimedStartupId || s.id;
+            u.claimedStartupIds = Array.from(new Set([...(u.claimedStartupIds || []), s.id]));
+          }
+        }
       });
 
       this.blogs.clear();

@@ -21,7 +21,10 @@ import {
   Phone,
   Mail,
   Layers,
-  Code
+  Code,
+  Search,
+  Clock,
+  Filter
 } from 'lucide-react';
 import { useAuth } from '../../../context/AuthContext';
 
@@ -144,15 +147,117 @@ export const AdminSubmissions: React.FC = () => {
     }
   };
 
+  const [statusFilter, setStatusFilter] = useState<'PENDING_REVIEW' | 'APPROVED' | 'REJECTED' | 'ALL'>('PENDING_REVIEW');
+  const [searchQuery, setSearchQuery] = useState<string>('');
+
+  const pendingCount = submissions.filter((s) => s.status === 'PENDING_REVIEW').length;
+  const approvedCount = submissions.filter((s) => s.status === 'APPROVED').length;
+  const rejectedCount = submissions.filter((s) => s.status === 'REJECTED').length;
+  const allCount = submissions.length;
+
+  const filteredSubmissions = submissions.filter((sub) => {
+    // 1. Status Filter (Defaults to PENDING_REVIEW - non approved)
+    if (statusFilter !== 'ALL') {
+      if (sub.status !== statusFilter) return false;
+    }
+
+    // 2. Search Filter
+    if (searchQuery.trim()) {
+      const q = searchQuery.toLowerCase().trim();
+      const rawData = sub?.data || {};
+      const name = (sub?.name || rawData.name || sub?.startupName || '').toLowerCase();
+      const founderName = (sub?.founderName || rawData.founderName || '').toLowerCase();
+      const founderEmail = (sub?.submittedByEmail || sub?.founderEmail || rawData.founderEmail || '').toLowerCase();
+      const district = (sub?.district || rawData.district || '').toLowerCase();
+      const city = (sub?.city || rawData.city || '').toLowerCase();
+      const sectors = (Array.isArray(sub?.sectors) ? sub.sectors : (Array.isArray(rawData.sectors) ? rawData.sectors : [])).join(' ').toLowerCase();
+
+      return (
+        name.includes(q) ||
+        founderName.includes(q) ||
+        founderEmail.includes(q) ||
+        district.includes(q) ||
+        city.includes(q) ||
+        sectors.includes(q)
+      );
+    }
+
+    return true;
+  });
+
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="text-2xl sm:text-3xl font-extrabold font-display text-white tracking-tight">
-          Pending Startup Submissions
-        </h1>
-        <p className="text-xs sm:text-sm text-apple-secondary mt-1">
-          Review community and founder proposals. Inspect complete submissions and one-click approve to publish to the live map.
-        </p>
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <h1 className="text-2xl sm:text-3xl font-extrabold font-display text-white tracking-tight">
+            Startup Submissions Queue
+          </h1>
+          <p className="text-xs sm:text-sm text-apple-secondary mt-1">
+            Review community and founder proposals. Filter by status and one-click approve to publish.
+          </p>
+        </div>
+
+        <div className="relative w-full sm:w-80">
+          <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-3" />
+          <input
+            type="text"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder="Search submission, founder, district..."
+            className="w-full pl-9 pr-4 py-2.5 text-xs bg-white/5 border border-white/10 rounded-full text-white placeholder-slate-400 focus:bg-white/10 focus:ring-2 focus:ring-[#0071E3]/20 focus:border-[#0071E3] transition-all"
+          />
+        </div>
+      </div>
+
+      {/* Filter Status Tabs - Default to Pending Review (Not Approved) */}
+      <div className="flex items-center gap-2 overflow-x-auto pb-1">
+        <button
+          onClick={() => setStatusFilter('PENDING_REVIEW')}
+          className={`px-4 py-2 rounded-2xl text-xs font-bold transition-all flex items-center gap-1.5 shrink-0 ${
+            statusFilter === 'PENDING_REVIEW'
+              ? 'bg-apple-amber text-black shadow-apple-sm'
+              : 'bg-white/5 text-slate-400 hover:text-white hover:bg-white/10'
+          }`}
+        >
+          <Clock className="w-3.5 h-3.5" />
+          <span>Pending Review ({pendingCount})</span>
+        </button>
+
+        <button
+          onClick={() => setStatusFilter('APPROVED')}
+          className={`px-4 py-2 rounded-2xl text-xs font-bold transition-all flex items-center gap-1.5 shrink-0 ${
+            statusFilter === 'APPROVED'
+              ? 'bg-apple-emerald text-white shadow-apple-sm'
+              : 'bg-white/5 text-slate-400 hover:text-white hover:bg-white/10'
+          }`}
+        >
+          <CheckCircle2 className="w-3.5 h-3.5" />
+          <span>Approved ({approvedCount})</span>
+        </button>
+
+        <button
+          onClick={() => setStatusFilter('REJECTED')}
+          className={`px-4 py-2 rounded-2xl text-xs font-bold transition-all flex items-center gap-1.5 shrink-0 ${
+            statusFilter === 'REJECTED'
+              ? 'bg-rose-600 text-white shadow-apple-sm'
+              : 'bg-white/5 text-slate-400 hover:text-white hover:bg-white/10'
+          }`}
+        >
+          <XCircle className="w-3.5 h-3.5" />
+          <span>Rejected ({rejectedCount})</span>
+        </button>
+
+        <button
+          onClick={() => setStatusFilter('ALL')}
+          className={`px-4 py-2 rounded-2xl text-xs font-bold transition-all flex items-center gap-1.5 shrink-0 ${
+            statusFilter === 'ALL'
+              ? 'bg-[#0071E3] text-white shadow-apple-sm'
+              : 'bg-white/5 text-slate-400 hover:text-white hover:bg-white/10'
+          }`}
+        >
+          <Filter className="w-3.5 h-3.5" />
+          <span>All Submissions ({allCount})</span>
+        </button>
       </div>
 
       {message && (
@@ -177,17 +282,23 @@ export const AdminSubmissions: React.FC = () => {
           <Loader2 className="w-8 h-8 text-apple-blue animate-spin mx-auto" />
           <p className="text-xs text-apple-secondary">Loading review queue...</p>
         </div>
-      ) : submissions.length === 0 ? (
+      ) : filteredSubmissions.length === 0 ? (
         <div className="p-12 text-center bg-[#1c1c1e] rounded-3xl border border-white/10 space-y-3 shadow-apple-modal">
           <CheckCircle2 className="w-12 h-12 text-apple-emerald mx-auto" />
-          <h3 className="text-base font-bold text-white font-display">Queue All Clear</h3>
+          <h3 className="text-base font-bold text-white font-display">
+            {statusFilter === 'PENDING_REVIEW'
+              ? 'No Pending Submissions'
+              : `No ${statusFilter.toLowerCase()} submissions`}
+          </h3>
           <p className="text-xs text-apple-secondary max-w-sm mx-auto">
-            No pending submissions awaiting review. Check back later or test by submitting a new startup!
+            {statusFilter === 'PENDING_REVIEW'
+              ? 'All incoming startup submissions have been reviewed and verified!'
+              : `No submissions match the current filter (${statusFilter}).`}
           </p>
         </div>
       ) : (
         <div className="space-y-4">
-          {submissions.map((sub) => {
+          {filteredSubmissions.map((sub) => {
             const rawData = sub?.data || {};
             const displayName = sub?.name || rawData.name || sub?.startupName || 'Startup';
             const displayInitial = displayName.charAt(0).toUpperCase();
@@ -211,8 +322,14 @@ export const AdminSubmissions: React.FC = () => {
                     <div>
                       <div className="flex items-center gap-2 flex-wrap">
                         <h3 className="font-bold text-base text-white">{displayName}</h3>
-                        <span className="px-3 py-0.5 rounded-full text-[10px] font-bold bg-apple-amber/20 text-apple-amber border border-apple-amber/30">
-                          {sub?.status || 'Pending'}
+                        <span className={`px-3 py-0.5 rounded-full text-[10px] font-bold border ${
+                          sub?.status === 'APPROVED'
+                            ? 'bg-apple-emerald/20 text-apple-emerald border-apple-emerald/30'
+                            : sub?.status === 'REJECTED'
+                            ? 'bg-rose-900/30 text-rose-300 border-rose-700/30'
+                            : 'bg-apple-amber/20 text-apple-amber border-apple-amber/30'
+                        }`}>
+                          {sub?.status === 'APPROVED' ? 'Approved & Verified' : (sub?.status === 'REJECTED' ? 'Rejected' : 'Pending Review')}
                         </span>
                         <span className="text-[11px] text-apple-secondary">
                           Submitted {displayDate}
@@ -235,27 +352,31 @@ export const AdminSubmissions: React.FC = () => {
                       <span>View Profile</span>
                     </button>
 
-                    <button
-                      onClick={() => handleReject(sub.id)}
-                      disabled={actionLoading === sub.id}
-                      className="px-4 py-2 rounded-full border border-rose-500/30 bg-rose-500/10 text-rose-300 hover:bg-rose-500/20 text-xs font-semibold flex items-center gap-1.5 transition-all apple-press"
-                    >
-                      <XCircle className="w-3.5 h-3.5" />
-                      <span>Reject</span>
-                    </button>
+                    {sub?.status === 'PENDING_REVIEW' && (
+                      <>
+                        <button
+                          onClick={() => handleReject(sub.id)}
+                          disabled={actionLoading === sub.id}
+                          className="px-4 py-2 rounded-full border border-rose-500/30 bg-rose-500/10 text-rose-300 hover:bg-rose-500/20 text-xs font-semibold flex items-center gap-1.5 transition-all apple-press"
+                        >
+                          <XCircle className="w-3.5 h-3.5" />
+                          <span>Reject</span>
+                        </button>
 
-                    <button
-                      onClick={() => handleApprove(sub.id)}
-                      disabled={actionLoading === sub.id}
-                      className="px-5 py-2 rounded-full bg-apple-emerald hover:bg-emerald-600 text-white text-xs font-semibold flex items-center gap-1.5 transition-all shadow-apple-sm apple-press"
-                    >
-                      {actionLoading === sub.id ? (
-                        <Loader2 className="w-3.5 h-3.5 animate-spin" />
-                      ) : (
-                        <CheckCircle2 className="w-3.5 h-3.5" />
-                      )}
-                      <span>Approve & Publish</span>
-                    </button>
+                        <button
+                          onClick={() => handleApprove(sub.id)}
+                          disabled={actionLoading === sub.id}
+                          className="px-5 py-2 rounded-full bg-apple-emerald hover:bg-emerald-600 text-white text-xs font-semibold flex items-center gap-1.5 transition-all shadow-apple-sm apple-press"
+                        >
+                          {actionLoading === sub.id ? (
+                            <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                          ) : (
+                            <CheckCircle2 className="w-3.5 h-3.5" />
+                          )}
+                          <span>Approve & Publish</span>
+                        </button>
+                      </>
+                    )}
                   </div>
                 </div>
 

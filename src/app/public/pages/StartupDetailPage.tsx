@@ -168,7 +168,7 @@ export const StartupDetailPage: React.FC = () => {
           <div className="w-12 h-12 rounded-2xl bg-rose-50 border border-rose-100 flex items-center justify-center mx-auto text-rose-600">
             <Building2 className="w-6 h-6" />
           </div>
-          <h2 className="text-lg font-bold font-art text-[#1D1D1F]">
+          <h2 className="text-lg font-bold font-display text-[#1D1D1F]">
             {error || 'Startup Entity Not Found'}
           </h2>
           <p className="text-xs text-[#86868B] leading-relaxed">
@@ -263,7 +263,7 @@ export const StartupDetailPage: React.FC = () => {
                     className="w-full h-full object-contain rounded-2xl" 
                   />
                 ) : (
-                  <div className="w-full h-full rounded-2xl bg-[#0071E3] text-white font-art font-extrabold text-3xl flex items-center justify-center shadow-inner">
+                  <div className="w-full h-full rounded-2xl bg-[#0071E3] text-white font-bold text-3xl flex items-center justify-center shadow-inner">
                     {startup.name.charAt(0)}
                   </div>
                 )}
@@ -272,7 +272,7 @@ export const StartupDetailPage: React.FC = () => {
               {/* Startup Name, Verification Status & Tagline */}
               <div className="pt-1 sm:pt-2 space-y-1.5">
                 <div className="flex items-center gap-2.5 flex-wrap">
-                  <h1 className="text-2xl sm:text-4xl font-extrabold font-art text-[#1D1D1F] tracking-tight">
+                  <h1 className="text-2xl sm:text-4xl font-bold font-display text-[#1D1D1F] tracking-tight">
                     {startup.name}
                   </h1>
                   {startup.verificationStatus === 'VERIFIED' && (
@@ -376,7 +376,7 @@ export const StartupDetailPage: React.FC = () => {
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 py-3 px-5 rounded-2xl bg-white/70 border border-black/[0.06] backdrop-blur-md shadow-2xs text-xs">
           <div>
             <span className="text-[11px] font-mono text-[#86868B] block">Total Capital</span>
-            <span className="font-extrabold font-art text-[#1D1D1F] text-sm mt-0.5 block truncate">
+            <span className="font-bold text-[#1D1D1F] text-sm mt-0.5 block truncate">
               {startup.totalFundingInr || startup.fundingType}
             </span>
           </div>
@@ -546,7 +546,7 @@ export const StartupDetailPage: React.FC = () => {
                     <div key={idx} className="p-4 rounded-2xl bg-white/70 border border-black/[0.05] space-y-1.5 shadow-2xs text-xs">
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-2">
-                          <span className="font-art font-extrabold text-[#1D1D1F] text-sm">{m.title}</span>
+                          <span className="font-bold text-[#1D1D1F] text-sm">{m.title}</span>
                           {m.category && (
                             <span className="px-2 py-0.5 rounded-md bg-[#0071E3]/10 text-[#0071E3] font-bold text-[10px]">
                               {m.category}
@@ -581,7 +581,7 @@ export const StartupDetailPage: React.FC = () => {
                   {startup.awards.map((a, idx) => (
                     <div key={idx} className="p-4 rounded-2xl bg-white/70 border border-black/[0.05] space-y-1 shadow-2xs text-xs">
                       <div className="flex items-start justify-between gap-2">
-                        <span className="font-art font-extrabold text-[#1D1D1F] text-xs leading-snug">{a.title}</span>
+                        <span className="font-bold text-[#1D1D1F] text-xs leading-snug">{a.title}</span>
                         {a.year && (
                           <span className="px-2 py-0.5 rounded-md bg-amber-500/10 text-amber-700 font-bold text-[10px] shrink-0">
                             {a.year}
@@ -723,7 +723,7 @@ export const StartupDetailPage: React.FC = () => {
                             {f.name.charAt(0)}
                           </div>
                           <div>
-                            <h4 className="font-art font-extrabold text-[#1D1D1F] text-xs">{f.name}</h4>
+                            <h4 className="font-bold text-[#1D1D1F] text-sm tracking-tight">{f.name}</h4>
                             <p className="text-[11px] font-semibold text-[#0071E3]">{f.role}</p>
                           </div>
                         </div>
@@ -775,7 +775,7 @@ export const StartupDetailPage: React.FC = () => {
                     <div key={idx} className="p-4 rounded-2xl bg-white/70 border border-black/[0.05] flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs shadow-2xs">
                       <div>
                         <div className="flex items-center gap-2">
-                          <span className="font-art font-extrabold text-[#1D1D1F] text-sm">{round.roundType}</span>
+                          <span className="font-display font-bold text-[#1D1D1F] text-sm">{round.roundType}</span>
                           <span className="text-[#86868B]">•</span>
                           <span className="font-mono text-[#86868B] text-xs">{round.date}</span>
                         </div>
@@ -787,7 +787,7 @@ export const StartupDetailPage: React.FC = () => {
                       </div>
 
                       <div className="text-right shrink-0">
-                        <span className="font-art font-extrabold text-sm text-[#34C759] block">
+                        <span className="font-display font-bold text-sm text-[#34C759] block">
                           {round.amountInr || round.amountUsd || 'Undisclosed'}
                         </span>
                       </div>
@@ -886,7 +886,7 @@ export const StartupDetailPage: React.FC = () => {
               </div>
 
               <div className="space-y-1 text-xs pt-1">
-                <p className="font-art font-extrabold text-[#1D1D1F]">{startup.city || startup.district}</p>
+                <p className="font-display font-bold text-[#1D1D1F]">{startup.city || startup.district}</p>
                 <p className="text-[#86868B] text-[11px]">{startup.district} District, Tamil Nadu</p>
                 <Link
                   to={`/map?district=${startup.districtSlug}`}

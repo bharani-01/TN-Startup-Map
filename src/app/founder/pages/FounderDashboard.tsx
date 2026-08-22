@@ -27,11 +27,12 @@ import { useAuth } from '../../../context/AuthContext';
 import { Startup } from '../../../types';
 
 export const FounderDashboard: React.FC = () => {
-  const { user } = useAuth();
+  const { user, token } = useAuth();
+  const [myStartups, setMyStartups] = useState<Startup[]>([]);
   const [startup, setStartup] = useState<Startup | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [activeStartupId, setActiveStartupId] = useState<string>(() => {
-    return localStorage.getItem('tn_active_startup_id') || user?.claimedStartupId || 'agnikul-cosmos';
+    return localStorage.getItem('tn_active_startup_id') || '';
   });
 
   useEffect(() => {
@@ -45,32 +46,47 @@ export const FounderDashboard: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    const fetchStartupProfile = async () => {
+    const fetchFounderStartups = async () => {
       try {
         setLoading(true);
-        const target = activeStartupId || user?.claimedStartupId || user?.companyName || 'agnikul-cosmos';
-        let res = await fetch(`/api/startups/${target}`);
-        let data = await res.json();
-        
-        if (data.success && data.data) {
-          setStartup(data.data);
-        } else {
-          // Fallback to agnikul-cosmos for verified founder demo
-          const fallbackRes = await fetch('/api/startups/agnikul-cosmos');
-          const fallbackData = await fallbackRes.json();
-          if (fallbackData.success && fallbackData.data) {
-            setStartup(fallbackData.data);
+        const res = await fetch('/api/founder/my-startups', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        const data = await res.json();
+
+        if (data.success && data.data?.startups) {
+          const list: Startup[] = data.data.startups;
+          setMyStartups(list);
+
+          if (list.length > 0) {
+            const found = list.find((s) => s.id === activeStartupId || s.slug === activeStartupId) || list[0];
+            setStartup(found);
+            setActiveStartupId(found.id);
+            localStorage.setItem('tn_active_startup_id', found.id);
+          } else {
+            setStartup(null);
           }
+        } else {
+          setMyStartups([]);
+          setStartup(null);
         }
       } catch (err) {
-        console.error('Error fetching founder startup:', err);
+        console.error('Error fetching founder startups:', err);
+        setMyStartups([]);
+        setStartup(null);
       } finally {
         setLoading(false);
       }
     };
 
-    fetchStartupProfile();
-  }, [user, activeStartupId]);
+    if (token) {
+      fetchFounderStartups();
+    } else {
+      setLoading(false);
+    }
+  }, [token, user, activeStartupId]);
 
   const firstName = user?.name ? user.name.split(' ')[0] : 'Founder';
 

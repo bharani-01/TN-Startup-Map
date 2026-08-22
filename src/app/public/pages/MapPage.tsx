@@ -355,16 +355,23 @@ export const MapPage: React.FC = () => {
           })}
 
           {startups.length === 0 && (
-            <div className="p-8 text-center space-y-2">
-              <Building2 className="w-8 h-8 text-[#86868B] mx-auto opacity-50" />
-              <p className="text-xs font-semibold text-[#1D1D1F]">No Startups Found</p>
-              <p className="text-[11px] text-[#86868B]">Try broadening your filter criteria or reset to view all ventures.</p>
-              <button
-                onClick={handleResetFilters}
-                className="mt-2 px-3 py-1 bg-[#0071E3] text-white rounded-full text-xs font-semibold apple-press"
-              >
-                Reset Filters
-              </button>
+            <div className="p-8 text-center space-y-3">
+              <div className="w-12 h-12 rounded-xl bg-[#F5F5F7] flex items-center justify-center mx-auto">
+                <Building2 className="w-6 h-6 text-[#86868B]" />
+              </div>
+              <p className="text-xs font-semibold text-[#1D1D1F]">No startups here yet</p>
+              <p className="text-[11px] text-[#86868B] leading-relaxed">The directory is empty or no results match your filters. Reset filters or add your startup.</p>
+              <div className="flex gap-2 justify-center flex-wrap pt-1">
+                <button
+                  onClick={handleResetFilters}
+                  className="px-3 py-1.5 bg-[#1D1D1F] text-white rounded-full text-[11px] font-semibold apple-press"
+                >
+                  Reset Filters
+                </button>
+                <a href="/submit" className="px-3 py-1.5 bg-[#F5F5F7] text-[#1D1D1F] rounded-full text-[11px] font-semibold apple-press">
+                  Add Startup
+                </a>
+              </div>
             </div>
           )}
         </div>

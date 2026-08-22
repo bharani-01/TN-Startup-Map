@@ -11,9 +11,17 @@ import { generatePublicId } from '../utils/publicId.js';
 
 export class ClaimService {
   async submitClaim(data: ClaimRequestDTO, userId?: string): Promise<Claim> {
-    const startup = await startupRepository.findById(data.startupId) || await startupRepository.findBySlug(data.startupSlug);
+    const targetIdentifier = data.startupId || data.startupSlug;
+    if (!targetIdentifier) {
+      throw ApiError.badRequest('Startup ID or slug is required to submit a claim');
+    }
+
+    const startup = (data.startupId ? await startupRepository.findById(data.startupId) : null) || 
+                    (data.startupSlug ? await startupRepository.findBySlug(data.startupSlug) : null) ||
+                    (await startupRepository.findById(targetIdentifier));
+
     if (!startup) {
-      throw ApiError.notFound('Target startup for claim not found');
+      throw ApiError.notFound('Target startup for claim not found in ecosystem');
     }
 
     if (!data.claimantName || !data.claimantEmail || !data.claimantRole || !data.proofDetails) {

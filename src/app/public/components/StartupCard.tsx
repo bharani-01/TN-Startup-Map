@@ -75,7 +75,7 @@ export const StartupCard: React.FC<StartupCardProps> = ({ startup, viewMode = 'g
                 onError={handleImageError}
               />
             ) : (
-              <div className="w-full h-full rounded-xl bg-[#0071E3] text-white font-art font-extrabold text-base flex items-center justify-center">
+              <div className="w-full h-full rounded-xl bg-[#0071E3] text-white font-bold text-base flex items-center justify-center">
                 {startup.name.charAt(0)}
               </div>
             )}
@@ -83,7 +83,7 @@ export const StartupCard: React.FC<StartupCardProps> = ({ startup, viewMode = 'g
 
           <div className="min-w-0 space-y-1">
             <div className="flex flex-wrap items-center gap-2">
-              <h3 className="font-art font-extrabold text-base sm:text-lg text-[#1D1D1F] group-hover:text-[#0071E3] transition-colors truncate">
+              <h3 className="font-display font-bold text-base sm:text-lg text-[#1D1D1F] group-hover:text-[#0071E3] transition-colors truncate">
                 {startup.name}
               </h3>
               {startup.verificationStatus === 'VERIFIED' && (
@@ -160,7 +160,7 @@ export const StartupCard: React.FC<StartupCardProps> = ({ startup, viewMode = 'g
                   onError={handleImageError}
                 />
               ) : (
-                <div className="w-full h-full rounded-xl bg-[#0071E3] text-white font-art font-extrabold text-sm flex items-center justify-center">
+                <div className="w-full h-full rounded-xl bg-[#0071E3] text-white font-bold text-sm flex items-center justify-center">
                   {startup.name.charAt(0)}
                 </div>
               )}
@@ -168,7 +168,7 @@ export const StartupCard: React.FC<StartupCardProps> = ({ startup, viewMode = 'g
 
             <div className="min-w-0">
               <div className="flex items-center gap-1.5">
-                <h3 className="font-art font-extrabold text-base text-[#1D1D1F] group-hover:text-[#0071E3] transition-colors truncate">
+                <h3 className="font-display font-bold text-base text-[#1D1D1F] group-hover:text-[#0071E3] transition-colors truncate">
                   {startup.name}
                 </h3>
                 {startup.verificationStatus === 'VERIFIED' && (
@@ -223,7 +223,7 @@ export const StartupCard: React.FC<StartupCardProps> = ({ startup, viewMode = 'g
       <div className="mt-5 pt-3.5 border-t border-black/[0.04] flex items-center justify-between text-xs">
         <div className="flex items-center gap-1.5">
           <span className="text-[#86868B] font-mono text-[11px]">Funding:</span>
-          <span className="font-art font-extrabold text-[#1D1D1F] text-xs">
+          <span className="font-semibold text-[#1D1D1F] text-xs">
             {startup.totalFundingInr || startup.fundingType}
           </span>
         </div>

@@ -17,16 +17,33 @@ export const LoginPage: React.FC = () => {
 
   const redirectParam = searchParams.get('redirect');
 
+  const getDestinationForUser = (role: string, targetRedirect?: string | null): string => {
+    if (targetRedirect && targetRedirect !== '/login' && targetRedirect !== '/') {
+      if (targetRedirect.startsWith('/admin') && role !== 'ADMIN' && role !== 'SUPER_ADMIN') {
+        return role === 'FOUNDER' ? '/founder/dashboard' : '/startups';
+      }
+      if (targetRedirect.startsWith('/founder') && role === 'USER') {
+        return '/startups';
+      }
+      return targetRedirect;
+    }
+
+    if (role === 'ADMIN' || role === 'SUPER_ADMIN') {
+      return '/admin';
+    }
+    if (role === 'FOUNDER') {
+      return '/founder/dashboard';
+    }
+    return '/startups';
+  };
+
   // Auto redirect if already authenticated
   React.useEffect(() => {
     if (isAuthenticated && currentUser) {
-      if (currentUser.role === 'ADMIN' || currentUser.role === 'SUPER_ADMIN') {
-        navigate('/admin', { replace: true });
-      } else if (currentUser.role === 'FOUNDER') {
-        navigate('/founder/dashboard', { replace: true });
-      }
+      const destination = getDestinationForUser(currentUser.role, redirectParam);
+      navigate(destination, { replace: true });
     }
-  }, [isAuthenticated, currentUser, navigate]);
+  }, [isAuthenticated, currentUser, navigate, redirectParam]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -41,7 +58,7 @@ export const LoginPage: React.FC = () => {
       }
       const res = await register(name, email, password, 'USER');
       if (res.success) {
-        navigate(redirectParam || '/startups');
+        navigate('/startups', { replace: true });
       } else {
         setError(res.error || 'Registration failed');
         setLoading(false);
@@ -49,16 +66,8 @@ export const LoginPage: React.FC = () => {
     } else {
       const res = await login(email, password);
       if (res.success && res.user) {
-        const role = res.user.role;
-        if (redirectParam && redirectParam !== '/') {
-          navigate(redirectParam);
-        } else if (role === 'ADMIN' || role === 'SUPER_ADMIN') {
-          navigate('/admin');
-        } else if (role === 'FOUNDER') {
-          navigate('/founder/dashboard');
-        } else {
-          navigate('/');
-        }
+        const destination = getDestinationForUser(res.user.role, redirectParam);
+        navigate(destination, { replace: true });
       } else {
         setError(res.error || 'Invalid email or password');
         setLoading(false);

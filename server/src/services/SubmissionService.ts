@@ -65,10 +65,12 @@ export class SubmissionService {
       fundingType: subData.fundingType,
       teamSize: subData.teamSize || '1-10',
       linkedin: subData.linkedin,
+      contactEmail: founderEmail,
       founders: [
         {
           name: founderName,
           role: 'Founder & CEO',
+          email: founderEmail,
           linkedin: subData.founderLinkedin,
         },
       ],
@@ -82,9 +84,11 @@ export class SubmissionService {
     const existingUser = await userRepository.findByEmail(founderEmail);
     let isNewUser = false;
     let tempPassword = '';
+    let founderUserId = '';
 
     if (existingUser) {
       isNewUser = false;
+      founderUserId = existingUser.id;
       const existingClaims = Array.isArray(existingUser.claimedStartupIds)
         ? existingUser.claimedStartupIds
         : (existingUser.claimedStartupId ? [existingUser.claimedStartupId] : []);
@@ -111,6 +115,7 @@ export class SubmissionService {
       const passwordHash = await bcrypt.hash(tempPassword, 10);
       const userId = generateInternalUserId();
       const publicId = generatePublicId('usr');
+      founderUserId = userId;
 
       const newUser = {
         id: userId,
@@ -138,6 +143,13 @@ export class SubmissionService {
       });
     }
 
+    // 3. Link founder user account ID and ensure VERIFIED status on startup
+    const finalStartup = await startupService.updateStartup(createdStartup.id, {
+      claimedByUserId: founderUserId,
+      contactEmail: founderEmail,
+      verificationStatus: VerificationStatus.VERIFIED,
+    });
+
     // 4. Update submission status
     const updatedSubmission = await submissionRepository.updateStatus(
       submissionId,
@@ -148,7 +160,7 @@ export class SubmissionService {
 
     return {
       submission: updatedSubmission,
-      startup: createdStartup,
+      startup: finalStartup || createdStartup,
       founderAccount: {
         email: founderEmail,
         name: founderName,

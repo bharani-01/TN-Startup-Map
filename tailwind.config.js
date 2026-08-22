@@ -67,9 +67,13 @@ export default {
           'sans-serif'
         ],
         art: [
-          'Syne',
           '-apple-system',
           'BlinkMacSystemFont',
+          '"SF Pro Display"',
+          '"SF Pro Text"',
+          '"Plus Jakarta Sans"',
+          'Manrope',
+          'Inter',
           'sans-serif'
         ],
         editorial: [

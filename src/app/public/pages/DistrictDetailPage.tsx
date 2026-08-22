@@ -143,8 +143,17 @@ export const DistrictDetailPage: React.FC = () => {
         </div>
 
         {startups.length === 0 ? (
-          <div className="py-16 text-center apple-glass-card rounded-3xl border border-black/[0.06] p-8 text-xs text-[#86868B]">
-            No startups listed in {district.name} yet. Be the first to register your venture!
+          <div className="py-20 flex flex-col items-center text-center space-y-4">
+            <div className="w-14 h-14 rounded-2xl bg-[#F5F5F7] flex items-center justify-center">
+              <Building2 className="w-7 h-7 text-[#86868B]" />
+            </div>
+            <div className="space-y-1.5">
+              <p className="text-base font-bold text-[#1D1D1F]">No startups in {district.name} yet</p>
+              <p className="text-sm text-[#86868B] max-w-xs mx-auto leading-relaxed">Be the first venture from this district to join the Tamil Nadu Startup Map.</p>
+            </div>
+            <a href="/submit" className="px-5 py-2.5 bg-[#1D1D1F] text-white text-xs font-semibold rounded-full inline-flex items-center gap-1.5 apple-press">
+              Register Your Startup
+            </a>
           </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">

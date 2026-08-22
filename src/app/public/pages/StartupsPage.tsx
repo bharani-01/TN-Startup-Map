@@ -131,9 +131,9 @@ export const StartupsPage: React.FC = () => {
             </div>
 
             {/* Majestic Headline */}
-            <h1 className="font-art font-extrabold text-3xl sm:text-5xl lg:text-6xl text-[#1D1D1F] tracking-[-0.035em] leading-[1.08] pb-1">
+            <h1 className="font-display font-bold text-3xl sm:text-5xl lg:text-6xl text-[#1D1D1F] tracking-[-0.035em] leading-[1.08] pb-1">
               Verified Tamil Nadu <br />
-              <span className="inline-block font-editorial italic font-normal text-3xl sm:text-5xl lg:text-6xl text-[#0071E3] pr-3 sm:pr-5 pb-1">
+              <span className="inline-block text-3xl sm:text-5xl lg:text-6xl text-[#0071E3] pr-3 sm:pr-5 pb-1">
                 Startup Directory
               </span>
             </h1>
@@ -192,19 +192,31 @@ export const StartupsPage: React.FC = () => {
             <p className="text-xs text-[#86868B] font-mono">Loading verified startups from database...</p>
           </div>
         ) : startups.length === 0 ? (
-          <div className="py-16 text-center rounded-3xl border border-black/[0.06] bg-white/60 p-8 space-y-4 shadow-2xs">
-            <Building2 className="w-12 h-12 text-[#86868B] mx-auto" />
-            <h3 className="text-lg font-bold text-[#1D1D1F] font-art">No Startups Found</h3>
-            <p className="text-xs text-[#86868B] max-w-md mx-auto">
-              No ventures match your active filters. Try clearing some filters or searching for another sector or district.
-            </p>
-            <button
-              onClick={handleResetFilters}
-              className="px-5 py-2.5 bg-[#1D1D1F] text-white text-xs font-semibold rounded-full inline-flex items-center gap-1.5 shadow-2xs apple-press cursor-pointer"
-            >
-              <RotateCcw className="w-3.5 h-3.5" />
-              <span>Reset All Filters</span>
-            </button>
+          <div className="py-20 flex flex-col items-center text-center space-y-5">
+            <div className="w-16 h-16 rounded-2xl bg-[#F5F5F7] flex items-center justify-center">
+              <Building2 className="w-8 h-8 text-[#86868B]" />
+            </div>
+            <div className="space-y-2">
+              <h3 className="text-xl font-bold text-[#1D1D1F] font-display">No startups here yet</h3>
+              <p className="text-sm text-[#86868B] max-w-sm mx-auto leading-relaxed">
+                No ventures match your current filters, or the directory is being populated. Try resetting your filters or be the first to add your startup.
+              </p>
+            </div>
+            <div className="flex items-center gap-3 flex-wrap justify-center">
+              <button
+                onClick={handleResetFilters}
+                className="px-5 py-2.5 bg-[#1D1D1F] text-white text-xs font-semibold rounded-full inline-flex items-center gap-1.5 shadow-2xs apple-press cursor-pointer"
+              >
+                <RotateCcw className="w-3.5 h-3.5" />
+                <span>Reset Filters</span>
+              </button>
+              <a
+                href="/submit"
+                className="px-5 py-2.5 bg-[#F5F5F7] text-[#1D1D1F] text-xs font-semibold rounded-full inline-flex items-center gap-1.5 apple-press cursor-pointer"
+              >
+                <span>Add Your Startup</span>
+              </a>
+            </div>
           </div>
         ) : viewMode === 'grid' ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 sm:gap-6">

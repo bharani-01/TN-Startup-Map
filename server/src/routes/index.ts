@@ -9,11 +9,13 @@ import claimRoutes from './claim.routes.js';
 import statsRoutes from './stats.routes.js';
 import adminRoutes from './admin.routes.js';
 import blogRoutes from './blog.routes.js';
+import founderRoutes from './founder.routes.js';
 
 const router = Router();
 
 router.use('/auth', authRoutes);
 router.use('/startups', startupRoutes);
+router.use('/founder', founderRoutes);
 router.use('/districts', districtRoutes);
 router.use('/sectors', sectorRoutes);
 router.use('/search', searchRoutes);

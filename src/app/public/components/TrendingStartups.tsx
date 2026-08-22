@@ -40,7 +40,7 @@ export const TrendingStartups: React.FC<TrendingStartupsProps> = ({ startups }) 
           Trending in Tamil Nadu • High-Velocity Startups
         </p>
 
-        <h2 className="font-art font-extrabold text-2xl sm:text-3xl lg:text-4xl text-[#1D1D1F] tracking-[-0.03em] leading-tight">
+        <h2 className="font-display font-bold text-2xl sm:text-3xl lg:text-4xl text-[#1D1D1F] tracking-[-0.03em] leading-tight">
           Ecosystem Momentum Leaders
         </h2>
       </div>
@@ -71,7 +71,7 @@ export const TrendingStartups: React.FC<TrendingStartupsProps> = ({ startups }) 
 
                 {/* Info */}
                 <div className="flex items-center gap-2 whitespace-nowrap">
-                  <span className="font-art font-extrabold text-sm sm:text-base text-[#1D1D1F] group-hover:text-[#0071E3] transition-colors">
+                  <span className="font-display font-bold text-sm sm:text-base text-[#1D1D1F] group-hover:text-[#0071E3] transition-colors">
                     {item.name}
                   </span>
                   {item.isVerified && (
@@ -109,7 +109,7 @@ export const TrendingStartups: React.FC<TrendingStartupsProps> = ({ startups }) 
 
                 {/* Info */}
                 <div className="flex items-center gap-2 whitespace-nowrap">
-                  <span className="font-art font-extrabold text-sm sm:text-base text-[#1D1D1F] group-hover:text-[#5856D6] transition-colors">
+                  <span className="font-display font-bold text-sm sm:text-base text-[#1D1D1F] group-hover:text-[#5856D6] transition-colors">
                     {item.name}
                   </span>
                   {item.isVerified && (

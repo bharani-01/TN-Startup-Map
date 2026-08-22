@@ -113,7 +113,7 @@ export const HomePage: React.FC = () => {
               <p className="text-[11px] sm:text-xs font-extrabold uppercase tracking-[0.2em] text-[#86868B] font-mono">
                 Knowledge & Deep Intel • Founder Insights
               </p>
-              <h2 className="font-art font-extrabold text-2xl sm:text-3xl lg:text-4xl text-[#1D1D1F] tracking-tight">
+              <h2 className="font-display font-bold text-2xl sm:text-3xl lg:text-4xl text-[#1D1D1F] tracking-tight">
                 Ecosystem Stories
               </h2>
               <p className="text-xs sm:text-sm text-[#86868B] max-w-2xl font-normal">

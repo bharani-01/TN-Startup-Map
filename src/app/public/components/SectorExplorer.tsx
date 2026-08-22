@@ -103,9 +103,9 @@ export const SectorExplorer: React.FC<SectorExplorerProps> = ({ sectors, startup
             Ecosystem Taxonomy • Industry Clusters
           </p>
 
-          <h2 className="font-art font-extrabold text-3xl sm:text-5xl lg:text-6xl text-[#1D1D1F] tracking-[-0.035em] leading-[1.06] pb-1">
+          <h2 className="font-display font-bold text-3xl sm:text-5xl lg:text-6xl text-[#1D1D1F] tracking-[-0.035em] leading-[1.06] pb-1">
             Specialized Innovation <br />
-            <span className="inline-block font-editorial italic font-normal text-3xl sm:text-5xl lg:text-6xl text-[#0071E3] pr-3 sm:pr-5 pb-1">
+            <span className="inline-block text-3xl sm:text-5xl lg:text-6xl text-[#0071E3] pr-3 sm:pr-5 pb-1">
               Industry Verticals
             </span>
           </h2>
@@ -168,7 +168,7 @@ export const SectorExplorer: React.FC<SectorExplorerProps> = ({ sectors, startup
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-black/[0.06] text-left">
             <div>
               <div className="flex items-baseline gap-2.5">
-                <h3 className="font-art font-extrabold text-2xl sm:text-3xl text-[#1D1D1F] tracking-tight">
+                <h3 className="font-display font-bold text-2xl sm:text-3xl text-[#1D1D1F] tracking-tight">
                   {activeSector.name}
                 </h3>
                 <span className="text-xs font-mono font-bold text-[#0071E3]">
@@ -220,7 +220,7 @@ export const SectorExplorer: React.FC<SectorExplorerProps> = ({ sectors, startup
 
                       <div className="min-w-0 flex-1">
                         <div className="flex items-center gap-2">
-                          <h4 className="font-art font-extrabold text-base text-[#1D1D1F] group-hover:text-[#0071E3] transition-colors truncate">
+                          <h4 className="font-display font-bold text-base text-[#1D1D1F] group-hover:text-[#0071E3] transition-colors truncate">
                             {startup.name}
                           </h4>
                           <span className="text-[10px] font-mono font-semibold text-[#86868B]">
@@ -257,7 +257,7 @@ export const SectorExplorer: React.FC<SectorExplorerProps> = ({ sectors, startup
               <div className="w-12 h-12 rounded-xl bg-[#0071E3]/10 text-[#0071E3] flex items-center justify-center">
                 <Building2 className="w-6 h-6" />
               </div>
-              <h4 className="font-art font-extrabold text-base text-[#1D1D1F]">
+              <h4 className="font-display font-bold text-base text-[#1D1D1F]">
                 Discover {activeSector?.name} Startups
               </h4>
               <p className="text-xs text-[#86868B] max-w-md">

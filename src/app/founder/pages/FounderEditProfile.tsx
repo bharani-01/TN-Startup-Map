@@ -187,7 +187,7 @@ export const FounderEditProfile: React.FC = () => {
   });
 
   const [activeStartupId, setActiveStartupId] = useState<string>(() => {
-    return localStorage.getItem('tn_active_startup_id') || user?.claimedStartupId || 'agnikul-cosmos';
+    return localStorage.getItem('tn_active_startup_id') || '';
   });
 
   useEffect(() => {
@@ -204,12 +204,18 @@ export const FounderEditProfile: React.FC = () => {
     const fetchStartup = async () => {
       try {
         setLoading(true);
-        const target = activeStartupId || user?.claimedStartupId || 'agnikul-cosmos';
-        const res = await fetch(`/api/startups/${target}`);
+        const res = await fetch('/api/founder/my-startups', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         const data = await res.json();
-        if (data.success && data.data) {
-          const s = data.data as Startup;
+        if (data.success && data.data?.startups && data.data.startups.length > 0) {
+          const list: Startup[] = data.data.startups;
+          const s = list.find((item) => item.id === activeStartupId || item.slug === activeStartupId) || list[0];
           setStartup(s);
+          setActiveStartupId(s.id);
+          localStorage.setItem('tn_active_startup_id', s.id);
           setFormData({
             name: s.name || '',
             tagline: s.tagline || '',
@@ -263,16 +269,23 @@ export const FounderEditProfile: React.FC = () => {
             posts: s.posts || [],
             customSections: s.customSections || [],
           });
+        } else {
+          setStartup(null);
         }
       } catch (err) {
         console.error('Error fetching startup for editing:', err);
+        setStartup(null);
       } finally {
         setLoading(false);
       }
     };
 
-    fetchStartup();
-  }, [user, activeStartupId]);
+    if (token) {
+      fetchStartup();
+    } else {
+      setLoading(false);
+    }
+  }, [token, user, activeStartupId]);
 
   const handleChange = (field: string, value: any) => {
     setFormData((prev) => ({ ...prev, [field]: value }));

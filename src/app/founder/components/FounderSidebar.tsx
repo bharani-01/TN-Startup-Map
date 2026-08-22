@@ -5,26 +5,31 @@ import { useAuth } from '../../../context/AuthContext';
 import { Startup } from '../../../types';
 
 export const FounderSidebar: React.FC = () => {
-  const { user } = useAuth();
+  const { user, token } = useAuth();
   const [startupsList, setStartupsList] = useState<Startup[]>([]);
   const [activeStartup, setActiveStartup] = useState<string>(() => {
-    return localStorage.getItem('tn_active_startup_id') || user?.claimedStartupId || 'agnikul-cosmos';
+    return localStorage.getItem('tn_active_startup_id') || '';
   });
 
   useEffect(() => {
     const fetchStartups = async () => {
       try {
-        const claims = user?.claimedStartupIds || (user?.claimedStartupId ? [user.claimedStartupId] : []);
-        if (claims.length > 0) {
-          const promises = claims.map((id) => fetch(`/api/startups/${id}`).then((r) => r.json()));
-          const results = await Promise.all(promises);
-          const valid = results.filter((r) => r.success && r.data).map((r) => r.data as Startup);
-          if (valid.length > 0) {
-            setStartupsList(valid);
-            if (!claims.includes(activeStartup)) {
-              setActiveStartup(valid[0].id);
-              localStorage.setItem('tn_active_startup_id', valid[0].id);
-            }
+        const res = await fetch('/api/founder/my-startups', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        const data = await res.json();
+        if (data.success && data.data?.startups) {
+          const list: Startup[] = data.data.startups;
+          setStartupsList(list);
+          if (list.length > 0) {
+            const currentActive = list.find((s) => s.id === activeStartup) || list[0];
+            setActiveStartup(currentActive.id);
+            localStorage.setItem('tn_active_startup_id', currentActive.id);
+          } else {
+            setActiveStartup('');
+            localStorage.removeItem('tn_active_startup_id');
           }
         }
       } catch (err) {
@@ -32,8 +37,10 @@ export const FounderSidebar: React.FC = () => {
       }
     };
 
-    fetchStartups();
-  }, [user]);
+    if (token) {
+      fetchStartups();
+    }
+  }, [token, user]);
 
   const handleSelectStartup = (id: string) => {
     setActiveStartup(id);
@@ -41,7 +48,8 @@ export const FounderSidebar: React.FC = () => {
     window.dispatchEvent(new CustomEvent('startup-switched', { detail: { startupId: id } }));
   };
 
-  const currentStartupName = startupsList.find((s) => s.id === activeStartup)?.name || user?.companyName || 'AgniKul Cosmos';
+  const currentStartupName =
+    startupsList.find((s) => s.id === activeStartup)?.name || user?.companyName || 'No Startup Linked';
 
   const links = [
     { label: 'Overview & Analytics', path: '/founder/dashboard', icon: LayoutDashboard },

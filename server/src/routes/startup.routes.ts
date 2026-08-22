@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { startupController } from '../controllers/StartupController.js';
 import { requireAuth } from '../middleware/authenticate.js';
 import { authorize } from '../middleware/authorize.js';
+import { requireStartupOwner } from '../middleware/checkStartupOwnership.js';
 import { UserRole } from '../utils/constants.js';
 
 const router = Router();
@@ -14,10 +15,10 @@ router.get('/nearby', startupController.getNearby.bind(startupController));
 router.get('/map-geojson', startupController.getMapGeoJSON.bind(startupController));
 router.get('/:slug', startupController.getStartupBySlug.bind(startupController));
 
-// Protected startup mutations (admin or founder)
+// Protected startup mutations (admin or verified startup owner only)
 router.post('/', requireAuth, authorize(UserRole.ADMIN, UserRole.SUPER_ADMIN), startupController.createStartup.bind(startupController));
-router.put('/:id', requireAuth, startupController.updateStartup.bind(startupController));
-router.post('/:id/transfer', requireAuth, startupController.transferOwnership.bind(startupController));
+router.put('/:id', requireAuth, requireStartupOwner, startupController.updateStartup.bind(startupController));
+router.post('/:id/transfer', requireAuth, requireStartupOwner, startupController.transferOwnership.bind(startupController));
 router.post('/:id/restore', requireAuth, authorize(UserRole.ADMIN, UserRole.SUPER_ADMIN), startupController.restoreStartup.bind(startupController));
 router.delete('/:id', requireAuth, authorize(UserRole.ADMIN, UserRole.SUPER_ADMIN), startupController.deleteStartup.bind(startupController));
 

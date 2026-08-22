@@ -15,8 +15,14 @@ export const FounderLayout: React.FC = () => {
     );
   }
 
-  if (!isAuthenticated || !isFounder) {
+  // 1. Not authenticated -> redirect to login with return target
+  if (!isAuthenticated) {
     return <Navigate to="/login?redirect=/founder/dashboard" replace />;
+  }
+
+  // 2. Authenticated but regular USER account -> Strictly block and redirect to landing page
+  if (!isFounder) {
+    return <Navigate to="/" replace />;
   }
 
   return (

@@ -47,11 +47,11 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenSearch }) => {
             </span>
           </div>
 
-          {/* Majestic Hero Headline with Art & Editorial Typography */}
+          {/* Majestic Hero Headline with Apple Display Typography */}
           <div className="space-y-3">
-            <h1 className="font-art font-extrabold text-3xl sm:text-5xl lg:text-6xl xl:text-[76px] text-[#1D1D1F] tracking-[-0.035em] leading-[1.08] pb-1">
+            <h1 className="font-display font-bold text-3xl sm:text-5xl lg:text-6xl xl:text-[72px] text-[#1D1D1F] tracking-[-0.035em] leading-[1.08] pb-1">
               The Spatial Map of <br />
-              <span className="inline-block font-editorial italic font-normal text-[#0071E3] pr-3 sm:pr-5 pb-1">
+              <span className="inline-block text-[#0071E3] pr-3 sm:pr-5 pb-1">
                 Tamil Nadu Startups
               </span>
             </h1>

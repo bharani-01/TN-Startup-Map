@@ -6,6 +6,7 @@ interface AuthContextType {
   token: string | null;
   isAuthenticated: boolean;
   isLoading: boolean;
+  isUser: boolean;
   isFounder: boolean;
   isAdmin: boolean;
   isSuperAdmin: boolean;
@@ -18,20 +19,34 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<User | null>(() => {
-    const savedUser = localStorage.getItem('tn_user');
-    return savedUser ? JSON.parse(savedUser) : null;
+    try {
+      const savedUser = localStorage.getItem('tn_user');
+      return savedUser ? JSON.parse(savedUser) : null;
+    } catch {
+      return null;
+    }
   });
   const [token, setToken] = useState<string | null>(() => {
     return localStorage.getItem('tn_token');
   });
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
+  const logout = React.useCallback(() => {
+    setUser(null);
+    setToken(null);
+    localStorage.removeItem('tn_token');
+    localStorage.removeItem('tn_user');
+    localStorage.removeItem('tn_active_startup_id');
+  }, []);
+
   // Validate session on mount
   useEffect(() => {
+    let isMounted = true;
+
     const checkAuth = async () => {
       const storedToken = localStorage.getItem('tn_token');
       if (!storedToken) {
-        setIsLoading(false);
+        if (isMounted) setIsLoading(false);
         return;
       }
 
@@ -42,22 +57,31 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
           },
         });
         const data = await res.json();
-        if (data.success && data.data) {
-          setUser(data.data);
-          localStorage.setItem('tn_user', JSON.stringify(data.data));
-        } else {
-          // Token expired or invalid
-          logout();
+        if (isMounted) {
+          if (data.success && data.data) {
+            setUser(data.data);
+            setToken(storedToken);
+            localStorage.setItem('tn_user', JSON.stringify(data.data));
+          } else {
+            // Token expired, malformed or revoked
+            logout();
+          }
         }
       } catch (err) {
         console.error('Session validation error:', err);
       } finally {
-        setIsLoading(false);
+        if (isMounted) {
+          setIsLoading(false);
+        }
       }
     };
 
     checkAuth();
-  }, []);
+
+    return () => {
+      isMounted = false;
+    };
+  }, [logout]);
 
   const login = async (email: string, password: string): Promise<{ success: boolean; user?: User; error?: string }> => {
     try {
@@ -115,14 +139,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   };
 
-  const logout = () => {
-    setUser(null);
-    setToken(null);
-    localStorage.removeItem('tn_token');
-    localStorage.removeItem('tn_user');
-  };
-
   const role = user?.role;
+  const isUser = role === 'USER';
   const isFounder = role === 'FOUNDER' || role === 'ADMIN' || role === 'SUPER_ADMIN';
   const isAdmin = role === 'ADMIN' || role === 'SUPER_ADMIN';
   const isSuperAdmin = role === 'SUPER_ADMIN';
@@ -134,6 +152,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         token,
         isAuthenticated: !!user && !!token,
         isLoading,
+        isUser,
         isFounder,
         isAdmin,
         isSuperAdmin,

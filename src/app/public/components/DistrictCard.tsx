@@ -17,7 +17,7 @@ export const DistrictCard: React.FC<DistrictCardProps> = ({ district }) => {
         {/* Header: Title + Startup Count */}
         <div className="flex items-start justify-between gap-3">
           <div>
-            <h3 className="font-art font-extrabold text-lg text-[#1D1D1F] group-hover:text-[#0071E3] transition-colors">
+            <h3 className="font-display font-bold text-lg text-[#1D1D1F] group-hover:text-[#0071E3] transition-colors">
               {district.name}
             </h3>
             <div className="flex items-center gap-1.5 text-xs text-[#86868B] mt-0.5 font-medium">

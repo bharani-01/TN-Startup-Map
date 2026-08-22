@@ -15,6 +15,7 @@ export class StartupController {
         fundingType: req.query.fundingType as string,
         verificationStatus: req.query.verificationStatus as string,
         isHiring: req.query.isHiring ? req.query.isHiring === 'true' : undefined,
+        includeDeleted: req.query.includeDeleted === 'true',
         sortBy: req.query.sortBy as any,
         order: req.query.order as any,
         page: req.query.page ? Number(req.query.page) : 1,

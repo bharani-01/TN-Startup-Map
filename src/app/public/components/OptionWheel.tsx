@@ -290,7 +290,7 @@ export const OptionWheel: React.FC<OptionWheelProps> = ({
       role="listbox"
       tabIndex={0}
       aria-label="Option wheel"
-      className={`option-wheel font-art${side === 'right' ? ' option-wheel--right' : ''}${isDragging ? ' option-wheel--dragging' : ''}${className ? ` ${className}` : ''}`}
+      className={`option-wheel font-display font-bold${side === 'right' ? ' option-wheel--right' : ''}${isDragging ? ' option-wheel--dragging' : ''}${className ? ` ${className}` : ''}`}
       style={{
         '--ow-text-color': textColor,
         '--ow-active-color': activeColor,

@@ -15,8 +15,13 @@ export const AdminLayout: React.FC = () => {
     );
   }
 
-  if (!isAuthenticated || !isAdmin) {
+  if (!isAuthenticated) {
     return <Navigate to="/login?redirect=/admin" replace />;
+  }
+
+  // Strict guard: Non-admins are immediately redirected to the landing page
+  if (!isAdmin) {
+    return <Navigate to="/" replace />;
   }
 
   return (
