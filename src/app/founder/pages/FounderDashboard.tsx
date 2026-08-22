@@ -2,26 +2,17 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { 
   Building2, 
-  Users, 
-  Briefcase, 
   DollarSign, 
   Edit3, 
-  ArrowRight, 
   ShieldCheck, 
-  MapPin, 
-  Globe, 
   Loader2, 
   ExternalLink,
-  Sparkles,
   CheckCircle2,
-  AlertCircle,
-  TrendingUp,
   Award,
-  Calendar,
   Layers,
-  FileCheck,
   Zap,
-  ChevronRight
+  ChevronRight,
+  Briefcase
 } from 'lucide-react';
 import { useAuth } from '../../../context/AuthContext';
 import { Startup } from '../../../types';
@@ -121,29 +112,29 @@ export const FounderDashboard: React.FC = () => {
       });
     }
 
-    // 3. Milestones Timeline (15%)
-    const hasMilestones = Boolean(st.milestones && st.milestones.length > 0);
-    if (hasMilestones) {
+    // 3. Financials & Funding (15%)
+    const hasFunding = Boolean(st.totalFundingInr || (st.fundingRounds && st.fundingRounds.length > 0));
+    if (hasFunding) {
       score += 15;
     } else {
       tasks.push({
-        title: 'Key Milestones',
+        title: 'Funding Rounds & Cap Table',
         gain: '+15%',
-        tab: 'milestones',
-        desc: 'Document key mission launches, product releases, and funding milestones.'
+        tab: 'funding',
+        desc: 'Add institutional or angel funding rounds and verified lead investors.'
       });
     }
 
-    // 4. Awards & Recognition (10%)
-    const hasAwards = Boolean(st.awards && st.awards.length > 0);
-    if (hasAwards) {
+    // 4. Milestones & Achievements (10%)
+    const hasMilestones = Boolean((st.milestones && st.milestones.length > 0) || (st.awards && st.awards.length > 0));
+    if (hasMilestones) {
       score += 10;
     } else {
       tasks.push({
-        title: 'Honors & Awards',
+        title: 'Milestones & Key Awards',
         gain: '+10%',
-        tab: 'milestones',
-        desc: 'Add national, state, or industry awards and citations.'
+        tab: 'growth',
+        desc: 'Add patent filings, government awards, product launches, or major pilot wins.'
       });
     }
 
@@ -191,37 +182,50 @@ export const FounderDashboard: React.FC = () => {
 
   const completeness = startup ? calculateCompleteness(startup) : { score: 0, tasks: [] };
 
+  const formatStage = (stage: string) => {
+    switch (stage) {
+      case 'SERIES_A': return 'Series A';
+      case 'SERIES_B_PLUS': return 'Series B+';
+      case 'PRE_SEED': return 'Pre-Seed';
+      case 'SEED': return 'Seed';
+      case 'BOOTSTRAPPED': return 'Bootstrapped';
+      case 'IDEA': return 'Idea Stage';
+      case 'ACQUIRED': return 'Acquired';
+      default: return stage.replace(/_/g, ' ');
+    }
+  };
+
   return (
-    <div className="space-y-8">
-      {/* Welcome Banner - High Contrast Solid Apple Dark Card */}
-      <div className="bg-[#1D1D1F] rounded-3xl p-6 sm:p-8 text-white flex flex-col sm:flex-row sm:items-center justify-between gap-6 shadow-apple-card border border-black/10">
+    <div className="space-y-6">
+      {/* Welcome Banner */}
+      <div className="bg-[#1c1c1e] rounded-2xl p-6 sm:p-8 text-white flex flex-col sm:flex-row sm:items-center justify-between gap-6 border border-white/10 shadow-lg">
         <div className="space-y-2">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#0071E3]/20 text-[#0071E3] text-xs font-semibold border border-[#0071E3]/30">
+          <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-[#0071E3]/20 text-[#0071E3] text-xs font-semibold border border-[#0071E3]/30">
             <ShieldCheck className="w-3.5 h-3.5" />
             <span>Verified Founder Account</span>
           </div>
-          <h1 className="font-display font-extrabold text-2xl sm:text-3xl text-white tracking-tight">
+          <h1 className="font-bold text-2xl sm:text-3xl text-white tracking-tight">
             Welcome, {firstName}
           </h1>
-          <p className="text-xs sm:text-sm text-[#86868B]">
+          <p className="text-xs sm:text-sm text-slate-400">
             Official founder control panel for managing verified profile data on the Tamil Nadu Startup Map.
           </p>
         </div>
 
         {startup && (
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2.5">
             <Link
               to={`/startups/${startup.slug}`}
-              className="px-4 py-2.5 rounded-full bg-white/10 hover:bg-white/20 text-white font-semibold text-xs flex items-center justify-center gap-1.5 transition-all shrink-0 apple-press"
+              className="px-4 py-2 rounded-lg bg-white/10 hover:bg-white/15 text-white font-semibold text-xs flex items-center justify-center gap-1.5 transition-colors shrink-0"
             >
               <ExternalLink className="w-3.5 h-3.5" />
               <span>View Public Profile</span>
             </Link>
             <Link
               to="/founder/edit"
-              className="px-5 py-2.5 rounded-full bg-[#0071E3] hover:bg-[#0077ED] text-white font-semibold text-xs flex items-center justify-center gap-1.5 transition-all shrink-0 shadow-apple-sm apple-press"
+              className="px-4 py-2 rounded-lg bg-[#0071E3] hover:bg-[#0077ED] text-white font-semibold text-xs flex items-center justify-center gap-1.5 transition-colors shrink-0 shadow-sm"
             >
-              <Edit3 className="w-4 h-4" />
+              <Edit3 className="w-3.5 h-3.5" />
               <span>Edit Profile</span>
             </Link>
           </div>
@@ -231,58 +235,52 @@ export const FounderDashboard: React.FC = () => {
       {loading ? (
         <div className="py-20 text-center space-y-3">
           <Loader2 className="w-8 h-8 text-[#0071E3] animate-spin mx-auto" />
-          <p className="text-xs text-[#86868B] font-medium">Loading startup records from database...</p>
+          <p className="text-xs text-slate-500 font-medium">Loading startup records from database...</p>
         </div>
       ) : startup ? (
         <>
           {/* PROFILE COMPLETION NUDGE & READINESS CARD */}
-          <div className="bg-white rounded-3xl border border-black/[0.08] shadow-apple-card p-6 sm:p-8 space-y-6">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-black/[0.06] pb-5">
+          <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8 space-y-6">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-5">
               <div className="space-y-1">
                 <div className="flex items-center gap-2">
                   <Zap className="w-4 h-4 text-[#0071E3]" />
-                  <h2 className="text-base sm:text-lg font-extrabold font-display text-[#1D1D1F]">
+                  <h2 className="text-base sm:text-lg font-bold text-slate-900">
                     Profile Strength & Ecosystem Completeness
                   </h2>
                 </div>
-                <p className="text-xs text-[#86868B]">
+                <p className="text-xs text-slate-500">
                   Complete profiles receive 4x more investor pageviews and priority placement across district leaderboards.
                 </p>
               </div>
 
               <div className="flex items-center gap-3">
                 <div className="text-right">
-                  <div className="text-2xl font-black font-display text-[#1D1D1F]">
+                  <div className="text-2xl font-black text-slate-900">
                     {completeness.score}%
                   </div>
-                  <span className="text-[10px] font-semibold text-[#86868B] uppercase tracking-wider">
+                  <span className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider">
                     {completeness.score === 100 ? 'Fully Verified' : 'In Progress'}
                   </span>
                 </div>
-                <div className="w-12 h-12 rounded-full border-4 border-black/[0.06] flex items-center justify-center relative">
-                  <div 
-                    className="absolute inset-0 rounded-full border-4 border-[#0071E3]"
-                    style={{
-                      clipPath: `polygon(50% 50%, 50% 0%, ${completeness.score >= 25 ? '100% 0%' : '50% 0%'}, ${completeness.score >= 50 ? '100% 100%' : completeness.score >= 25 ? '100% 50%' : '50% 0%'}, ${completeness.score >= 75 ? '0% 100%' : completeness.score >= 50 ? '50% 100%' : '50% 0%'}, ${completeness.score >= 100 ? '0% 0%' : completeness.score >= 75 ? '0% 50%' : '50% 0%'})`
-                    }}
-                  />
-                  <span className="text-xs font-bold text-[#1D1D1F]">{completeness.score}%</span>
+                <div className="w-12 h-12 rounded-xl bg-blue-50 border border-blue-200 text-[#0071E3] flex items-center justify-center font-bold text-xs">
+                  {completeness.score}%
                 </div>
               </div>
             </div>
 
             {/* Progress Track */}
-            <div className="w-full h-2 rounded-full bg-black/[0.04] overflow-hidden">
+            <div className="w-full h-2 rounded-md bg-slate-100 overflow-hidden">
               <div 
-                className="h-full bg-gradient-to-r from-[#0071E3] to-[#34C759] transition-all duration-500 rounded-full"
+                className="h-full bg-gradient-to-r from-[#0071E3] to-emerald-500 transition-all duration-500"
                 style={{ width: `${completeness.score}%` }}
               />
             </div>
 
-            {/* Incomplete Tasks / Smart Nudges */}
+            {/* Incomplete Tasks */}
             {completeness.tasks.length > 0 ? (
               <div className="space-y-3">
-                <h3 className="text-xs font-bold text-[#1D1D1F] uppercase tracking-wider">
+                <h3 className="text-xs font-bold text-slate-900 uppercase tracking-wider">
                   Recommended Data Additions ({completeness.tasks.length} pending)
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -290,28 +288,28 @@ export const FounderDashboard: React.FC = () => {
                     <Link
                       key={idx}
                       to={`/founder/edit?tab=${task.tab}`}
-                      className="p-4 rounded-2xl bg-black/[0.02] hover:bg-[#0071E3]/[0.04] border border-black/[0.05] hover:border-[#0071E3]/30 transition-all flex items-start justify-between gap-3 group"
+                      className="p-4 rounded-xl bg-slate-50 hover:bg-blue-50/50 border border-slate-200 hover:border-[#0071E3]/40 transition-colors flex items-start justify-between gap-3 group"
                     >
                       <div className="space-y-1">
                         <div className="flex items-center gap-2">
-                          <span className="font-bold text-xs text-[#1D1D1F] group-hover:text-[#0071E3] transition-colors">
+                          <span className="font-bold text-xs text-slate-900 group-hover:text-[#0071E3] transition-colors">
                             {task.title}
                           </span>
-                          <span className="px-2 py-0.5 rounded-md bg-[#0071E3]/10 text-[#0071E3] font-bold text-[10px]">
+                          <span className="px-2 py-0.5 rounded bg-[#0071E3]/10 text-[#0071E3] font-bold text-[10px]">
                             {task.gain}
                           </span>
                         </div>
-                        <p className="text-[11px] text-[#86868B] leading-normal">
+                        <p className="text-[11px] text-slate-500 leading-normal">
                           {task.desc}
                         </p>
                       </div>
-                      <ChevronRight className="w-4 h-4 text-[#86868B] group-hover:text-[#0071E3] group-hover:translate-x-0.5 transition-all shrink-0 mt-0.5" />
+                      <ChevronRight className="w-4 h-4 text-slate-400 group-hover:text-[#0071E3] group-hover:translate-x-0.5 transition-all shrink-0 mt-0.5" />
                     </Link>
                   ))}
                 </div>
               </div>
             ) : (
-              <div className="p-4 rounded-2xl bg-[#34C759]/10 border border-[#34C759]/20 text-[#34C759] text-xs font-semibold flex items-center gap-2.5">
+              <div className="p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-semibold flex items-center gap-2.5">
                 <CheckCircle2 className="w-4 h-4 shrink-0" />
                 <span>Your startup profile is 100% complete with full business metrics, milestones, and credentials.</span>
               </div>
@@ -320,107 +318,107 @@ export const FounderDashboard: React.FC = () => {
 
           {/* Metric Cards */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <div className="p-5 rounded-3xl bg-white border border-black/[0.08] shadow-apple-card space-y-2">
+            <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-2">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-semibold text-[#86868B]">Total Funding</span>
-                <div className="p-2 rounded-2xl bg-emerald-500/10 text-emerald-600">
+                <span className="text-xs font-semibold text-slate-500">Total Funding</span>
+                <div className="p-2 rounded-lg bg-emerald-50 text-emerald-600">
                   <DollarSign className="w-4 h-4" />
                 </div>
               </div>
-              <div className="text-2xl font-extrabold font-display text-[#1D1D1F] truncate">
+              <div className="text-2xl font-bold text-slate-900 truncate">
                 {startup.totalFundingInr || 'Bootstrapped'}
               </div>
-              <p className="text-[11px] text-[#86868B] font-medium">
+              <p className="text-[11px] text-slate-400 font-medium">
                 {startup.fundingRounds?.length || 0} recorded rounds
               </p>
             </div>
 
-            <div className="p-5 rounded-3xl bg-white border border-black/[0.08] shadow-apple-card space-y-2">
+            <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-2">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-semibold text-[#86868B]">Current Stage</span>
-                <div className="p-2 rounded-2xl bg-[#0071E3]/10 text-[#0071E3]">
+                <span className="text-xs font-semibold text-slate-500">Current Stage</span>
+                <div className="p-2 rounded-lg bg-blue-50 text-[#0071E3]">
                   <Building2 className="w-4 h-4" />
                 </div>
               </div>
-              <div className="text-2xl font-extrabold font-display text-[#1D1D1F]">
-                {startup.stage}
+              <div className="text-2xl font-bold text-slate-900">
+                {formatStage(startup.stage)}
               </div>
-              <p className="text-[11px] text-[#86868B] font-medium">
+              <p className="text-[11px] text-slate-400 font-medium">
                 Founded {startup.foundedYear}
               </p>
             </div>
 
-            <div className="p-5 rounded-3xl bg-white border border-black/[0.08] shadow-apple-card space-y-2">
+            <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-2">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-semibold text-[#86868B]">Business Model</span>
-                <div className="p-2 rounded-2xl bg-indigo-500/10 text-indigo-600">
+                <span className="text-xs font-semibold text-slate-500">Business Model</span>
+                <div className="p-2 rounded-lg bg-indigo-50 text-indigo-600">
                   <Layers className="w-4 h-4" />
                 </div>
               </div>
-              <div className="text-2xl font-extrabold font-display text-[#1D1D1F] truncate">
+              <div className="text-2xl font-bold text-slate-900 truncate" title={startup.businessModel}>
                 {startup.businessModel || 'Pending'}
               </div>
-              <p className="text-[11px] text-[#86868B] font-medium truncate">
+              <p className="text-[11px] text-slate-400 font-medium truncate" title={startup.revenueRange}>
                 {startup.revenueRange || `${startup.teamSize || '1-10'} Members`}
               </p>
             </div>
 
-            <div className="p-5 rounded-3xl bg-white border border-black/[0.08] shadow-apple-card space-y-2">
+            <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-2">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-semibold text-[#86868B]">Milestones & Awards</span>
-                <div className="p-2 rounded-2xl bg-amber-500/10 text-amber-600">
+                <span className="text-xs font-semibold text-slate-500">Milestones & Awards</span>
+                <div className="p-2 rounded-lg bg-amber-50 text-amber-600">
                   <Award className="w-4 h-4" />
                 </div>
               </div>
-              <div className="text-2xl font-extrabold font-display text-[#1D1D1F]">
+              <div className="text-2xl font-bold text-slate-900">
                 {(startup.milestones?.length || 0) + (startup.awards?.length || 0)}
               </div>
-              <p className="text-[11px] text-[#86868B] font-medium">
+              <p className="text-[11px] text-slate-400 font-medium">
                 {startup.milestones?.length || 0} milestones · {startup.awards?.length || 0} awards
               </p>
             </div>
           </div>
 
           {/* Live Profile Card */}
-          <div className="bg-white rounded-3xl border border-black/[0.08] shadow-apple-card p-6 sm:p-8 space-y-5">
+          <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8 space-y-5">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
               <div className="flex items-center gap-3.5">
-                <div className="w-14 h-14 rounded-2xl bg-white p-1.5 border border-black/[0.08] shadow-apple-sm flex items-center justify-center shrink-0 overflow-hidden">
+                <div className="w-14 h-14 rounded-xl bg-white p-1.5 border border-slate-200 shadow-sm flex items-center justify-center shrink-0 overflow-hidden">
                   {startup.logoUrl ? (
-                    <img src={startup.logoUrl} alt={startup.name} className="w-full h-full object-contain rounded-xl" />
+                    <img src={startup.logoUrl} alt={startup.name} className="w-full h-full object-contain rounded-lg" />
                   ) : (
-                    <div className="w-full h-full rounded-xl bg-[#1D1D1F] text-white font-bold font-display text-lg flex items-center justify-center">
+                    <div className="w-full h-full rounded-lg bg-slate-900 text-white font-bold text-lg flex items-center justify-center">
                       {startup.name.charAt(0)}
                     </div>
                   )}
                 </div>
                 <div>
-                  <h3 className="font-display font-bold text-lg text-[#1D1D1F]">
+                  <h3 className="font-bold text-lg text-slate-900">
                     {startup.name}
                   </h3>
-                  <p className="text-xs text-[#86868B]">{startup.tagline}</p>
+                  <p className="text-xs text-slate-500">{startup.tagline}</p>
                 </div>
               </div>
 
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-600 border border-emerald-500/20">
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-mono font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
                 <ShieldCheck className="w-3.5 h-3.5" />
-                <span>{startup.verificationStatus} Platform Record</span>
+                <span>{startup.verificationStatus} RECORD</span>
               </span>
             </div>
 
             {/* Profile Fields */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 p-4 bg-black/[0.02] rounded-2xl border border-black/[0.04] text-xs text-[#86868B]">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 p-4 bg-slate-50 rounded-xl border border-slate-200 text-xs text-slate-500">
               <div>
-                <span className="text-[#86868B] font-medium block text-[11px]">Location</span>
-                <span className="font-semibold text-[#1D1D1F]">{startup.city || startup.district}, {startup.district}, TN</span>
+                <span className="text-slate-400 font-medium block text-[11px]">Location</span>
+                <span className="font-semibold text-slate-900">{startup.city || startup.district}, {startup.district}, TN</span>
               </div>
               <div>
-                <span className="text-[#86868B] font-medium block text-[11px]">Sectors</span>
-                <span className="font-semibold text-[#1D1D1F]">{startup.sectors?.join(', ')}</span>
+                <span className="text-slate-400 font-medium block text-[11px]">Sectors</span>
+                <span className="font-semibold text-slate-900">{startup.sectors?.join(', ')}</span>
               </div>
               <div>
-                <span className="text-[#86868B] font-medium block text-[11px]">Incubator / Hub</span>
-                <span className="font-semibold text-[#1D1D1F]">{startup.incubator || 'Independent'}</span>
+                <span className="text-slate-400 font-medium block text-[11px]">Incubator / Hub</span>
+                <span className="font-semibold text-slate-900">{startup.incubator || 'Independent'}</span>
               </div>
             </div>
 
@@ -428,20 +426,20 @@ export const FounderDashboard: React.FC = () => {
             <div className="flex flex-wrap items-center gap-3 pt-2">
               <Link
                 to="/founder/edit"
-                className="px-5 py-2.5 bg-[#1D1D1F] hover:bg-black text-white text-xs font-semibold rounded-full shadow-apple-sm transition-all apple-press"
+                className="px-4 py-2 bg-slate-900 hover:bg-black text-white text-xs font-semibold rounded-lg shadow-sm transition-colors"
               >
                 Update Profile Information
               </Link>
               <Link
                 to="/founder/jobs"
-                className="px-5 py-2.5 bg-[#0071E3] hover:bg-[#0077ED] text-white text-xs font-semibold rounded-full shadow-apple-sm transition-all apple-press flex items-center gap-1.5"
+                className="px-4 py-2 bg-[#0071E3] hover:bg-[#0077ED] text-white text-xs font-semibold rounded-lg shadow-sm transition-colors flex items-center gap-1.5"
               >
                 <Briefcase className="w-3.5 h-3.5" />
                 <span>Manage Job Openings</span>
               </Link>
               <Link
                 to={`/startups/${startup.slug}`}
-                className="px-5 py-2.5 bg-white hover:bg-slate-50 border border-black/[0.08] text-[#1D1D1F] text-xs font-semibold rounded-full shadow-apple-sm transition-all apple-press"
+                className="px-4 py-2 bg-white hover:bg-slate-50 border border-slate-200 text-slate-800 text-xs font-semibold rounded-lg shadow-sm transition-colors"
               >
                 View Public Page
               </Link>
@@ -449,15 +447,15 @@ export const FounderDashboard: React.FC = () => {
           </div>
         </>
       ) : (
-        <div className="bg-white rounded-3xl border border-black/[0.06] p-8 text-center space-y-3">
-          <Building2 className="w-12 h-12 text-[#86868B] mx-auto" />
-          <h3 className="text-base font-bold text-[#1D1D1F]">No Linked Startup Found</h3>
-          <p className="text-xs text-[#86868B] max-w-md mx-auto">
+        <div className="bg-white rounded-2xl border border-slate-200 p-8 text-center space-y-3">
+          <Building2 className="w-12 h-12 text-slate-400 mx-auto" />
+          <h3 className="text-base font-bold text-slate-900">No Linked Startup Found</h3>
+          <p className="text-xs text-slate-500 max-w-md mx-auto">
             Please submit your startup proposal or claim an existing company profile to manage your data here.
           </p>
           <Link
             to="/submit"
-            className="inline-flex items-center gap-1.5 px-5 py-2.5 bg-[#0071E3] text-white text-xs font-semibold rounded-full shadow-apple-sm apple-press"
+            className="inline-flex items-center gap-1.5 px-4 py-2 bg-[#0071E3] text-white text-xs font-semibold rounded-lg shadow-sm"
           >
             Submit Startup
           </Link>

@@ -30,7 +30,7 @@ export const FounderLayout: React.FC = () => {
       <FounderNavbar />
       <div className="flex-1 flex">
         <FounderSidebar />
-        <main className="flex-1 p-6 sm:p-10 max-w-6xl overflow-y-auto">
+        <main className="flex-1 p-6 sm:p-8 w-full max-w-7xl mx-auto overflow-y-auto">
           <Outlet />
         </main>
       </div>

@@ -62,14 +62,14 @@ export const FounderSidebar: React.FC = () => {
     <aside className="w-64 bg-white/90 backdrop-blur-2xl border-r border-black/[0.08] min-h-[calc(100vh-64px)] p-4 space-y-6">
       
       {/* Startup Badge Card & Switcher */}
-      <div className="p-4 bg-white rounded-2xl border border-black/[0.08] shadow-apple-sm space-y-2">
+      <div className="p-4 bg-white rounded-xl border border-slate-200 shadow-sm space-y-2">
         <div className="flex items-center justify-between">
           <span className="text-[10px] font-bold text-[#0071E3] uppercase tracking-wider block">
             {startupsList.length > 1 ? `Managed Startups (${startupsList.length})` : 'Managed Startup'}
           </span>
-          <span className="inline-flex items-center gap-1 text-[10px] font-semibold text-[#34C759]">
-            <ShieldCheck className="w-3 h-3 text-[#34C759]" />
-            Verified
+          <span className="inline-flex items-center gap-1 text-[10px] font-mono font-bold text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-200">
+            <ShieldCheck className="w-3 h-3 text-emerald-600" />
+            VERIFIED
           </span>
         </div>
 
@@ -78,7 +78,7 @@ export const FounderSidebar: React.FC = () => {
             <select
               value={activeStartup}
               onChange={(e) => handleSelectStartup(e.target.value)}
-              className="w-full text-xs font-bold text-[#1D1D1F] bg-black/[0.03] px-2.5 py-1.5 rounded-xl border border-black/[0.06] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#0071E3]/20 cursor-pointer truncate"
+              className="w-full text-xs font-semibold text-slate-900 bg-slate-50 px-2.5 py-1.5 rounded-lg border border-slate-200 focus:bg-white focus:outline-none focus:border-[#0071E3] cursor-pointer truncate"
             >
               {startupsList.map((s) => (
                 <option key={s.id} value={s.id}>
@@ -86,24 +86,24 @@ export const FounderSidebar: React.FC = () => {
                 </option>
               ))}
             </select>
-            <p className="text-[10px] text-[#86868B]">Switch between your managed ventures</p>
+            <p className="text-[10px] text-slate-500">Switch between your managed ventures</p>
           </div>
         ) : (
-          <p className="font-bold text-sm text-[#1D1D1F] truncate">
+          <p className="font-bold text-sm text-slate-900 truncate">
             {currentStartupName}
           </p>
         )}
 
-        <div className="pt-1.5 border-t border-black/[0.04] flex items-center justify-between text-[10px] text-[#86868B]">
+        <div className="pt-1.5 border-t border-slate-100 flex items-center justify-between text-[10px] text-slate-500">
           <span>Account Ref:</span>
-          <span className="font-mono font-bold text-[#1D1D1F] bg-black/[0.04] px-1.5 py-0.5 rounded-md">
+          <span className="font-mono font-bold text-slate-800 bg-slate-100 px-1.5 py-0.5 rounded">
             {user?.displayId || 'TN-FND-1001'}
           </span>
         </div>
       </div>
 
       {/* Nav Links */}
-      <nav className="space-y-1.5">
+      <nav className="space-y-1">
         {links.map((link) => {
           const Icon = link.icon;
           return (
@@ -111,10 +111,10 @@ export const FounderSidebar: React.FC = () => {
               key={link.path}
               to={link.path}
               className={({ isActive }) =>
-                `flex items-center gap-2.5 px-3.5 py-2.5 rounded-2xl text-xs font-bold transition-all apple-press-subtle ${
+                `flex items-center gap-2.5 px-3.5 py-2.5 rounded-lg text-xs font-semibold transition-colors ${
                   isActive
-                    ? 'bg-[#0071E3] text-white shadow-apple-sm'
-                    : 'text-[#1D1D1F] hover:bg-black/[0.05] hover:text-[#0071E3]'
+                    ? 'bg-[#0071E3] text-white'
+                    : 'text-slate-700 hover:bg-slate-100 hover:text-[#0071E3]'
                 }`
               }
             >
@@ -126,22 +126,22 @@ export const FounderSidebar: React.FC = () => {
       </nav>
 
       {/* Quick View Public Profile */}
-      <div className="pt-4 border-t border-black/[0.06] space-y-2">
+      <div className="pt-4 border-t border-slate-200 space-y-1.5">
         <Link
           to={`/startups/${activeStartup}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center justify-between px-3.5 py-2.5 text-xs font-semibold text-[#86868B] hover:text-[#1D1D1F] rounded-2xl hover:bg-black/[0.04] transition-all"
+          className="flex items-center justify-between px-3 py-2 text-xs font-semibold text-slate-600 hover:text-slate-900 rounded-lg hover:bg-slate-100 transition-colors"
         >
           <span>View Public Profile</span>
-          <ExternalLink className="w-3.5 h-3.5 text-[#86868B]" />
+          <ExternalLink className="w-3.5 h-3.5 text-slate-400" />
         </Link>
 
         <Link
           to="/submit"
-          className="flex items-center justify-between px-3.5 py-2 text-xs font-semibold text-[#0071E3] hover:text-[#0077ED] rounded-2xl hover:bg-[#0071E3]/5 transition-all"
+          className="flex items-center justify-between px-3 py-2 text-xs font-semibold text-[#0071E3] hover:text-[#0077ED] rounded-lg hover:bg-blue-50 transition-colors"
         >
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5">
             <Plus className="w-3.5 h-3.5" />
             <span>List Another Venture</span>
           </div>

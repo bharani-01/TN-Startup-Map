@@ -595,7 +595,7 @@ export const FounderEditProfile: React.FC = () => {
         <AlertCircle className="w-10 h-10 text-amber-500 mx-auto" />
         <h2 className="text-lg font-bold text-[#1D1D1F]">No Linked Venture Found</h2>
         <p className="text-xs text-[#86868B]">You must have a verified or claimed startup to edit its details.</p>
-        <Link to="/founder" className="inline-block px-5 py-2 rounded-full bg-[#0071E3] text-white text-xs font-semibold">
+        <Link to="/founder" className="inline-block px-4 py-2 rounded-lg bg-[#0071E3] text-white text-xs font-semibold">
           Return to Dashboard
         </Link>
       </div>
@@ -605,19 +605,19 @@ export const FounderEditProfile: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Top Bar Navigation & Actions */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-black/[0.06] pb-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200 pb-4">
         <div className="flex items-center gap-3">
           <button
             onClick={() => navigate('/founder')}
-            className="p-2 rounded-xl bg-white hover:bg-black/[0.04] border border-black/[0.08] text-[#1D1D1F] transition-all"
+            className="p-2 rounded-lg bg-white hover:bg-slate-50 border border-slate-200 text-slate-800 transition-colors cursor-pointer"
           >
             <ArrowLeft className="w-4 h-4" />
           </button>
           <div>
-            <h1 className="font-display font-extrabold text-xl sm:text-2xl text-[#1D1D1F]">
+            <h1 className="font-bold text-xl sm:text-2xl text-slate-900">
               Edit Profile: {startup.name}
             </h1>
-            <p className="text-xs text-[#86868B]">
+            <p className="text-xs text-slate-500">
               Update your public presence, verified metrics, milestones, and credentials on the Tamil Nadu map.
             </p>
           </div>
@@ -627,7 +627,7 @@ export const FounderEditProfile: React.FC = () => {
           <Link
             to={`/startups/${startup.slug}`}
             target="_blank"
-            className="px-4 py-2 rounded-full bg-white hover:bg-slate-50 border border-black/[0.08] text-[#1D1D1F] font-semibold text-xs flex items-center gap-1.5 transition-all shadow-2xs apple-press"
+            className="px-4 py-2 rounded-lg bg-white hover:bg-slate-50 border border-slate-200 text-slate-800 font-semibold text-xs flex items-center gap-1.5 transition-colors shadow-sm"
           >
             <ExternalLink className="w-3.5 h-3.5" />
             <span>Preview Live</span>
@@ -636,7 +636,7 @@ export const FounderEditProfile: React.FC = () => {
           <button
             onClick={handleSave}
             disabled={saving}
-            className="px-5 py-2 rounded-full bg-[#0071E3] hover:bg-[#0077ED] text-white font-semibold text-xs flex items-center gap-1.5 shadow-apple-sm transition-all apple-press disabled:opacity-50"
+            className="px-5 py-2 rounded-lg bg-[#0071E3] hover:bg-[#0077ED] text-white font-semibold text-xs flex items-center gap-1.5 shadow-sm transition-colors cursor-pointer disabled:opacity-50"
           >
             {saving ? (
               <>

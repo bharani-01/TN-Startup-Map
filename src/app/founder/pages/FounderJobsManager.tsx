@@ -297,22 +297,22 @@ export const FounderJobsManager: React.FC = () => {
   };
 
   return (
-    <div className="max-w-5xl mx-auto space-y-8 text-left">
+    <div className="w-full space-y-6 text-left">
       {/* Top Banner Card */}
-      <div className="bg-white rounded-3xl border border-black/[0.08] p-6 sm:p-8 shadow-apple-card flex flex-col sm:flex-row sm:items-center justify-between gap-6">
+      <div className="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-6">
         <div className="space-y-2">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#0071E3]/10 text-[#0071E3] text-xs font-semibold border border-[#0071E3]/20">
+          <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-md bg-blue-50 text-[#0071E3] text-xs font-semibold border border-blue-200">
             <Briefcase className="w-3.5 h-3.5" />
             <span>Talent & Hiring Hub</span>
           </div>
-          <h1 className="text-2xl sm:text-3xl font-extrabold font-display text-[#1D1D1F] tracking-tight">
+          <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">
             Manage Job Openings
           </h1>
-          <p className="text-xs sm:text-sm text-[#86868B] max-w-xl">
+          <p className="text-xs sm:text-sm text-slate-500 max-w-xl">
             {activeStartup ? (
               <span>
                 Publishing open engineering, product, and leadership roles for{' '}
-                <strong className="text-[#1D1D1F]">{activeStartup.name}</strong> on the Tamil Nadu Startup Directory.
+                <strong className="text-slate-900">{activeStartup.name}</strong> on the Tamil Nadu Startup Directory.
               </span>
             ) : (
               <span>Post and manage career opportunities for your verified venture.</span>
@@ -324,7 +324,7 @@ export const FounderJobsManager: React.FC = () => {
           <button
             id="add-job-btn"
             onClick={() => openForm()}
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#0071E3] hover:bg-[#0077ED] text-white font-semibold text-xs shadow-apple-sm transition-all apple-press cursor-pointer"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-[#0071E3] hover:bg-[#0077ED] text-white font-semibold text-xs shadow-sm transition-colors cursor-pointer"
           >
             <Plus className="w-4 h-4" />
             <span>Post New Opening</span>
@@ -334,7 +334,7 @@ export const FounderJobsManager: React.FC = () => {
 
       {/* Success Notification */}
       {successMsg && (
-        <div className="flex items-center gap-2.5 p-4 rounded-2xl bg-[#34C759]/10 border border-[#34C759]/20 text-[#34C759] text-xs font-semibold animate-in fade-in">
+        <div className="flex items-center gap-2.5 p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-semibold animate-in fade-in">
           <CheckCircle2 className="w-4 h-4 shrink-0" />
           <span>{successMsg}</span>
         </div>
@@ -342,7 +342,7 @@ export const FounderJobsManager: React.FC = () => {
 
       {/* Status Filter Segmented Control */}
       <div className="flex items-center justify-between gap-4 flex-wrap">
-        <div className="bg-black/[0.04] p-1 rounded-full border border-black/[0.04] inline-flex items-center gap-1">
+        <div className="bg-slate-100 p-1 rounded-lg border border-slate-200 inline-flex items-center gap-1">
           {(['ALL', 'OPEN', 'CLOSED'] as const).map((tab) => {
             const count = jobs.filter((j) => tab === 'ALL' || j.status === tab).length;
             const active = statusFilter === tab;
@@ -351,10 +351,10 @@ export const FounderJobsManager: React.FC = () => {
                 key={tab}
                 id={`jobs-tab-${tab.toLowerCase()}`}
                 onClick={() => setStatusFilter(tab)}
-                className={`px-4 py-1.5 rounded-full text-xs font-semibold transition-all duration-200 apple-press-subtle cursor-pointer ${
+                className={`px-3.5 py-1.5 rounded-md text-xs font-semibold transition-colors cursor-pointer ${
                   active
-                    ? 'bg-white text-[#1D1D1F] shadow-apple-sm'
-                    : 'text-[#86868B] hover:text-[#1D1D1F]'
+                    ? 'bg-white text-slate-900 shadow-sm'
+                    : 'text-slate-500 hover:text-slate-900'
                 }`}
               >
                 {tab === 'ALL' ? 'All Roles' : tab.charAt(0) + tab.slice(1).toLowerCase()} ({count})
@@ -363,34 +363,34 @@ export const FounderJobsManager: React.FC = () => {
           })}
         </div>
 
-        <span className="text-xs font-mono text-[#86868B]">
+        <span className="text-xs font-mono text-slate-500">
           {filteredJobs.length} role{filteredJobs.length !== 1 ? 's' : ''} listed
         </span>
       </div>
 
       {/* Main Content Area */}
       {loading ? (
-        <div className="py-24 text-center space-y-3 bg-white rounded-3xl border border-black/[0.06]">
+        <div className="py-24 text-center space-y-3 bg-white rounded-2xl border border-slate-200">
           <Loader2 className="w-8 h-8 text-[#0071E3] animate-spin mx-auto" />
-          <p className="text-xs text-[#86868B] font-medium font-mono">Loading active openings...</p>
+          <p className="text-xs text-slate-500 font-medium font-mono">Loading active openings...</p>
         </div>
       ) : filteredJobs.length === 0 ? (
-        <div className="bg-white rounded-3xl border border-black/[0.08] shadow-apple-card p-12 text-center space-y-4">
-          <div className="w-14 h-14 rounded-2xl bg-[#0071E3]/10 text-[#0071E3] flex items-center justify-center mx-auto shadow-2xs">
-            <Briefcase className="w-7 h-7" />
+        <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-12 text-center space-y-4">
+          <div className="w-12 h-12 rounded-xl bg-blue-50 text-[#0071E3] flex items-center justify-center mx-auto">
+            <Briefcase className="w-6 h-6" />
           </div>
           <div className="space-y-1 max-w-md mx-auto">
-            <h3 className="text-base font-bold font-display text-[#1D1D1F]">
+            <h3 className="text-base font-bold text-slate-900">
               No {statusFilter !== 'ALL' ? statusFilter.toLowerCase() : ''} openings found
             </h3>
-            <p className="text-xs text-[#86868B] leading-relaxed">
+            <p className="text-xs text-slate-500 leading-relaxed">
               Post verified openings to attract top software engineers, product designers, and operators across Tamil Nadu.
             </p>
           </div>
           <div className="pt-2">
             <button
               onClick={() => openForm()}
-              className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#0071E3] hover:bg-[#0077ED] text-white font-semibold text-xs shadow-apple-sm transition-all apple-press cursor-pointer"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-[#0071E3] hover:bg-[#0077ED] text-white font-semibold text-xs shadow-sm transition-colors cursor-pointer"
             >
               <Plus className="w-4 h-4" />
               <span>Create First Job Listing</span>
@@ -406,36 +406,36 @@ export const FounderJobsManager: React.FC = () => {
             return (
               <div
                 key={job.id}
-                className="bg-white rounded-3xl border border-black/[0.08] p-6 shadow-apple-sm hover:shadow-apple-card hover:border-[#0071E3]/30 transition-all space-y-4 text-left"
+                className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm hover:border-[#0071E3]/40 transition-colors space-y-4 text-left"
               >
                 {/* Header Row */}
                 <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
                   <div className="space-y-1.5 flex-1">
-                    <div className="flex items-center gap-2.5 flex-wrap">
-                      <h3 className="font-display font-bold text-base text-[#1D1D1F]">
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <h3 className="font-bold text-base text-slate-900">
                         {job.title}
                       </h3>
 
                       {job.status === 'OPEN' ? (
-                        <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-[#34C759]/10 text-[#34C759] border border-[#34C759]/20">
+                        <span className="px-2 py-0.5 rounded-md text-[10px] font-mono font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
                           ACTIVE OPENING
                         </span>
                       ) : (
-                        <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-black/[0.04] text-[#86868B] border border-black/[0.06]">
+                        <span className="px-2 py-0.5 rounded-md text-[10px] font-mono font-bold bg-slate-100 text-slate-600 border border-slate-200">
                           CLOSED
                         </span>
                       )}
 
                       {job.isHidden && (
-                        <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-amber-500/10 text-amber-600 border border-amber-500/20">
+                        <span className="px-2 py-0.5 rounded-md text-[10px] font-mono font-bold bg-amber-50 text-amber-700 border border-amber-200">
                           MODERATED / HIDDEN
                         </span>
                       )}
                     </div>
 
-                    <div className="flex items-center gap-3 text-xs text-[#86868B] flex-wrap">
+                    <div className="flex items-center gap-3 text-xs text-slate-500 flex-wrap">
                       {job.department && (
-                        <span className="font-semibold text-[#1D1D1F]">{job.department}</span>
+                        <span className="font-semibold text-slate-900">{job.department}</span>
                       )}
                       {job.department && <span>•</span>}
                       <span>{JOB_TYPE_LABELS[job.jobType]}</span>
@@ -453,7 +453,7 @@ export const FounderJobsManager: React.FC = () => {
                       {salary && (
                         <>
                           <span>•</span>
-                          <span className="font-bold text-[#34C759] font-mono">{salary}</span>
+                          <span className="font-bold text-emerald-600 font-mono">{salary}</span>
                         </>
                       )}
                     </div>
@@ -464,9 +464,9 @@ export const FounderJobsManager: React.FC = () => {
                     <button
                       id={`edit-job-${job.id}`}
                       onClick={() => openForm(job)}
-                      className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full border border-black/[0.08] bg-white hover:bg-slate-50 text-xs font-semibold text-[#1D1D1F] shadow-2xs transition-all apple-press cursor-pointer"
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-200 bg-white hover:bg-slate-50 text-xs font-semibold text-slate-700 transition-colors cursor-pointer"
                     >
-                      <Edit3 className="w-3.5 h-3.5 text-[#86868B]" />
+                      <Edit3 className="w-3.5 h-3.5 text-slate-400" />
                       <span>Edit</span>
                     </button>
 
@@ -474,7 +474,7 @@ export const FounderJobsManager: React.FC = () => {
                       <button
                         id={`close-job-${job.id}`}
                         onClick={() => handleClose(job.id)}
-                        className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full border border-rose-200 bg-rose-50/60 hover:bg-rose-100 text-xs font-semibold text-rose-600 shadow-2xs transition-all apple-press cursor-pointer"
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-rose-200 bg-rose-50 hover:bg-rose-100 text-xs font-semibold text-rose-600 transition-colors cursor-pointer"
                       >
                         <X className="w-3.5 h-3.5" />
                         <span>Close Role</span>
