@@ -27,7 +27,7 @@ export const HomePage: React.FC = () => {
         setLoading(true);
         const [statsRes, startupsRes, districtsRes, sectorsRes, recentRes, trendingRes, blogsRes] = await Promise.all([
           fetch('/api/stats').then((r) => r.json()),
-          fetch('/api/startups?limit=100').then((r) => r.json()),
+          fetch('/api/startups?limit=5000').then((r) => r.json()),
           fetch('/api/districts').then((r) => r.json()),
           fetch('/api/sectors').then((r) => r.json()),
           fetch('/api/startups/recent?limit=8').then((r) => r.json()),

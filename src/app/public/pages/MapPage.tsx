@@ -70,7 +70,7 @@ export const MapPage: React.FC = () => {
       if (stageFilter !== 'all') params.append('stage', stageFilter);
       if (hiringOnly) params.append('isHiring', 'true');
       if (sortBy) params.append('sortBy', sortBy);
-      params.append('limit', '500');
+      params.append('limit', '5000');
 
       try {
         const res = await fetch(`/api/startups?${params.toString()}`);

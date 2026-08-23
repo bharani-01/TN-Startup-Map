@@ -27,7 +27,7 @@ export const BookmarksPage: React.FC = () => {
 
       setLoading(true);
       try {
-        const res = await fetch('/api/startups?limit=500');
+        const res = await fetch('/api/startups?limit=5000');
         const data = await res.json();
         if (data.success && Array.isArray(data.data)) {
           const filtered = data.data.filter((s: Startup) => bookmarkedIds.includes(s.id));

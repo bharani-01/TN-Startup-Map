@@ -16,8 +16,8 @@ export const AdminStartups: React.FC = () => {
     try {
       setLoading(true);
       const [activeRes, archivedRes] = await Promise.all([
-        fetch('/api/startups?limit=500'),
-        fetch('/api/startups?includeDeleted=true&limit=500'),
+        fetch('/api/startups?limit=5000'),
+        fetch('/api/startups?includeDeleted=true&limit=5000'),
       ]);
       const activeData = await activeRes.json();
       const archivedData = await archivedRes.json();
