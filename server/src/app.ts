@@ -8,6 +8,7 @@ import { authenticate } from './middleware/authenticate.js';
 import { requestLogger } from './middleware/requestLogger.js';
 import { errorHandler } from './middleware/errorHandler.js';
 import { apiAuditLogger } from './middleware/apiAuditLogger.js';
+import { createDynamicSeoHandler } from './middleware/dynamicSeo.js';
 
 export function createApp() {
   const app = express();
@@ -32,12 +33,8 @@ export function createApp() {
   const distPath = path.resolve(process.cwd(), 'dist');
   if (fs.existsSync(distPath)) {
     app.use(express.static(distPath));
-    app.get('*', (req, res, next) => {
-      if (req.path.startsWith('/api')) {
-        return next();
-      }
-      res.sendFile(path.join(distPath, 'index.html'));
-    });
+    // Dynamic SSR Open Graph handler
+    app.get('*', createDynamicSeoHandler(distPath));
   }
 
   // Global error handler
@@ -45,3 +42,4 @@ export function createApp() {
 
   return app;
 }
+
