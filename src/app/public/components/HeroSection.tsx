@@ -1,12 +1,64 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { Compass, ArrowRight, Search, MapPin, Cpu, Zap } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { Compass, ArrowRight, Search, MapPin, Cpu, Zap, X, Loader2, Building2, Layers } from 'lucide-react';
 
 interface HeroSectionProps {
   onOpenSearch?: () => void;
 }
 
 export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenSearch }) => {
+  const navigate = useNavigate();
+  const [query, setQuery] = useState('');
+  const [results, setResults] = useState<any>(null);
+  const [loading, setLoading] = useState(false);
+  const [showDropdown, setShowDropdown] = useState(false);
+  const searchContainerRef = useRef<HTMLDivElement>(null);
+
+  // Debounced search query
+  useEffect(() => {
+    if (!query.trim()) {
+      setResults(null);
+      setLoading(false);
+      return;
+    }
+
+    const timer = setTimeout(async () => {
+      setLoading(true);
+      try {
+        const res = await fetch(`/api/search?q=${encodeURIComponent(query.trim())}`);
+        const data = await res.json();
+        if (data.success && data.data) {
+          setResults(data.data.results || data.data);
+        }
+      } catch (err) {
+        console.error('Hero search error:', err);
+      } finally {
+        setLoading(false);
+      }
+    }, 180);
+
+    return () => clearTimeout(timer);
+  }, [query]);
+
+  // Click outside to close dropdown
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (searchContainerRef.current && !searchContainerRef.current.contains(e.target as Node)) {
+        setShowDropdown(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  const handleSearchSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (query.trim()) {
+      setShowDropdown(false);
+      navigate(`/startups?search=${encodeURIComponent(query.trim())}`);
+    }
+  };
+
   return (
     <section className="relative overflow-hidden min-h-[580px] sm:min-h-[660px] lg:min-h-[720px] xl:min-h-[760px] pt-12 pb-20 sm:pt-16 sm:pb-28 lg:pt-24 lg:pb-36 xl:pt-28 xl:pb-40 flex flex-col justify-center bg-[#FAFBFD]">
       
@@ -61,25 +113,200 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenSearch }) => {
             </p>
           </div>
 
-          {/* Quick Spotlight Search Capsule */}
-          {onOpenSearch && (
-            <div className="w-full max-w-lg">
-              <button
-                onClick={onOpenSearch}
-                className="w-full flex items-center justify-between px-4 sm:px-5 py-3.5 rounded-2xl bg-white hover:bg-slate-50 border border-black/[0.08] hover:border-[#0071E3]/50 shadow-2xs hover:shadow-apple-sm backdrop-blur-xl transition-all group apple-press-subtle text-left"
-              >
-                <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
-                  <Search className="w-4 h-4 text-[#0071E3] shrink-0" />
-                  <span className="text-xs sm:text-sm text-[#86868B] group-hover:text-[#1D1D1F] font-medium truncate">
-                    Search by startup, sector, district, or founder...
-                  </span>
+          {/* Interactive Hero Search Bar with Live Instant Results */}
+          <div className="relative w-full max-w-xl" ref={searchContainerRef}>
+            <form onSubmit={handleSearchSubmit} className="relative flex items-center">
+              <div className="relative w-full flex items-center bg-white rounded-2xl border border-black/[0.1] hover:border-[#0071E3]/40 focus-within:border-[#0071E3] focus-within:ring-4 focus-within:ring-[#0071E3]/15 shadow-apple-card transition-all">
+                <div className="pl-4 pr-2 text-[#0071E3]">
+                  {loading ? (
+                    <Loader2 className="w-4 h-4 animate-spin text-[#0071E3]" />
+                  ) : (
+                    <Search className="w-4 h-4 text-[#0071E3]" />
+                  )}
                 </div>
-                <kbd className="hidden sm:inline-flex items-center px-2 py-0.5 text-[10px] font-mono font-bold text-[#86868B] bg-black/[0.04] rounded-md border border-black/[0.06] shrink-0 ml-2">
-                  ⌘K
-                </kbd>
-              </button>
-            </div>
-          )}
+                
+                <input
+                  type="text"
+                  value={query}
+                  onChange={(e) => {
+                    setQuery(e.target.value);
+                    setShowDropdown(true);
+                  }}
+                  onFocus={() => {
+                    if (query.trim()) setShowDropdown(true);
+                  }}
+                  placeholder="Search startups, sectors, districts, founders..."
+                  className="w-full py-3.5 pr-20 text-xs sm:text-sm text-[#1D1D1F] placeholder-[#86868B] bg-transparent focus:outline-none font-medium"
+                />
+
+                <div className="absolute right-2 flex items-center gap-1.5">
+                  {query && (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setQuery('');
+                        setResults(null);
+                        setShowDropdown(false);
+                      }}
+                      className="p-1 text-[#86868B] hover:text-[#1D1D1F] rounded-full hover:bg-black/[0.05] transition-colors"
+                      title="Clear"
+                    >
+                      <X className="w-3.5 h-3.5" />
+                    </button>
+                  )}
+                  
+                  <button
+                    type="submit"
+                    className="px-3.5 py-1.5 rounded-xl bg-[#0071E3] hover:bg-[#0077ED] text-white text-xs font-bold shadow-apple-sm transition-all apple-press cursor-pointer flex items-center gap-1"
+                  >
+                    <span>Search</span>
+                    <ArrowRight className="w-3 h-3" />
+                  </button>
+                </div>
+              </div>
+            </form>
+
+            {/* Instant Search Results Dropdown */}
+            {showDropdown && results && query.trim().length > 0 && (
+              <div className="absolute top-full left-0 right-0 mt-2 bg-white/95 backdrop-blur-2xl rounded-2xl border border-black/[0.08] shadow-apple-card z-50 max-h-96 overflow-y-auto divide-y divide-black/[0.06] animate-in fade-in-50 slide-in-from-top-2 duration-150 text-left">
+                
+                {/* Startups Results */}
+                {results.startups && results.startups.length > 0 && (
+                  <div className="p-2 space-y-1">
+                    <span className="px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-[#86868B] flex items-center gap-1.5">
+                      <Building2 className="w-3 h-3 text-[#0071E3]" />
+                      <span>Startups ({results.startups.length})</span>
+                    </span>
+                    {results.startups.slice(0, 5).map((s: any) => {
+                      const title = s.title || s.name || '';
+                      const subtitle = s.subtitle || s.district || s.city || '';
+                      const url = s.url || `/startups/${s.slug}`;
+                      const icon = s.icon || s.logoUrl;
+                      const badge = s.badge || s.stage;
+
+                      return (
+                        <Link
+                          key={s.id || s.slug || title}
+                          to={url}
+                          onClick={() => setShowDropdown(false)}
+                          className="flex items-center justify-between px-3 py-2 rounded-xl hover:bg-black/[0.04] transition-colors group"
+                        >
+                          <div className="flex items-center gap-2.5 min-w-0">
+                            <div className="w-7 h-7 rounded-lg bg-black/[0.04] border border-black/[0.06] flex items-center justify-center p-0.5 shrink-0 overflow-hidden">
+                              {icon ? (
+                                <img src={icon} alt={title} className="w-full h-full object-contain" />
+                              ) : (
+                                <span className="font-bold text-xs text-[#1D1D1F]">{title.charAt(0)}</span>
+                              )}
+                            </div>
+                            <div className="min-w-0">
+                              <p className="text-xs font-bold text-[#1D1D1F] group-hover:text-[#0071E3] truncate">
+                                {title}
+                              </p>
+                              <p className="text-[10px] text-[#86868B] truncate">
+                                {subtitle}
+                              </p>
+                            </div>
+                          </div>
+                          {badge && (
+                            <span className="px-2 py-0.5 rounded-full text-[9px] font-semibold bg-black/[0.04] text-[#86868B] shrink-0">
+                              {badge}
+                            </span>
+                          )}
+                        </Link>
+                      );
+                    })}
+                  </div>
+                )}
+
+                {/* Districts Results */}
+                {results.districts && results.districts.length > 0 && (
+                  <div className="p-2 space-y-1">
+                    <span className="px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-[#86868B] flex items-center gap-1.5">
+                      <MapPin className="w-3 h-3 text-[#34C759]" />
+                      <span>Districts ({results.districts.length})</span>
+                    </span>
+                    {results.districts.slice(0, 3).map((d: any) => {
+                      const title = d.title || d.name || '';
+                      const subtitle = d.subtitle || '';
+                      const url = d.url || `/districts/${d.slug}`;
+
+                      return (
+                        <Link
+                          key={d.id || d.slug || title}
+                          to={url}
+                          onClick={() => setShowDropdown(false)}
+                          className="flex items-center justify-between px-3 py-2 rounded-xl hover:bg-black/[0.04] transition-colors group"
+                        >
+                          <div className="flex items-center gap-2 min-w-0">
+                            <MapPin className="w-3.5 h-3.5 text-[#34C759] shrink-0" />
+                            <div className="min-w-0">
+                              <span className="text-xs font-semibold text-[#1D1D1F] group-hover:text-[#0071E3] truncate block">
+                                {title} District
+                              </span>
+                              {subtitle && (
+                                <span className="text-[10px] text-[#86868B] block truncate">
+                                  {subtitle}
+                                </span>
+                              )}
+                            </div>
+                          </div>
+                          <span className="text-[10px] text-[#86868B] shrink-0">
+                            Explore District →
+                          </span>
+                        </Link>
+                      );
+                    })}
+                  </div>
+                )}
+
+                {/* Sectors Results */}
+                {results.sectors && results.sectors.length > 0 && (
+                  <div className="p-2 space-y-1">
+                    <span className="px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-[#86868B] flex items-center gap-1.5">
+                      <Layers className="w-3 h-3 text-[#AF52DE]" />
+                      <span>Sectors</span>
+                    </span>
+                    <div className="flex flex-wrap gap-1.5 px-3 py-1">
+                      {results.sectors.slice(0, 4).map((sec: any) => {
+                        const title = sec.title || sec.name;
+                        const url = sec.url || `/startups?sector=${encodeURIComponent(title)}`;
+                        return (
+                          <Link
+                            key={sec.id || title}
+                            to={url}
+                            onClick={() => setShowDropdown(false)}
+                            className="px-2.5 py-1 rounded-lg text-xs font-semibold bg-[#AF52DE]/10 text-[#AF52DE] hover:bg-[#AF52DE]/20 transition-colors"
+                          >
+                            {title}
+                          </Link>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
+
+                {/* No results fallback */}
+                {(!results.startups || results.startups.length === 0) &&
+                 (!results.districts || results.districts.length === 0) &&
+                 (!results.sectors || results.sectors.length === 0) && (
+                  <div className="p-6 text-center text-xs text-[#86868B]">
+                    No immediate matches found for "<span className="font-semibold text-[#1D1D1F]">{query}</span>"
+                  </div>
+                )}
+
+                {/* Bottom View All Link */}
+                <button
+                  type="button"
+                  onClick={handleSearchSubmit}
+                  className="w-full px-4 py-2.5 text-xs font-semibold text-[#0071E3] hover:bg-[#0071E3]/5 flex items-center justify-between transition-colors text-left"
+                >
+                  <span>See all directory results for "{query}"</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </button>
+              </div>
+            )}
+          </div>
 
           {/* Focused Action Buttons */}
           <div className="flex flex-wrap items-center gap-3 sm:gap-4">

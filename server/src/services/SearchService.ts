@@ -43,6 +43,7 @@ export class SearchService {
       slug: s.slug,
       url: `/startups/${s.slug}`,
       badge: s.stage,
+      icon: s.logoUrl,
     }));
 
     // 2. Districts search

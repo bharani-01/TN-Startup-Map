@@ -48,13 +48,23 @@ const SECTOR_COLORS: Record<string, string> = {
   Other: '#86868B',
 };
 
-// Create custom Apple pin marker (with active selected pulse halo state)
-const createCustomIcon = (sector: string, name: string, isSelected: boolean = false) => {
+// Create custom Apple pin marker with Startup Logo (and sector-colored border + active selected pulse halo)
+const createCustomIcon = (
+  sector: string, 
+  name: string, 
+  logoUrl?: string, 
+  website?: string, 
+  isSelected: boolean = false
+) => {
   const color = SECTOR_COLORS[sector] || '#0071E3';
   const initial = name ? name.charAt(0).toUpperCase() : 'S';
+  
+  // Prefer logoUrl; if missing, fallback to google favicon or initial
+  const effectiveLogo = logoUrl || (website ? `https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=${encodeURIComponent(website)}&size=64` : null);
 
-  const size = isSelected ? 42 : 34;
-  const anchor = isSelected ? 21 : 17;
+  const size = isSelected ? 44 : 36;
+  const innerSize = isSelected ? 28 : 22;
+  const anchor = isSelected ? 22 : 18;
 
   const html = `
     <div class="marker-pin-inner ${isSelected ? 'marker-selected' : ''}" style="
@@ -64,34 +74,81 @@ const createCustomIcon = (sector: string, name: string, isSelected: boolean = fa
       justify-content: center;
       width: ${size}px;
       height: ${size}px;
-      background: ${isSelected ? color : 'white'};
-      border: ${isSelected ? '3px solid white' : `2.5px solid ${color}`};
+      background: #ffffff;
+      border: ${isSelected ? `3px solid ${color}` : `2px solid ${color}`};
       border-radius: 50% 50% 50% 0;
       transform: rotate(-45deg);
       box-shadow: ${isSelected 
-        ? `0 0 0 6px ${color}40, 0 12px 28px rgba(0,0,0,0.35)` 
-        : '0 6px 16px rgba(0,0,0,0.18), 0 2px 4px rgba(0,0,0,0.06)'};
+        ? `0 0 0 6px ${color}35, 0 12px 28px rgba(0,0,0,0.25)` 
+        : '0 4px 14px rgba(0,0,0,0.16), 0 2px 4px rgba(0,0,0,0.06)'};
       cursor: pointer;
-      transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.25s ease;
+      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease;
     ">
       ${isSelected ? `
         <div style="
           position: absolute;
-          inset: -12px;
+          inset: -10px;
           border-radius: 50%;
-          background: ${color}35;
+          background: ${color}30;
           animation: ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;
           pointer-events: none;
         "></div>
       ` : ''}
       <div style="
         transform: rotate(45deg);
-        font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
-        font-weight: 800;
-        font-size: ${isSelected ? '15px' : '13px'};
-        color: ${isSelected ? 'white' : color};
+        width: ${innerSize}px;
+        height: ${innerSize}px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        overflow: hidden;
+        background: #ffffff;
       ">
-        ${initial}
+        ${effectiveLogo ? `
+          <img 
+            src="${effectiveLogo}" 
+            alt="${name || ''}" 
+            style="
+              width: 100%;
+              height: 100%;
+              object-fit: contain;
+              border-radius: 50%;
+              display: block;
+              padding: 1px;
+            " 
+            onerror="this.style.display='none'; if(this.nextElementSibling) this.nextElementSibling.style.display='flex';"
+          />
+          <div style="
+            display: none;
+            width: 100%;
+            height: 100%;
+            align-items: center;
+            justify-content: center;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+            font-weight: 800;
+            font-size: ${isSelected ? '14px' : '12px'};
+            color: ${color};
+            background: #ffffff;
+          ">
+            ${initial}
+          </div>
+        ` : `
+          <div style="
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+            font-weight: 800;
+            font-size: ${isSelected ? '14px' : '12px'};
+            color: ${color};
+            background: #ffffff;
+          ">
+            ${initial}
+          </div>
+        `}
       </div>
     </div>
   `;
@@ -112,7 +169,13 @@ const StartupMarker: React.FC<{
   onSelect?: (s: Startup) => void;
 }> = ({ startup, isSelected, onSelect }) => {
   const markerRef = useRef<L.Marker | null>(null);
-  const icon = createCustomIcon(startup.sectors[0] || 'Other', startup.name, isSelected);
+  const icon = createCustomIcon(
+    startup.sectors[0] || 'Other', 
+    startup.name, 
+    startup.logoUrl, 
+    startup.website, 
+    isSelected
+  );
 
   useEffect(() => {
     if (isSelected && markerRef.current) {
@@ -137,8 +200,27 @@ const StartupMarker: React.FC<{
         <div className="p-4 sm:p-5 w-64 sm:w-72 space-y-3 font-sans">
           <div className="flex items-start justify-between gap-2.5">
             <div className="flex items-center gap-2.5 min-w-0">
-              <div className="w-10 h-10 rounded-2xl bg-[#1D1D1F] text-white font-bold flex items-center justify-center text-sm shrink-0 shadow-apple-sm">
-                {startup.name.charAt(0)}
+              <div className="w-10 h-10 rounded-2xl bg-white border border-black/[0.08] shadow-2xs flex items-center justify-center p-1 overflow-hidden shrink-0">
+                {startup.logoUrl ? (
+                  <img
+                    src={startup.logoUrl}
+                    alt={startup.name}
+                    className="w-full h-full object-contain rounded-xl"
+                    onError={(e) => {
+                      e.currentTarget.style.display = 'none';
+                      if (e.currentTarget.nextElementSibling) {
+                        (e.currentTarget.nextElementSibling as HTMLElement).style.display = 'flex';
+                      }
+                    }}
+                  />
+                ) : null}
+                <div
+                  className={`w-full h-full rounded-xl bg-[#1D1D1F] text-white font-bold flex items-center justify-center text-sm ${
+                    startup.logoUrl ? 'hidden' : 'flex'
+                  }`}
+                >
+                  {startup.name.charAt(0)}
+                </div>
               </div>
               <div className="min-w-0">
                 <div className="flex items-center gap-1">

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { 
   MapPin, 
@@ -33,6 +33,58 @@ export const PublicNavbar: React.FC<PublicNavbarProps> = ({ onOpenSearch }) => {
   const { count: bookmarkedCount } = useBookmarks();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [userDropdownOpen, setUserDropdownOpen] = useState(false);
+  
+  // Inline Navbar Search State
+  const [navSearchQuery, setNavSearchQuery] = useState('');
+  const [navSearchResults, setNavSearchResults] = useState<any>(null);
+  const [navSearchLoading, setNavSearchLoading] = useState(false);
+  const [navSearchDropdown, setNavSearchDropdown] = useState(false);
+  const navSearchRef = React.useRef<HTMLDivElement>(null);
+
+  // Debounced search for navbar input
+  useEffect(() => {
+    if (!navSearchQuery.trim()) {
+      setNavSearchResults(null);
+      setNavSearchLoading(false);
+      return;
+    }
+
+    const timer = setTimeout(async () => {
+      setNavSearchLoading(true);
+      try {
+        const res = await fetch(`/api/search?q=${encodeURIComponent(navSearchQuery.trim())}`);
+        const data = await res.json();
+        if (data.success && data.data) {
+          setNavSearchResults(data.data.results || data.data);
+        }
+      } catch (err) {
+        console.error('Navbar search error:', err);
+      } finally {
+        setNavSearchLoading(false);
+      }
+    }, 180);
+
+    return () => clearTimeout(timer);
+  }, [navSearchQuery]);
+
+  // Click outside to close navbar search dropdown
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (navSearchRef.current && !navSearchRef.current.contains(e.target as Node)) {
+        setNavSearchDropdown(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  const handleNavSearchSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (navSearchQuery.trim()) {
+      setNavSearchDropdown(false);
+      navigate(`/startups?search=${encodeURIComponent(navSearchQuery.trim())}`);
+    }
+  };
 
   const isActive = (path: string) => {
     if (path === '/' && location.pathname !== '/') return false;
@@ -70,8 +122,8 @@ export const PublicNavbar: React.FC<PublicNavbarProps> = ({ onOpenSearch }) => {
             </Link>
           </div>
 
-          {/* Center: Desktop Navigation Links (Unified Segmented Pill) */}
-          <nav className="hidden lg:flex items-center bg-black/[0.04] p-1 rounded-full border border-black/[0.04] h-9 shrink-0">
+          {/* Center: Tablet & Desktop Navigation Links (Unified Segmented Pill) */}
+          <nav className="hidden md:flex items-center bg-black/[0.04] p-1 rounded-full border border-black/[0.04] h-9 shrink-0">
             {navLinks.map((link) => {
               const Icon = link.icon;
               const active = isActive(link.path);
@@ -79,7 +131,7 @@ export const PublicNavbar: React.FC<PublicNavbarProps> = ({ onOpenSearch }) => {
                 <Link
                   key={link.path}
                   to={link.path}
-                  className={`flex items-center gap-1.5 px-3.5 h-7 rounded-full text-xs font-semibold transition-all duration-200 apple-press-subtle ${
+                  className={`flex items-center gap-1.5 px-2.5 lg:px-3.5 h-7 rounded-full text-xs font-semibold transition-all duration-200 apple-press-subtle ${
                     active
                       ? 'bg-white text-[#1D1D1F] shadow-apple-sm'
                       : 'text-[#86868B] hover:text-[#1D1D1F]'
@@ -92,35 +144,142 @@ export const PublicNavbar: React.FC<PublicNavbarProps> = ({ onOpenSearch }) => {
             })}
           </nav>
 
-          {/* Right: Search, Bookmarks, Submit & Auth Actions (Strictly Harmonized Heights) */}
-          <div className="hidden md:flex items-center gap-2.5 shrink-0">
+          {/* Right: Search, Bookmarks, Submit & Auth Actions */}
+          <div className="hidden md:flex items-center gap-2 lg:gap-2.5 shrink-0">
             
-            {/* Spotlight Search Capsule */}
-            <button
-              onClick={onOpenSearch}
-              className="hidden xl:flex items-center gap-2 px-3.5 h-9 rounded-full text-xs text-[#86868B] bg-black/[0.03] hover:bg-black/[0.06] hover:text-[#1D1D1F] border border-black/[0.06] transition-all apple-press cursor-pointer shrink-0"
-              title="Search startups or press Cmd+K"
-            >
-              <Search className="w-3.5 h-3.5 text-[#86868B]" />
-              <span className="font-normal">Search ecosystem...</span>
-              <kbd className="inline-flex items-center px-1.5 py-0.5 text-[10px] font-mono text-[#86868B] bg-white/90 rounded-md border border-black/[0.08] shadow-2xs font-semibold ml-1">
-                ⌘K
-              </kbd>
-            </button>
+            {/* Interactive Inline Navbar Search Bar */}
+            <div className="relative" ref={navSearchRef}>
+              <form onSubmit={handleNavSearchSubmit} className="relative flex items-center">
+                <div className="relative flex items-center bg-black/[0.03] hover:bg-black/[0.05] focus-within:bg-white focus-within:border-[#0071E3] focus-within:ring-2 focus-within:ring-[#0071E3]/20 rounded-full border border-black/[0.08] transition-all h-9 px-3 w-36 lg:w-48 xl:w-56">
+                  {navSearchLoading ? (
+                    <div className="w-3.5 h-3.5 border-2 border-[#0071E3] border-t-transparent rounded-full animate-spin shrink-0 mr-1.5" />
+                  ) : (
+                    <Search className="w-3.5 h-3.5 text-[#86868B] shrink-0 mr-1.5" />
+                  )}
+                  <input
+                    type="text"
+                    value={navSearchQuery}
+                    onChange={(e) => {
+                      setNavSearchQuery(e.target.value);
+                      setNavSearchDropdown(true);
+                    }}
+                    onFocus={() => {
+                      if (navSearchQuery.trim()) setNavSearchDropdown(true);
+                    }}
+                    placeholder="Search..."
+                    className="w-full text-xs text-[#1D1D1F] placeholder-[#86868B] bg-transparent focus:outline-none font-medium"
+                  />
+                  {navSearchQuery ? (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setNavSearchQuery('');
+                        setNavSearchResults(null);
+                        setNavSearchDropdown(false);
+                      }}
+                      className="p-0.5 text-[#86868B] hover:text-[#1D1D1F] rounded-full transition-colors ml-1"
+                    >
+                      <X className="w-3 h-3" />
+                    </button>
+                  ) : (
+                    <kbd className="hidden xl:inline-flex items-center px-1.5 py-0.2 text-[9px] font-mono text-[#86868B] bg-white/80 rounded border border-black/[0.08] shadow-2xs font-semibold ml-1 shrink-0">
+                      ↵
+                    </kbd>
+                  )}
+                </div>
+              </form>
 
-            {/* Compact Search Trigger */}
-            <button
-              onClick={onOpenSearch}
-              className="flex xl:hidden items-center justify-center w-9 h-9 rounded-full text-[#86868B] hover:text-[#1D1D1F] bg-black/[0.03] hover:bg-black/[0.06] border border-black/[0.06] apple-press shrink-0"
-              title="Search"
-            >
-              <Search className="w-4 h-4" />
-            </button>
+              {/* Instant Search Results Dropdown below Navbar */}
+              {navSearchDropdown && navSearchResults && navSearchQuery.trim().length > 0 && (
+                <div className="absolute top-full right-0 mt-2 w-72 sm:w-80 bg-white/95 backdrop-blur-2xl rounded-2xl border border-black/[0.08] shadow-apple-card z-50 max-h-80 overflow-y-auto divide-y divide-black/[0.06] animate-in fade-in-50 slide-in-from-top-2 duration-150 text-left">
+                  
+                  {/* Startups */}
+                  {navSearchResults.startups && navSearchResults.startups.length > 0 && (
+                    <div className="p-2 space-y-1">
+                      <span className="px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-[#86868B] flex items-center gap-1.5">
+                        <Building2 className="w-3 h-3 text-[#0071E3]" />
+                        <span>Startups</span>
+                      </span>
+                      {navSearchResults.startups.slice(0, 4).map((s: any) => {
+                        const title = s.title || s.name || '';
+                        const subtitle = s.subtitle || s.district || s.city || '';
+                        const url = s.url || `/startups/${s.slug}`;
+                        const icon = s.icon || s.logoUrl;
+
+                        return (
+                          <Link
+                            key={s.id || s.slug || title}
+                            to={url}
+                            onClick={() => setNavSearchDropdown(false)}
+                            className="flex items-center justify-between px-2.5 py-1.5 rounded-xl hover:bg-black/[0.04] transition-colors group"
+                          >
+                            <div className="flex items-center gap-2 min-w-0">
+                              <div className="w-6 h-6 rounded-md bg-black/[0.04] border border-black/[0.06] flex items-center justify-center p-0.5 shrink-0 overflow-hidden">
+                                {icon ? (
+                                  <img src={icon} alt={title} className="w-full h-full object-contain" />
+                                ) : (
+                                  <span className="font-bold text-[10px] text-[#1D1D1F]">{title.charAt(0)}</span>
+                                )}
+                              </div>
+                              <span className="text-xs font-bold text-[#1D1D1F] group-hover:text-[#0071E3] truncate">
+                                {title}
+                              </span>
+                            </div>
+                            <span className="text-[10px] text-[#86868B] shrink-0 truncate max-w-[100px]">
+                              {subtitle}
+                            </span>
+                          </Link>
+                        );
+                      })}
+                    </div>
+                  )}
+
+                  {/* Districts */}
+                  {navSearchResults.districts && navSearchResults.districts.length > 0 && (
+                    <div className="p-2 space-y-1">
+                      <span className="px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-[#86868B] flex items-center gap-1.5">
+                        <MapPin className="w-3 h-3 text-[#34C759]" />
+                        <span>Districts</span>
+                      </span>
+                      {navSearchResults.districts.slice(0, 3).map((d: any) => {
+                        const title = d.title || d.name || '';
+                        const url = d.url || `/districts/${d.slug}`;
+
+                        return (
+                          <Link
+                            key={d.id || d.slug || title}
+                            to={url}
+                            onClick={() => setNavSearchDropdown(false)}
+                            className="flex items-center justify-between px-2.5 py-1.5 rounded-xl hover:bg-black/[0.04] transition-colors group text-xs font-semibold text-[#1D1D1F] group-hover:text-[#0071E3]"
+                          >
+                            <div className="flex items-center gap-1.5 min-w-0">
+                              <MapPin className="w-3.5 h-3.5 text-[#34C759] shrink-0" />
+                              <span className="truncate">{title} District</span>
+                            </div>
+                            <span className="text-[10px] text-[#86868B]">Explore →</span>
+                          </Link>
+                        );
+                      })}
+                    </div>
+                  )}
+
+                  {/* View All */}
+                  <button
+                    type="button"
+                    onClick={handleNavSearchSubmit}
+                    className="w-full px-3 py-2 text-xs font-semibold text-[#0071E3] hover:bg-[#0071E3]/5 flex items-center justify-between transition-colors text-left"
+                  >
+                    <span>See results for "{navSearchQuery}"</span>
+                    <span>↵</span>
+                  </button>
+                </div>
+              )}
+            </div>
 
             {/* Saved Bookmarks Capsule */}
             <Link
               to="/bookmarks"
-              className={`flex items-center gap-1.5 px-3.5 h-9 rounded-full text-xs font-semibold border transition-all apple-press shrink-0 ${
+              className={`flex items-center gap-1.5 px-2.5 lg:px-3.5 h-9 rounded-full text-xs font-semibold border transition-all apple-press shrink-0 ${
                 isActive('/bookmarks')
                   ? 'bg-[#0071E3]/10 border-[#0071E3]/30 text-[#0071E3]'
                   : 'bg-white hover:bg-slate-50 border-black/[0.08] text-[#1D1D1F]'
@@ -139,10 +298,11 @@ export const PublicNavbar: React.FC<PublicNavbarProps> = ({ onOpenSearch }) => {
             {/* List Startup Button */}
             <Link
               to="/submit"
-              className="flex items-center gap-1.5 px-3.5 h-9 rounded-full text-xs font-semibold bg-white hover:bg-slate-50 text-[#1D1D1F] border border-black/[0.08] shadow-apple-sm transition-all apple-press shrink-0"
+              className="flex items-center gap-1.5 px-2.5 lg:px-3.5 h-9 rounded-full text-xs font-semibold bg-white hover:bg-slate-50 text-[#1D1D1F] border border-black/[0.08] shadow-apple-sm transition-all apple-press shrink-0"
             >
               <Plus className="w-3.5 h-3.5 text-[#0071E3]" />
-              <span>List Startup</span>
+              <span className="hidden lg:inline">List Startup</span>
+              <span className="inline lg:hidden">List</span>
             </Link>
 
             {/* Divider */}
@@ -153,12 +313,12 @@ export const PublicNavbar: React.FC<PublicNavbarProps> = ({ onOpenSearch }) => {
               <div className="relative">
                 <button
                   onClick={() => setUserDropdownOpen(!userDropdownOpen)}
-                  className="flex items-center gap-2 px-3 h-9 rounded-full bg-white hover:bg-slate-50 border border-black/[0.08] text-xs font-semibold text-[#1D1D1F] shadow-apple-sm transition-all apple-press shrink-0"
+                  className="flex items-center gap-2 px-2.5 lg:px-3 h-9 rounded-full bg-white hover:bg-slate-50 border border-black/[0.08] text-xs font-semibold text-[#1D1D1F] shadow-apple-sm transition-all apple-press shrink-0"
                 >
                   <div className="w-5 h-5 rounded-full bg-[#0071E3] text-white flex items-center justify-center text-[10px] font-bold shrink-0">
                     {user.name.charAt(0).toUpperCase()}
                   </div>
-                  <span className="max-w-[100px] truncate">{user.name.split(' ')[0]}</span>
+                  <span className="max-w-[70px] lg:max-w-[100px] truncate">{user.name.split(' ')[0]}</span>
                   <ChevronDown className="w-3 h-3 text-[#86868B]" />
                 </button>
 
@@ -326,6 +486,39 @@ export const PublicNavbar: React.FC<PublicNavbarProps> = ({ onOpenSearch }) => {
       {/* Mobile Drawer Menu */}
       {mobileMenuOpen && (
         <div className="md:hidden border-t border-black/[0.06] bg-white/95 backdrop-blur-2xl px-6 py-5 space-y-4 animate-in slide-in-from-top-4 duration-200">
+          
+          {/* Mobile Direct Search Bar */}
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              if (navSearchQuery.trim()) {
+                setMobileMenuOpen(false);
+                navigate(`/startups?search=${encodeURIComponent(navSearchQuery.trim())}`);
+              }
+            }}
+            className="relative"
+          >
+            <div className="flex items-center bg-black/[0.04] rounded-2xl px-3.5 py-2.5 border border-black/[0.08] focus-within:bg-white focus-within:border-[#0071E3] transition-all">
+              <Search className="w-4 h-4 text-[#86868B] mr-2 shrink-0" />
+              <input
+                type="text"
+                value={navSearchQuery}
+                onChange={(e) => setNavSearchQuery(e.target.value)}
+                placeholder="Search startups, sectors..."
+                className="w-full text-xs font-medium bg-transparent focus:outline-none text-[#1D1D1F] placeholder-[#86868B]"
+              />
+              {navSearchQuery && (
+                <button
+                  type="button"
+                  onClick={() => setNavSearchQuery('')}
+                  className="p-1 text-[#86868B] hover:text-[#1D1D1F]"
+                >
+                  <X className="w-3.5 h-3.5" />
+                </button>
+              )}
+            </div>
+          </form>
+
           <nav className="space-y-1">
             {navLinks.map((link) => {
               const Icon = link.icon;
