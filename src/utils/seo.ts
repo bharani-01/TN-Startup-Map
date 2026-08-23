@@ -10,5 +10,5 @@ export const SITE_URL =
 export const canonicalUrl = (path: string = '') =>
   `${SITE_URL}${path.startsWith('/') ? path : `/${path}`}`;
 
-/** Default OG cover image */
-export const OG_DEFAULT_IMAGE = `${SITE_URL}/og-cover.png`;
+/** Default OG cover image (Brand Logo WebP) */
+export const OG_DEFAULT_IMAGE = `${SITE_URL}/logo.webp`;

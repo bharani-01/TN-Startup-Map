@@ -10,7 +10,7 @@ const blogRepo = new BlogRepository();
 const districtRepo = new DistrictRepository();
 
 const BASE_URL = process.env.VITE_PUBLIC_URL || 'https://tnstartupmaps.trackifyapp.co.in';
-const DEFAULT_IMAGE = `${BASE_URL}/og-cover.png`;
+const DEFAULT_IMAGE = `${BASE_URL}/logo.webp`;
 
 function escapeHtml(str: string): string {
   return (str || '')
