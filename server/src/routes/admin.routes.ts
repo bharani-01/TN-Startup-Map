@@ -15,6 +15,7 @@ const router = Router();
 router.use(requireAuth, authorize(UserRole.ADMIN, UserRole.SUPER_ADMIN));
 
 router.get('/stats', adminController.getDashboardStats.bind(adminController));
+router.post('/sync-database', adminController.syncDatabase.bind(adminController));
 
 // Submissions review
 router.get('/submissions', adminController.getSubmissions.bind(adminController));

@@ -98,6 +98,17 @@ export class AdminController {
       next(error);
     }
   }
+
+  async syncDatabase(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { db } = await import('../database/connection.js');
+      await db.syncFromDatabase();
+      const stats = await statsService.getEcosystemStats();
+      res.status(HTTP_STATUS.OK).json(ApiResponse.success(stats, 'In-memory spatial cache synchronized with PostgreSQL database successfully'));
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 
 export const adminController = new AdminController();

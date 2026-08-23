@@ -117,7 +117,7 @@ class SpatialDatabase {
     }
   }
 
-  private async syncFromDatabase(): Promise<void> {
+  public async syncFromDatabase(): Promise<void> {
     try {
       const p = prisma as any;
       const [
