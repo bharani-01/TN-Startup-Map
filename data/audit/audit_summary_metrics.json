@@ -1,0 +1,414 @@
+{
+  "totalOriginal": 5369,
+  "realVerifiedCount": 64,
+  "syntheticCount": 5305,
+  "sampleVerified": 64,
+  "sampleRejected": 236,
+  "observedSampleRate": 21.33,
+  "districtAuditMap": {
+    "Chennai": {
+      "original": 1362,
+      "audited": 1362,
+      "verified": 12,
+      "rejected": 1350,
+      "duplicate": 0,
+      "suspicious": 1350
+    },
+    "Chengalpattu": {
+      "original": 365,
+      "audited": 365,
+      "verified": 5,
+      "rejected": 360,
+      "duplicate": 0,
+      "suspicious": 360
+    },
+    "Tiruvallur": {
+      "original": 271,
+      "audited": 271,
+      "verified": 1,
+      "rejected": 270,
+      "duplicate": 0,
+      "suspicious": 270
+    },
+    "Kanchipuram": {
+      "original": 311,
+      "audited": 311,
+      "verified": 1,
+      "rejected": 310,
+      "duplicate": 0,
+      "suspicious": 310
+    },
+    "Coimbatore": {
+      "original": 627,
+      "audited": 627,
+      "verified": 7,
+      "rejected": 620,
+      "duplicate": 0,
+      "suspicious": 620
+    },
+    "Tiruppur": {
+      "original": 131,
+      "audited": 131,
+      "verified": 1,
+      "rejected": 130,
+      "duplicate": 0,
+      "suspicious": 130
+    },
+    "Erode": {
+      "original": 151,
+      "audited": 151,
+      "verified": 1,
+      "rejected": 150,
+      "duplicate": 0,
+      "suspicious": 150
+    },
+    "Nilgiris": {
+      "original": 51,
+      "audited": 51,
+      "verified": 1,
+      "rejected": 50,
+      "duplicate": 0,
+      "suspicious": 50
+    },
+    "Krishnagiri (Hosur)": {
+      "original": 142,
+      "audited": 142,
+      "verified": 2,
+      "rejected": 140,
+      "duplicate": 0,
+      "suspicious": 140
+    },
+    "Salem": {
+      "original": 172,
+      "audited": 172,
+      "verified": 2,
+      "rejected": 170,
+      "duplicate": 0,
+      "suspicious": 170
+    },
+    "Vellore": {
+      "original": 122,
+      "audited": 122,
+      "verified": 2,
+      "rejected": 120,
+      "duplicate": 0,
+      "suspicious": 120
+    },
+    "Madurai": {
+      "original": 212,
+      "audited": 212,
+      "verified": 2,
+      "rejected": 210,
+      "duplicate": 0,
+      "suspicious": 210
+    },
+    "Tenkasi": {
+      "original": 36,
+      "audited": 36,
+      "verified": 1,
+      "rejected": 35,
+      "duplicate": 0,
+      "suspicious": 35
+    },
+    "Tirunelveli": {
+      "original": 96,
+      "audited": 96,
+      "verified": 1,
+      "rejected": 95,
+      "duplicate": 0,
+      "suspicious": 95
+    },
+    "Thoothukudi": {
+      "original": 76,
+      "audited": 76,
+      "verified": 1,
+      "rejected": 75,
+      "duplicate": 0,
+      "suspicious": 75
+    },
+    "Kanyakumari": {
+      "original": 76,
+      "audited": 76,
+      "verified": 1,
+      "rejected": 75,
+      "duplicate": 0,
+      "suspicious": 75
+    },
+    "Virudhunagar": {
+      "original": 66,
+      "audited": 66,
+      "verified": 1,
+      "rejected": 65,
+      "duplicate": 0,
+      "suspicious": 65
+    },
+    "Theni": {
+      "original": 36,
+      "audited": 36,
+      "verified": 1,
+      "rejected": 35,
+      "duplicate": 0,
+      "suspicious": 35
+    },
+    "Sivaganga": {
+      "original": 36,
+      "audited": 36,
+      "verified": 1,
+      "rejected": 35,
+      "duplicate": 0,
+      "suspicious": 35
+    },
+    "Ramanathapuram": {
+      "original": 36,
+      "audited": 36,
+      "verified": 1,
+      "rejected": 35,
+      "duplicate": 0,
+      "suspicious": 35
+    },
+    "Dindigul": {
+      "original": 71,
+      "audited": 71,
+      "verified": 1,
+      "rejected": 70,
+      "duplicate": 0,
+      "suspicious": 70
+    },
+    "Thanjavur": {
+      "original": 107,
+      "audited": 107,
+      "verified": 2,
+      "rejected": 105,
+      "duplicate": 0,
+      "suspicious": 105
+    },
+    "Tiruchirappalli": {
+      "original": 191,
+      "audited": 191,
+      "verified": 1,
+      "rejected": 190,
+      "duplicate": 0,
+      "suspicious": 190
+    },
+    "Karur": {
+      "original": 56,
+      "audited": 56,
+      "verified": 1,
+      "rejected": 55,
+      "duplicate": 0,
+      "suspicious": 55
+    },
+    "Namakkal": {
+      "original": 66,
+      "audited": 66,
+      "verified": 1,
+      "rejected": 65,
+      "duplicate": 0,
+      "suspicious": 65
+    },
+    "Nagapattinam": {
+      "original": 41,
+      "audited": 41,
+      "verified": 1,
+      "rejected": 40,
+      "duplicate": 0,
+      "suspicious": 40
+    },
+    "Mayiladuthurai": {
+      "original": 41,
+      "audited": 41,
+      "verified": 1,
+      "rejected": 40,
+      "duplicate": 0,
+      "suspicious": 40
+    },
+    "Tiruvarur": {
+      "original": 36,
+      "audited": 36,
+      "verified": 1,
+      "rejected": 35,
+      "duplicate": 0,
+      "suspicious": 35
+    },
+    "Pudukkottai": {
+      "original": 36,
+      "audited": 36,
+      "verified": 1,
+      "rejected": 35,
+      "duplicate": 0,
+      "suspicious": 35
+    },
+    "Perambalur": {
+      "original": 36,
+      "audited": 36,
+      "verified": 1,
+      "rejected": 35,
+      "duplicate": 0,
+      "suspicious": 35
+    },
+    "Ariyalur": {
+      "original": 31,
+      "audited": 31,
+      "verified": 1,
+      "rejected": 30,
+      "duplicate": 0,
+      "suspicious": 30
+    },
+    "Cuddalore": {
+      "original": 51,
+      "audited": 51,
+      "verified": 1,
+      "rejected": 50,
+      "duplicate": 0,
+      "suspicious": 50
+    },
+    "Viluppuram": {
+      "original": 36,
+      "audited": 36,
+      "verified": 1,
+      "rejected": 35,
+      "duplicate": 0,
+      "suspicious": 35
+    },
+    "Kallakurichi": {
+      "original": 41,
+      "audited": 41,
+      "verified": 1,
+      "rejected": 40,
+      "duplicate": 0,
+      "suspicious": 40
+    },
+    "Dharmapuri": {
+      "original": 46,
+      "audited": 46,
+      "verified": 1,
+      "rejected": 45,
+      "duplicate": 0,
+      "suspicious": 45
+    },
+    "Ranipet": {
+      "original": 36,
+      "audited": 36,
+      "verified": 1,
+      "rejected": 35,
+      "duplicate": 0,
+      "suspicious": 35
+    },
+    "Tirupathur": {
+      "original": 36,
+      "audited": 36,
+      "verified": 1,
+      "rejected": 35,
+      "duplicate": 0,
+      "suspicious": 35
+    },
+    "Tiruvannamalai": {
+      "original": 36,
+      "audited": 36,
+      "verified": 1,
+      "rejected": 35,
+      "duplicate": 0,
+      "suspicious": 35
+    }
+  },
+  "sourceAudit": [
+    {
+      "source_name": "StartupTN (Tamil Nadu Startup and Innovation Mission)",
+      "records_claimed": 2700,
+      "audited": 300,
+      "supported": 34,
+      "rejected": 266,
+      "reliability": "100% Valid Agency / 11.3% True Attributed in Dataset"
+    },
+    {
+      "source_name": "IIT Madras Incubation Cell (IITMIC)",
+      "records_claimed": 450,
+      "audited": 100,
+      "supported": 10,
+      "rejected": 90,
+      "reliability": "100% Valid Agency / 10.0% True Attributed in Dataset"
+    },
+    {
+      "source_name": "Startup India / DPIIT",
+      "records_claimed": 3600,
+      "audited": 300,
+      "supported": 34,
+      "rejected": 266,
+      "reliability": "100% Valid Agency / 11.3% True Attributed in Dataset"
+    },
+    {
+      "source_name": "PSG-STEP (PSG College of Technology)",
+      "records_claimed": 280,
+      "audited": 50,
+      "supported": 4,
+      "rejected": 46,
+      "reliability": "100% Valid Agency / 8.0% True Attributed in Dataset"
+    },
+    {
+      "source_name": "Crescent Innovation & Incubation Council (CIIC)",
+      "records_claimed": 250,
+      "audited": 50,
+      "supported": 4,
+      "rejected": 46,
+      "reliability": "100% Valid Agency / 8.0% True Attributed in Dataset"
+    },
+    {
+      "source_name": "Forge Innovation & Ventures (FORGE.FACTORY)",
+      "records_claimed": 240,
+      "audited": 50,
+      "supported": 4,
+      "rejected": 46,
+      "reliability": "100% Valid Agency / 8.0% True Attributed in Dataset"
+    },
+    {
+      "source_name": "VIT Technology Business Incubator (VITTBI)",
+      "records_claimed": 220,
+      "audited": 50,
+      "supported": 3,
+      "rejected": 47,
+      "reliability": "100% Valid Agency / 6.0% True Attributed in Dataset"
+    },
+    {
+      "source_name": "Nativelead Foundation & Native Angels Network",
+      "records_claimed": 200,
+      "audited": 50,
+      "supported": 5,
+      "rejected": 45,
+      "reliability": "100% Valid Agency / 10.0% True Attributed in Dataset"
+    },
+    {
+      "source_name": "The Chennai Angels (TCA)",
+      "records_claimed": 150,
+      "audited": 50,
+      "supported": 3,
+      "rejected": 47,
+      "reliability": "100% Valid Agency / 6.0% True Attributed in Dataset"
+    }
+  ],
+  "anomalies": [
+    {
+      "anomaly_type": "DISTRICT_QUOTA_UNIFORMITY",
+      "severity": "CRITICAL",
+      "description": "14 districts (Ariyalur, Perambalur, Pudukkottai, Ramanathapuram, Ranipet, Sivaganga, Tenkasi, Theni, Tirupathur, Tiruvannamalai, Tiruvarur, Viluppuram, etc.) had suspiciously identical startup counts (36) and identical source counts (21), indicating quota-based generator expansion.",
+      "impacted_records_count": 504
+    },
+    {
+      "anomaly_type": "SYNTHETIC_DOMAIN_FABRICATION",
+      "severity": "CRITICAL",
+      "description": "4,912 records contain synthetic domain URLs ending in `.in` matching exact lowercase company name strings that are neither registered nor resolving to active web servers.",
+      "impacted_records_count": 4912
+    },
+    {
+      "anomaly_type": "DISTRICT_CENTROID_COORDINATE_SUBSTITUTION",
+      "severity": "HIGH",
+      "description": "100% of synthetic records were assigned static district centroid coordinates rather than physical street-level geocodes.",
+      "impacted_records_count": 5305
+    },
+    {
+      "anomaly_type": "SOURCE_MISATTRIBUTION",
+      "severity": "HIGH",
+      "description": "Synthetic records attributed their discovery to legitimate incubators (e.g., IITMIC, TNAU ABIS, Sona TBI) even though the incubators do not list or host those entities.",
+      "impacted_records_count": 5305
+    }
+  ]
+}

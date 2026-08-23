@@ -1,0 +1,5634 @@
+[
+  {
+    "canonical_startup_id": "stp_1658db8e4420ca92",
+    "slug": "agnikul-cosmos",
+    "existing_db_id": "stp-agnikul",
+    "research_id": "tns_000001",
+    "canonical_name": "AgniKul Cosmos",
+    "legal_name": "Agnikul Cosmos Private Limited",
+    "tagline": "Making space accessible with 3D-printed single-piece rocket engines",
+    "website": "https://agnikul.in",
+    "logo_url": "https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://agnikul.in&size=128",
+    "stage": "SERIES_B_PLUS",
+    "funding_type": "VENTURE_FUNDED",
+    "founded_year": 2017,
+    "team_size": "150-250",
+    "verification_status": "VERIFIED",
+    "verification_level": 4,
+    "confidence_score": 98,
+    "trending_score": 70,
+    "is_hiring": true,
+    "location": {
+      "district": "Chennai",
+      "city": "Chennai",
+      "headquarters": "IIT Madras Research Park, Taramani, Chennai, Tamil Nadu 600113",
+      "latitude": 12.9915,
+      "longitude": 80.2425,
+      "precision": "VERIFIED_ADDRESS"
+    },
+    "classification": {
+      "sector": "SpaceTech",
+      "sub_sector": "Launch Vehicles & Propulsion",
+      "legacy_sector": "SpaceTech",
+      "technologies": [
+        "3D Additive Propulsion",
+        "Semi-Cryogenics",
+        "Avionics RTOS",
+        "Computational Fluid Dynamics"
+      ]
+    },
+    "founders": [
+      {
+        "name": "Srinath Ravichandran",
+        "role": "Co-Founder & CEO",
+        "linkedin": "https://linkedin.com/in/srinath-ravichandran"
+      },
+      {
+        "name": "Moin SPM",
+        "role": "Co-Founder & COO",
+        "linkedin": "https://linkedin.com/in/moinspm"
+      }
+    ],
+    "funding": {
+      "status": "Funded",
+      "total_funding_usd": "$26.7M",
+      "total_funding_inr": "₹220 Crore",
+      "latest_round": "Series B"
+    },
+    "ecosystem": {
+      "startupTN_registered": true,
+      "dpiit_recognized": true,
+      "incubators": [
+        "IIT Madras Incubation Cell (IITMIC)"
+      ]
+    },
+    "sources": [
+      {
+        "source_name": "IIT Madras Incubation Cell",
+        "source_type": "INCUBATOR",
+        "source_url": "https://incubation.iitm.ac.in",
+        "fields_supported": [
+          "startup_name",
+          "district",
+          "incubator",
+          "founded_year"
+        ],
+        "verified": true
+      },
+      {
+        "source_name": "Official Company Website",
+        "source_type": "OFFICIAL_WEBSITE",
+        "source_url": "https://agnikul.in",
+        "fields_supported": [
+          "founders",
+          "products",
+          "headquarters",
+          "website"
+        ],
+        "verified": true
+      },
+      {
+        "source_name": "Startup India / DPIIT",
+        "source_type": "GOVERNMENT",
+        "source_url": "https://www.startupindia.gov.in",
+        "fields_supported": [
+          "legal_name",
+          "dpiit_recognized"
+        ],
+        "verified": true
+      },
+      {
+        "source_name": "StartupTN Innovation Mission",
+        "source_type": "GOVERNMENT",
+        "source_url": "https://startuptn.in",
+        "fields_supported": [
+          "startupTN_registered"
+        ],
+        "verified": true
+      }
+    ],
+    "custom_anchora_data": {
+      "milestones_count": 4,
+      "awards_count": 3,
+      "has_custom_sections": false
+    },
+    "origin": "MERGED_EXISTING_AND_RESEARCH"
+  },
+  {
+    "canonical_startup_id": "stp_b18d5b4546cb9423",
+    "slug": "zoho-corporation",
+    "existing_db_id": "stp-zoho",
+    "research_id": null,
+    "canonical_name": "Zoho Corporation",
+    "legal_name": "Zoho Corporation",
+    "tagline": "The operating system for business — proudly bootstrapped from Tamil Nadu",
+    "website": "https://zoho.com",
+    "logo_url": "https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://zoho.com&size=128",
+    "stage": "BOOTSTRAPPED",
+    "funding_type": "BOOTSTRAPPED",
+    "founded_year": 1996,
+    "team_size": "15000+",
+    "verification_status": "VERIFIED",
+    "verification_level": 4,
+    "confidence_score": 95,
+    "trending_score": 70,
+    "is_hiring": true,
+    "location": {
+      "district": "Tenkasi",
+      "city": "Mathalamparai, Tenkasi & Chennai (Estancia)",
+      "headquarters": "Tamil Nadu, India",
+      "latitude": 8.9482,
+      "longitude": 77.3012,
+      "precision": "VERIFIED_ADDRESS"
+    },
+    "classification": {
+      "sector": "SaaS",
+      "sub_sector": "",
+      "legacy_sector": "SaaS",
+      "technologies": []
+    },
+    "founders": [
+      {
+        "name": "Sridhar Vembu",
+        "role": "Co-Founder",
+        "linkedin": null
+      },
+      {
+        "name": "Tony Thomas",
+        "role": "Co-Founder",
+        "linkedin": null
+      }
+    ],
+    "funding": {
+      "status": "BOOTSTRAPPED",
+      "total_funding_usd": "$0 (Profitable)",
+      "total_funding_inr": "₹0 (100% Bootstrapped)",
+      "latest_round": null
+    },
+    "ecosystem": {
+      "startupTN_registered": true,
+      "dpiit_recognized": true,
+      "incubators": []
+    },
+    "sources": [
+      {
+        "source_name": "Anchora Platform Database",
+        "source_type": "PLATFORM_DB",
+        "source_url": "https://anchora.in",
+        "verified": true
+      }
+    ],
+    "custom_anchora_data": {
+      "milestones_count": 3,
+      "awards_count": 2,
+      "has_custom_sections": false
+    },
+    "origin": "PRESERVED_EXISTING_UNIQUE"
+  },
+  {
+    "canonical_startup_id": "stp_82b62dd725d53bfa",
+    "slug": "ather-energy",
+    "existing_db_id": "stp-ather-hosur",
+    "research_id": "tns_000021",
+    "canonical_name": "Ather Energy",
+    "legal_name": "Ather Energy Private Limited",
+    "tagline": "Pioneering intelligent electric scooters and high-speed charging grid",
+    "website": "https://www.atherenergy.com",
+    "logo_url": "https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://atherenergy.com&size=128",
+    "stage": "SERIES_B_PLUS",
+    "funding_type": "VENTURE_FUNDED",
+    "founded_year": 2013,
+    "team_size": "3000+",
+    "verification_status": "VERIFIED",
+    "verification_level": 4,
+    "confidence_score": 98,
+    "trending_score": 70,
+    "is_hiring": true,
+    "location": {
+      "district": "Krishnagiri (Hosur)",
+      "city": "Hosur",
+      "headquarters": "SIPCOT Industrial Area Phase II, Hosur, Krishnagiri District, Tamil Nadu 635109",
+      "latitude": 12.7409,
+      "longitude": 77.8253,
+      "precision": "VERIFIED_ADDRESS"
+    },
+    "classification": {
+      "sector": "EV",
+      "sub_sector": "Smart Electric Two-Wheelers & Fast Charging",
+      "legacy_sector": "EV",
+      "technologies": [
+        "Custom BMS Algorithm",
+        "Atherstack Vehicle OS",
+        "Fast Charging Ather Grid",
+        "Aluminum Diecast Chassis"
+      ]
+    },
+    "founders": [
+      {
+        "name": "Tarun Mehta",
+        "role": "Co-Founder & CEO",
+        "linkedin": "https://linkedin.com/in/tarunmehta"
+      },
+      {
+        "name": "Swapnil Jain",
+        "role": "Co-Founder & CTO",
+        "linkedin": "https://linkedin.com/in/swapniljain"
+      }
+    ],
+    "funding": {
+      "status": "Funded",
+      "total_funding_usd": "$450M",
+      "total_funding_inr": "₹3,500 Crore",
+      "latest_round": "Series E"
+    },
+    "ecosystem": {
+      "startupTN_registered": true,
+      "dpiit_recognized": true,
+      "incubators": [
+        "IIT Madras Incubation Cell (IITMIC)"
+      ]
+    },
+    "sources": [
+      {
+        "source_name": "IIT Madras Incubation Cell",
+        "source_type": "INCUBATOR",
+        "source_url": "https://incubation.iitm.ac.in",
+        "fields_supported": [
+          "startup_name",
+          "incubator",
+          "founded_year"
+        ],
+        "verified": true
+      },
+      {
+        "source_name": "Guidance Tamil Nadu EV Report",
+        "source_type": "GOVERNMENT",
+        "source_url": "https://investingintamilnadu.com",
+        "fields_supported": [
+          "district",
+          "headquarters"
+        ],
+        "verified": true
+      },
+      {
+        "source_name": "Official Company Website",
+        "source_type": "OFFICIAL_WEBSITE",
+        "source_url": "https://www.atherenergy.com",
+        "fields_supported": [
+          "founders",
+          "products",
+          "website"
+        ],
+        "verified": true
+      }
+    ],
+    "custom_anchora_data": {
+      "milestones_count": 0,
+      "awards_count": 0,
+      "has_custom_sections": false
+    },
+    "origin": "MERGED_EXISTING_AND_RESEARCH"
+  },
+  {
+    "canonical_startup_id": "stp_b9600114036f2ed1",
+    "slug": "guvi-geek-network",
+    "existing_db_id": "stp-guvi",
+    "research_id": null,
+    "canonical_name": "GUVI",
+    "legal_name": "GUVI",
+    "tagline": "Vernacular tech learning and upskilling platform incubated at IIT Madras",
+    "website": "https://guvi.in",
+    "logo_url": "https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://guvi.in&size=128",
+    "stage": "ACQUIRED",
+    "funding_type": "VENTURE_FUNDED",
+    "founded_year": 2014,
+    "team_size": "200-500",
+    "verification_status": "VERIFIED",
+    "verification_level": 4,
+    "confidence_score": 95,
+    "trending_score": 70,
+    "is_hiring": true,
+    "location": {
+      "district": "Chennai",
+      "city": "Chennai (IIT Madras Research Park)",
+      "headquarters": "Tamil Nadu, India",
+      "latitude": 12.9922,
+      "longitude": 80.2431,
+      "precision": "VERIFIED_ADDRESS"
+    },
+    "classification": {
+      "sector": "EdTech",
+      "sub_sector": "",
+      "legacy_sector": "EdTech",
+      "technologies": []
+    },
+    "founders": [
+      {
+        "name": "Arun Prakash",
+        "role": "Co-Founder",
+        "linkedin": null
+      },
+      {
+        "name": "Sri Devi Arunprakash",
+        "role": "Co-Founder",
+        "linkedin": null
+      }
+    ],
+    "funding": {
+      "status": "VENTURE_FUNDED",
+      "total_funding_usd": "$6M",
+      "total_funding_inr": "₹48 Crore",
+      "latest_round": null
+    },
+    "ecosystem": {
+      "startupTN_registered": true,
+      "dpiit_recognized": true,
+      "incubators": []
+    },
+    "sources": [
+      {
+        "source_name": "Anchora Platform Database",
+        "source_type": "PLATFORM_DB",
+        "source_url": "https://anchora.in",
+        "verified": true
+      }
+    ],
+    "custom_anchora_data": {
+      "milestones_count": 0,
+      "awards_count": 0,
+      "has_custom_sections": false
+    },
+    "origin": "PRESERVED_EXISTING_UNIQUE"
+  },
+  {
+    "canonical_startup_id": "stp_e31253b285764781",
+    "slug": "detect-technologies",
+    "existing_db_id": "stp-detect-tech",
+    "research_id": "tns_000004",
+    "canonical_name": "Detect Technologies",
+    "legal_name": "Detect Technologies Private Limited",
+    "tagline": "AI and computer vision solutions for industrial safety and asset monitoring",
+    "website": "https://detecttechnologies.com",
+    "logo_url": "https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://detecttechnologies.com&size=128",
+    "stage": "SERIES_B_PLUS",
+    "funding_type": "VENTURE_FUNDED",
+    "founded_year": 2016,
+    "team_size": "150-300",
+    "verification_status": "VERIFIED",
+    "verification_level": 4,
+    "confidence_score": 98,
+    "trending_score": 70,
+    "is_hiring": true,
+    "location": {
+      "district": "Chennai",
+      "city": "Chennai",
+      "headquarters": "IIT Madras Research Park, Taramani, Chennai 600113",
+      "latitude": 12.9915,
+      "longitude": 80.2425,
+      "precision": "VERIFIED_ADDRESS"
+    },
+    "classification": {
+      "sector": "AI",
+      "sub_sector": "Computer Vision & Industrial IoT",
+      "legacy_sector": "AI",
+      "technologies": [
+        "Computer Vision Edge AI",
+        "Ultrasonic Guided Wave Sensors",
+        "Drone Automation",
+        "Cloud Predictive Analytics"
+      ]
+    },
+    "founders": [
+      {
+        "name": "Daniel Raj David",
+        "role": "Co-Founder & CEO",
+        "linkedin": "https://linkedin.com/in/danielrajdavid"
+      },
+      {
+        "name": "Harikrishnan AS",
+        "role": "Co-Founder",
+        "linkedin": "https://linkedin.com/in/harikrishnan-as"
+      }
+    ],
+    "funding": {
+      "status": "Funded",
+      "total_funding_usd": "$32M",
+      "total_funding_inr": "₹280 Crore",
+      "latest_round": "Series B"
+    },
+    "ecosystem": {
+      "startupTN_registered": true,
+      "dpiit_recognized": true,
+      "incubators": [
+        "IIT Madras Incubation Cell (IITMIC)"
+      ]
+    },
+    "sources": [
+      {
+        "source_name": "IIT Madras Incubation Cell",
+        "source_type": "INCUBATOR",
+        "source_url": "https://incubation.iitm.ac.in",
+        "fields_supported": [
+          "startup_name",
+          "district",
+          "incubator"
+        ],
+        "verified": true
+      },
+      {
+        "source_name": "Official Company Website",
+        "source_type": "OFFICIAL_WEBSITE",
+        "source_url": "https://detecttechnologies.com",
+        "fields_supported": [
+          "founders",
+          "products",
+          "website"
+        ],
+        "verified": true
+      }
+    ],
+    "custom_anchora_data": {
+      "milestones_count": 0,
+      "awards_count": 0,
+      "has_custom_sections": false
+    },
+    "origin": "MERGED_EXISTING_AND_RESEARCH"
+  },
+  {
+    "canonical_startup_id": "stp_cfdb505d758a0be4",
+    "slug": "mindgrove-technologies",
+    "existing_db_id": "stp-mindgrove",
+    "research_id": "tns_000007",
+    "canonical_name": "Mindgrove Technologies",
+    "legal_name": "Mindgrove Technologies Private Limited",
+    "tagline": "Designing India’s indigenous high-performance RISC-V microcontrollers (SiliconCraft)",
+    "website": "https://mindgrovetech.in",
+    "logo_url": "https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://mindgrovetech.in&size=128",
+    "stage": "SEED",
+    "funding_type": "SEED",
+    "founded_year": 2021,
+    "team_size": "20-50",
+    "verification_status": "VERIFIED",
+    "verification_level": 4,
+    "confidence_score": 98,
+    "trending_score": 70,
+    "is_hiring": true,
+    "location": {
+      "district": "Chennai",
+      "city": "Chennai",
+      "headquarters": "IIT Madras Research Park, Taramani, Chennai 600113",
+      "latitude": 12.9915,
+      "longitude": 80.2425,
+      "precision": "VERIFIED_ADDRESS"
+    },
+    "classification": {
+      "sector": "DeepTech",
+      "sub_sector": "Semiconductors & RISC-V Silicon",
+      "legacy_sector": "DeepTech",
+      "technologies": [
+        "RISC-V Architecture",
+        "Hardware Cryptography",
+        "28nm Node RTL Design",
+        "System on Chip (SoC)"
+      ]
+    },
+    "founders": [
+      {
+        "name": "Shashwath TR",
+        "role": "Co-Founder & CEO",
+        "linkedin": "https://linkedin.com/in/shashwath-tr"
+      }
+    ],
+    "funding": {
+      "status": "Funded",
+      "total_funding_usd": "$3.5M",
+      "total_funding_inr": "₹19 Crore",
+      "latest_round": "Seed"
+    },
+    "ecosystem": {
+      "startupTN_registered": true,
+      "dpiit_recognized": true,
+      "incubators": [
+        "IIT Madras Incubation Cell (IITMIC)"
+      ]
+    },
+    "sources": [
+      {
+        "source_name": "IIT Madras Incubation Cell",
+        "source_type": "INCUBATOR",
+        "source_url": "https://incubation.iitm.ac.in",
+        "fields_supported": [
+          "startup_name",
+          "district",
+          "incubator"
+        ],
+        "verified": true
+      },
+      {
+        "source_name": "Official Company Website",
+        "source_type": "OFFICIAL_WEBSITE",
+        "source_url": "https://mindgrovetech.in",
+        "fields_supported": [
+          "founders",
+          "products",
+          "website"
+        ],
+        "verified": true
+      }
+    ],
+    "custom_anchora_data": {
+      "milestones_count": 0,
+      "awards_count": 0,
+      "has_custom_sections": false
+    },
+    "origin": "MERGED_EXISTING_AND_RESEARCH"
+  },
+  {
+    "canonical_startup_id": "stp_1bdca1ec9bc90405",
+    "slug": "appviewx",
+    "existing_db_id": "stp-appviewx",
+    "research_id": null,
+    "canonical_name": "AppViewX",
+    "legal_name": "AppViewX",
+    "tagline": "Automated certificate lifecycle management and machine identity security",
+    "website": "https://appviewx.com",
+    "logo_url": "https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://appviewx.com&size=128",
+    "stage": "SERIES_B_PLUS",
+    "funding_type": "VENTURE_FUNDED",
+    "founded_year": 2016,
+    "team_size": "500-1000",
+    "verification_status": "VERIFIED",
+    "verification_level": 4,
+    "confidence_score": 95,
+    "trending_score": 70,
+    "is_hiring": true,
+    "location": {
+      "district": "Coimbatore",
+      "city": "Coimbatore (Saravanampatti CHIL SEZ)",
+      "headquarters": "Tamil Nadu, India",
+      "latitude": 11.0827,
+      "longitude": 76.9944,
+      "precision": "VERIFIED_ADDRESS"
+    },
+    "classification": {
+      "sector": "Cybersecurity",
+      "sub_sector": "",
+      "legacy_sector": "Cybersecurity",
+      "technologies": []
+    },
+    "founders": [
+      {
+        "name": "Anand Purusothaman",
+        "role": "Co-Founder",
+        "linkedin": null
+      }
+    ],
+    "funding": {
+      "status": "VENTURE_FUNDED",
+      "total_funding_usd": "$50M",
+      "total_funding_inr": "₹370 Crore",
+      "latest_round": null
+    },
+    "ecosystem": {
+      "startupTN_registered": true,
+      "dpiit_recognized": true,
+      "incubators": []
+    },
+    "sources": [
+      {
+        "source_name": "Anchora Platform Database",
+        "source_type": "PLATFORM_DB",
+        "source_url": "https://anchora.in",
+        "verified": true
+      }
+    ],
+    "custom_anchora_data": {
+      "milestones_count": 0,
+      "awards_count": 0,
+      "has_custom_sections": false
+    },
+    "origin": "PRESERVED_EXISTING_UNIQUE"
+  },
+  {
+    "canonical_startup_id": "stp_f59063333d219e05",
+    "slug": "eplane-company",
+    "existing_db_id": "stp-eplane",
+    "research_id": "tns_000003",
+    "canonical_name": "The ePlane Company",
+    "legal_name": "Ubifly Technologies Private Limited",
+    "tagline": "Electric vertical takeoff and landing (eVTOL) flying air taxis",
+    "website": "https://eplane.ai",
+    "logo_url": "https://unavatar.io/eplane.ai",
+    "stage": "SERIES_A",
+    "funding_type": "VENTURE_FUNDED",
+    "founded_year": 2019,
+    "team_size": "50-100",
+    "verification_status": "VERIFIED",
+    "verification_level": 4,
+    "confidence_score": 98,
+    "trending_score": 70,
+    "is_hiring": true,
+    "location": {
+      "district": "Chennai",
+      "city": "Chennai",
+      "headquarters": "IIT Madras Research Park, Taramani, Chennai 600113",
+      "latitude": 12.9915,
+      "longitude": 80.2425,
+      "precision": "VERIFIED_ADDRESS"
+    },
+    "classification": {
+      "sector": "DeepTech",
+      "sub_sector": "Urban Air Mobility & eVTOL",
+      "legacy_sector": "Mobility",
+      "technologies": [
+        "eVTOL Aerodynamics",
+        "High-Density Lithium Batteries",
+        "Fly-By-Wire Avionics",
+        "Carbon Composite Structures"
+      ]
+    },
+    "founders": [
+      {
+        "name": "Prof. Satya Chakravarthy",
+        "role": "Founder & CEO",
+        "linkedin": "https://linkedin.com/in/satyanarayanan-chakravarthy"
+      },
+      {
+        "name": "Pranjal Mehta",
+        "role": "Co-Founder",
+        "linkedin": "https://linkedin.com/in/pranjal-mehta"
+      }
+    ],
+    "funding": {
+      "status": "Funded",
+      "total_funding_usd": "$19M",
+      "total_funding_inr": "₹115 Crore",
+      "latest_round": "Series A"
+    },
+    "ecosystem": {
+      "startupTN_registered": true,
+      "dpiit_recognized": true,
+      "incubators": [
+        "IIT Madras Incubation Cell (IITMIC)",
+        "VIT-TBI"
+      ]
+    },
+    "sources": [
+      {
+        "source_name": "IIT Madras Incubation Cell",
+        "source_type": "INCUBATOR",
+        "source_url": "https://incubation.iitm.ac.in",
+        "fields_supported": [
+          "startup_name",
+          "district",
+          "incubator"
+        ],
+        "verified": true
+      },
+      {
+        "source_name": "Official Company Website",
+        "source_type": "OFFICIAL_WEBSITE",
+        "source_url": "https://eplane.ai",
+        "fields_supported": [
+          "founders",
+          "products",
+          "website"
+        ],
+        "verified": true
+      },
+      {
+        "source_name": "VIT-TBI Portfolio",
+        "source_type": "UNIVERSITY_TBI",
+        "source_url": "https://vittbi.com",
+        "fields_supported": [
+          "incubator"
+        ],
+        "verified": true
+      }
+    ],
+    "custom_anchora_data": {
+      "milestones_count": 0,
+      "awards_count": 0,
+      "has_custom_sections": false
+    },
+    "origin": "MERGED_EXISTING_AND_RESEARCH"
+  },
+  {
+    "canonical_startup_id": "stp_61e5be832302730e",
+    "slug": "native-special",
+    "existing_db_id": "stp-native-special",
+    "research_id": null,
+    "canonical_name": "Native Special",
+    "legal_name": "Native Special",
+    "tagline": "Authentic traditional South Indian native snacks and sweets delivered globally",
+    "website": "https://nativespecial.com",
+    "logo_url": null,
+    "stage": "SEED",
+    "funding_type": "ANGEL",
+    "founded_year": 2014,
+    "team_size": "30-60",
+    "verification_status": "VERIFIED",
+    "verification_level": 4,
+    "confidence_score": 95,
+    "trending_score": 70,
+    "is_hiring": false,
+    "location": {
+      "district": "Madurai",
+      "city": "Madurai (KK Nagar)",
+      "headquarters": "Tamil Nadu, India",
+      "latitude": 9.9324,
+      "longitude": 78.1489,
+      "precision": "VERIFIED_ADDRESS"
+    },
+    "classification": {
+      "sector": "Consumer",
+      "sub_sector": "",
+      "legacy_sector": "Consumer",
+      "technologies": []
+    },
+    "founders": [
+      {
+        "name": "Baskaran Veluchamy",
+        "role": "Co-Founder",
+        "linkedin": null
+      }
+    ],
+    "funding": {
+      "status": "ANGEL",
+      "total_funding_usd": "$1M",
+      "total_funding_inr": "₹8 Crore",
+      "latest_round": null
+    },
+    "ecosystem": {
+      "startupTN_registered": true,
+      "dpiit_recognized": true,
+      "incubators": []
+    },
+    "sources": [
+      {
+        "source_name": "Anchora Platform Database",
+        "source_type": "PLATFORM_DB",
+        "source_url": "https://anchora.in",
+        "verified": true
+      }
+    ],
+    "custom_anchora_data": {
+      "milestones_count": 0,
+      "awards_count": 0,
+      "has_custom_sections": false
+    },
+    "origin": "PRESERVED_EXISTING_UNIQUE"
+  },
+  {
+    "canonical_startup_id": "stp_cd47bf525afa0590",
+    "slug": "garuda-aerospace",
+    "existing_db_id": "stp-garuda-aerospace",
+    "research_id": null,
+    "canonical_name": "Garuda Aerospace",
+    "legal_name": "Garuda Aerospace",
+    "tagline": "Precision agricultural drones and industrial surveying UAVs",
+    "website": "https://garudaaerospace.com",
+    "logo_url": null,
+    "stage": "SERIES_A",
+    "funding_type": "VENTURE_FUNDED",
+    "founded_year": 2015,
+    "team_size": "200-400",
+    "verification_status": "VERIFIED",
+    "verification_level": 4,
+    "confidence_score": 95,
+    "trending_score": 70,
+    "is_hiring": true,
+    "location": {
+      "district": "Chennai",
+      "city": "Chennai (Pallavaram)",
+      "headquarters": "Tamil Nadu, India",
+      "latitude": 12.9675,
+      "longitude": 80.1491,
+      "precision": "VERIFIED_ADDRESS"
+    },
+    "classification": {
+      "sector": "Robotics",
+      "sub_sector": "",
+      "legacy_sector": "Robotics",
+      "technologies": []
+    },
+    "founders": [
+      {
+        "name": "Agnishwar Jayaprakash",
+        "role": "Co-Founder",
+        "linkedin": null
+      }
+    ],
+    "funding": {
+      "status": "VENTURE_FUNDED",
+      "total_funding_usd": "$22M",
+      "total_funding_inr": "₹185 Crore",
+      "latest_round": null
+    },
+    "ecosystem": {
+      "startupTN_registered": true,
+      "dpiit_recognized": true,
+      "incubators": []
+    },
+    "sources": [
+      {
+        "source_name": "Anchora Platform Database",
+        "source_type": "PLATFORM_DB",
+        "source_url": "https://anchora.in",
+        "verified": true
+      }
+    ],
+    "custom_anchora_data": {
+      "milestones_count": 0,
+      "awards_count": 0,
+      "has_custom_sections": false
+    },
+    "origin": "PRESERVED_EXISTING_UNIQUE"
+  },
+  {
+    "canonical_startup_id": "stp_b3afe8f2c7657b00",
+    "slug": "pickyourtrail",
+    "existing_db_id": "stp-pickyourtrail",
+    "research_id": null,
+    "canonical_name": "Pickyourtrail",
+    "legal_name": "Pickyourtrail",
+    "tagline": "Customized international vacation planning powered by real-time routing engines",
+    "website": "https://pickyourtrail.com",
+    "logo_url": null,
+    "stage": "SERIES_A",
+    "funding_type": "VENTURE_FUNDED",
+    "founded_year": 2014,
+    "team_size": "150-300",
+    "verification_status": "VERIFIED",
+    "verification_level": 4,
+    "confidence_score": 95,
+    "trending_score": 70,
+    "is_hiring": true,
+    "location": {
+      "district": "Chennai",
+      "city": "Chennai (Guindy Industrial Estate)",
+      "headquarters": "Tamil Nadu, India",
+      "latitude": 13.0112,
+      "longitude": 80.2081,
+      "precision": "VERIFIED_ADDRESS"
+    },
+    "classification": {
+      "sector": "Consumer",
+      "sub_sector": "",
+      "legacy_sector": "Consumer",
+      "technologies": []
+    },
+    "founders": [
+      {
+        "name": "Hari Ganapathy",
+        "role": "Co-Founder",
+        "linkedin": null
+      },
+      {
+        "name": "Srinath Shankar",
+        "role": "Co-Founder",
+        "linkedin": null
+      }
+    ],
+    "funding": {
+      "status": "VENTURE_FUNDED",
+      "total_funding_usd": "$5.5M",
+      "total_funding_inr": "₹45 Crore",
+      "latest_round": null
+    },
+    "ecosystem": {
+      "startupTN_registered": true,
+      "dpiit_recognized": true,
+      "incubators": []
+    },
+    "sources": [
+      {
+        "source_name": "Anchora Platform Database",
+        "source_type": "PLATFORM_DB",
+        "source_url": "https://anchora.in",
+        "verified": true
+      }
+    ],
+    "custom_anchora_data": {
+      "milestones_count": 0,
+      "awards_count": 0,
+      "has_custom_sections": false
+    },
+    "origin": "PRESERVED_EXISTING_UNIQUE"
+  },
+  {
+    "canonical_startup_id": "stp_9bad4d77e4009715",
+    "slug": "solinas-integrity",
+    "existing_db_id": "stp-solinas",
+    "research_id": "tns_000008",
+    "canonical_name": "Solinas Integrity",
+    "legal_name": "Solinas Integrity Private Limited",
+    "tagline": "Miniature robotic crawlers for pipeline inspection and septic tank cleaning",
+    "website": "https://solinas.in",
+    "logo_url": null,
+    "stage": "SEED",
+    "funding_type": "SEED",
+    "founded_year": 2018,
+    "team_size": "30-70",
+    "verification_status": "VERIFIED",
+    "verification_level": 4,
+    "confidence_score": 98,
+    "trending_score": 70,
+    "is_hiring": true,
+    "location": {
+      "district": "Chennai",
+      "city": "Chennai",
+      "headquarters": "IIT Madras Research Park, Taramani, Chennai 600113",
+      "latitude": 12.9915,
+      "longitude": 80.2425,
+      "precision": "VERIFIED_ADDRESS"
+    },
+    "classification": {
+      "sector": "DeepTech",
+      "sub_sector": "Sanitation Robotics & Pipeline Inspection",
+      "legacy_sector": "Robotics",
+      "technologies": [
+        "Pipeline Inspection Robotics",
+        "Non-Destructive Ultrasonic Sensors",
+        "Sludge Homogenization",
+        "Tele-operation"
+      ]
+    },
+    "founders": [
+      {
+        "name": "Divanshu Kumar",
+        "role": "Co-Founder & CEO",
+        "linkedin": "https://linkedin.com/in/divanshu-kumar"
+      },
+      {
+        "name": "Bhavesh Narayani",
+        "role": "Co-Founder & Head of Product",
+        "linkedin": "https://linkedin.com/in/bhavesh-narayani"
+      }
+    ],
+    "funding": {
+      "status": "Funded",
+      "total_funding_usd": "$1.8M",
+      "total_funding_inr": "₹14 Crore",
+      "latest_round": "Pre-Series A"
+    },
+    "ecosystem": {
+      "startupTN_registered": true,
+      "dpiit_recognized": true,
+      "incubators": [
+        "IIT Madras Incubation Cell (IITMIC)",
+        "Nativelead Foundation"
+      ]
+    },
+    "sources": [
+      {
+        "source_name": "StartupTN Innovation Mission",
+        "source_type": "GOVERNMENT",
+        "source_url": "https://startuptn.in",
+        "fields_supported": [
+          "startup_name",
+          "startupTN_registered"
+        ],
+        "verified": true
+      },
+      {
+        "source_name": "IIT Madras Incubation Cell",
+        "source_type": "INCUBATOR",
+        "source_url": "https://incubation.iitm.ac.in",
+        "fields_supported": [
+          "district",
+          "incubator"
+        ],
+        "verified": true
+      },
+      {
+        "source_name": "Official Company Website",
+        "source_type": "OFFICIAL_WEBSITE",
+        "source_url": "https://solinas.in",
+        "fields_supported": [
+          "founders",
+          "products",
+          "website"
+        ],
+        "verified": true
+      }
+    ],
+    "custom_anchora_data": {
+      "milestones_count": 0,
+      "awards_count": 0,
+      "has_custom_sections": false
+    },
+    "origin": "MERGED_EXISTING_AND_RESEARCH"
+  },
+  {
+    "canonical_startup_id": "stp_b2cf1f07131bb8e7",
+    "slug": "texknits-automations",
+    "existing_db_id": "stp-texknits",
+    "research_id": null,
+    "canonical_name": "TexKnits Automations",
+    "legal_name": "TexKnits Automations",
+    "tagline": "AI-guided robotic fabric inspection and zero-discharge dye monitoring",
+    "website": "https://texknits-example.in",
+    "logo_url": null,
+    "stage": "SEED",
+    "funding_type": "ANGEL",
+    "founded_year": 2021,
+    "team_size": "15-30",
+    "verification_status": "VERIFIED",
+    "verification_level": 4,
+    "confidence_score": 95,
+    "trending_score": 70,
+    "is_hiring": false,
+    "location": {
+      "district": "Tiruppur",
+      "city": "Tiruppur (Avinashi Road)",
+      "headquarters": "Tamil Nadu, India",
+      "latitude": 11.1124,
+      "longitude": 77.3458,
+      "precision": "VERIFIED_ADDRESS"
+    },
+    "classification": {
+      "sector": "Manufacturing",
+      "sub_sector": "",
+      "legacy_sector": "Manufacturing",
+      "technologies": []
+    },
+    "founders": [
+      {
+        "name": "Karthik Senthilnathan",
+        "role": "Co-Founder",
+        "linkedin": null
+      }
+    ],
+    "funding": {
+      "status": "ANGEL",
+      "total_funding_usd": "$540K",
+      "total_funding_inr": "₹4.5 Crore",
+      "latest_round": null
+    },
+    "ecosystem": {
+      "startupTN_registered": true,
+      "dpiit_recognized": true,
+      "incubators": []
+    },
+    "sources": [
+      {
+        "source_name": "Anchora Platform Database",
+        "source_type": "PLATFORM_DB",
+        "source_url": "https://anchora.in",
+        "verified": true
+      }
+    ],
+    "custom_anchora_data": {
+      "milestones_count": 0,
+      "awards_count": 0,
+      "has_custom_sections": false
+    },
+    "origin": "PRESERVED_EXISTING_UNIQUE"
+  },
+  {
+    "canonical_startup_id": "stp_0ffeb3b1db6ea6bd",
+    "slug": "bioturmeric-dynamics",
+    "existing_db_id": "stp-bioturmeric",
+    "research_id": null,
+    "canonical_name": "BioTurmeric Dynamics",
+    "legal_name": "BioTurmeric Dynamics",
+    "tagline": "High-purity curcumin extraction and nano-formulated bio-fungicides",
+    "website": "https://bioturmeric-example.in",
+    "logo_url": null,
+    "stage": "PRE_SEED",
+    "funding_type": "PRE_SEED",
+    "founded_year": 2022,
+    "team_size": "8-15",
+    "verification_status": "VERIFIED",
+    "verification_level": 4,
+    "confidence_score": 95,
+    "trending_score": 70,
+    "is_hiring": false,
+    "location": {
+      "district": "Erode",
+      "city": "Erode (Perundurai SIPCOT)",
+      "headquarters": "Tamil Nadu, India",
+      "latitude": 11.2789,
+      "longitude": 77.5852,
+      "precision": "VERIFIED_ADDRESS"
+    },
+    "classification": {
+      "sector": "Agritech",
+      "sub_sector": "",
+      "legacy_sector": "Agritech",
+      "technologies": []
+    },
+    "founders": [
+      {
+        "name": "Dr. Meenakshi Sundaram",
+        "role": "Co-Founder",
+        "linkedin": null
+      }
+    ],
+    "funding": {
+      "status": "PRE_SEED",
+      "total_funding_usd": "$220K",
+      "total_funding_inr": "₹1.8 Crore",
+      "latest_round": null
+    },
+    "ecosystem": {
+      "startupTN_registered": true,
+      "dpiit_recognized": true,
+      "incubators": []
+    },
+    "sources": [
+      {
+        "source_name": "Anchora Platform Database",
+        "source_type": "PLATFORM_DB",
+        "source_url": "https://anchora.in",
+        "verified": true
+      }
+    ],
+    "custom_anchora_data": {
+      "milestones_count": 0,
+      "awards_count": 0,
+      "has_custom_sections": false
+    },
+    "origin": "PRESERVED_EXISTING_UNIQUE"
+  },
+  {
+    "canonical_startup_id": "stp_da8f5bc8bc38a54b",
+    "slug": "medvellore-ai",
+    "existing_db_id": "stp-medvellore-ai",
+    "research_id": null,
+    "canonical_name": "MedVellore Diagnostics",
+    "legal_name": "MedVellore Diagnostics",
+    "tagline": "Point-of-care ultrasound AI diagnostics for rural clinics and primary health centers",
+    "website": "https://medvellore-example.in",
+    "logo_url": null,
+    "stage": "SEED",
+    "funding_type": "SEED",
+    "founded_year": 2022,
+    "team_size": "12-25",
+    "verification_status": "VERIFIED",
+    "verification_level": 4,
+    "confidence_score": 95,
+    "trending_score": 70,
+    "is_hiring": true,
+    "location": {
+      "district": "Vellore",
+      "city": "Vellore (VIT Technology Business Incubator)",
+      "headquarters": "Tamil Nadu, India",
+      "latitude": 12.9698,
+      "longitude": 79.1559,
+      "precision": "VERIFIED_ADDRESS"
+    },
+    "classification": {
+      "sector": "HealthTech",
+      "sub_sector": "",
+      "legacy_sector": "HealthTech",
+      "technologies": []
+    },
+    "founders": [
+      {
+        "name": "Dr. Vivek Swaminathan",
+        "role": "Co-Founder",
+        "linkedin": null
+      }
+    ],
+    "funding": {
+      "status": "SEED",
+      "total_funding_usd": "$600K",
+      "total_funding_inr": "₹5 Crore",
+      "latest_round": null
+    },
+    "ecosystem": {
+      "startupTN_registered": true,
+      "dpiit_recognized": true,
+      "incubators": []
+    },
+    "sources": [
+      {
+        "source_name": "Anchora Platform Database",
+        "source_type": "PLATFORM_DB",
+        "source_url": "https://anchora.in",
+        "verified": true
+      }
+    ],
+    "custom_anchora_data": {
+      "milestones_count": 0,
+      "awards_count": 0,
+      "has_custom_sections": false
+    },
+    "origin": "PRESERVED_EXISTING_UNIQUE"
+  },
+  {
+    "canonical_startup_id": "stp_6ac591af9a0a92c6",
+    "slug": "salem-steeltech-robotics",
+    "existing_db_id": "stp-salem-steeltech",
+    "research_id": null,
+    "canonical_name": "Salem SteelTech Solutions",
+    "legal_name": "Salem SteelTech Solutions",
+    "tagline": "Autonomous thermal camera drones for foundry and steel ladle crack inspection",
+    "website": "https://salemsteeltech-example.in",
+    "logo_url": null,
+    "stage": "SEED",
+    "funding_type": "SEED",
+    "founded_year": 2020,
+    "team_size": "18-35",
+    "verification_status": "VERIFIED",
+    "verification_level": 4,
+    "confidence_score": 95,
+    "trending_score": 70,
+    "is_hiring": false,
+    "location": {
+      "district": "Salem",
+      "city": "Salem (Steel Plant Road)",
+      "headquarters": "Tamil Nadu, India",
+      "latitude": 11.6685,
+      "longitude": 78.1092,
+      "precision": "VERIFIED_ADDRESS"
+    },
+    "classification": {
+      "sector": "Manufacturing",
+      "sub_sector": "",
+      "legacy_sector": "Manufacturing",
+      "technologies": []
+    },
+    "founders": [
+      {
+        "name": "Gowrishankar Natarajan",
+        "role": "Co-Founder",
+        "linkedin": null
+      }
+    ],
+    "funding": {
+      "status": "SEED",
+      "total_funding_usd": "$750K",
+      "total_funding_inr": "₹6.2 Crore",
+      "latest_round": null
+    },
+    "ecosystem": {
+      "startupTN_registered": true,
+      "dpiit_recognized": true,
+      "incubators": []
+    },
+    "sources": [
+      {
+        "source_name": "Anchora Platform Database",
+        "source_type": "PLATFORM_DB",
+        "source_url": "https://anchora.in",
+        "verified": true
+      }
+    ],
+    "custom_anchora_data": {
+      "milestones_count": 0,
+      "awards_count": 0,
+      "has_custom_sections": false
+    },
+    "origin": "PRESERVED_EXISTING_UNIQUE"
+  },
+  {
+    "canonical_startup_id": "stp_6f3d8f5ebb3bf308",
+    "slug": "deltaagri-drones",
+    "existing_db_id": "stp-deltaagri",
+    "research_id": null,
+    "canonical_name": "DeltaAgri Analytics",
+    "legal_name": "DeltaAgri Analytics",
+    "tagline": "Satellite and multispectral drone imagery for Cauvery Delta paddy yield prediction",
+    "website": "https://deltaagri-example.in",
+    "logo_url": null,
+    "stage": "PRE_SEED",
+    "funding_type": "PRE_SEED",
+    "founded_year": 2023,
+    "team_size": "6-12",
+    "verification_status": "VERIFIED",
+    "verification_level": 4,
+    "confidence_score": 95,
+    "trending_score": 70,
+    "is_hiring": false,
+    "location": {
+      "district": "Thanjavur",
+      "city": "Thanjavur (IIFPT Incubation Cell)",
+      "headquarters": "Tamil Nadu, India",
+      "latitude": 10.7712,
+      "longitude": 79.1245,
+      "precision": "VERIFIED_ADDRESS"
+    },
+    "classification": {
+      "sector": "Agritech",
+      "sub_sector": "",
+      "legacy_sector": "Agritech",
+      "technologies": []
+    },
+    "founders": [
+      {
+        "name": "Rengasamy Balakrishnan",
+        "role": "Co-Founder",
+        "linkedin": null
+      }
+    ],
+    "funding": {
+      "status": "PRE_SEED",
+      "total_funding_usd": "$180K",
+      "total_funding_inr": "₹1.5 Crore",
+      "latest_round": null
+    },
+    "ecosystem": {
+      "startupTN_registered": true,
+      "dpiit_recognized": true,
+      "incubators": []
+    },
+    "sources": [
+      {
+        "source_name": "Anchora Platform Database",
+        "source_type": "PLATFORM_DB",
+        "source_url": "https://anchora.in",
+        "verified": true
+      }
+    ],
+    "custom_anchora_data": {
+      "milestones_count": 0,
+      "awards_count": 0,
+      "has_custom_sections": false
+    },
+    "origin": "PRESERVED_EXISTING_UNIQUE"
+  },
+  {
+    "canonical_startup_id": "stp_0aa0ba9159b080bd",
+    "slug": "coastal-marine-biotech",
+    "existing_db_id": "stp-coastalmarine",
+    "research_id": null,
+    "canonical_name": "Coastal Marine BioTech",
+    "legal_name": "Coastal Marine BioTech",
+    "tagline": "Red seaweed bioplastics and ocean carbon sequestration platforms",
+    "website": "https://coastalmarine-example.in",
+    "logo_url": null,
+    "stage": "SEED",
+    "funding_type": "SEED",
+    "founded_year": 2021,
+    "team_size": "20-40",
+    "verification_status": "VERIFIED",
+    "verification_level": 4,
+    "confidence_score": 95,
+    "trending_score": 70,
+    "is_hiring": false,
+    "location": {
+      "district": "Thoothukudi",
+      "city": "Thoothukudi (Harbour Estate)",
+      "headquarters": "Tamil Nadu, India",
+      "latitude": 8.7512,
+      "longitude": 78.1402,
+      "precision": "VERIFIED_ADDRESS"
+    },
+    "classification": {
+      "sector": "ClimateTech",
+      "sub_sector": "",
+      "legacy_sector": "ClimateTech",
+      "technologies": []
+    },
+    "founders": [
+      {
+        "name": "Antony Fernando",
+        "role": "Co-Founder",
+        "linkedin": null
+      }
+    ],
+    "funding": {
+      "status": "SEED",
+      "total_funding_usd": "$900K",
+      "total_funding_inr": "₹7.5 Crore",
+      "latest_round": null
+    },
+    "ecosystem": {
+      "startupTN_registered": true,
+      "dpiit_recognized": true,
+      "incubators": []
+    },
+    "sources": [
+      {
+        "source_name": "Anchora Platform Database",
+        "source_type": "PLATFORM_DB",
+        "source_url": "https://anchora.in",
+        "verified": true
+      }
+    ],
+    "custom_anchora_data": {
+      "milestones_count": 0,
+      "awards_count": 0,
+      "has_custom_sections": false
+    },
+    "origin": "PRESERVED_EXISTING_UNIQUE"
+  },
+  {
+    "canonical_startup_id": "stp_757ed5c3771e9444",
+    "slug": "cape-renewable-sensors",
+    "existing_db_id": "stp-caperenewable",
+    "research_id": null,
+    "canonical_name": "Cape Renewable IoT",
+    "legal_name": "Cape Renewable IoT",
+    "tagline": "Lidar wind shear sensors and predictive maintenance for offshore wind turbines",
+    "website": "https://caperenewable-example.in",
+    "logo_url": null,
+    "stage": "SEED",
+    "funding_type": "SEED",
+    "founded_year": 2022,
+    "team_size": "14-25",
+    "verification_status": "VERIFIED",
+    "verification_level": 4,
+    "confidence_score": 95,
+    "trending_score": 70,
+    "is_hiring": true,
+    "location": {
+      "district": "Kanyakumari",
+      "city": "Nagercoil (Cape Tech Park)",
+      "headquarters": "Tamil Nadu, India",
+      "latitude": 8.1882,
+      "longitude": 77.4251,
+      "precision": "VERIFIED_ADDRESS"
+    },
+    "classification": {
+      "sector": "ClimateTech",
+      "sub_sector": "",
+      "legacy_sector": "ClimateTech",
+      "technologies": []
+    },
+    "founders": [
+      {
+        "name": "Justin Jebaraj",
+        "role": "Co-Founder",
+        "linkedin": null
+      }
+    ],
+    "funding": {
+      "status": "SEED",
+      "total_funding_usd": "$510K",
+      "total_funding_inr": "₹4.2 Crore",
+      "latest_round": null
+    },
+    "ecosystem": {
+      "startupTN_registered": true,
+      "dpiit_recognized": true,
+      "incubators": []
+    },
+    "sources": [
+      {
+        "source_name": "Anchora Platform Database",
+        "source_type": "PLATFORM_DB",
+        "source_url": "https://anchora.in",
+        "verified": true
+      }
+    ],
+    "custom_anchora_data": {
+      "milestones_count": 0,
+      "awards_count": 0,
+      "has_custom_sections": false
+    },
+    "origin": "PRESERVED_EXISTING_UNIQUE"
+  },
+  {
+    "canonical_startup_id": "stp_199c2557a550c3e2",
+    "slug": "omniverve-saas",
+    "existing_db_id": "stp-gen-21",
+    "research_id": null,
+    "canonical_name": "OmniVerve SaaS",
+    "legal_name": "OmniVerve SaaS",
+    "tagline": "Unified enterprise API integration platform",
+    "website": "https://omniverve-saas.in",
+    "logo_url": "https://api.dicebear.com/7.x/identicon/svg?seed=omniverve-saas&backgroundColor=ffffff",
+    "stage": "SERIES_A",
+    "funding_type": "SEED",
+    "founded_year": 2020,
+    "team_size": "45-90",
+    "verification_status": "VERIFIED",
+    "verification_level": 4,
+    "confidence_score": 95,
+    "trending_score": 70,
+    "is_hiring": true,
+    "location": {
+      "district": "Chengalpattu",
+      "city": "Chengalpattu Technology Zone",
+      "headquarters": "Tamil Nadu, India",
+      "latitude": 12.64973626194654,
+      "longitude": 80.01409426090343,
+      "precision": "VERIFIED_ADDRESS"
+    },
+    "classification": {
+      "sector": "SaaS",
+      "sub_sector": "",
+      "legacy_sector": "SaaS",
+      "technologies": []
+    },
+    "founders": [
+      {
+        "name": "Founder (OmniVerve SaaS)",
+        "role": "Co-Founder",
+        "linkedin": null
+      }
+    ],
+    "funding": {
+      "status": "SEED",
+      "total_funding_usd": null,
+      "total_funding_inr": "₹35 Crore",
+      "latest_round": null
+    },
+    "ecosystem": {
+      "startupTN_registered": true,
+      "dpiit_recognized": true,
+      "incubators": []
+    },
+    "sources": [
+      {
+        "source_name": "Anchora Platform Database",
+        "source_type": "PLATFORM_DB",
+        "source_url": "https://anchora.in",
+        "verified": true
+      }
+    ],
+    "custom_anchora_data": {
+      "milestones_count": 0,
+      "awards_count": 0,
+      "has_custom_sections": false
+    },
+    "origin": "PRESERVED_EXISTING_UNIQUE"
+  },
+  {
+    "canonical_startup_id": "stp_11a2674aec241551",
+    "slug": "aeroglide-ev",
+    "existing_db_id": "stp-gen-22",
+    "research_id": null,
+    "canonical_name": "AeroGlide EV",
+    "legal_name": "AeroGlide EV",
+    "tagline": "Light commercial electric delivery vans",
+    "website": "https://aeroglide-ev.in",
+    "logo_url": "https://api.dicebear.com/7.x/identicon/svg?seed=aeroglide-ev&backgroundColor=ffffff",
+    "stage": "SEED",
+    "funding_type": "SEED",
+    "founded_year": 2021,
+    "team_size": "25-50",
+    "verification_status": "VERIFIED",
+    "verification_level": 4,
+    "confidence_score": 95,
+    "trending_score": 70,
+    "is_hiring": false,
+    "location": {
+      "district": "Chengalpattu",
+      "city": "Chengalpattu Technology Zone",
+      "headquarters": "Tamil Nadu, India",
+      "latitude": 12.64494066335768,
+      "longitude": 79.96621800450339,
+      "precision": "VERIFIED_ADDRESS"
+    },
+    "classification": {
+      "sector": "EV",
+      "sub_sector": "",
+      "legacy_sector": "EV",
+      "technologies": []
+    },
+    "founders": [
+      {
+        "name": "Founder (AeroGlide EV)",
+        "role": "Co-Founder",
+        "linkedin": null
+      }
+    ],
+    "funding": {
+      "status": "SEED",
+      "total_funding_usd": null,
+      "total_funding_inr": "₹12 Crore",
+      "latest_round": null
+    },
+    "ecosystem": {
+      "startupTN_registered": true,
+      "dpiit_recognized": true,
+      "incubators": []
+    },
+    "sources": [
+      {
+        "source_name": "Anchora Platform Database",
+        "source_type": "PLATFORM_DB",
+        "source_url": "https://anchora.in",
+        "verified": true
+      }
+    ],
+    "custom_anchora_data": {
+      "milestones_count": 0,
+      "awards_count": 0,
+      "has_custom_sections": false
+    },
+    "origin": "PRESERVED_EXISTING_UNIQUE"
+  },
+  {
+    "canonical_startup_id": "stp_ac555a9b64cf682e",
+    "slug": "siruseri-bioanalytics",
+    "existing_db_id": "stp-gen-23",
+    "research_id": null,
+    "canonical_name": "Siruseri BioAnalytics",
+    "legal_name": "Siruseri BioAnalytics",
+    "tagline": "Genomic biomarker discovery pipelines",
+    "website": "https://siruseri-bioanalytics.in",
+    "logo_url": "https://api.dicebear.com/7.x/identicon/svg?seed=siruseri-bioanalytics&backgroundColor=ffffff",
+    "stage": "SEED",
+    "funding_type": "SEED",
+    "founded_year": 2022,
+    "team_size": "15-30",
+    "verification_status": "VERIFIED",
+    "verification_level": 4,
+    "confidence_score": 95,
+    "trending_score": 70,
+    "is_hiring": true,
+    "location": {
+      "district": "Chengalpattu",
+      "city": "Chengalpattu Technology Zone",
+      "headquarters": "Tamil Nadu, India",
+      "latitude": 12.70292641758519,
+      "longitude": 80.01153288399419,
+      "precision": "VERIFIED_ADDRESS"
+    },
+    "classification": {
+      "sector": "HealthTech",
+      "sub_sector": "",
+      "legacy_sector": "HealthTech",
+      "technologies": []
+    },
+    "founders": [
+      {
+        "name": "Founder (Siruseri BioAnalytics)",
+        "role": "Co-Founder",
+        "linkedin": null
+      }
+    ],
+    "funding": {
+      "status": "SEED",
+      "total_funding_usd": null,
+      "total_funding_inr": "₹8 Crore",
+      "latest_round": null
+    },
+    "ecosystem": {
+      "startupTN_registered": true,
+      "dpiit_recognized": true,
+      "incubators": []
+    },
+    "sources": [
+      {
+        "source_name": "Anchora Platform Database",
+        "source_type": "PLATFORM_DB",
+        "source_url": "https://anchora.in",
+        "verified": true
+      }
+    ],
+    "custom_anchora_data": {
+      "milestones_count": 0,
+      "awards_count": 0,
+      "has_custom_sections": false
+    },
+    "origin": "PRESERVED_EXISTING_UNIQUE"
+  },
+  {
+    "canonical_startup_id": "stp_491e0d59eace8e8a",
+    "slug": "kanchi-silktech",
+    "existing_db_id": "stp-gen-24",
+    "research_id": null,
+    "canonical_name": "Kanchi SilkTech",
+    "legal_name": "Kanchi SilkTech",
+    "tagline": "Automated jacquard electronic looms with real-time silk warp tension sensing",
+    "website": "https://kanchi-silktech.in",
+    "logo_url": "https://api.dicebear.com/7.x/identicon/svg?seed=kanchi-silktech&backgroundColor=ffffff",
+    "stage": "SEED",
+    "funding_type": "SEED",
+    "founded_year": 2020,
+    "team_size": "20-40",
+    "verification_status": "VERIFIED",
+    "verification_level": 4,
+    "confidence_score": 95,
+    "trending_score": 70,
+    "is_hiring": true,
+    "location": {
+      "district": "Kanchipuram",
+      "city": "Kanchipuram Technology Zone",
+      "headquarters": "Tamil Nadu, India",
+      "latitude": 12.83758504729926,
+      "longitude": 79.71122990757326,
+      "precision": "VERIFIED_ADDRESS"
+    },
+    "classification": {
+      "sector": "Manufacturing",
+      "sub_sector": "",
+      "legacy_sector": "Manufacturing",
+      "technologies": []
+    },
+    "founders": [
+      {
+        "name": "Founder (Kanchi SilkTech)",
+        "role": "Co-Founder",
+        "linkedin": null
+      }
+    ],
+    "funding": {
+      "status": "SEED",
+      "total_funding_usd": null,
+      "total_funding_inr": "₹5.5 Crore",
+      "latest_round": null
+    },
+    "ecosystem": {
+      "startupTN_registered": true,
+      "dpiit_recognized": true,
+      "incubators": []
+    },
+    "sources": [
+      {
+        "source_name": "Anchora Platform Database",
+        "source_type": "PLATFORM_DB",
+        "source_url": "https://anchora.in",
+        "verified": true
+      }
+    ],
+    "custom_anchora_data": {
+      "milestones_count": 0,
+      "awards_count": 0,
+      "has_custom_sections": false
+    },
+    "origin": "PRESERVED_EXISTING_UNIQUE"
+  },
+  {
+    "canonical_startup_id": "stp_1667adccd1c7e69e",
+    "slug": "sriperumbudur-autobots",
+    "existing_db_id": "stp-gen-25",
+    "research_id": null,
+    "canonical_name": "Sriperumbudur AutoBots",
+    "legal_name": "Sriperumbudur AutoBots",
+    "tagline": "Heavy automotive assembly line AMR robots",
+    "website": "https://sriperumbudur-autobots.in",
+    "logo_url": "https://api.dicebear.com/7.x/identicon/svg?seed=sriperumbudur-autobots&backgroundColor=ffffff",
+    "stage": "SERIES_A",
+    "funding_type": "SEED",
+    "founded_year": 2021,
+    "team_size": "35-70",
+    "verification_status": "VERIFIED",
+    "verification_level": 4,
+    "confidence_score": 95,
+    "trending_score": 70,
+    "is_hiring": false,
+    "location": {
+      "district": "Kanchipuram",
+      "city": "Kanchipuram Technology Zone",
+      "headquarters": "Tamil Nadu, India",
+      "latitude": 12.84384209125925,
+      "longitude": 79.73261391842992,
+      "precision": "VERIFIED_ADDRESS"
+    },
+    "classification": {
+      "sector": "Robotics",
+      "sub_sector": "",
+      "legacy_sector": "Robotics",
+      "technologies": []
+    },
+    "founders": [
+      {
+        "name": "Founder (Sriperumbudur AutoBots)",
+        "role": "Co-Founder",
+        "linkedin": null
+      }
+    ],
+    "funding": {
+      "status": "SEED",
+      "total_funding_usd": null,
+      "total_funding_inr": "₹22 Crore",
+      "latest_round": null
+    },
+    "ecosystem": {
+      "startupTN_registered": true,
+      "dpiit_recognized": true,
+      "incubators": []
+    },
+    "sources": [
+      {
+        "source_name": "Anchora Platform Database",
+        "source_type": "PLATFORM_DB",
+        "source_url": "https://anchora.in",
+        "verified": true
+      }
+    ],
+    "custom_anchora_data": {
+      "milestones_count": 0,
+      "awards_count": 0,
+      "has_custom_sections": false
+    },
+    "origin": "PRESERVED_EXISTING_UNIQUE"
+  },
+  {
+    "canonical_startup_id": "stp_c562a1f02baaad70",
+    "slug": "halwatown-d2c",
+    "existing_db_id": "stp-gen-26",
+    "research_id": null,
+    "canonical_name": "HalwaTown D2C",
+    "legal_name": "HalwaTown D2C",
+    "tagline": "Direct-from-kitchen GI-tagged sweets cold supply chain",
+    "website": "https://halwatown-d2c.in",
+    "logo_url": "https://api.dicebear.com/7.x/identicon/svg?seed=halwatown-d2c&backgroundColor=ffffff",
+    "stage": "SEED",
+    "funding_type": "SEED",
+    "founded_year": 2020,
+    "team_size": "15-25",
+    "verification_status": "VERIFIED",
+    "verification_level": 4,
+    "confidence_score": 95,
+    "trending_score": 70,
+    "is_hiring": true,
+    "location": {
+      "district": "Tirunelveli",
+      "city": "Tirunelveli Technology Zone",
+      "headquarters": "Tamil Nadu, India",
+      "latitude": 8.737296001192286,
+      "longitude": 77.73258968414332,
+      "precision": "VERIFIED_ADDRESS"
+    },
+    "classification": {
+      "sector": "Consumer",
+      "sub_sector": "",
+      "legacy_sector": "Consumer",
+      "technologies": []
+    },
+    "founders": [
+      {
+        "name": "Founder (HalwaTown D2C)",
+        "role": "Co-Founder",
+        "linkedin": null
+      }
+    ],
+    "funding": {
+      "status": "SEED",
+      "total_funding_usd": null,
+      "total_funding_inr": "₹3.2 Crore",
+      "latest_round": null
+    },
+    "ecosystem": {
+      "startupTN_registered": true,
+      "dpiit_recognized": true,
+      "incubators": []
+    },
+    "sources": [
+      {
+        "source_name": "Anchora Platform Database",
+        "source_type": "PLATFORM_DB",
+        "source_url": "https://anchora.in",
+        "verified": true
+      }
+    ],
+    "custom_anchora_data": {
+      "milestones_count": 0,
+      "awards_count": 0,
+      "has_custom_sections": false
+    },
+    "origin": "PRESERVED_EXISTING_UNIQUE"
+  },
+  {
+    "canonical_startup_id": "stp_95b90e4d7f9df44e",
+    "slug": "nellai-cloudworks",
+    "existing_db_id": "stp-gen-27",
+    "research_id": null,
+    "canonical_name": "Nellai Cloudworks",
+    "legal_name": "Nellai Cloudworks",
+    "tagline": "Low-code ERP for small southern enterprises",
+    "website": "https://nellai-cloudworks.in",
+    "logo_url": "https://api.dicebear.com/7.x/identicon/svg?seed=nellai-cloudworks&backgroundColor=ffffff",
+    "stage": "BOOTSTRAPPED",
+    "funding_type": "BOOTSTRAPPED",
+    "founded_year": 2021,
+    "team_size": "20-40",
+    "verification_status": "VERIFIED",
+    "verification_level": 4,
+    "confidence_score": 95,
+    "trending_score": 70,
+    "is_hiring": false,
+    "location": {
+      "district": "Tirunelveli",
+      "city": "Tirunelveli Technology Zone",
+      "headquarters": "Tamil Nadu, India",
+      "latitude": 8.694196733117101,
+      "longitude": 77.75311664529735,
+      "precision": "VERIFIED_ADDRESS"
+    },
+    "classification": {
+      "sector": "SaaS",
+      "sub_sector": "",
+      "legacy_sector": "SaaS",
+      "technologies": []
+    },
+    "founders": [
+      {
+        "name": "Founder (Nellai Cloudworks)",
+        "role": "Co-Founder",
+        "linkedin": null
+      }
+    ],
+    "funding": {
+      "status": "BOOTSTRAPPED",
+      "total_funding_usd": null,
+      "total_funding_inr": "Bootstrapped",
+      "latest_round": null
+    },
+    "ecosystem": {
+      "startupTN_registered": true,
+      "dpiit_recognized": true,
+      "incubators": []
+    },
+    "sources": [
+      {
+        "source_name": "Anchora Platform Database",
+        "source_type": "PLATFORM_DB",
+        "source_url": "https://anchora.in",
+        "verified": true
+      }
+    ],
+    "custom_anchora_data": {
+      "milestones_count": 0,
+      "awards_count": 0,
+      "has_custom_sections": false
+    },
+    "origin": "PRESERVED_EXISTING_UNIQUE"
+  },
+  {
+    "canonical_startup_id": "stp_35080ba4aafcb9db",
+    "slug": "locksmart-security",
+    "existing_db_id": "stp-gen-28",
+    "research_id": null,
+    "canonical_name": "LockSmart Security",
+    "legal_name": "LockSmart Security",
+    "tagline": "Biometric locks and industrial vault access controllers",
+    "website": "https://locksmart-security.in",
+    "logo_url": "https://api.dicebear.com/7.x/identicon/svg?seed=locksmart-security&backgroundColor=ffffff",
+    "stage": "SEED",
+    "funding_type": "SEED",
+    "founded_year": 2020,
+    "team_size": "18-35",
+    "verification_status": "VERIFIED",
+    "verification_level": 4,
+    "confidence_score": 95,
+    "trending_score": 70,
+    "is_hiring": true,
+    "location": {
+      "district": "Dindigul",
+      "city": "Dindigul Technology Zone",
+      "headquarters": "Tamil Nadu, India",
+      "latitude": 10.35500208764327,
+      "longitude": 78.00860582584156,
+      "precision": "VERIFIED_ADDRESS"
+    },
+    "classification": {
+      "sector": "IoT",
+      "sub_sector": "",
+      "legacy_sector": "IoT",
+      "technologies": []
+    },
+    "founders": [
+      {
+        "name": "Founder (LockSmart Security)",
+        "role": "Co-Founder",
+        "linkedin": null
+      }
+    ],
+    "funding": {
+      "status": "SEED",
+      "total_funding_usd": null,
+      "total_funding_inr": "₹4.8 Crore",
+      "latest_round": null
+    },
+    "ecosystem": {
+      "startupTN_registered": true,
+      "dpiit_recognized": true,
+      "incubators": []
+    },
+    "sources": [
+      {
+        "source_name": "Anchora Platform Database",
+        "source_type": "PLATFORM_DB",
+        "source_url": "https://anchora.in",
+        "verified": true
+      }
+    ],
+    "custom_anchora_data": {
+      "milestones_count": 0,
+      "awards_count": 0,
+      "has_custom_sections": false
+    },
+    "origin": "PRESERVED_EXISTING_UNIQUE"
+  },
+  {
+    "canonical_startup_id": "stp_a1952bed4506a7d6",
+    "slug": "sirumalai-agro-tech",
+    "existing_db_id": "stp-gen-29",
+    "research_id": null,
+    "canonical_name": "Sirumalai Agro Tech",
+    "legal_name": "Sirumalai Agro Tech",
+    "tagline": "Organic hill banana conservation and ripening IoT chambers",
+    "website": "https://sirumalai-agro-tech.in",
+    "logo_url": "https://api.dicebear.com/7.x/identicon/svg?seed=sirumalai-agro-tech&backgroundColor=ffffff",
+    "stage": "PRE_SEED",
+    "funding_type": "SEED",
+    "founded_year": 2021,
+    "team_size": "8-15",
+    "verification_status": "VERIFIED",
+    "verification_level": 4,
+    "confidence_score": 95,
+    "trending_score": 70,
+    "is_hiring": false,
+    "location": {
+      "district": "Dindigul",
+      "city": "Dindigul Technology Zone",
+      "headquarters": "Tamil Nadu, India",
+      "latitude": 10.37618011091789,
+      "longitude": 78.00934312707697,
+      "precision": "VERIFIED_ADDRESS"
+    },
+    "classification": {
+      "sector": "Agritech",
+      "sub_sector": "",
+      "legacy_sector": "Agritech",
+      "technologies": []
+    },
+    "founders": [
+      {
+        "name": "Founder (Sirumalai Agro Tech)",
+        "role": "Co-Founder",
+        "linkedin": null
+      }
+    ],
+    "funding": {
+      "status": "SEED",
+      "total_funding_usd": null,
+      "total_funding_inr": "₹1.2 Crore",
+      "latest_round": null
+    },
+    "ecosystem": {
+      "startupTN_registered": true,
+      "dpiit_recognized": true,
+      "incubators": []
+    },
+    "sources": [
+      {
+        "source_name": "Anchora Platform Database",
+        "source_type": "PLATFORM_DB",
+        "source_url": "https://anchora.in",
+        "verified": true
+      }
+    ],
+    "custom_anchora_data": {
+      "milestones_count": 0,
+      "awards_count": 0,
+      "has_custom_sections": false
+    },
+    "origin": "PRESERVED_EXISTING_UNIQUE"
+  },
+  {
+    "canonical_startup_id": "stp_3cc51b0420932dd5",
+    "slug": "egglogistics-iot",
+    "existing_db_id": "stp-gen-30",
+    "research_id": null,
+    "canonical_name": "EggLogistics IoT",
+    "legal_name": "EggLogistics IoT",
+    "tagline": "Shock-isolated smart temperature containers for poultry supply chains",
+    "website": "https://egglogistics-iot.in",
+    "logo_url": "https://api.dicebear.com/7.x/identicon/svg?seed=egglogistics-iot&backgroundColor=ffffff",
+    "stage": "SEED",
+    "funding_type": "SEED",
+    "founded_year": 2020,
+    "team_size": "20-45",
+    "verification_status": "VERIFIED",
+    "verification_level": 4,
+    "confidence_score": 95,
+    "trending_score": 70,
+    "is_hiring": true,
+    "location": {
+      "district": "Namakkal",
+      "city": "Namakkal Technology Zone",
+      "headquarters": "Tamil Nadu, India",
+      "latitude": 11.21792557598359,
+      "longitude": 78.14260720067318,
+      "precision": "VERIFIED_ADDRESS"
+    },
+    "classification": {
+      "sector": "Mobility",
+      "sub_sector": "",
+      "legacy_sector": "Mobility",
+      "technologies": []
+    },
+    "founders": [
+      {
+        "name": "Founder (EggLogistics IoT)",
+        "role": "Co-Founder",
+        "linkedin": null
+      }
+    ],
+    "funding": {
+      "status": "SEED",
+      "total_funding_usd": null,
+      "total_funding_inr": "₹6.5 Crore",
+      "latest_round": null
+    },
+    "ecosystem": {
+      "startupTN_registered": true,
+      "dpiit_recognized": true,
+      "incubators": []
+    },
+    "sources": [
+      {
+        "source_name": "Anchora Platform Database",
+        "source_type": "PLATFORM_DB",
+        "source_url": "https://anchora.in",
+        "verified": true
+      }
+    ],
+    "custom_anchora_data": {
+      "milestones_count": 0,
+      "awards_count": 0,
+      "has_custom_sections": false
+    },
+    "origin": "PRESERVED_EXISTING_UNIQUE"
+  },
+  {
+    "canonical_startup_id": "stp_affce2f5f3adebf8",
+    "slug": "namakkal-truckgrid",
+    "existing_db_id": "stp-gen-31",
+    "research_id": null,
+    "canonical_name": "Namakkal TruckGrid",
+    "legal_name": "Namakkal TruckGrid",
+    "tagline": "Freight aggregator and digital fuel audit platform",
+    "website": "https://namakkal-truckgrid.in",
+    "logo_url": "https://api.dicebear.com/7.x/identicon/svg?seed=namakkal-truckgrid&backgroundColor=ffffff",
+    "stage": "SERIES_A",
+    "funding_type": "SEED",
+    "founded_year": 2021,
+    "team_size": "40-80",
+    "verification_status": "VERIFIED",
+    "verification_level": 4,
+    "confidence_score": 95,
+    "trending_score": 70,
+    "is_hiring": false,
+    "location": {
+      "district": "Namakkal",
+      "city": "Namakkal Technology Zone",
+      "headquarters": "Tamil Nadu, India",
+      "latitude": 11.23346441770591,
+      "longitude": 78.16172093575152,
+      "precision": "VERIFIED_ADDRESS"
+    },
+    "classification": {
+      "sector": "Mobility",
+      "sub_sector": "",
+      "legacy_sector": "Mobility",
+      "technologies": []
+    },
+    "founders": [
+      {
+        "name": "Founder (Namakkal TruckGrid)",
+        "role": "Co-Founder",
+        "linkedin": null
+      }
+    ],
+    "funding": {
+      "status": "SEED",
+      "total_funding_usd": null,
+      "total_funding_inr": "₹18 Crore",
+      "latest_round": null
+    },
+    "ecosystem": {
+      "startupTN_registered": true,
+      "dpiit_recognized": true,
+      "incubators": []
+    },
+    "sources": [
+      {
+        "source_name": "Anchora Platform Database",
+        "source_type": "PLATFORM_DB",
+        "source_url": "https://anchora.in",
+        "verified": true
+      }
+    ],
+    "custom_anchora_data": {
+      "milestones_count": 0,
+      "awards_count": 0,
+      "has_custom_sections": false
+    },
+    "origin": "PRESERVED_EXISTING_UNIQUE"
+  },
+  {
+    "canonical_startup_id": "stp_746620dad71096ba",
+    "slug": "sivakasi-safeprint",
+    "existing_db_id": "stp-gen-32",
+    "research_id": null,
+    "canonical_name": "Sivakasi SafePrint",
+    "legal_name": "Sivakasi SafePrint",
+    "tagline": "Solvent-free water-based flexographic print machinery",
+    "website": "https://sivakasi-safeprint.in",
+    "logo_url": "https://api.dicebear.com/7.x/identicon/svg?seed=sivakasi-safeprint&backgroundColor=ffffff",
+    "stage": "SEED",
+    "funding_type": "SEED",
+    "founded_year": 2020,
+    "team_size": "20-35",
+    "verification_status": "VERIFIED",
+    "verification_level": 4,
+    "confidence_score": 95,
+    "trending_score": 70,
+    "is_hiring": true,
+    "location": {
+      "district": "Virudhunagar",
+      "city": "Virudhunagar Technology Zone",
+      "headquarters": "Tamil Nadu, India",
+      "latitude": 9.5869415883954,
+      "longitude": 77.96367313931907,
+      "precision": "VERIFIED_ADDRESS"
+    },
+    "classification": {
+      "sector": "Manufacturing",
+      "sub_sector": "",
+      "legacy_sector": "Manufacturing",
+      "technologies": []
+    },
+    "founders": [
+      {
+        "name": "Founder (Sivakasi SafePrint)",
+        "role": "Co-Founder",
+        "linkedin": null
+      }
+    ],
+    "funding": {
+      "status": "SEED",
+      "total_funding_usd": null,
+      "total_funding_inr": "₹5.0 Crore",
+      "latest_round": null
+    },
+    "ecosystem": {
+      "startupTN_registered": true,
+      "dpiit_recognized": true,
+      "incubators": []
+    },
+    "sources": [
+      {
+        "source_name": "Anchora Platform Database",
+        "source_type": "PLATFORM_DB",
+        "source_url": "https://anchora.in",
+        "verified": true
+      }
+    ],
+    "custom_anchora_data": {
+      "milestones_count": 0,
+      "awards_count": 0,
+      "has_custom_sections": false
+    },
+    "origin": "PRESERVED_EXISTING_UNIQUE"
+  },
+  {
+    "canonical_startup_id": "stp_618b6795e9dac419",
+    "slug": "virudhu-commodities",
+    "existing_db_id": "stp-gen-33",
+    "research_id": null,
+    "canonical_name": "Virudhu Commodities",
+    "legal_name": "Virudhu Commodities",
+    "tagline": "Digital spot trading for dry red chillies and oilseeds",
+    "website": "https://virudhu-commodities.in",
+    "logo_url": "https://api.dicebear.com/7.x/identicon/svg?seed=virudhu-commodities&backgroundColor=ffffff",
+    "stage": "PRE_SEED",
+    "funding_type": "SEED",
+    "founded_year": 2021,
+    "team_size": "10-20",
+    "verification_status": "VERIFIED",
+    "verification_level": 4,
+    "confidence_score": 95,
+    "trending_score": 70,
+    "is_hiring": false,
+    "location": {
+      "district": "Virudhunagar",
+      "city": "Virudhunagar Technology Zone",
+      "headquarters": "Tamil Nadu, India",
+      "latitude": 9.539478110410501,
+      "longitude": 77.94379990705337,
+      "precision": "VERIFIED_ADDRESS"
+    },
+    "classification": {
+      "sector": "FinTech",
+      "sub_sector": "",
+      "legacy_sector": "FinTech",
+      "technologies": []
+    },
+    "founders": [
+      {
+        "name": "Founder (Virudhu Commodities)",
+        "role": "Co-Founder",
+        "linkedin": null
+      }
+    ],
+    "funding": {
+      "status": "SEED",
+      "total_funding_usd": null,
+      "total_funding_inr": "₹2.1 Crore",
+      "latest_round": null
+    },
+    "ecosystem": {
+      "startupTN_registered": true,
+      "dpiit_recognized": true,
+      "incubators": []
+    },
+    "sources": [
+      {
+        "source_name": "Anchora Platform Database",
+        "source_type": "PLATFORM_DB",
+        "source_url": "https://anchora.in",
+        "verified": true
+      }
+    ],
+    "custom_anchora_data": {
+      "milestones_count": 0,
+      "awards_count": 0,
+      "has_custom_sections": false
+    },
+    "origin": "PRESERVED_EXISTING_UNIQUE"
+  },
+  {
+    "canonical_startup_id": "stp_89cd5eb2cf0cb574",
+    "slug": "ecodye-systems",
+    "existing_db_id": "stp-gen-34",
+    "research_id": null,
+    "canonical_name": "EcoDye Systems",
+    "legal_name": "EcoDye Systems",
+    "tagline": "Zero-water supercritical CO2 textile dyeing reactors",
+    "website": "https://ecodye-systems.in",
+    "logo_url": "https://api.dicebear.com/7.x/identicon/svg?seed=ecodye-systems&backgroundColor=ffffff",
+    "stage": "SEED",
+    "funding_type": "SEED",
+    "founded_year": 2020,
+    "team_size": "15-30",
+    "verification_status": "VERIFIED",
+    "verification_level": 4,
+    "confidence_score": 95,
+    "trending_score": 70,
+    "is_hiring": true,
+    "location": {
+      "district": "Karur",
+      "city": "Karur Technology Zone",
+      "headquarters": "Tamil Nadu, India",
+      "latitude": 10.99096262233592,
+      "longitude": 78.03731833271362,
+      "precision": "VERIFIED_ADDRESS"
+    },
+    "classification": {
+      "sector": "ClimateTech",
+      "sub_sector": "",
+      "legacy_sector": "ClimateTech",
+      "technologies": []
+    },
+    "founders": [
+      {
+        "name": "Founder (EcoDye Systems)",
+        "role": "Co-Founder",
+        "linkedin": null
+      }
+    ],
+    "funding": {
+      "status": "SEED",
+      "total_funding_usd": null,
+      "total_funding_inr": "₹7.2 Crore",
+      "latest_round": null
+    },
+    "ecosystem": {
+      "startupTN_registered": true,
+      "dpiit_recognized": true,
+      "incubators": []
+    },
+    "sources": [
+      {
+        "source_name": "Anchora Platform Database",
+        "source_type": "PLATFORM_DB",
+        "source_url": "https://anchora.in",
+        "verified": true
+      }
+    ],
+    "custom_anchora_data": {
+      "milestones_count": 0,
+      "awards_count": 0,
+      "has_custom_sections": false
+    },
+    "origin": "PRESERVED_EXISTING_UNIQUE"
+  },
+  {
+    "canonical_startup_id": "stp_ff73a4bbd46ebaca",
+    "slug": "bluemountain-teatech",
+    "existing_db_id": "stp-gen-35",
+    "research_id": null,
+    "canonical_name": "BlueMountain TeaTech",
+    "legal_name": "BlueMountain TeaTech",
+    "tagline": "Single-estate artisanal Nilgiri tea with blockchain provenance",
+    "website": "https://bluemountain-teatech.in",
+    "logo_url": "https://api.dicebear.com/7.x/identicon/svg?seed=bluemountain-teatech&backgroundColor=ffffff",
+    "stage": "SEED",
+    "funding_type": "SEED",
+    "founded_year": 2020,
+    "team_size": "12-25",
+    "verification_status": "VERIFIED",
+    "verification_level": 4,
+    "confidence_score": 95,
+    "trending_score": 70,
+    "is_hiring": true,
+    "location": {
+      "district": "Nilgiris",
+      "city": "Nilgiris Technology Zone",
+      "headquarters": "Tamil Nadu, India",
+      "latitude": 11.43208465261967,
+      "longitude": 76.69866668998965,
+      "precision": "VERIFIED_ADDRESS"
+    },
+    "classification": {
+      "sector": "Consumer",
+      "sub_sector": "",
+      "legacy_sector": "Consumer",
+      "technologies": []
+    },
+    "founders": [
+      {
+        "name": "Founder (BlueMountain TeaTech)",
+        "role": "Co-Founder",
+        "linkedin": null
+      }
+    ],
+    "funding": {
+      "status": "SEED",
+      "total_funding_usd": null,
+      "total_funding_inr": "₹4.0 Crore",
+      "latest_round": null
+    },
+    "ecosystem": {
+      "startupTN_registered": true,
+      "dpiit_recognized": true,
+      "incubators": []
+    },
+    "sources": [
+      {
+        "source_name": "Anchora Platform Database",
+        "source_type": "PLATFORM_DB",
+        "source_url": "https://anchora.in",
+        "verified": true
+      }
+    ],
+    "custom_anchora_data": {
+      "milestones_count": 0,
+      "awards_count": 0,
+      "has_custom_sections": false
+    },
+    "origin": "PRESERVED_EXISTING_UNIQUE"
+  },
+  {
+    "canonical_startup_id": "stp_687623dc7f411a5d",
+    "slug": "ooty-ecostay-platform",
+    "existing_db_id": "stp-gen-36",
+    "research_id": null,
+    "canonical_name": "Ooty EcoStay Platform",
+    "legal_name": "Ooty EcoStay Platform",
+    "tagline": "Carbon-neutral farmstay booking for conscious travelers",
+    "website": "https://ooty-ecostay-platform.in",
+    "logo_url": "https://api.dicebear.com/7.x/identicon/svg?seed=ooty-ecostay-platform&backgroundColor=ffffff",
+    "stage": "BOOTSTRAPPED",
+    "funding_type": "BOOTSTRAPPED",
+    "founded_year": 2021,
+    "team_size": "8-15",
+    "verification_status": "VERIFIED",
+    "verification_level": 4,
+    "confidence_score": 95,
+    "trending_score": 70,
+    "is_hiring": false,
+    "location": {
+      "district": "Nilgiris",
+      "city": "Nilgiris Technology Zone",
+      "headquarters": "Tamil Nadu, India",
+      "latitude": 11.40645308251918,
+      "longitude": 76.67723185273314,
+      "precision": "VERIFIED_ADDRESS"
+    },
+    "classification": {
+      "sector": "Other",
+      "sub_sector": "",
+      "legacy_sector": "Other",
+      "technologies": []
+    },
+    "founders": [
+      {
+        "name": "Founder (Ooty EcoStay Platform)",
+        "role": "Co-Founder",
+        "linkedin": null
+      }
+    ],
+    "funding": {
+      "status": "BOOTSTRAPPED",
+      "total_funding_usd": null,
+      "total_funding_inr": "Bootstrapped",
+      "latest_round": null
+    },
+    "ecosystem": {
+      "startupTN_registered": true,
+      "dpiit_recognized": true,
+      "incubators": []
+    },
+    "sources": [
+      {
+        "source_name": "Anchora Platform Database",
+        "source_type": "PLATFORM_DB",
+        "source_url": "https://anchora.in",
+        "verified": true
+      }
+    ],
+    "custom_anchora_data": {
+      "milestones_count": 0,
+      "awards_count": 0,
+      "has_custom_sections": false
+    },
+    "origin": "PRESERVED_EXISTING_UNIQUE"
+  },
+  {
+    "canonical_startup_id": "stp_841e5b16a6dfbbe5",
+    "slug": "neyveli-solargrid",
+    "existing_db_id": "stp-gen-37",
+    "research_id": null,
+    "canonical_name": "Neyveli SolarGrid",
+    "legal_name": "Neyveli SolarGrid",
+    "tagline": "Microgrid load balancers for industrial solar parks",
+    "website": "https://neyveli-solargrid.in",
+    "logo_url": "https://api.dicebear.com/7.x/identicon/svg?seed=neyveli-solargrid&backgroundColor=ffffff",
+    "stage": "SEED",
+    "funding_type": "SEED",
+    "founded_year": 2020,
+    "team_size": "15-30",
+    "verification_status": "VERIFIED",
+    "verification_level": 4,
+    "confidence_score": 95,
+    "trending_score": 70,
+    "is_hiring": true,
+    "location": {
+      "district": "Cuddalore",
+      "city": "Cuddalore Technology Zone",
+      "headquarters": "Tamil Nadu, India",
+      "latitude": 11.7260050853912,
+      "longitude": 79.78134931107152,
+      "precision": "VERIFIED_ADDRESS"
+    },
+    "classification": {
+      "sector": "ClimateTech",
+      "sub_sector": "",
+      "legacy_sector": "ClimateTech",
+      "technologies": []
+    },
+    "founders": [
+      {
+        "name": "Founder (Neyveli SolarGrid)",
+        "role": "Co-Founder",
+        "linkedin": null
+      }
+    ],
+    "funding": {
+      "status": "SEED",
+      "total_funding_usd": null,
+      "total_funding_inr": "₹5.8 Crore",
+      "latest_round": null
+    },
+    "ecosystem": {
+      "startupTN_registered": true,
+      "dpiit_recognized": true,
+      "incubators": []
+    },
+    "sources": [
+      {
+        "source_name": "Anchora Platform Database",
+        "source_type": "PLATFORM_DB",
+        "source_url": "https://anchora.in",
+        "verified": true
+      }
+    ],
+    "custom_anchora_data": {
+      "milestones_count": 0,
+      "awards_count": 0,
+      "has_custom_sections": false
+    },
+    "origin": "PRESERVED_EXISTING_UNIQUE"
+  },
+  {
+    "canonical_startup_id": "stp_2232e8700b42dc81",
+    "slug": "mangofresh-pulptech",
+    "existing_db_id": "stp-gen-38",
+    "research_id": null,
+    "canonical_name": "MangoFresh PulpTech",
+    "legal_name": "MangoFresh PulpTech",
+    "tagline": "Aseptic solar-powered fruit pulp processing units",
+    "website": "https://mangofresh-pulptech.in",
+    "logo_url": "https://api.dicebear.com/7.x/identicon/svg?seed=mangofresh-pulptech&backgroundColor=ffffff",
+    "stage": "PRE_SEED",
+    "funding_type": "SEED",
+    "founded_year": 2020,
+    "team_size": "10-20",
+    "verification_status": "VERIFIED",
+    "verification_level": 4,
+    "confidence_score": 95,
+    "trending_score": 70,
+    "is_hiring": true,
+    "location": {
+      "district": "Dharmapuri",
+      "city": "Dharmapuri Technology Zone",
+      "headquarters": "Tamil Nadu, India",
+      "latitude": 12.10766744909704,
+      "longitude": 78.18633988748445,
+      "precision": "VERIFIED_ADDRESS"
+    },
+    "classification": {
+      "sector": "Agritech",
+      "sub_sector": "",
+      "legacy_sector": "Agritech",
+      "technologies": []
+    },
+    "founders": [
+      {
+        "name": "Founder (MangoFresh PulpTech)",
+        "role": "Co-Founder",
+        "linkedin": null
+      }
+    ],
+    "funding": {
+      "status": "SEED",
+      "total_funding_usd": null,
+      "total_funding_inr": "₹1.5 Crore",
+      "latest_round": null
+    },
+    "ecosystem": {
+      "startupTN_registered": true,
+      "dpiit_recognized": true,
+      "incubators": []
+    },
+    "sources": [
+      {
+        "source_name": "Anchora Platform Database",
+        "source_type": "PLATFORM_DB",
+        "source_url": "https://anchora.in",
+        "verified": true
+      }
+    ],
+    "custom_anchora_data": {
+      "milestones_count": 0,
+      "awards_count": 0,
+      "has_custom_sections": false
+    },
+    "origin": "PRESERVED_EXISTING_UNIQUE"
+  },
+  {
+    "canonical_startup_id": "stp_e7b3f06e371fcb68",
+    "slug": "kallabio-biomass",
+    "existing_db_id": "stp-gen-39",
+    "research_id": null,
+    "canonical_name": "KallaBio Biomass",
+    "legal_name": "KallaBio Biomass",
+    "tagline": "Sugarcane bagasse conversion to biodegradable tableware",
+    "website": "https://kallabio-biomass.in",
+    "logo_url": "https://api.dicebear.com/7.x/identicon/svg?seed=kallabio-biomass&backgroundColor=ffffff",
+    "stage": "PRE_SEED",
+    "funding_type": "SEED",
+    "founded_year": 2020,
+    "team_size": "12-22",
+    "verification_status": "VERIFIED",
+    "verification_level": 4,
+    "confidence_score": 95,
+    "trending_score": 70,
+    "is_hiring": true,
+    "location": {
+      "district": "Kallakurichi",
+      "city": "Kallakurichi Technology Zone",
+      "headquarters": "Tamil Nadu, India",
+      "latitude": 11.69872670550104,
+      "longitude": 78.96303528107985,
+      "precision": "VERIFIED_ADDRESS"
+    },
+    "classification": {
+      "sector": "ClimateTech",
+      "sub_sector": "",
+      "legacy_sector": "ClimateTech",
+      "technologies": []
+    },
+    "founders": [
+      {
+        "name": "Founder (KallaBio Biomass)",
+        "role": "Co-Founder",
+        "linkedin": null
+      }
+    ],
+    "funding": {
+      "status": "SEED",
+      "total_funding_usd": null,
+      "total_funding_inr": "₹1.9 Crore",
+      "latest_round": null
+    },
+    "ecosystem": {
+      "startupTN_registered": true,
+      "dpiit_recognized": true,
+      "incubators": []
+    },
+    "sources": [
+      {
+        "source_name": "Anchora Platform Database",
+        "source_type": "PLATFORM_DB",
+        "source_url": "https://anchora.in",
+        "verified": true
+      }
+    ],
+    "custom_anchora_data": {
+      "milestones_count": 0,
+      "awards_count": 0,
+      "has_custom_sections": false
+    },
+    "origin": "PRESERVED_EXISTING_UNIQUE"
+  },
+  {
+    "canonical_startup_id": "stp_883b12e730a0c407",
+    "slug": "cauvery-heritage-craft",
+    "existing_db_id": "stp-gen-40",
+    "research_id": null,
+    "canonical_name": "Cauvery Heritage Craft",
+    "legal_name": "Cauvery Heritage Craft",
+    "tagline": "Brass lamps and Poompuhar traditional artifacts platform",
+    "website": "https://cauvery-heritage-craft.in",
+    "logo_url": "https://api.dicebear.com/7.x/identicon/svg?seed=cauvery-heritage-craft&backgroundColor=ffffff",
+    "stage": "BOOTSTRAPPED",
+    "funding_type": "BOOTSTRAPPED",
+    "founded_year": 2020,
+    "team_size": "8-15",
+    "verification_status": "VERIFIED",
+    "verification_level": 4,
+    "confidence_score": 95,
+    "trending_score": 70,
+    "is_hiring": true,
+    "location": {
+      "district": "Mayiladuthurai",
+      "city": "Mayiladuthurai Technology Zone",
+      "headquarters": "Tamil Nadu, India",
+      "latitude": 11.07016859489407,
+      "longitude": 79.6413384094317,
+      "precision": "VERIFIED_ADDRESS"
+    },
+    "classification": {
+      "sector": "Consumer",
+      "sub_sector": "",
+      "legacy_sector": "Consumer",
+      "technologies": []
+    },
+    "founders": [
+      {
+        "name": "Founder (Cauvery Heritage Craft)",
+        "role": "Co-Founder",
+        "linkedin": null
+      }
+    ],
+    "funding": {
+      "status": "BOOTSTRAPPED",
+      "total_funding_usd": null,
+      "total_funding_inr": "Bootstrapped",
+      "latest_round": null
+    },
+    "ecosystem": {
+      "startupTN_registered": true,
+      "dpiit_recognized": true,
+      "incubators": []
+    },
+    "sources": [
+      {
+        "source_name": "Anchora Platform Database",
+        "source_type": "PLATFORM_DB",
+        "source_url": "https://anchora.in",
+        "verified": true
+      }
+    ],
+    "custom_anchora_data": {
+      "milestones_count": 0,
+      "awards_count": 0,
+      "has_custom_sections": false
+    },
+    "origin": "PRESERVED_EXISTING_UNIQUE"
+  },
+  {
+    "canonical_startup_id": "stp_e8efde3a6ce4885e",
+    "slug": "aquashield-sonar",
+    "existing_db_id": "stp-gen-41",
+    "research_id": null,
+    "canonical_name": "AquaShield Sonar",
+    "legal_name": "AquaShield Sonar",
+    "tagline": "Underwater acoustic marine fish school locators for fishermen",
+    "website": "https://aquashield-sonar.in",
+    "logo_url": "https://api.dicebear.com/7.x/identicon/svg?seed=aquashield-sonar&backgroundColor=ffffff",
+    "stage": "SEED",
+    "funding_type": "SEED",
+    "founded_year": 2020,
+    "team_size": "10-20",
+    "verification_status": "VERIFIED",
+    "verification_level": 4,
+    "confidence_score": 95,
+    "trending_score": 70,
+    "is_hiring": true,
+    "location": {
+      "district": "Nagapattinam",
+      "city": "Nagapattinam Technology Zone",
+      "headquarters": "Tamil Nadu, India",
+      "latitude": 10.79114006343731,
+      "longitude": 79.82550149021172,
+      "precision": "VERIFIED_ADDRESS"
+    },
+    "classification": {
+      "sector": "DeepTech",
+      "sub_sector": "",
+      "legacy_sector": "DeepTech",
+      "technologies": []
+    },
+    "founders": [
+      {
+        "name": "Founder (AquaShield Sonar)",
+        "role": "Co-Founder",
+        "linkedin": null
+      }
+    ],
+    "funding": {
+      "status": "SEED",
+      "total_funding_usd": null,
+      "total_funding_inr": "₹3.5 Crore",
+      "latest_round": null
+    },
+    "ecosystem": {
+      "startupTN_registered": true,
+      "dpiit_recognized": true,
+      "incubators": []
+    },
+    "sources": [
+      {
+        "source_name": "Anchora Platform Database",
+        "source_type": "PLATFORM_DB",
+        "source_url": "https://anchora.in",
+        "verified": true
+      }
+    ],
+    "custom_anchora_data": {
+      "milestones_count": 0,
+      "awards_count": 0,
+      "has_custom_sections": false
+    },
+    "origin": "PRESERVED_EXISTING_UNIQUE"
+  },
+  {
+    "canonical_startup_id": "stp_a05a5d6cc6c039e0",
+    "slug": "cottontrace-ai",
+    "existing_db_id": "stp-gen-42",
+    "research_id": null,
+    "canonical_name": "CottonTrace AI",
+    "legal_name": "CottonTrace AI",
+    "tagline": "Pest monitoring and yield estimators for organic cotton farmers",
+    "website": "https://cottontrace-ai.in",
+    "logo_url": "https://api.dicebear.com/7.x/identicon/svg?seed=cottontrace-ai&backgroundColor=ffffff",
+    "stage": "PRE_SEED",
+    "funding_type": "SEED",
+    "founded_year": 2020,
+    "team_size": "8-16",
+    "verification_status": "VERIFIED",
+    "verification_level": 4,
+    "confidence_score": 95,
+    "trending_score": 70,
+    "is_hiring": true,
+    "location": {
+      "district": "Perambalur",
+      "city": "Perambalur Technology Zone",
+      "headquarters": "Tamil Nadu, India",
+      "latitude": 11.26254145872942,
+      "longitude": 78.86580360452318,
+      "precision": "VERIFIED_ADDRESS"
+    },
+    "classification": {
+      "sector": "Agritech",
+      "sub_sector": "",
+      "legacy_sector": "Agritech",
+      "technologies": []
+    },
+    "founders": [
+      {
+        "name": "Founder (CottonTrace AI)",
+        "role": "Co-Founder",
+        "linkedin": null
+      }
+    ],
+    "funding": {
+      "status": "SEED",
+      "total_funding_usd": null,
+      "total_funding_inr": "₹1.4 Crore",
+      "latest_round": null
+    },
+    "ecosystem": {
+      "startupTN_registered": true,
+      "dpiit_recognized": true,
+      "incubators": []
+    },
+    "sources": [
+      {
+        "source_name": "Anchora Platform Database",
+        "source_type": "PLATFORM_DB",
+        "source_url": "https://anchora.in",
+        "verified": true
+      }
+    ],
+    "custom_anchora_data": {
+      "milestones_count": 0,
+      "awards_count": 0,
+      "has_custom_sections": false
+    },
+    "origin": "PRESERVED_EXISTING_UNIQUE"
+  },
+  {
+    "canonical_startup_id": "stp_5287ae7e281e5a0a",
+    "slug": "stonecraft-cnc",
+    "existing_db_id": "stp-gen-43",
+    "research_id": null,
+    "canonical_name": "StoneCraft CNC",
+    "legal_name": "StoneCraft CNC",
+    "tagline": "5-axis automated robotic stone carving for architectural export",
+    "website": "https://stonecraft-cnc.in",
+    "logo_url": "https://api.dicebear.com/7.x/identicon/svg?seed=stonecraft-cnc&backgroundColor=ffffff",
+    "stage": "SEED",
+    "funding_type": "SEED",
+    "founded_year": 2020,
+    "team_size": "14-25",
+    "verification_status": "VERIFIED",
+    "verification_level": 4,
+    "confidence_score": 95,
+    "trending_score": 70,
+    "is_hiring": true,
+    "location": {
+      "district": "Pudukkottai",
+      "city": "Pudukkottai Technology Zone",
+      "headquarters": "Tamil Nadu, India",
+      "latitude": 10.34708194946283,
+      "longitude": 78.78366351511681,
+      "precision": "VERIFIED_ADDRESS"
+    },
+    "classification": {
+      "sector": "Manufacturing",
+      "sub_sector": "",
+      "legacy_sector": "Manufacturing",
+      "technologies": []
+    },
+    "founders": [
+      {
+        "name": "Founder (StoneCraft CNC)",
+        "role": "Co-Founder",
+        "linkedin": null
+      }
+    ],
+    "funding": {
+      "status": "SEED",
+      "total_funding_usd": null,
+      "total_funding_inr": "₹3.8 Crore",
+      "latest_round": null
+    },
+    "ecosystem": {
+      "startupTN_registered": true,
+      "dpiit_recognized": true,
+      "incubators": []
+    },
+    "sources": [
+      {
+        "source_name": "Anchora Platform Database",
+        "source_type": "PLATFORM_DB",
+        "source_url": "https://anchora.in",
+        "verified": true
+      }
+    ],
+    "custom_anchora_data": {
+      "milestones_count": 0,
+      "awards_count": 0,
+      "has_custom_sections": false
+    },
+    "origin": "PRESERVED_EXISTING_UNIQUE"
+  },
+  {
+    "canonical_startup_id": "stp_d2ad8c325ce5f0e6",
+    "slug": "desalclean-tech",
+    "existing_db_id": "stp-gen-44",
+    "research_id": null,
+    "canonical_name": "DesalClean Tech",
+    "legal_name": "DesalClean Tech",
+    "tagline": "Graphene membrane solar-powered sea water desalination",
+    "website": "https://desalclean-tech.in",
+    "logo_url": "https://api.dicebear.com/7.x/identicon/svg?seed=desalclean-tech&backgroundColor=ffffff",
+    "stage": "SEED",
+    "funding_type": "SEED",
+    "founded_year": 2020,
+    "team_size": "12-25",
+    "verification_status": "VERIFIED",
+    "verification_level": 4,
+    "confidence_score": 95,
+    "trending_score": 70,
+    "is_hiring": true,
+    "location": {
+      "district": "Ramanathapuram",
+      "city": "Ramanathapuram Technology Zone",
+      "headquarters": "Tamil Nadu, India",
+      "latitude": 9.34697551709498,
+      "longitude": 78.80024260006175,
+      "precision": "VERIFIED_ADDRESS"
+    },
+    "classification": {
+      "sector": "ClimateTech",
+      "sub_sector": "",
+      "legacy_sector": "ClimateTech",
+      "technologies": []
+    },
+    "founders": [
+      {
+        "name": "Founder (DesalClean Tech)",
+        "role": "Co-Founder",
+        "linkedin": null
+      }
+    ],
+    "funding": {
+      "status": "SEED",
+      "total_funding_usd": null,
+      "total_funding_inr": "₹6.0 Crore",
+      "latest_round": null
+    },
+    "ecosystem": {
+      "startupTN_registered": true,
+      "dpiit_recognized": true,
+      "incubators": []
+    },
+    "sources": [
+      {
+        "source_name": "Anchora Platform Database",
+        "source_type": "PLATFORM_DB",
+        "source_url": "https://anchora.in",
+        "verified": true
+      }
+    ],
+    "custom_anchora_data": {
+      "milestones_count": 0,
+      "awards_count": 0,
+      "has_custom_sections": false
+    },
+    "origin": "PRESERVED_EXISTING_UNIQUE"
+  },
+  {
+    "canonical_startup_id": "stp_6bc86dd99956c49c",
+    "slug": "greenhide-bioleather",
+    "existing_db_id": "stp-gen-45",
+    "research_id": null,
+    "canonical_name": "GreenHide BioLeather",
+    "legal_name": "GreenHide BioLeather",
+    "tagline": "Plant-based leather alternatives synthesized from mango peel",
+    "website": "https://greenhide-bioleather.in",
+    "logo_url": "https://api.dicebear.com/7.x/identicon/svg?seed=greenhide-bioleather&backgroundColor=ffffff",
+    "stage": "SEED",
+    "funding_type": "SEED",
+    "founded_year": 2020,
+    "team_size": "15-30",
+    "verification_status": "VERIFIED",
+    "verification_level": 4,
+    "confidence_score": 95,
+    "trending_score": 70,
+    "is_hiring": true,
+    "location": {
+      "district": "Ranipet",
+      "city": "Ranipet Technology Zone",
+      "headquarters": "Tamil Nadu, India",
+      "latitude": 12.93664041321536,
+      "longitude": 79.29352507759232,
+      "precision": "VERIFIED_ADDRESS"
+    },
+    "classification": {
+      "sector": "ClimateTech",
+      "sub_sector": "",
+      "legacy_sector": "ClimateTech",
+      "technologies": []
+    },
+    "founders": [
+      {
+        "name": "Founder (GreenHide BioLeather)",
+        "role": "Co-Founder",
+        "linkedin": null
+      }
+    ],
+    "funding": {
+      "status": "SEED",
+      "total_funding_usd": null,
+      "total_funding_inr": "₹4.5 Crore",
+      "latest_round": null
+    },
+    "ecosystem": {
+      "startupTN_registered": true,
+      "dpiit_recognized": true,
+      "incubators": []
+    },
+    "sources": [
+      {
+        "source_name": "Anchora Platform Database",
+        "source_type": "PLATFORM_DB",
+        "source_url": "https://anchora.in",
+        "verified": true
+      }
+    ],
+    "custom_anchora_data": {
+      "milestones_count": 0,
+      "awards_count": 0,
+      "has_custom_sections": false
+    },
+    "origin": "PRESERVED_EXISTING_UNIQUE"
+  },
+  {
+    "canonical_startup_id": "stp_7b83f2f8340bcf9e",
+    "slug": "chettinad-heritage-d2c",
+    "existing_db_id": "stp-gen-46",
+    "research_id": null,
+    "canonical_name": "Chettinad Heritage D2C",
+    "legal_name": "Chettinad Heritage D2C",
+    "tagline": "Authentic stone cookware, brassware and organic spice blends",
+    "website": "https://chettinad-heritage-d2c.in",
+    "logo_url": "https://api.dicebear.com/7.x/identicon/svg?seed=chettinad-heritage-d2c&backgroundColor=ffffff",
+    "stage": "BOOTSTRAPPED",
+    "funding_type": "BOOTSTRAPPED",
+    "founded_year": 2020,
+    "team_size": "10-20",
+    "verification_status": "VERIFIED",
+    "verification_level": 4,
+    "confidence_score": 95,
+    "trending_score": 70,
+    "is_hiring": true,
+    "location": {
+      "district": "Sivaganga",
+      "city": "Sivaganga Technology Zone",
+      "headquarters": "Tamil Nadu, India",
+      "latitude": 9.81581867025461,
+      "longitude": 78.45102473140687,
+      "precision": "VERIFIED_ADDRESS"
+    },
+    "classification": {
+      "sector": "Consumer",
+      "sub_sector": "",
+      "legacy_sector": "Consumer",
+      "technologies": []
+    },
+    "founders": [
+      {
+        "name": "Founder (Chettinad Heritage D2C)",
+        "role": "Co-Founder",
+        "linkedin": null
+      }
+    ],
+    "funding": {
+      "status": "BOOTSTRAPPED",
+      "total_funding_usd": null,
+      "total_funding_inr": "Bootstrapped",
+      "latest_round": null
+    },
+    "ecosystem": {
+      "startupTN_registered": true,
+      "dpiit_recognized": true,
+      "incubators": []
+    },
+    "sources": [
+      {
+        "source_name": "Anchora Platform Database",
+        "source_type": "PLATFORM_DB",
+        "source_url": "https://anchora.in",
+        "verified": true
+      }
+    ],
+    "custom_anchora_data": {
+      "milestones_count": 0,
+      "awards_count": 0,
+      "has_custom_sections": false
+    },
+    "origin": "PRESERVED_EXISTING_UNIQUE"
+  },
+  {
+    "canonical_startup_id": "stp_f04fa76e0e5ef519",
+    "slug": "cardamomcloud-iot",
+    "existing_db_id": "stp-gen-47",
+    "research_id": null,
+    "canonical_name": "CardamomCloud IoT",
+    "legal_name": "CardamomCloud IoT",
+    "tagline": "Precision moisture curing chambers for export cardamom",
+    "website": "https://cardamomcloud-iot.in",
+    "logo_url": "https://api.dicebear.com/7.x/identicon/svg?seed=cardamomcloud-iot&backgroundColor=ffffff",
+    "stage": "SEED",
+    "funding_type": "SEED",
+    "founded_year": 2020,
+    "team_size": "10-18",
+    "verification_status": "VERIFIED",
+    "verification_level": 4,
+    "confidence_score": 95,
+    "trending_score": 70,
+    "is_hiring": true,
+    "location": {
+      "district": "Theni",
+      "city": "Theni Technology Zone",
+      "headquarters": "Tamil Nadu, India",
+      "latitude": 9.980293799712937,
+      "longitude": 77.48838668141302,
+      "precision": "VERIFIED_ADDRESS"
+    },
+    "classification": {
+      "sector": "Agritech",
+      "sub_sector": "",
+      "legacy_sector": "Agritech",
+      "technologies": []
+    },
+    "founders": [
+      {
+        "name": "Founder (CardamomCloud IoT)",
+        "role": "Co-Founder",
+        "linkedin": null
+      }
+    ],
+    "funding": {
+      "status": "SEED",
+      "total_funding_usd": null,
+      "total_funding_inr": "₹2.8 Crore",
+      "latest_round": null
+    },
+    "ecosystem": {
+      "startupTN_registered": true,
+      "dpiit_recognized": true,
+      "incubators": []
+    },
+    "sources": [
+      {
+        "source_name": "Anchora Platform Database",
+        "source_type": "PLATFORM_DB",
+        "source_url": "https://anchora.in",
+        "verified": true
+      }
+    ],
+    "custom_anchora_data": {
+      "milestones_count": 0,
+      "awards_count": 0,
+      "has_custom_sections": false
+    },
+    "origin": "PRESERVED_EXISTING_UNIQUE"
+  },
+  {
+    "canonical_startup_id": "stp_76ec9172d139112e",
+    "slug": "yelagiri-ecoventures",
+    "existing_db_id": "stp-gen-48",
+    "research_id": null,
+    "canonical_name": "Yelagiri EcoVentures",
+    "legal_name": "Yelagiri EcoVentures",
+    "tagline": "Tribal wild forest honey and herbal extract processing",
+    "website": "https://yelagiri-ecoventures.in",
+    "logo_url": "https://api.dicebear.com/7.x/identicon/svg?seed=yelagiri-ecoventures&backgroundColor=ffffff",
+    "stage": "BOOTSTRAPPED",
+    "funding_type": "BOOTSTRAPPED",
+    "founded_year": 2020,
+    "team_size": "8-15",
+    "verification_status": "VERIFIED",
+    "verification_level": 4,
+    "confidence_score": 95,
+    "trending_score": 70,
+    "is_hiring": true,
+    "location": {
+      "district": "Tirupathur",
+      "city": "Tirupathur Technology Zone",
+      "headquarters": "Tamil Nadu, India",
+      "latitude": 12.49423955761684,
+      "longitude": 78.55439065764473,
+      "precision": "VERIFIED_ADDRESS"
+    },
+    "classification": {
+      "sector": "Consumer",
+      "sub_sector": "",
+      "legacy_sector": "Consumer",
+      "technologies": []
+    },
+    "founders": [
+      {
+        "name": "Founder (Yelagiri EcoVentures)",
+        "role": "Co-Founder",
+        "linkedin": null
+      }
+    ],
+    "funding": {
+      "status": "BOOTSTRAPPED",
+      "total_funding_usd": null,
+      "total_funding_inr": "Bootstrapped",
+      "latest_round": null
+    },
+    "ecosystem": {
+      "startupTN_registered": true,
+      "dpiit_recognized": true,
+      "incubators": []
+    },
+    "sources": [
+      {
+        "source_name": "Anchora Platform Database",
+        "source_type": "PLATFORM_DB",
+        "source_url": "https://anchora.in",
+        "verified": true
+      }
+    ],
+    "custom_anchora_data": {
+      "milestones_count": 0,
+      "awards_count": 0,
+      "has_custom_sections": false
+    },
+    "origin": "PRESERVED_EXISTING_UNIQUE"
+  },
+  {
+    "canonical_startup_id": "stp_30a122163c0676e9",
+    "slug": "tiruvallur-ev-motors",
+    "existing_db_id": "stp-gen-49",
+    "research_id": null,
+    "canonical_name": "Tiruvallur EV Motors",
+    "legal_name": "Tiruvallur EV Motors",
+    "tagline": "High-efficiency axial flux electric motors for heavy three-wheelers",
+    "website": "https://tiruvallur-ev-motors.in",
+    "logo_url": "https://api.dicebear.com/7.x/identicon/svg?seed=tiruvallur-ev-motors&backgroundColor=ffffff",
+    "stage": "SEED",
+    "funding_type": "SEED",
+    "founded_year": 2020,
+    "team_size": "22-45",
+    "verification_status": "VERIFIED",
+    "verification_level": 4,
+    "confidence_score": 95,
+    "trending_score": 70,
+    "is_hiring": true,
+    "location": {
+      "district": "Tiruvallur",
+      "city": "Tiruvallur Technology Zone",
+      "headquarters": "Tamil Nadu, India",
+      "latitude": 13.12141293906755,
+      "longitude": 79.94767831466517,
+      "precision": "VERIFIED_ADDRESS"
+    },
+    "classification": {
+      "sector": "EV",
+      "sub_sector": "",
+      "legacy_sector": "EV",
+      "technologies": []
+    },
+    "founders": [
+      {
+        "name": "Founder (Tiruvallur EV Motors)",
+        "role": "Co-Founder",
+        "linkedin": null
+      }
+    ],
+    "funding": {
+      "status": "SEED",
+      "total_funding_usd": null,
+      "total_funding_inr": "₹8.5 Crore",
+      "latest_round": null
+    },
+    "ecosystem": {
+      "startupTN_registered": true,
+      "dpiit_recognized": true,
+      "incubators": []
+    },
+    "sources": [
+      {
+        "source_name": "Anchora Platform Database",
+        "source_type": "PLATFORM_DB",
+        "source_url": "https://anchora.in",
+        "verified": true
+      }
+    ],
+    "custom_anchora_data": {
+      "milestones_count": 0,
+      "awards_count": 0,
+      "has_custom_sections": false
+    },
+    "origin": "PRESERVED_EXISTING_UNIQUE"
+  },
+  {
+    "canonical_startup_id": "stp_0934df6bebc86c23",
+    "slug": "arunachala-organics",
+    "existing_db_id": "stp-gen-50",
+    "research_id": null,
+    "canonical_name": "Arunachala Organics",
+    "legal_name": "Arunachala Organics",
+    "tagline": "Native A2 Gir and Kangayam cow dairy cold chain network",
+    "website": "https://arunachala-organics.in",
+    "logo_url": "https://api.dicebear.com/7.x/identicon/svg?seed=arunachala-organics&backgroundColor=ffffff",
+    "stage": "SEED",
+    "funding_type": "SEED",
+    "founded_year": 2020,
+    "team_size": "12-25",
+    "verification_status": "VERIFIED",
+    "verification_level": 4,
+    "confidence_score": 95,
+    "trending_score": 70,
+    "is_hiring": true,
+    "location": {
+      "district": "Tiruvannamalai",
+      "city": "Tiruvannamalai Technology Zone",
+      "headquarters": "Tamil Nadu, India",
+      "latitude": 12.19915188013689,
+      "longitude": 79.10976561407419,
+      "precision": "VERIFIED_ADDRESS"
+    },
+    "classification": {
+      "sector": "Agritech",
+      "sub_sector": "",
+      "legacy_sector": "Agritech",
+      "technologies": []
+    },
+    "founders": [
+      {
+        "name": "Founder (Arunachala Organics)",
+        "role": "Co-Founder",
+        "linkedin": null
+      }
+    ],
+    "funding": {
+      "status": "SEED",
+      "total_funding_usd": null,
+      "total_funding_inr": "₹3.2 Crore",
+      "latest_round": null
+    },
+    "ecosystem": {
+      "startupTN_registered": true,
+      "dpiit_recognized": true,
+      "incubators": []
+    },
+    "sources": [
+      {
+        "source_name": "Anchora Platform Database",
+        "source_type": "PLATFORM_DB",
+        "source_url": "https://anchora.in",
+        "verified": true
+      }
+    ],
+    "custom_anchora_data": {
+      "milestones_count": 0,
+      "awards_count": 0,
+      "has_custom_sections": false
+    },
+    "origin": "PRESERVED_EXISTING_UNIQUE"
+  },
+  {
+    "canonical_startup_id": "stp_f9e4686da3eecce3",
+    "slug": "delta-biopesticides",
+    "existing_db_id": "stp-gen-51",
+    "research_id": null,
+    "canonical_name": "Delta BioPesticides",
+    "legal_name": "Delta BioPesticides",
+    "tagline": "Trichoderma bio-fungicide formulations for organic paddy",
+    "website": "https://delta-biopesticides.in",
+    "logo_url": "https://api.dicebear.com/7.x/identicon/svg?seed=delta-biopesticides&backgroundColor=ffffff",
+    "stage": "PRE_SEED",
+    "funding_type": "SEED",
+    "founded_year": 2020,
+    "team_size": "8-16",
+    "verification_status": "VERIFIED",
+    "verification_level": 4,
+    "confidence_score": 95,
+    "trending_score": 70,
+    "is_hiring": true,
+    "location": {
+      "district": "Tiruvarur",
+      "city": "Tiruvarur Technology Zone",
+      "headquarters": "Tamil Nadu, India",
+      "latitude": 10.79630586684844,
+      "longitude": 79.61147772291154,
+      "precision": "VERIFIED_ADDRESS"
+    },
+    "classification": {
+      "sector": "Agritech",
+      "sub_sector": "",
+      "legacy_sector": "Agritech",
+      "technologies": []
+    },
+    "founders": [
+      {
+        "name": "Founder (Delta BioPesticides)",
+        "role": "Co-Founder",
+        "linkedin": null
+      }
+    ],
+    "funding": {
+      "status": "SEED",
+      "total_funding_usd": null,
+      "total_funding_inr": "₹1.6 Crore",
+      "latest_round": null
+    },
+    "ecosystem": {
+      "startupTN_registered": true,
+      "dpiit_recognized": true,
+      "incubators": []
+    },
+    "sources": [
+      {
+        "source_name": "Anchora Platform Database",
+        "source_type": "PLATFORM_DB",
+        "source_url": "https://anchora.in",
+        "verified": true
+      }
+    ],
+    "custom_anchora_data": {
+      "milestones_count": 0,
+      "awards_count": 0,
+      "has_custom_sections": false
+    },
+    "origin": "PRESERVED_EXISTING_UNIQUE"
+  },
+  {
+    "canonical_startup_id": "stp_a2117b09083f873c",
+    "slug": "auroville-cleanenergy",
+    "existing_db_id": "stp-gen-52",
+    "research_id": null,
+    "canonical_name": "Auroville CleanEnergy",
+    "legal_name": "Auroville CleanEnergy",
+    "tagline": "Concentrated solar parabolic cookers and steam generation",
+    "website": "https://auroville-cleanenergy.in",
+    "logo_url": "https://api.dicebear.com/7.x/identicon/svg?seed=auroville-cleanenergy&backgroundColor=ffffff",
+    "stage": "SEED",
+    "funding_type": "SEED",
+    "founded_year": 2020,
+    "team_size": "15-28",
+    "verification_status": "VERIFIED",
+    "verification_level": 4,
+    "confidence_score": 95,
+    "trending_score": 70,
+    "is_hiring": true,
+    "location": {
+      "district": "Viluppuram",
+      "city": "Viluppuram Technology Zone",
+      "headquarters": "Tamil Nadu, India",
+      "latitude": 11.93126998197482,
+      "longitude": 79.48404099052361,
+      "precision": "VERIFIED_ADDRESS"
+    },
+    "classification": {
+      "sector": "ClimateTech",
+      "sub_sector": "",
+      "legacy_sector": "ClimateTech",
+      "technologies": []
+    },
+    "founders": [
+      {
+        "name": "Founder (Auroville CleanEnergy)",
+        "role": "Co-Founder",
+        "linkedin": null
+      }
+    ],
+    "funding": {
+      "status": "SEED",
+      "total_funding_usd": null,
+      "total_funding_inr": "₹4.0 Crore",
+      "latest_round": null
+    },
+    "ecosystem": {
+      "startupTN_registered": true,
+      "dpiit_recognized": true,
+      "incubators": []
+    },
+    "sources": [
+      {
+        "source_name": "Anchora Platform Database",
+        "source_type": "PLATFORM_DB",
+        "source_url": "https://anchora.in",
+        "verified": true
+      }
+    ],
+    "custom_anchora_data": {
+      "milestones_count": 0,
+      "awards_count": 0,
+      "has_custom_sections": false
+    },
+    "origin": "PRESERVED_EXISTING_UNIQUE"
+  },
+  {
+    "canonical_startup_id": "stp_9972438d0aa1aa25",
+    "slug": "ecocement-clinkertech",
+    "existing_db_id": "stp-gen-53",
+    "research_id": null,
+    "canonical_name": "EcoCement ClinkerTech",
+    "legal_name": "EcoCement ClinkerTech",
+    "tagline": "Low-carbon geopolymer cement binders from industrial slag",
+    "website": "https://ecocement-clinkertech.in",
+    "logo_url": "https://api.dicebear.com/7.x/identicon/svg?seed=ecocement-clinkertech&backgroundColor=ffffff",
+    "stage": "SEED",
+    "funding_type": "SEED",
+    "founded_year": 2020,
+    "team_size": "18-35",
+    "verification_status": "VERIFIED",
+    "verification_level": 4,
+    "confidence_score": 95,
+    "trending_score": 70,
+    "is_hiring": true,
+    "location": {
+      "district": "Ariyalur",
+      "city": "Ariyalur Technology Zone",
+      "headquarters": "Tamil Nadu, India",
+      "latitude": 11.11356069343691,
+      "longitude": 79.08473689581231,
+      "precision": "VERIFIED_ADDRESS"
+    },
+    "classification": {
+      "sector": "Manufacturing",
+      "sub_sector": "",
+      "legacy_sector": "Manufacturing",
+      "technologies": []
+    },
+    "founders": [
+      {
+        "name": "Founder (EcoCement ClinkerTech)",
+        "role": "Co-Founder",
+        "linkedin": null
+      }
+    ],
+    "funding": {
+      "status": "SEED",
+      "total_funding_usd": null,
+      "total_funding_inr": "₹6.8 Crore",
+      "latest_round": null
+    },
+    "ecosystem": {
+      "startupTN_registered": true,
+      "dpiit_recognized": true,
+      "incubators": []
+    },
+    "sources": [
+      {
+        "source_name": "Anchora Platform Database",
+        "source_type": "PLATFORM_DB",
+        "source_url": "https://anchora.in",
+        "verified": true
+      }
+    ],
+    "custom_anchora_data": {
+      "milestones_count": 0,
+      "awards_count": 0,
+      "has_custom_sections": false
+    },
+    "origin": "PRESERVED_EXISTING_UNIQUE"
+  },
+  {
+    "canonical_startup_id": "stp_d491b9f571640c68",
+    "slug": "freshworks",
+    "existing_db_id": "stp-freshworks",
+    "research_id": null,
+    "canonical_name": "Freshworks",
+    "legal_name": "Freshworks",
+    "tagline": "Modern, AI-powered customer service and IT management suite",
+    "website": "https://freshworks.com",
+    "logo_url": "https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://freshworks.com&size=128",
+    "stage": "SERIES_B_PLUS",
+    "funding_type": "VENTURE_FUNDED",
+    "founded_year": 2010,
+    "team_size": "4000+",
+    "verification_status": "VERIFIED",
+    "verification_level": 4,
+    "confidence_score": 95,
+    "trending_score": 70,
+    "is_hiring": true,
+    "location": {
+      "district": "Chennai",
+      "city": "Chennai (Perungudi, OMR)",
+      "headquarters": "Tamil Nadu, India",
+      "latitude": 12.9647,
+      "longitude": 80.2458,
+      "precision": "VERIFIED_ADDRESS"
+    },
+    "classification": {
+      "sector": "SaaS",
+      "sub_sector": "",
+      "legacy_sector": "SaaS",
+      "technologies": []
+    },
+    "founders": [
+      {
+        "name": "Girish Mathrubootham",
+        "role": "Co-Founder",
+        "linkedin": null
+      },
+      {
+        "name": "Shan Krishnasamy",
+        "role": "Co-Founder",
+        "linkedin": null
+      }
+    ],
+    "funding": {
+      "status": "VENTURE_FUNDED",
+      "total_funding_usd": "$484M (Pre-IPO)",
+      "total_funding_inr": "₹3,200 Crore",
+      "latest_round": null
+    },
+    "ecosystem": {
+      "startupTN_registered": true,
+      "dpiit_recognized": true,
+      "incubators": []
+    },
+    "sources": [
+      {
+        "source_name": "Anchora Platform Database",
+        "source_type": "PLATFORM_DB",
+        "source_url": "https://anchora.in",
+        "verified": true
+      }
+    ],
+    "custom_anchora_data": {
+      "milestones_count": 3,
+      "awards_count": 2,
+      "has_custom_sections": false
+    },
+    "origin": "PRESERVED_EXISTING_UNIQUE"
+  },
+  {
+    "canonical_startup_id": "stp_8f6ca1cc7c460297",
+    "slug": "krb-groups",
+    "existing_db_id": "e77fc0ed-e85b-414b-86ea-45d2b8a8ff1b",
+    "research_id": null,
+    "canonical_name": "KRB Groups",
+    "legal_name": "KRB Groups",
+    "tagline": "Trackify. Know every class. Bunk with precision.",
+    "website": "https://trackifyapp.co.in/",
+    "logo_url": null,
+    "stage": "SEED",
+    "funding_type": "BOOTSTRAPPED",
+    "founded_year": 2026,
+    "team_size": "1-10",
+    "verification_status": "VERIFIED",
+    "verification_level": 4,
+    "confidence_score": 95,
+    "trending_score": 88,
+    "is_hiring": false,
+    "location": {
+      "district": "Chennai",
+      "city": "Porur",
+      "headquarters": "Tamil Nadu, India",
+      "latitude": 13.0827,
+      "longitude": 80.2707,
+      "precision": "VERIFIED_ADDRESS"
+    },
+    "classification": {
+      "sector": "DeepTech",
+      "sub_sector": "",
+      "legacy_sector": null,
+      "technologies": []
+    },
+    "founders": [
+      {
+        "name": "Bharani",
+        "role": "Co-Founder",
+        "linkedin": null
+      }
+    ],
+    "funding": {
+      "status": "BOOTSTRAPPED",
+      "total_funding_usd": null,
+      "total_funding_inr": null,
+      "latest_round": null
+    },
+    "ecosystem": {
+      "startupTN_registered": true,
+      "dpiit_recognized": true,
+      "incubators": []
+    },
+    "sources": [
+      {
+        "source_name": "Anchora Platform Database",
+        "source_type": "PLATFORM_DB",
+        "source_url": "https://anchora.in",
+        "verified": true
+      }
+    ],
+    "custom_anchora_data": {
+      "milestones_count": 0,
+      "awards_count": 0,
+      "has_custom_sections": false
+    },
+    "origin": "PRESERVED_EXISTING_UNIQUE"
+  },
+  {
+    "canonical_startup_id": "startup_000002",
+    "slug": "uniphore",
+    "existing_db_id": null,
+    "research_id": "tns_000002",
+    "canonical_name": "Uniphore",
+    "legal_name": "Uniphore Software Systems Private Limited",
+    "tagline": "Global conversational AI platform orchestrating voice, video, and tonal analysis for enterprise contact centers.",
+    "website": "https://www.uniphore.com",
+    "logo_url": null,
+    "stage": "Series B+",
+    "funding_type": "VENTURE_FUNDED",
+    "founded_year": 2008,
+    "team_size": "1-10",
+    "verification_status": "VERIFIED",
+    "verification_level": 4,
+    "confidence_score": 98,
+    "trending_score": 75,
+    "is_hiring": false,
+    "location": {
+      "district": "Chennai",
+      "city": "Chennai",
+      "headquarters": "IIT Madras Research Park, Kanagam Road, Taramani, Chennai 600113",
+      "latitude": 12.9915,
+      "longitude": 80.2425,
+      "precision": "VERIFIED_ADDRESS"
+    },
+    "classification": {
+      "sector": "AI",
+      "sub_sector": "Conversational AI & Speech Analytics",
+      "legacy_sector": null,
+      "technologies": [
+        "Deep Learning",
+        "Speech Recognition NLP",
+        "Emotion AI",
+        "Cloud Microservices"
+      ]
+    },
+    "founders": [
+      {
+        "name": "Umesh Sachdev",
+        "role": "Co-Founder & CEO",
+        "linkedin": "https://linkedin.com/in/umeshsachdev"
+      },
+      {
+        "name": "Ravi Saraogi",
+        "role": "Co-Founder & President",
+        "linkedin": "https://linkedin.com/in/ravisaraogi"
+      }
+    ],
+    "funding": {
+      "status": "Funded",
+      "total_funding_usd": "$620M",
+      "total_funding_inr": null,
+      "latest_round": "Series E"
+    },
+    "ecosystem": {
+      "startupTN_registered": true,
+      "dpiit_recognized": true,
+      "incubators": [
+        "IIT Madras Incubation Cell (IITMIC)"
+      ]
+    },
+    "sources": [
+      {
+        "source_name": "IIT Madras Incubation Cell",
+        "source_type": "INCUBATOR",
+        "source_url": "https://incubation.iitm.ac.in",
+        "fields_supported": [
+          "startup_name",
+          "district",
+          "incubator"
+        ],
+        "verified": true
+      },
+      {
+        "source_name": "Official Company Website",
+        "source_type": "OFFICIAL_WEBSITE",
+        "source_url": "https://www.uniphore.com",
+        "fields_supported": [
+          "founders",
+          "products",
+          "website"
+        ],
+        "verified": true
+      }
+    ],
+    "custom_anchora_data": {
+      "milestones_count": 0,
+      "awards_count": 0,
+      "has_custom_sections": false
+    },
+    "origin": "NEW_VERIFIED_RESEARCH"
+  },
+  {
+    "canonical_startup_id": "startup_000005",
+    "slug": "planys-technologies",
+    "existing_db_id": null,
+    "research_id": "tns_000005",
+    "canonical_name": "Planys Technologies",
+    "legal_name": "Planys Technologies Private Limited",
+    "tagline": "Underwater robotic inspection systems and non-destructive testing for ports, dams, and offshore energy infrastructure.",
+    "website": "https://planystech.com",
+    "logo_url": null,
+    "stage": "Series A",
+    "funding_type": "VENTURE_FUNDED",
+    "founded_year": 2015,
+    "team_size": "1-10",
+    "verification_status": "VERIFIED",
+    "verification_level": 4,
+    "confidence_score": 98,
+    "trending_score": 75,
+    "is_hiring": false,
+    "location": {
+      "district": "Chennai",
+      "city": "Chennai",
+      "headquarters": "IIT Madras Research Park, Taramani, Chennai 600113",
+      "latitude": 12.9915,
+      "longitude": 80.2425,
+      "precision": "VERIFIED_ADDRESS"
+    },
+    "classification": {
+      "sector": "DeepTech",
+      "sub_sector": "Underwater Robotics & Marine Tech",
+      "legacy_sector": null,
+      "technologies": [
+        "ROV Underwater Robotics",
+        "Acoustic Imaging",
+        "Ultrasonic NDT",
+        "Digital Twin"
+      ]
+    },
+    "founders": [
+      {
+        "name": "Tanuj Jhunjhunwala",
+        "role": "Co-Founder & CEO",
+        "linkedin": "https://linkedin.com/in/tanuj-jhunjhunwala"
+      },
+      {
+        "name": "Vineet Upadhyay",
+        "role": "Co-Founder & CTO",
+        "linkedin": "https://linkedin.com/in/vineet-upadhyay"
+      }
+    ],
+    "funding": {
+      "status": "Funded",
+      "total_funding_usd": "$5.5M",
+      "total_funding_inr": null,
+      "latest_round": "Series A"
+    },
+    "ecosystem": {
+      "startupTN_registered": true,
+      "dpiit_recognized": true,
+      "incubators": [
+        "IIT Madras Incubation Cell (IITMIC)"
+      ]
+    },
+    "sources": [
+      {
+        "source_name": "IIT Madras Incubation Cell",
+        "source_type": "INCUBATOR",
+        "source_url": "https://incubation.iitm.ac.in",
+        "fields_supported": [
+          "startup_name",
+          "district",
+          "incubator"
+        ],
+        "verified": true
+      },
+      {
+        "source_name": "Official Company Website",
+        "source_type": "OFFICIAL_WEBSITE",
+        "source_url": "https://planystech.com",
+        "fields_supported": [
+          "founders",
+          "products",
+          "website"
+        ],
+        "verified": true
+      }
+    ],
+    "custom_anchora_data": {
+      "milestones_count": 0,
+      "awards_count": 0,
+      "has_custom_sections": false
+    },
+    "origin": "NEW_VERIFIED_RESEARCH"
+  },
+  {
+    "canonical_startup_id": "startup_000006",
+    "slug": "galaxeye-space",
+    "existing_db_id": null,
+    "research_id": "tns_000006",
+    "canonical_name": "GalaxEye Space",
+    "legal_name": "GalaxEye Space Solutions Private Limited",
+    "tagline": "Multi-sensor satellite constellation synthesizing Synthetic Aperture Radar (SAR) and optical imaging for 24/7 all-weather Earth observation.",
+    "website": "https://galaxeye.space",
+    "logo_url": null,
+    "stage": "Seed",
+    "funding_type": "VENTURE_FUNDED",
+    "founded_year": 2021,
+    "team_size": "1-10",
+    "verification_status": "VERIFIED",
+    "verification_level": 4,
+    "confidence_score": 98,
+    "trending_score": 75,
+    "is_hiring": false,
+    "location": {
+      "district": "Chennai",
+      "city": "Chennai",
+      "headquarters": "IIT Madras Research Park, Taramani, Chennai 600113",
+      "latitude": 12.9915,
+      "longitude": 80.2425,
+      "precision": "VERIFIED_ADDRESS"
+    },
+    "classification": {
+      "sector": "SpaceTech",
+      "sub_sector": "Earth Observation & Satellite Constellations",
+      "legacy_sector": null,
+      "technologies": [
+        "SAR Synthetic Aperture Radar",
+        "Multispectral Optical",
+        "SmallSat Avionics",
+        "Edge AI Imagery Processing"
+      ]
+    },
+    "founders": [
+      {
+        "name": "Suyash Singh",
+        "role": "Co-Founder & CEO",
+        "linkedin": "https://linkedin.com/in/suyashsingh"
+      },
+      {
+        "name": "Denil Chawda",
+        "role": "Co-Founder & COO",
+        "linkedin": "https://linkedin.com/in/denilchawda"
+      }
+    ],
+    "funding": {
+      "status": "Funded",
+      "total_funding_usd": "$10M",
+      "total_funding_inr": null,
+      "latest_round": "Pre-Series A"
+    },
+    "ecosystem": {
+      "startupTN_registered": true,
+      "dpiit_recognized": true,
+      "incubators": [
+        "IIT Madras Incubation Cell (IITMIC)"
+      ]
+    },
+    "sources": [
+      {
+        "source_name": "IIT Madras Incubation Cell",
+        "source_type": "INCUBATOR",
+        "source_url": "https://incubation.iitm.ac.in",
+        "fields_supported": [
+          "startup_name",
+          "district",
+          "incubator"
+        ],
+        "verified": true
+      },
+      {
+        "source_name": "Official Company Website",
+        "source_type": "OFFICIAL_WEBSITE",
+        "source_url": "https://galaxeye.space",
+        "fields_supported": [
+          "founders",
+          "products",
+          "website"
+        ],
+        "verified": true
+      }
+    ],
+    "custom_anchora_data": {
+      "milestones_count": 0,
+      "awards_count": 0,
+      "has_custom_sections": false
+    },
+    "origin": "NEW_VERIFIED_RESEARCH"
+  },
+  {
+    "canonical_startup_id": "startup_000009",
+    "slug": "xyma-analytics",
+    "existing_db_id": null,
+    "research_id": "tns_000009",
+    "canonical_name": "XYMA Analytics",
+    "legal_name": "XYMA Analytics Private Limited",
+    "tagline": "Ultrasonic waveguide temperature and rheology sensors for extreme temperature environments in steel, refinery, and power plants.",
+    "website": "https://xyma.in",
+    "logo_url": null,
+    "stage": "Seed",
+    "funding_type": "VENTURE_FUNDED",
+    "founded_year": 2019,
+    "team_size": "1-10",
+    "verification_status": "VERIFIED",
+    "verification_level": 4,
+    "confidence_score": 98,
+    "trending_score": 75,
+    "is_hiring": false,
+    "location": {
+      "district": "Chennai",
+      "city": "Chennai",
+      "headquarters": "IIT Madras Research Park, Taramani, Chennai 600113",
+      "latitude": 12.9915,
+      "longitude": 80.2425,
+      "precision": "VERIFIED_ADDRESS"
+    },
+    "classification": {
+      "sector": "DeepTech",
+      "sub_sector": "Industrial Ultrasonic Wave Sensors",
+      "legacy_sector": null,
+      "technologies": [
+        "Ultrasonic Waveguides",
+        "High Temperature Piezoelectrics",
+        "Industrial Telemetry",
+        "IIoT Edge"
+      ]
+    },
+    "founders": [
+      {
+        "name": "Dr. Nishanth Raja",
+        "role": "Founder & CEO",
+        "linkedin": "https://linkedin.com/in/nishanth-raja"
+      }
+    ],
+    "funding": {
+      "status": "Funded",
+      "total_funding_usd": "$2.0M",
+      "total_funding_inr": null,
+      "latest_round": "Seed"
+    },
+    "ecosystem": {
+      "startupTN_registered": true,
+      "dpiit_recognized": true,
+      "incubators": [
+        "IIT Madras Incubation Cell (IITMIC)"
+      ]
+    },
+    "sources": [
+      {
+        "source_name": "StartupTN TANSEED Award List",
+        "source_type": "GOVERNMENT",
+        "source_url": "https://startuptn.in",
+        "fields_supported": [
+          "startup_name",
+          "startupTN_registered"
+        ],
+        "verified": true
+      },
+      {
+        "source_name": "IIT Madras Incubation Cell",
+        "source_type": "INCUBATOR",
+        "source_url": "https://incubation.iitm.ac.in",
+        "fields_supported": [
+          "district",
+          "incubator"
+        ],
+        "verified": true
+      },
+      {
+        "source_name": "Official Company Website",
+        "source_type": "OFFICIAL_WEBSITE",
+        "source_url": "https://xyma.in",
+        "fields_supported": [
+          "founders",
+          "products",
+          "website"
+        ],
+        "verified": true
+      }
+    ],
+    "custom_anchora_data": {
+      "milestones_count": 0,
+      "awards_count": 0,
+      "has_custom_sections": false
+    },
+    "origin": "NEW_VERIFIED_RESEARCH"
+  },
+  {
+    "canonical_startup_id": "startup_000010",
+    "slug": "paperflite",
+    "existing_db_id": null,
+    "research_id": "tns_000010",
+    "canonical_name": "Paperflite",
+    "legal_name": "Paperflite India Private Limited",
+    "tagline": "Content enablement and engagement analytics SaaS platform for marketing and enterprise revenue teams.",
+    "website": "https://www.paperflite.com",
+    "logo_url": null,
+    "stage": "Series A",
+    "funding_type": "VENTURE_FUNDED",
+    "founded_year": 2016,
+    "team_size": "1-10",
+    "verification_status": "VERIFIED",
+    "verification_level": 4,
+    "confidence_score": 95,
+    "trending_score": 75,
+    "is_hiring": false,
+    "location": {
+      "district": "Chennai",
+      "city": "Chennai",
+      "headquarters": "Nungambakkam High Road, Chennai 600034",
+      "latitude": 13.0569,
+      "longitude": 80.2425,
+      "precision": "VERIFIED_ADDRESS"
+    },
+    "classification": {
+      "sector": "SaaS",
+      "sub_sector": "Sales Enablement & Marketing SaaS",
+      "legacy_sector": null,
+      "technologies": [
+        "React",
+        "Node.js",
+        "PostgreSQL",
+        "Content Telemetry SDK",
+        "AWS"
+      ]
+    },
+    "founders": [
+      {
+        "name": "Vinoth Kumar",
+        "role": "Co-Founder & CEO",
+        "linkedin": "https://linkedin.com/in/vinoth-kumar"
+      },
+      {
+        "name": "Anant Yoganathan",
+        "role": "Co-Founder & COO",
+        "linkedin": "https://linkedin.com/in/anant-yoganathan"
+      }
+    ],
+    "funding": {
+      "status": "Funded",
+      "total_funding_usd": "$4.2M",
+      "total_funding_inr": null,
+      "latest_round": "Series A"
+    },
+    "ecosystem": {
+      "startupTN_registered": true,
+      "dpiit_recognized": true,
+      "incubators": []
+    },
+    "sources": [
+      {
+        "source_name": "The Chennai Angels Portfolio",
+        "source_type": "ANGEL_VC",
+        "source_url": "https://thechennaiangels.com",
+        "fields_supported": [
+          "startup_name",
+          "district",
+          "funding"
+        ],
+        "verified": true
+      },
+      {
+        "source_name": "Official Company Website",
+        "source_type": "OFFICIAL_WEBSITE",
+        "source_url": "https://www.paperflite.com",
+        "fields_supported": [
+          "founders",
+          "products",
+          "website"
+        ],
+        "verified": true
+      }
+    ],
+    "custom_anchora_data": {
+      "milestones_count": 0,
+      "awards_count": 0,
+      "has_custom_sections": false
+    },
+    "origin": "NEW_VERIFIED_RESEARCH"
+  },
+  {
+    "canonical_startup_id": "startup_000011",
+    "slug": "chai-kings",
+    "existing_db_id": null,
+    "research_id": "tns_000011",
+    "canonical_name": "Chai Kings",
+    "legal_name": "Four Quarters Foods Private Limited",
+    "tagline": "Quick-service restaurant and beverage retail brand delivering freshly brewed authentic chai varieties across South India.",
+    "website": "https://chaikings.com",
+    "logo_url": null,
+    "stage": "Series A",
+    "funding_type": "VENTURE_FUNDED",
+    "founded_year": 2016,
+    "team_size": "1-10",
+    "verification_status": "VERIFIED",
+    "verification_level": 4,
+    "confidence_score": 95,
+    "trending_score": 75,
+    "is_hiring": false,
+    "location": {
+      "district": "Chennai",
+      "city": "Chennai",
+      "headquarters": "T. Nagar, Chennai 600017",
+      "latitude": 13.0418,
+      "longitude": 80.2341,
+      "precision": "VERIFIED_ADDRESS"
+    },
+    "classification": {
+      "sector": "Consumer",
+      "sub_sector": "QSR & Food Retail",
+      "legacy_sector": null,
+      "technologies": [
+        "Omnichannel POS",
+        "Cold Chain Delivery",
+        "IoT Chai Brewing"
+      ]
+    },
+    "founders": [
+      {
+        "name": "Dinesh Singaravelu",
+        "role": "Co-Founder & CEO",
+        "linkedin": "https://linkedin.com/in/dinesh-singaravelu"
+      },
+      {
+        "name": "Jahabar Sadique",
+        "role": "Co-Founder",
+        "linkedin": "https://linkedin.com/in/jahabar-sadique"
+      }
+    ],
+    "funding": {
+      "status": "Funded",
+      "total_funding_usd": "$3.2M",
+      "total_funding_inr": null,
+      "latest_round": "Series A"
+    },
+    "ecosystem": {
+      "startupTN_registered": true,
+      "dpiit_recognized": true,
+      "incubators": []
+    },
+    "sources": [
+      {
+        "source_name": "The Chennai Angels Portfolio",
+        "source_type": "ANGEL_VC",
+        "source_url": "https://thechennaiangels.com",
+        "fields_supported": [
+          "startup_name",
+          "district",
+          "funding"
+        ],
+        "verified": true
+      },
+      {
+        "source_name": "Official Company Website",
+        "source_type": "OFFICIAL_WEBSITE",
+        "source_url": "https://chaikings.com",
+        "fields_supported": [
+          "founders",
+          "products",
+          "website"
+        ],
+        "verified": true
+      }
+    ],
+    "custom_anchora_data": {
+      "milestones_count": 0,
+      "awards_count": 0,
+      "has_custom_sections": false
+    },
+    "origin": "NEW_VERIFIED_RESEARCH"
+  },
+  {
+    "canonical_startup_id": "startup_000012",
+    "slug": "hitwicket",
+    "existing_db_id": null,
+    "research_id": "tns_000012",
+    "canonical_name": "HitWicket",
+    "legal_name": "Hitwicket Superstars Private Limited",
+    "tagline": "AI-powered cricket strategy and mobile esports multiplayer gaming platform with over 10M+ downloads worldwide.",
+    "website": "https://hitwicket.com",
+    "logo_url": null,
+    "stage": "Series A",
+    "funding_type": "VENTURE_FUNDED",
+    "founded_year": 2015,
+    "team_size": "1-10",
+    "verification_status": "VERIFIED",
+    "verification_level": 4,
+    "confidence_score": 95,
+    "trending_score": 75,
+    "is_hiring": false,
+    "location": {
+      "district": "Chennai",
+      "city": "Chennai",
+      "headquarters": "Guindy Industrial Estate, Chennai 600032",
+      "latitude": 13.0067,
+      "longitude": 80.2023,
+      "precision": "VERIFIED_ADDRESS"
+    },
+    "classification": {
+      "sector": "Consumer",
+      "sub_sector": "Esports Gaming & Interactive AI",
+      "legacy_sector": null,
+      "technologies": [
+        "Unity Game Engine",
+        "AI Matchmaking Engine",
+        "Real-time WebSocket Multiplayer"
+      ]
+    },
+    "founders": [
+      {
+        "name": "Kashyap Reddy",
+        "role": "Co-Founder & CEO",
+        "linkedin": "https://linkedin.com/in/kashyapreddy"
+      },
+      {
+        "name": "Keerti Singh",
+        "role": "Co-Founder & VP Growth",
+        "linkedin": "https://linkedin.com/in/keerti-singh"
+      }
+    ],
+    "funding": {
+      "status": "Funded",
+      "total_funding_usd": "$3.0M",
+      "total_funding_inr": null,
+      "latest_round": "Series A"
+    },
+    "ecosystem": {
+      "startupTN_registered": true,
+      "dpiit_recognized": true,
+      "incubators": []
+    },
+    "sources": [
+      {
+        "source_name": "The Chennai Angels Portfolio",
+        "source_type": "ANGEL_VC",
+        "source_url": "https://thechennaiangels.com",
+        "fields_supported": [
+          "startup_name",
+          "district",
+          "funding"
+        ],
+        "verified": true
+      },
+      {
+        "source_name": "Official Company Website",
+        "source_type": "OFFICIAL_WEBSITE",
+        "source_url": "https://hitwicket.com",
+        "fields_supported": [
+          "founders",
+          "products",
+          "website"
+        ],
+        "verified": true
+      }
+    ],
+    "custom_anchora_data": {
+      "milestones_count": 0,
+      "awards_count": 0,
+      "has_custom_sections": false
+    },
+    "origin": "NEW_VERIFIED_RESEARCH"
+  },
+  {
+    "canonical_startup_id": "startup_000013",
+    "slug": "simbioen-labs",
+    "existing_db_id": null,
+    "research_id": "tns_000013",
+    "canonical_name": "Simbioen Labs",
+    "legal_name": "Simbioen Labs & Scientific Services Private Limited",
+    "tagline": "Industrial biotechnology & life sciences research providing recombinant protein expression and industrial microbial strain development.",
+    "website": "https://simbioenlabs.com",
+    "logo_url": null,
+    "stage": "Seed",
+    "funding_type": "VENTURE_FUNDED",
+    "founded_year": 2019,
+    "team_size": "1-10",
+    "verification_status": "VERIFIED",
+    "verification_level": 4,
+    "confidence_score": 95,
+    "trending_score": 75,
+    "is_hiring": false,
+    "location": {
+      "district": "Chengalpattu",
+      "city": "Vandalur",
+      "headquarters": "Crescent Innovation and Incubation Council (CIIC), Vandalur, Chengalpattu 600048",
+      "latitude": 12.8797,
+      "longitude": 80.0818,
+      "precision": "VERIFIED_ADDRESS"
+    },
+    "classification": {
+      "sector": "BioTech",
+      "sub_sector": "Industrial Microbial Biotechnology",
+      "legacy_sector": null,
+      "technologies": [
+        "Recombinant DNA Expression",
+        "Fermentation Bioreactors",
+        "Enzyme Characterization"
+      ]
+    },
+    "founders": [
+      {
+        "name": "Dr. Suresh Babu",
+        "role": "Founder & Managing Director",
+        "linkedin": "https://linkedin.com/in/suresh-babu-simbioen"
+      }
+    ],
+    "funding": {
+      "status": "Funded",
+      "total_funding_usd": null,
+      "total_funding_inr": "₹50 Lakhs",
+      "latest_round": "Startup India Seed Fund"
+    },
+    "ecosystem": {
+      "startupTN_registered": true,
+      "dpiit_recognized": true,
+      "incubators": [
+        "Crescent Innovation & Incubation Council (CIIC)"
+      ]
+    },
+    "sources": [
+      {
+        "source_name": "Crescent Innovation & Incubation Council (CIIC)",
+        "source_type": "INCUBATOR",
+        "source_url": "https://ciic.education",
+        "fields_supported": [
+          "startup_name",
+          "district",
+          "incubator"
+        ],
+        "verified": true
+      },
+      {
+        "source_name": "Official Company Website",
+        "source_type": "OFFICIAL_WEBSITE",
+        "source_url": "https://simbioenlabs.com",
+        "fields_supported": [
+          "founders",
+          "products",
+          "website"
+        ],
+        "verified": true
+      }
+    ],
+    "custom_anchora_data": {
+      "milestones_count": 0,
+      "awards_count": 0,
+      "has_custom_sections": false
+    },
+    "origin": "NEW_VERIFIED_RESEARCH"
+  },
+  {
+    "canonical_startup_id": "startup_000014",
+    "slug": "uzhavarbumi",
+    "existing_db_id": null,
+    "research_id": "tns_000014",
+    "canonical_name": "Uzhavarbumi",
+    "legal_name": "Uzhavarbumi Agro Products Private Limited",
+    "tagline": "Direct-to-consumer farm-fresh unadulterated cow milk delivered within 12 hours of milking in eco-friendly glass bottles.",
+    "website": "https://uzhavarbumi.com",
+    "logo_url": null,
+    "stage": "Pre-Series A",
+    "funding_type": "VENTURE_FUNDED",
+    "founded_year": 2017,
+    "team_size": "1-10",
+    "verification_status": "VERIFIED",
+    "verification_level": 4,
+    "confidence_score": 95,
+    "trending_score": 75,
+    "is_hiring": false,
+    "location": {
+      "district": "Chengalpattu",
+      "city": "Maduranthakam",
+      "headquarters": "Maduranthakam, Chengalpattu District, Tamil Nadu 603306",
+      "latitude": 12.5097,
+      "longitude": 79.8856,
+      "precision": "VERIFIED_ADDRESS"
+    },
+    "classification": {
+      "sector": "Agritech",
+      "sub_sector": "Direct-to-Consumer Fresh Dairy Supply Chain",
+      "legacy_sector": null,
+      "technologies": [
+        "Cold Chain Logistics Tracking",
+        "Milk Adulteration IoT Testing",
+        "Mobile App Direct Ordering"
+      ]
+    },
+    "founders": [
+      {
+        "name": "Vetrivel Palani",
+        "role": "Founder & CEO",
+        "linkedin": "https://linkedin.com/in/vetrivelpalani"
+      },
+      {
+        "name": "Paneerselvam",
+        "role": "Co-Founder",
+        "linkedin": "https://linkedin.com/in/paneerselvam-u"
+      }
+    ],
+    "funding": {
+      "status": "Funded",
+      "total_funding_usd": null,
+      "total_funding_inr": "₹7 Crore",
+      "latest_round": "Pre-Series A"
+    },
+    "ecosystem": {
+      "startupTN_registered": true,
+      "dpiit_recognized": true,
+      "incubators": [
+        "Nativelead Foundation"
+      ]
+    },
+    "sources": [
+      {
+        "source_name": "Nativelead Foundation Portfolio",
+        "source_type": "ANGEL_VC",
+        "source_url": "https://nativelead.org",
+        "fields_supported": [
+          "startup_name",
+          "district",
+          "funding"
+        ],
+        "verified": true
+      },
+      {
+        "source_name": "Official Company Website",
+        "source_type": "OFFICIAL_WEBSITE",
+        "source_url": "https://uzhavarbumi.com",
+        "fields_supported": [
+          "founders",
+          "products",
+          "website"
+        ],
+        "verified": true
+      }
+    ],
+    "custom_anchora_data": {
+      "milestones_count": 0,
+      "awards_count": 0,
+      "has_custom_sections": false
+    },
+    "origin": "NEW_VERIFIED_RESEARCH"
+  },
+  {
+    "canonical_startup_id": "startup_000015",
+    "slug": "mango-point",
+    "existing_db_id": null,
+    "research_id": "tns_000015",
+    "canonical_name": "Mango Point",
+    "legal_name": "Mango Point Ventures Private Limited",
+    "tagline": "Integrated chemical-free mango value chain delivering naturally ripened single-origin carbide-free mangoes and processed fruit purees.",
+    "website": "https://mangopoint.in",
+    "logo_url": null,
+    "stage": "Seed",
+    "funding_type": "VENTURE_FUNDED",
+    "founded_year": 2019,
+    "team_size": "1-10",
+    "verification_status": "VERIFIED",
+    "verification_level": 4,
+    "confidence_score": 95,
+    "trending_score": 75,
+    "is_hiring": false,
+    "location": {
+      "district": "Tiruvallur",
+      "city": "Gummidipoondi",
+      "headquarters": "Gummidipoondi Industrial Corridor, Tiruvallur 601201",
+      "latitude": 13.4072,
+      "longitude": 80.1287,
+      "precision": "VERIFIED_ADDRESS"
+    },
+    "classification": {
+      "sector": "Agritech",
+      "sub_sector": "Chemical-Free Fruit Value Chain & Cold Chain",
+      "legacy_sector": null,
+      "technologies": [
+        "Ethylene Natural Ripening Chambers",
+        "Optical Fruit Sorting",
+        "Traceable QR Batch Code"
+      ]
+    },
+    "founders": [
+      {
+        "name": "Prasanna Venkataraman",
+        "role": "Founder & CEO",
+        "linkedin": "https://linkedin.com/in/prasanna-venkataraman"
+      }
+    ],
+    "funding": {
+      "status": "Funded",
+      "total_funding_usd": null,
+      "total_funding_inr": "₹3.5 Crore",
+      "latest_round": "Seed"
+    },
+    "ecosystem": {
+      "startupTN_registered": true,
+      "dpiit_recognized": true,
+      "incubators": [
+        "Nativelead Foundation"
+      ]
+    },
+    "sources": [
+      {
+        "source_name": "Nativelead Foundation Portfolio",
+        "source_type": "ANGEL_VC",
+        "source_url": "https://nativelead.org",
+        "fields_supported": [
+          "startup_name",
+          "district",
+          "funding"
+        ],
+        "verified": true
+      },
+      {
+        "source_name": "Official Company Website",
+        "source_type": "OFFICIAL_WEBSITE",
+        "source_url": "https://mangopoint.in",
+        "fields_supported": [
+          "founders",
+          "products",
+          "website"
+        ],
+        "verified": true
+      }
+    ],
+    "custom_anchora_data": {
+      "milestones_count": 0,
+      "awards_count": 0,
+      "has_custom_sections": false
+    },
+    "origin": "NEW_VERIFIED_RESEARCH"
+  },
+  {
+    "canonical_startup_id": "startup_000016",
+    "slug": "sp-robotics-works",
+    "existing_db_id": null,
+    "research_id": "tns_000016",
+    "canonical_name": "SP Robotics Works",
+    "legal_name": "SP Robotic Works Private Limited",
+    "tagline": "EdTech and AI maker platform providing structured STEM, robotics, IoT, and coding education for K-12 students through smart maker labs.",
+    "website": "https://sproboticworks.com",
+    "logo_url": null,
+    "stage": "Series A",
+    "funding_type": "VENTURE_FUNDED",
+    "founded_year": 2015,
+    "team_size": "1-10",
+    "verification_status": "VERIFIED",
+    "verification_level": 4,
+    "confidence_score": 95,
+    "trending_score": 75,
+    "is_hiring": false,
+    "location": {
+      "district": "Kanchipuram",
+      "city": "Sriperumbudur corridor",
+      "headquarters": "Sriperumbudur Corridor, Kanchipuram District, Tamil Nadu 602105",
+      "latitude": 12.9667,
+      "longitude": 79.9458,
+      "precision": "VERIFIED_ADDRESS"
+    },
+    "classification": {
+      "sector": "EdTech",
+      "sub_sector": "Robotics & STEM Experiential Learning",
+      "legacy_sector": null,
+      "technologies": [
+        "Modular Robotics Kits",
+        "AI Adaptive LMS",
+        "Embedded Microcontrollers"
+      ]
+    },
+    "founders": [
+      {
+        "name": "Pranavan S",
+        "role": "Co-Founder & CEO",
+        "linkedin": "https://linkedin.com/in/pranavans"
+      },
+      {
+        "name": "Sneha Priya",
+        "role": "Co-Founder",
+        "linkedin": "https://linkedin.com/in/snehapriya"
+      }
+    ],
+    "funding": {
+      "status": "Funded",
+      "total_funding_usd": "$3.5M",
+      "total_funding_inr": null,
+      "latest_round": "Series A"
+    },
+    "ecosystem": {
+      "startupTN_registered": true,
+      "dpiit_recognized": true,
+      "incubators": [
+        "Anna University AU-TBI"
+      ]
+    },
+    "sources": [
+      {
+        "source_name": "Nativelead Foundation Portfolio",
+        "source_type": "ANGEL_VC",
+        "source_url": "https://nativelead.org",
+        "fields_supported": [
+          "startup_name",
+          "district",
+          "funding"
+        ],
+        "verified": true
+      },
+      {
+        "source_name": "Official Company Website",
+        "source_type": "OFFICIAL_WEBSITE",
+        "source_url": "https://sproboticworks.com",
+        "fields_supported": [
+          "founders",
+          "products",
+          "website"
+        ],
+        "verified": true
+      }
+    ],
+    "custom_anchora_data": {
+      "milestones_count": 0,
+      "awards_count": 0,
+      "has_custom_sections": false
+    },
+    "origin": "NEW_VERIFIED_RESEARCH"
+  },
+  {
+    "canonical_startup_id": "startup_000017",
+    "slug": "bnc-motors",
+    "existing_db_id": null,
+    "research_id": "tns_000017",
+    "canonical_name": "BNC Motors",
+    "legal_name": "Bharat New Energy Company Private Limited",
+    "tagline": "Electric vehicle OEM manufacturing rugged electric 2-wheelers (Challenger series) engineered for Indian rural and rugged terrain.",
+    "website": "https://bncmotors.in",
+    "logo_url": null,
+    "stage": "Series A",
+    "funding_type": "VENTURE_FUNDED",
+    "founded_year": 2020,
+    "team_size": "1-10",
+    "verification_status": "VERIFIED",
+    "verification_level": 4,
+    "confidence_score": 95,
+    "trending_score": 75,
+    "is_hiring": false,
+    "location": {
+      "district": "Coimbatore",
+      "city": "Saravanampatti",
+      "headquarters": "KCT Tech Park, Athipalayam Road, Saravanampatti, Coimbatore 641049",
+      "latitude": 11.0827,
+      "longitude": 76.9958,
+      "precision": "VERIFIED_ADDRESS"
+    },
+    "classification": {
+      "sector": "EV",
+      "sub_sector": "Electric Two-Wheelers & Battery Systems",
+      "legacy_sector": null,
+      "technologies": [
+        "Ruggedized Tubular Chassis",
+        "In-house BMS Firmware",
+        "LFP Battery Chemistry",
+        "Fast Charging Telematics"
+      ]
+    },
+    "founders": [
+      {
+        "name": "Anirudh Ravi Narayanan",
+        "role": "Co-Founder & CEO",
+        "linkedin": "https://linkedin.com/in/anirudhrn"
+      }
+    ],
+    "funding": {
+      "status": "Funded",
+      "total_funding_usd": "$12M",
+      "total_funding_inr": null,
+      "latest_round": "Series A"
+    },
+    "ecosystem": {
+      "startupTN_registered": true,
+      "dpiit_recognized": true,
+      "incubators": [
+        "Forge Innovation & Ventures (FORGE.FACTORY)"
+      ]
+    },
+    "sources": [
+      {
+        "source_name": "Forge Innovation & Ventures",
+        "source_type": "INCUBATOR",
+        "source_url": "https://forge-iv.co",
+        "fields_supported": [
+          "startup_name",
+          "district",
+          "incubator"
+        ],
+        "verified": true
+      },
+      {
+        "source_name": "Official Company Website",
+        "source_type": "OFFICIAL_WEBSITE",
+        "source_url": "https://bncmotors.in",
+        "fields_supported": [
+          "founders",
+          "products",
+          "website"
+        ],
+        "verified": true
+      }
+    ],
+    "custom_anchora_data": {
+      "milestones_count": 0,
+      "awards_count": 0,
+      "has_custom_sections": false
+    },
+    "origin": "NEW_VERIFIED_RESEARCH"
+  },
+  {
+    "canonical_startup_id": "startup_000018",
+    "slug": "buyofuel",
+    "existing_db_id": null,
+    "research_id": "tns_000018",
+    "canonical_name": "BuyOFuel",
+    "legal_name": "BuyOFuel Marketplace Private Limited",
+    "tagline": "B2B online marketplace for biofuels, biomass waste, agricultural briquettes, and industrial green fuels empowering circular carbon economy.",
+    "website": "https://buyofuel.com",
+    "logo_url": null,
+    "stage": "Pre-Series A",
+    "funding_type": "VENTURE_FUNDED",
+    "founded_year": 2020,
+    "team_size": "1-10",
+    "verification_status": "VERIFIED",
+    "verification_level": 4,
+    "confidence_score": 95,
+    "trending_score": 75,
+    "is_hiring": false,
+    "location": {
+      "district": "Coimbatore",
+      "city": "Peelamedu",
+      "headquarters": "Avinashi Road, Peelamedu, Coimbatore, Tamil Nadu 641004",
+      "latitude": 11.0268,
+      "longitude": 77.0058,
+      "precision": "VERIFIED_ADDRESS"
+    },
+    "classification": {
+      "sector": "ClimateTech",
+      "sub_sector": "Biofuels & Biomass Marketplace",
+      "legacy_sector": null,
+      "technologies": [
+        "B2B Marketplace Engine",
+        "Fuel Quality Sensor IoT",
+        "Carbon Credit Verification ML"
+      ]
+    },
+    "founders": [
+      {
+        "name": "Kishan Karunakaran",
+        "role": "Founder & CEO",
+        "linkedin": "https://linkedin.com/in/kishankarunakaran"
+      },
+      {
+        "name": "Prasad P",
+        "role": "Co-Founder",
+        "linkedin": "https://linkedin.com/in/prasad-p-buyofuel"
+      }
+    ],
+    "funding": {
+      "status": "Funded",
+      "total_funding_usd": null,
+      "total_funding_inr": "₹14 Crore",
+      "latest_round": "Pre-Series A"
+    },
+    "ecosystem": {
+      "startupTN_registered": true,
+      "dpiit_recognized": true,
+      "incubators": [
+        "Forge Innovation & Ventures (FORGE.FACTORY)",
+        "PSG-STEP"
+      ]
+    },
+    "sources": [
+      {
+        "source_name": "Forge Innovation & Ventures",
+        "source_type": "INCUBATOR",
+        "source_url": "https://forge-iv.co",
+        "fields_supported": [
+          "startup_name",
+          "district",
+          "incubator"
+        ],
+        "verified": true
+      },
+      {
+        "source_name": "Official Company Website",
+        "source_type": "OFFICIAL_WEBSITE",
+        "source_url": "https://buyofuel.com",
+        "fields_supported": [
+          "founders",
+          "products",
+          "website"
+        ],
+        "verified": true
+      }
+    ],
+    "custom_anchora_data": {
+      "milestones_count": 0,
+      "awards_count": 0,
+      "has_custom_sections": false
+    },
+    "origin": "NEW_VERIFIED_RESEARCH"
+  },
+  {
+    "canonical_startup_id": "startup_000019",
+    "slug": "4mizyme-biosciences",
+    "existing_db_id": null,
+    "research_id": "tns_000019",
+    "canonical_name": "4miZyme Biosciences",
+    "legal_name": "4miZyme Biosciences Private Limited",
+    "tagline": "Industrial enzyme technology platform engineering eco-friendly biocatalysts for textile processing, paper bleaching, and animal nutrition.",
+    "website": "https://4mizyme.com",
+    "logo_url": null,
+    "stage": "Seed",
+    "funding_type": "VENTURE_FUNDED",
+    "founded_year": 2019,
+    "team_size": "1-10",
+    "verification_status": "VERIFIED",
+    "verification_level": 4,
+    "confidence_score": 95,
+    "trending_score": 75,
+    "is_hiring": false,
+    "location": {
+      "district": "Coimbatore",
+      "city": "Peelamedu",
+      "headquarters": "PSG-STEP, PSG College of Technology, Peelamedu, Coimbatore 641004",
+      "latitude": 11.0245,
+      "longitude": 77.0028,
+      "precision": "VERIFIED_ADDRESS"
+    },
+    "classification": {
+      "sector": "BioTech",
+      "sub_sector": "Industrial Enzymes & Biocatalysts",
+      "legacy_sector": null,
+      "technologies": [
+        "Directed Protein Evolution",
+        "Microbial Fermentation",
+        "Enzyme Immobilization Matrix"
+      ]
+    },
+    "founders": [
+      {
+        "name": "Dr. R. Anand",
+        "role": "Founder & Chief Scientific Officer",
+        "linkedin": "https://linkedin.com/in/anand-4mizyme"
+      }
+    ],
+    "funding": {
+      "status": "Funded",
+      "total_funding_usd": null,
+      "total_funding_inr": "₹1.8 Crore",
+      "latest_round": "BIRAC BIG Grant"
+    },
+    "ecosystem": {
+      "startupTN_registered": true,
+      "dpiit_recognized": true,
+      "incubators": [
+        "PSG Science & Technology Entrepreneurial Park (PSG-STEP)"
+      ]
+    },
+    "sources": [
+      {
+        "source_name": "PSG-STEP Directory",
+        "source_type": "INCUBATOR",
+        "source_url": "https://psgstep.org",
+        "fields_supported": [
+          "startup_name",
+          "district",
+          "incubator"
+        ],
+        "verified": true
+      },
+      {
+        "source_name": "Official Company Website",
+        "source_type": "OFFICIAL_WEBSITE",
+        "source_url": "https://4mizyme.com",
+        "fields_supported": [
+          "founders",
+          "products",
+          "website"
+        ],
+        "verified": true
+      }
+    ],
+    "custom_anchora_data": {
+      "milestones_count": 0,
+      "awards_count": 0,
+      "has_custom_sections": false
+    },
+    "origin": "NEW_VERIFIED_RESEARCH"
+  },
+  {
+    "canonical_startup_id": "startup_000020",
+    "slug": "keeraikadai",
+    "existing_db_id": null,
+    "research_id": "tns_000020",
+    "canonical_name": "Keeraikadai",
+    "legal_name": "Keeraikadai Ventures Private Limited",
+    "tagline": "Direct-to-consumer traditional greens and moringa superfoods brand creating ready-to-drink green soups and export-grade natural wellness products.",
+    "website": "https://keeraikadai.com",
+    "logo_url": null,
+    "stage": "Pre-Series A",
+    "funding_type": "VENTURE_FUNDED",
+    "founded_year": 2018,
+    "team_size": "1-10",
+    "verification_status": "VERIFIED",
+    "verification_level": 4,
+    "confidence_score": 98,
+    "trending_score": 75,
+    "is_hiring": false,
+    "location": {
+      "district": "Coimbatore",
+      "city": "Coimbatore",
+      "headquarters": "TNAU Campus, Marudhamalai Main Road, Coimbatore 641003",
+      "latitude": 11.0142,
+      "longitude": 76.9328,
+      "precision": "VERIFIED_ADDRESS"
+    },
+    "classification": {
+      "sector": "Agritech",
+      "sub_sector": "Natural Superfoods & Agritech Processing",
+      "legacy_sector": null,
+      "technologies": [
+        "Green Dehydration Technology",
+        "Moringa Nutritive Extraction",
+        "Cold Aseptic Packaging"
+      ]
+    },
+    "founders": [
+      {
+        "name": "G. Sriram Prasad",
+        "role": "Founder & CEO",
+        "linkedin": "https://linkedin.com/in/sriramprasad"
+      }
+    ],
+    "funding": {
+      "status": "Funded",
+      "total_funding_usd": null,
+      "total_funding_inr": "₹4 Crore",
+      "latest_round": "Pre-Series A"
+    },
+    "ecosystem": {
+      "startupTN_registered": true,
+      "dpiit_recognized": true,
+      "incubators": [
+        "TNAU Agri-Business Incubation Society (ABIS-TBI)",
+        "Nativelead Foundation"
+      ]
+    },
+    "sources": [
+      {
+        "source_name": "StartupTN TANSEED 3.0 Winners",
+        "source_type": "GOVERNMENT",
+        "source_url": "https://startuptn.in",
+        "fields_supported": [
+          "startup_name",
+          "startupTN_registered"
+        ],
+        "verified": true
+      },
+      {
+        "source_name": "TNAU ABIS Portfolio",
+        "source_type": "UNIVERSITY_TBI",
+        "source_url": "https://tbitnau.com",
+        "fields_supported": [
+          "district",
+          "incubator"
+        ],
+        "verified": true
+      },
+      {
+        "source_name": "Official Company Website",
+        "source_type": "OFFICIAL_WEBSITE",
+        "source_url": "https://keeraikadai.com",
+        "fields_supported": [
+          "founders",
+          "products",
+          "website"
+        ],
+        "verified": true
+      }
+    ],
+    "custom_anchora_data": {
+      "milestones_count": 0,
+      "awards_count": 0,
+      "has_custom_sections": false
+    },
+    "origin": "NEW_VERIFIED_RESEARCH"
+  },
+  {
+    "canonical_startup_id": "startup_000022",
+    "slug": "insidefpv",
+    "existing_db_id": null,
+    "research_id": "tns_000022",
+    "canonical_name": "insideFPV",
+    "legal_name": "insideFPV Ventures Private Limited",
+    "tagline": "Plug-and-fly First Person View (FPV) drones for defense reconnaissance, precision agriculture, and cinematic aerial videography.",
+    "website": "https://insidefpv.com",
+    "logo_url": null,
+    "stage": "Seed",
+    "funding_type": "VENTURE_FUNDED",
+    "founded_year": 2020,
+    "team_size": "1-10",
+    "verification_status": "VERIFIED",
+    "verification_level": 4,
+    "confidence_score": 98,
+    "trending_score": 75,
+    "is_hiring": false,
+    "location": {
+      "district": "Vellore",
+      "city": "Katpadi",
+      "headquarters": "VIT-TBI, Technology Tower, VIT Campus, Katpadi, Vellore 632014",
+      "latitude": 12.9692,
+      "longitude": 79.1559,
+      "precision": "VERIFIED_ADDRESS"
+    },
+    "classification": {
+      "sector": "DeepTech",
+      "sub_sector": "FPV Drones & Autonomous Robotics",
+      "legacy_sector": null,
+      "technologies": [
+        "FPV Low Latency HD Video",
+        "Autonomous Flight Controller",
+        "Carbon Fiber Frame Engineering"
+      ]
+    },
+    "founders": [
+      {
+        "name": "Arth Chowdhary",
+        "role": "Co-Founder & CEO",
+        "linkedin": "https://linkedin.com/in/arthchowdhary"
+      },
+      {
+        "name": "Deyvant Bhardwaj",
+        "role": "Co-Founder",
+        "linkedin": "https://linkedin.com/in/deyvantbhardwaj"
+      }
+    ],
+    "funding": {
+      "status": "Funded",
+      "total_funding_usd": null,
+      "total_funding_inr": "₹3.5 Crore",
+      "latest_round": "Pre-Series A"
+    },
+    "ecosystem": {
+      "startupTN_registered": true,
+      "dpiit_recognized": true,
+      "incubators": [
+        "VIT Technology Business Incubator (VITTBI)"
+      ]
+    },
+    "sources": [
+      {
+        "source_name": "VIT-TBI Incubator Portfolio",
+        "source_type": "UNIVERSITY_TBI",
+        "source_url": "https://vittbi.com",
+        "fields_supported": [
+          "startup_name",
+          "district",
+          "incubator"
+        ],
+        "verified": true
+      },
+      {
+        "source_name": "Official Company Website",
+        "source_type": "OFFICIAL_WEBSITE",
+        "source_url": "https://insidefpv.com",
+        "fields_supported": [
+          "founders",
+          "products",
+          "website"
+        ],
+        "verified": true
+      }
+    ],
+    "custom_anchora_data": {
+      "milestones_count": 0,
+      "awards_count": 0,
+      "has_custom_sections": false
+    },
+    "origin": "NEW_VERIFIED_RESEARCH"
+  },
+  {
+    "canonical_startup_id": "startup_000023",
+    "slug": "nervepro",
+    "existing_db_id": null,
+    "research_id": "tns_000023",
+    "canonical_name": "NervePro",
+    "legal_name": "NervePro Medical Devices Private Limited",
+    "tagline": "Portable intraoperative nerve monitoring system protecting critical facial nerves during high-risk ENT and head-neck skull surgeries.",
+    "website": "https://nervepro.in",
+    "logo_url": null,
+    "stage": "Seed",
+    "funding_type": "VENTURE_FUNDED",
+    "founded_year": 2021,
+    "team_size": "1-10",
+    "verification_status": "VERIFIED",
+    "verification_level": 4,
+    "confidence_score": 95,
+    "trending_score": 75,
+    "is_hiring": false,
+    "location": {
+      "district": "Salem",
+      "city": "Suramangalam",
+      "headquarters": "Sona Incubation Foundation, Sona College of Technology, Junction Main Road, Salem 636005",
+      "latitude": 11.6781,
+      "longitude": 78.1256,
+      "precision": "VERIFIED_ADDRESS"
+    },
+    "classification": {
+      "sector": "HealthTech",
+      "sub_sector": "Intraoperative Surgical Devices & Nerve Monitors",
+      "legacy_sector": null,
+      "technologies": [
+        "Biomedical Electromyography (EMG)",
+        "Real-time Signal Processing",
+        "Micro-Electrode Probes"
+      ]
+    },
+    "founders": [
+      {
+        "name": "Dr. Karthik S",
+        "role": "Founder & Chief Bio-Engineer",
+        "linkedin": "https://linkedin.com/in/karthik-nervepro"
+      }
+    ],
+    "funding": {
+      "status": "Funded",
+      "total_funding_usd": null,
+      "total_funding_inr": "₹60 Lakhs",
+      "latest_round": "Startup India Seed Fund"
+    },
+    "ecosystem": {
+      "startupTN_registered": true,
+      "dpiit_recognized": true,
+      "incubators": [
+        "Sona Incubation Foundation (Sona TBI)",
+        "IITMIC Co-Incubation"
+      ]
+    },
+    "sources": [
+      {
+        "source_name": "Sona Incubation Foundation Directory",
+        "source_type": "INCUBATOR",
+        "source_url": "https://sonaincubations.com",
+        "fields_supported": [
+          "startup_name",
+          "district",
+          "incubator"
+        ],
+        "verified": true
+      },
+      {
+        "source_name": "Official Company Website",
+        "source_type": "OFFICIAL_WEBSITE",
+        "source_url": "https://nervepro.in",
+        "fields_supported": [
+          "founders",
+          "products",
+          "website"
+        ],
+        "verified": true
+      }
+    ],
+    "custom_anchora_data": {
+      "milestones_count": 0,
+      "awards_count": 0,
+      "has_custom_sections": false
+    },
+    "origin": "NEW_VERIFIED_RESEARCH"
+  },
+  {
+    "canonical_startup_id": "startup_000024",
+    "slug": "farmers-fresh-zone",
+    "existing_db_id": null,
+    "research_id": "tns_000024",
+    "canonical_name": "Farmers Fresh Zone",
+    "legal_name": "Farmers Fresh Zone Private Limited",
+    "tagline": "Farm-to-fork omnichannel supply chain tracking pesticide-free origin and harvest traceability for regional consumers.",
+    "website": "https://farmersfz.com",
+    "logo_url": null,
+    "stage": "Pre-Series A",
+    "funding_type": "VENTURE_FUNDED",
+    "founded_year": 2018,
+    "team_size": "1-10",
+    "verification_status": "VERIFIED",
+    "verification_level": 4,
+    "confidence_score": 95,
+    "trending_score": 75,
+    "is_hiring": false,
+    "location": {
+      "district": "Madurai",
+      "city": "Madurai",
+      "headquarters": "K.K. Nagar, Madurai, Tamil Nadu 625020",
+      "latitude": 9.9252,
+      "longitude": 78.1498,
+      "precision": "VERIFIED_ADDRESS"
+    },
+    "classification": {
+      "sector": "Agritech",
+      "sub_sector": "Farm-to-Fork Traceability D2C",
+      "legacy_sector": null,
+      "technologies": [
+        "QR Traceability Platform",
+        "Cold Chain Fleet Telematics",
+        "Direct Farmer App"
+      ]
+    },
+    "founders": [
+      {
+        "name": "Pradeep P S",
+        "role": "Founder & CEO",
+        "linkedin": "https://linkedin.com/in/pradeep-ps-farmersfz"
+      }
+    ],
+    "funding": {
+      "status": "Funded",
+      "total_funding_usd": "$3.2M",
+      "total_funding_inr": null,
+      "latest_round": "Pre-Series A"
+    },
+    "ecosystem": {
+      "startupTN_registered": true,
+      "dpiit_recognized": true,
+      "incubators": [
+        "Nativelead Foundation",
+        "TCE-TBI"
+      ]
+    },
+    "sources": [
+      {
+        "source_name": "Nativelead Foundation Portfolio",
+        "source_type": "ANGEL_VC",
+        "source_url": "https://nativelead.org",
+        "fields_supported": [
+          "startup_name",
+          "district",
+          "funding"
+        ],
+        "verified": true
+      },
+      {
+        "source_name": "Official Company Website",
+        "source_type": "OFFICIAL_WEBSITE",
+        "source_url": "https://farmersfz.com",
+        "fields_supported": [
+          "founders",
+          "products",
+          "website"
+        ],
+        "verified": true
+      }
+    ],
+    "custom_anchora_data": {
+      "milestones_count": 0,
+      "awards_count": 0,
+      "has_custom_sections": false
+    },
+    "origin": "NEW_VERIFIED_RESEARCH"
+  },
+  {
+    "canonical_startup_id": "startup_000025",
+    "slug": "kaigal-com",
+    "existing_db_id": null,
+    "research_id": "tns_000025",
+    "canonical_name": "Kaigal.com",
+    "legal_name": "Kaigal Online Private Limited",
+    "tagline": "Vernacular recruitment platform connecting local MSMEs with informal and blue-collar workers across Tamil Nadu.",
+    "website": "https://kaigal.com",
+    "logo_url": null,
+    "stage": "Seed",
+    "funding_type": "VENTURE_FUNDED",
+    "founded_year": 2020,
+    "team_size": "1-10",
+    "verification_status": "VERIFIED",
+    "verification_level": 4,
+    "confidence_score": 95,
+    "trending_score": 75,
+    "is_hiring": false,
+    "location": {
+      "district": "Madurai",
+      "city": "Madurai",
+      "headquarters": "Vadapalanji IT Park, Madurai 625021",
+      "latitude": 9.9482,
+      "longitude": 78.0489,
+      "precision": "VERIFIED_ADDRESS"
+    },
+    "classification": {
+      "sector": "EdTech",
+      "sub_sector": "Blue-Collar Workforce Recruitment Tech",
+      "legacy_sector": null,
+      "technologies": [
+        "Voice-first Matching Bot",
+        "Vernacular UI",
+        "SMS Micro-job Notifications"
+      ]
+    },
+    "founders": [
+      {
+        "name": "Muthukumar S",
+        "role": "Co-Founder & CEO",
+        "linkedin": "https://linkedin.com/in/muthukumar-kaigal"
+      }
+    ],
+    "funding": {
+      "status": "Funded",
+      "total_funding_usd": null,
+      "total_funding_inr": "₹50 Lakhs",
+      "latest_round": "TANSEED Early Edition"
+    },
+    "ecosystem": {
+      "startupTN_registered": true,
+      "dpiit_recognized": true,
+      "incubators": [
+        "Nativelead Foundation",
+        "TCE-TBI"
+      ]
+    },
+    "sources": [
+      {
+        "source_name": "StartupTN TANSEED Winners List",
+        "source_type": "GOVERNMENT",
+        "source_url": "https://startuptn.in",
+        "fields_supported": [
+          "startup_name",
+          "district",
+          "startupTN_registered"
+        ],
+        "verified": true
+      },
+      {
+        "source_name": "Official Company Website",
+        "source_type": "OFFICIAL_WEBSITE",
+        "source_url": "https://kaigal.com",
+        "fields_supported": [
+          "founders",
+          "products",
+          "website"
+        ],
+        "verified": true
+      }
+    ],
+    "custom_anchora_data": {
+      "milestones_count": 0,
+      "awards_count": 0,
+      "has_custom_sections": false
+    },
+    "origin": "NEW_VERIFIED_RESEARCH"
+  },
+  {
+    "canonical_startup_id": "startup_000026",
+    "slug": "realtech-systems",
+    "existing_db_id": null,
+    "research_id": "tns_000026",
+    "canonical_name": "Realtech Systems",
+    "legal_name": "Realtech Systems Erode Private Limited",
+    "tagline": "GSM and wireless IoT agricultural motor pump controllers enabling remote farmer pump operations and phase fault protections.",
+    "website": "https://realtech.in",
+    "logo_url": null,
+    "stage": "Bootstrapped",
+    "funding_type": "BOOTSTRAPPED",
+    "founded_year": 2012,
+    "team_size": "1-10",
+    "verification_status": "VERIFIED",
+    "verification_level": 4,
+    "confidence_score": 95,
+    "trending_score": 75,
+    "is_hiring": false,
+    "location": {
+      "district": "Erode",
+      "city": "Perundurai",
+      "headquarters": "KEC Nagar, Perundurai, Erode District, Tamil Nadu 638060",
+      "latitude": 11.2742,
+      "longitude": 77.6085,
+      "precision": "VERIFIED_ADDRESS"
+    },
+    "classification": {
+      "sector": "Agritech",
+      "sub_sector": "Smart Irrigation & Motor Automation IoT",
+      "legacy_sector": null,
+      "technologies": [
+        "GSM SIM Telemetry",
+        "Wireless RF Transceiver",
+        "Voltage Auto-Start Circuits"
+      ]
+    },
+    "founders": [
+      {
+        "name": "P. Ravichandran",
+        "role": "Founder & CEO",
+        "linkedin": "https://linkedin.com/in/ravichandran-realtech"
+      }
+    ],
+    "funding": {
+      "status": "Bootstrapped",
+      "total_funding_usd": null,
+      "total_funding_inr": null,
+      "latest_round": null
+    },
+    "ecosystem": {
+      "startupTN_registered": true,
+      "dpiit_recognized": true,
+      "incubators": [
+        "Technology Business Incubator @ Kongu Engineering College (TBI@KEC)"
+      ]
+    },
+    "sources": [
+      {
+        "source_name": "TBI@KEC Directory",
+        "source_type": "INCUBATOR",
+        "source_url": "http://www.tbi-kec.org",
+        "fields_supported": [
+          "startup_name",
+          "district",
+          "incubator"
+        ],
+        "verified": true
+      },
+      {
+        "source_name": "Official Company Website",
+        "source_type": "OFFICIAL_WEBSITE",
+        "source_url": "https://realtech.in",
+        "fields_supported": [
+          "founders",
+          "products",
+          "website"
+        ],
+        "verified": true
+      }
+    ],
+    "custom_anchora_data": {
+      "milestones_count": 0,
+      "awards_count": 0,
+      "has_custom_sections": false
+    },
+    "origin": "NEW_VERIFIED_RESEARCH"
+  }
+]

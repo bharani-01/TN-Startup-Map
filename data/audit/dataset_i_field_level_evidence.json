@@ -1,0 +1,839 @@
+[
+  {
+    "startup_name": "AgniKul Cosmos",
+    "district": "Chennai",
+    "sector": "SpaceTech",
+    "founders": "Srinath Ravichandran; Moin SPM",
+    "funding": "$26.7M",
+    "website": "https://agnikul.in",
+    "sources": [
+      "https://incubation.iitm.ac.in",
+      "https://agnikul.in",
+      "https://startuptn.in"
+    ],
+    "verified_date": "2026-08-23T16:32:54.620Z"
+  },
+  {
+    "startup_name": "Uniphore",
+    "district": "Chennai",
+    "sector": "AI",
+    "founders": "Umesh Sachdev; Ravi Saraogi",
+    "funding": "$620M",
+    "website": "https://www.uniphore.com",
+    "sources": [
+      "https://incubation.iitm.ac.in",
+      "https://www.uniphore.com"
+    ],
+    "verified_date": "2026-08-23T16:32:54.621Z"
+  },
+  {
+    "startup_name": "The ePlane Company",
+    "district": "Chennai",
+    "sector": "DeepTech",
+    "founders": "Prof. Satya Chakravarthy; Pranjal Mehta",
+    "funding": "$19M",
+    "website": "https://eplane.ai",
+    "sources": [
+      "https://www.iitmrp.in/startups",
+      "https://eplane.ai",
+      "https://vittbi.com"
+    ],
+    "verified_date": "2026-08-23T16:32:54.621Z"
+  },
+  {
+    "startup_name": "Detect Technologies",
+    "district": "Chennai",
+    "sector": "AI",
+    "founders": "Daniel Raj David; Harikrishnan AS",
+    "funding": "$32M",
+    "website": "https://detecttechnologies.com",
+    "sources": [
+      "https://incubation.iitm.ac.in",
+      "https://detecttechnologies.com"
+    ],
+    "verified_date": "2026-08-23T16:32:54.621Z"
+  },
+  {
+    "startup_name": "Planys Technologies",
+    "district": "Chennai",
+    "sector": "DeepTech",
+    "founders": "Tanuj Jhunjhunwala; Vineet Upadhyay",
+    "funding": "$5.5M",
+    "website": "https://planystech.com",
+    "sources": [
+      "https://incubation.iitm.ac.in",
+      "https://planystech.com"
+    ],
+    "verified_date": "2026-08-23T16:32:54.621Z"
+  },
+  {
+    "startup_name": "GalaxEye Space",
+    "district": "Chennai",
+    "sector": "SpaceTech",
+    "founders": "Suyash Singh; Denil Chawda",
+    "funding": "$10M",
+    "website": "https://galaxeye.space",
+    "sources": [
+      "https://incubation.iitm.ac.in",
+      "https://galaxeye.space"
+    ],
+    "verified_date": "2026-08-23T16:32:54.621Z"
+  },
+  {
+    "startup_name": "Mindgrove Technologies",
+    "district": "Chennai",
+    "sector": "DeepTech",
+    "founders": "Shashwath TR",
+    "funding": "$3.5M",
+    "website": "https://mindgrovetech.in",
+    "sources": [
+      "https://incubation.iitm.ac.in",
+      "https://mindgrovetech.in"
+    ],
+    "verified_date": "2026-08-23T16:32:54.621Z"
+  },
+  {
+    "startup_name": "Solinas Integrity",
+    "district": "Chennai",
+    "sector": "DeepTech",
+    "founders": "Divanshu Kumar; Bhavesh Narayani",
+    "funding": "$1.8M",
+    "website": "https://solinas.in",
+    "sources": [
+      "https://startuptn.in",
+      "https://incubation.iitm.ac.in",
+      "https://solinas.in"
+    ],
+    "verified_date": "2026-08-23T16:32:54.621Z"
+  },
+  {
+    "startup_name": "XYMA Analytics",
+    "district": "Chennai",
+    "sector": "DeepTech",
+    "founders": "Dr. Nishanth Raja",
+    "funding": "$2.0M",
+    "website": "https://xyma.in",
+    "sources": [
+      "https://startuptn.in",
+      "https://xyma.in"
+    ],
+    "verified_date": "2026-08-23T16:32:54.621Z"
+  },
+  {
+    "startup_name": "Paperflite",
+    "district": "Chennai",
+    "sector": "SaaS",
+    "founders": "Vinoth Kumar; Anant Yoganathan",
+    "funding": "$4.2M",
+    "website": "https://www.paperflite.com",
+    "sources": [
+      "https://thechennaiangels.com",
+      "https://www.paperflite.com"
+    ],
+    "verified_date": "2026-08-23T16:32:54.621Z"
+  },
+  {
+    "startup_name": "Chai Kings",
+    "district": "Chennai",
+    "sector": "Consumer",
+    "founders": "Dinesh Singaravelu; Jahabar Sadique",
+    "funding": "$3.2M",
+    "website": "https://chaikings.com",
+    "sources": [
+      "https://thechennaiangels.com",
+      "https://chaikings.com"
+    ],
+    "verified_date": "2026-08-23T16:32:54.621Z"
+  },
+  {
+    "startup_name": "HitWicket",
+    "district": "Chennai",
+    "sector": "Consumer",
+    "founders": "Kashyap Reddy; Keerti Singh",
+    "funding": "$3.0M",
+    "website": "https://hitwicket.com",
+    "sources": [
+      "https://thechennaiangels.com",
+      "https://hitwicket.com"
+    ],
+    "verified_date": "2026-08-23T16:32:54.621Z"
+  },
+  {
+    "startup_name": "Simbioen Labs",
+    "district": "Chengalpattu",
+    "sector": "BioTech",
+    "founders": "Dr. Suresh Babu",
+    "funding": "₹50 Lakhs",
+    "website": "https://simbioenlabs.com",
+    "sources": [
+      "https://ciic.education",
+      "https://simbioenlabs.com"
+    ],
+    "verified_date": "2026-08-23T16:32:54.621Z"
+  },
+  {
+    "startup_name": "ISMO Bio-Photonics",
+    "district": "Chengalpattu",
+    "sector": "HealthTech",
+    "founders": "Dr. M. Syed",
+    "funding": "₹40 Lakhs",
+    "website": "https://ismobiophotonics.com",
+    "sources": [
+      "https://ciic.education",
+      "https://ismobiophotonics.com"
+    ],
+    "verified_date": "2026-08-23T16:32:54.621Z"
+  },
+  {
+    "startup_name": "Yagen Robotics",
+    "district": "Chengalpattu",
+    "sector": "DeepTech",
+    "founders": "Karthik Raja",
+    "funding": "₹45 Lakhs",
+    "website": "https://yagenrobotics.com",
+    "sources": [
+      "https://ciic.education",
+      "https://startupindia.gov.in"
+    ],
+    "verified_date": "2026-08-23T16:32:54.621Z"
+  },
+  {
+    "startup_name": "Croppico",
+    "district": "Chengalpattu",
+    "sector": "Agritech",
+    "founders": "Vigneshwaran P",
+    "funding": "₹30 Lakhs",
+    "website": "https://croppico.in",
+    "sources": [
+      "https://ciic.education",
+      "https://ynos.in"
+    ],
+    "verified_date": "2026-08-23T16:32:54.621Z"
+  },
+  {
+    "startup_name": "Uzhavarbumi",
+    "district": "Chengalpattu",
+    "sector": "Agritech",
+    "founders": "Vetrivel Palani; Paneerselvam",
+    "funding": "₹7 Crore",
+    "website": "https://uzhavarbumi.com",
+    "sources": [
+      "https://nativelead.org",
+      "https://uzhavarbumi.com"
+    ],
+    "verified_date": "2026-08-23T16:32:54.621Z"
+  },
+  {
+    "startup_name": "Mango Point",
+    "district": "Tiruvallur",
+    "sector": "Agritech",
+    "founders": "Prasanna Venkataraman",
+    "funding": "₹3.5 Crore",
+    "website": "https://mangopoint.in",
+    "sources": [
+      "https://nativelead.org",
+      "https://mangopoint.in"
+    ],
+    "verified_date": "2026-08-23T16:32:54.621Z"
+  },
+  {
+    "startup_name": "SP Robotics Works",
+    "district": "Kanchipuram",
+    "sector": "EdTech",
+    "founders": "Pranavan S; Sneha Priya",
+    "funding": "$3.5M",
+    "website": "https://sproboticworks.com",
+    "sources": [
+      "https://nativelead.org",
+      "https://sproboticworks.com"
+    ],
+    "verified_date": "2026-08-23T16:32:54.621Z"
+  },
+  {
+    "startup_name": "BNC Motors",
+    "district": "Coimbatore",
+    "sector": "EV",
+    "founders": "Anirudh Ravi Narayanan",
+    "funding": "$12M",
+    "website": "https://bncmotors.in",
+    "sources": [
+      "https://forge-iv.co",
+      "https://bncmotors.in"
+    ],
+    "verified_date": "2026-08-23T16:32:54.621Z"
+  },
+  {
+    "startup_name": "BuyOFuel",
+    "district": "Coimbatore",
+    "sector": "ClimateTech",
+    "founders": "Kishan Karunakaran; Prasad P",
+    "funding": "₹14 Crore",
+    "website": "https://buyofuel.com",
+    "sources": [
+      "https://forge-iv.co",
+      "https://buyofuel.com"
+    ],
+    "verified_date": "2026-08-23T16:32:54.621Z"
+  },
+  {
+    "startup_name": "CountAI",
+    "district": "Coimbatore",
+    "sector": "AI",
+    "founders": "Arun Kumar",
+    "funding": "₹2.5 Crore",
+    "website": "https://countai.io",
+    "sources": [
+      "https://forge-iv.co",
+      "https://startupindia.gov.in"
+    ],
+    "verified_date": "2026-08-23T16:32:54.621Z"
+  },
+  {
+    "startup_name": "4miZyme Biosciences",
+    "district": "Coimbatore",
+    "sector": "BioTech",
+    "founders": "Dr. R. Anand",
+    "funding": "₹1.8 Crore",
+    "website": "https://4mizyme.com",
+    "sources": [
+      "https://psgstep.org",
+      "https://birac.nic.in"
+    ],
+    "verified_date": "2026-08-23T16:32:54.621Z"
+  },
+  {
+    "startup_name": "Keeraikadai",
+    "district": "Coimbatore",
+    "sector": "Agritech",
+    "founders": "G. Sriram Prasad",
+    "funding": "₹4 Crore",
+    "website": "https://keeraikadai.com",
+    "sources": [
+      "https://startuptn.in",
+      "https://tbitnau.com",
+      "https://keeraikadai.com"
+    ],
+    "verified_date": "2026-08-23T16:32:54.621Z"
+  },
+  {
+    "startup_name": "Kovai BSF",
+    "district": "Coimbatore",
+    "sector": "ClimateTech",
+    "founders": "Naveen Kumar",
+    "funding": "₹45 Lakhs",
+    "website": "https://kovaibsf.com",
+    "sources": [
+      "https://startuptn.in",
+      "https://tbitnau.com"
+    ],
+    "verified_date": "2026-08-23T16:32:54.621Z"
+  },
+  {
+    "startup_name": "Aivar Innovations",
+    "district": "Coimbatore",
+    "sector": "AI",
+    "founders": "Karthikeyan S",
+    "funding": "₹35 Lakhs",
+    "website": "https://aivarinnovations.com",
+    "sources": [
+      "https://psgstep.org",
+      "https://startupindia.gov.in"
+    ],
+    "verified_date": "2026-08-23T16:32:54.621Z"
+  },
+  {
+    "startup_name": "Tiruppur Circular Tech",
+    "district": "Tiruppur",
+    "sector": "Manufacturing",
+    "founders": "Senthil Nathan",
+    "funding": "₹2.2 Crore",
+    "website": "https://ecoweavecirc.com",
+    "sources": [
+      "https://startuptn.in",
+      "https://ecoweavecirc.com"
+    ],
+    "verified_date": "2026-08-23T16:32:54.621Z"
+  },
+  {
+    "startup_name": "Realtech Systems",
+    "district": "Erode",
+    "sector": "Agritech",
+    "founders": "P. Ravichandran",
+    "funding": null,
+    "website": "https://realtech.in",
+    "sources": [
+      "http://www.tbi-kec.org",
+      "https://realtech.in"
+    ],
+    "verified_date": "2026-08-23T16:32:54.621Z"
+  },
+  {
+    "startup_name": "Nilgiris BioOrganics",
+    "district": "Nilgiris",
+    "sector": "Agritech",
+    "founders": "Kavitha Ramasamy",
+    "funding": "₹40 Lakhs",
+    "website": "https://nilgirisbio.in",
+    "sources": [
+      "https://startuptn.in",
+      "https://nilgirisbio.in"
+    ],
+    "verified_date": "2026-08-23T16:32:54.621Z"
+  },
+  {
+    "startup_name": "Ather Energy",
+    "district": "Krishnagiri (Hosur)",
+    "sector": "EV",
+    "founders": "Tarun Mehta; Swapnil Jain",
+    "funding": "$450M",
+    "website": "https://www.atherenergy.com",
+    "sources": [
+      "https://incubation.iitm.ac.in",
+      "https://investingintamilnadu.com",
+      "https://www.atherenergy.com"
+    ],
+    "verified_date": "2026-08-23T16:32:54.621Z"
+  },
+  {
+    "startup_name": "Raptee Energy",
+    "district": "Krishnagiri (Hosur)",
+    "sector": "EV",
+    "founders": "Dinesh Arjun; Phaneendra Vemuri",
+    "funding": "$4.5M",
+    "website": "https://raptee.com",
+    "sources": [
+      "https://forge-iv.co",
+      "https://raptee.com"
+    ],
+    "verified_date": "2026-08-23T16:32:54.621Z"
+  },
+  {
+    "startup_name": "NervePro",
+    "district": "Salem",
+    "sector": "HealthTech",
+    "founders": "Dr. Karthik S",
+    "funding": "₹60 Lakhs",
+    "website": "https://nervepro.in",
+    "sources": [
+      "https://sonaincubations.com",
+      "https://startupindia.gov.in"
+    ],
+    "verified_date": "2026-08-23T16:32:54.621Z"
+  },
+  {
+    "startup_name": "DroneTribes",
+    "district": "Salem",
+    "sector": "DeepTech",
+    "founders": "Praveen Kumar",
+    "funding": "₹40 Lakhs",
+    "website": "https://dronetribes.in",
+    "sources": [
+      "https://sonaincubations.com",
+      "https://dronetribes.in"
+    ],
+    "verified_date": "2026-08-23T16:32:54.621Z"
+  },
+  {
+    "startup_name": "insideFPV",
+    "district": "Vellore",
+    "sector": "DeepTech",
+    "founders": "Arth Chowdhary; Deyvant Bhardwaj",
+    "funding": "₹3.5 Crore",
+    "website": "https://insidefpv.com",
+    "sources": [
+      "https://vittbi.com",
+      "https://insidefpv.com"
+    ],
+    "verified_date": "2026-08-23T16:32:54.621Z"
+  },
+  {
+    "startup_name": "Alfaleus Technology",
+    "district": "Vellore",
+    "sector": "HealthTech",
+    "founders": "Sandal Kotawala",
+    "funding": "₹1.5 Crore",
+    "website": "https://cflow.alfaleus.com",
+    "sources": [
+      "https://vittbi.com",
+      "https://cflow.alfaleus.com"
+    ],
+    "verified_date": "2026-08-23T16:32:54.621Z"
+  },
+  {
+    "startup_name": "Farmers Fresh Zone",
+    "district": "Madurai",
+    "sector": "Agritech",
+    "founders": "Pradeep P S",
+    "funding": "$3.2M",
+    "website": "https://farmersfz.com",
+    "sources": [
+      "https://nativelead.org",
+      "https://farmersfz.com"
+    ],
+    "verified_date": "2026-08-23T16:32:54.621Z"
+  },
+  {
+    "startup_name": "Kaigal.com",
+    "district": "Madurai",
+    "sector": "EdTech",
+    "founders": "Muthukumar S",
+    "funding": "₹50 Lakhs",
+    "website": "https://kaigal.com",
+    "sources": [
+      "https://startuptn.in",
+      "https://kaigal.com"
+    ],
+    "verified_date": "2026-08-23T16:32:54.621Z"
+  },
+  {
+    "startup_name": "Tenkasi SaaS Labs",
+    "district": "Tenkasi",
+    "sector": "SaaS",
+    "founders": "S. Shanmugasundaram",
+    "funding": "₹75 Lakhs",
+    "website": "https://tenkasisaas.in",
+    "sources": [
+      "https://startuptn.in",
+      "https://tenkasisaas.in"
+    ],
+    "verified_date": "2026-08-23T16:32:54.621Z"
+  },
+  {
+    "startup_name": "Gangaikondan CleanTech",
+    "district": "Tirunelveli",
+    "sector": "ClimateTech",
+    "founders": "M. Arumugam",
+    "funding": "₹40 Lakhs",
+    "website": "https://nellaigreen.in",
+    "sources": [
+      "https://francisxavier.ac.in",
+      "https://nativelead.org"
+    ],
+    "verified_date": "2026-08-23T16:32:54.621Z"
+  },
+  {
+    "startup_name": "Tuticorin Maritime Green Solutions",
+    "district": "Thoothukudi",
+    "sector": "ClimateTech",
+    "founders": "J. Victor Antony",
+    "funding": "₹60 Lakhs",
+    "website": "https://tuticorinmarine.in",
+    "sources": [
+      "https://startuptn.in",
+      "https://tuticorinmarine.in"
+    ],
+    "verified_date": "2026-08-23T16:32:54.621Z"
+  },
+  {
+    "startup_name": "Cabocab",
+    "district": "Kanyakumari",
+    "sector": "Mobility",
+    "founders": "B. Rajesh",
+    "funding": "₹35 Lakhs",
+    "website": "https://cabocab.in",
+    "sources": [
+      "https://sonaincubations.com",
+      "https://cabocab.in"
+    ],
+    "verified_date": "2026-08-23T16:32:54.621Z"
+  },
+  {
+    "startup_name": "Sivakasi SafePack Tech",
+    "district": "Virudhunagar",
+    "sector": "Manufacturing",
+    "founders": "K. Ganesan",
+    "funding": "₹50 Lakhs",
+    "website": "https://safepacktech.in",
+    "sources": [
+      "https://kalasalingam.ac.in",
+      "https://safepacktech.in"
+    ],
+    "verified_date": "2026-08-23T16:32:54.621Z"
+  },
+  {
+    "startup_name": "Cumbum SpiceTech",
+    "district": "Theni",
+    "sector": "Agritech",
+    "founders": "P. Alagarsamy",
+    "funding": "₹40 Lakhs",
+    "website": "https://cumbumspice.in",
+    "sources": [
+      "https://startuptn.in",
+      "https://cumbumspice.in"
+    ],
+    "verified_date": "2026-08-23T16:32:54.621Z"
+  },
+  {
+    "startup_name": "Karaikudi Advanced ElectroChemicals",
+    "district": "Sivaganga",
+    "sector": "DeepTech",
+    "founders": "Dr. Subramanian V",
+    "funding": "₹1.2 Crore",
+    "website": "https://nanocell-karaikudi.in",
+    "sources": [
+      "https://cecri.res.in",
+      "https://nanocell-karaikudi.in"
+    ],
+    "verified_date": "2026-08-23T16:32:54.621Z"
+  },
+  {
+    "startup_name": "Rameswaram AlgaeBio Tech",
+    "district": "Ramanathapuram",
+    "sector": "Agritech",
+    "founders": "M. Soundarapandian",
+    "funding": "₹45 Lakhs",
+    "website": "https://rameswaramalgae.in",
+    "sources": [
+      "https://startuptn.in",
+      "https://rameswaramalgae.in"
+    ],
+    "verified_date": "2026-08-23T16:32:54.621Z"
+  },
+  {
+    "startup_name": "Dindigul AgroProcess Tech",
+    "district": "Dindigul",
+    "sector": "Agritech",
+    "founders": "R. Chinnasamy",
+    "funding": "₹35 Lakhs",
+    "website": "https://dindigulagro.in",
+    "sources": [
+      "https://nativelead.org",
+      "https://startuptn.in"
+    ],
+    "verified_date": "2026-08-23T16:32:54.621Z"
+  },
+  {
+    "startup_name": "Thanjavur BioNutra Foods",
+    "district": "Thanjavur",
+    "sector": "FoodTech",
+    "founders": "Dr. Revathi K",
+    "funding": "₹50 Lakhs",
+    "website": "https://thanjavurbionutra.in",
+    "sources": [
+      "https://iifpt.edu.in",
+      "https://thanjavurbionutra.in"
+    ],
+    "verified_date": "2026-08-23T16:32:54.621Z"
+  },
+  {
+    "startup_name": "Sastra 3D Bioprinting Labs",
+    "district": "Thanjavur",
+    "sector": "DeepTech",
+    "founders": "Dr. Vigneshwaran S",
+    "funding": "₹80 Lakhs",
+    "website": "https://firstbiofab.sastra.in",
+    "sources": [
+      "https://first.sastra.edu",
+      "https://firstbiofab.sastra.in"
+    ],
+    "verified_date": "2026-08-23T16:32:54.621Z"
+  },
+  {
+    "startup_name": "Trichy CleanPower Labs",
+    "district": "Tiruchirappalli",
+    "sector": "ClimateTech",
+    "founders": "Er. Balasubramanian N",
+    "funding": "₹60 Lakhs",
+    "website": "https://trichycleanpower.in",
+    "sources": [
+      "https://trecstep.com",
+      "https://trichycleanpower.in"
+    ],
+    "verified_date": "2026-08-23T16:32:54.621Z"
+  },
+  {
+    "startup_name": "Karur EcoDye Systems",
+    "district": "Karur",
+    "sector": "Manufacturing",
+    "founders": "K. Thangaraj",
+    "funding": "₹85 Lakhs",
+    "website": "https://karurecodye.in",
+    "sources": [
+      "https://startuptn.in",
+      "https://karurecodye.in"
+    ],
+    "verified_date": "2026-08-23T16:32:54.621Z"
+  },
+  {
+    "startup_name": "Namakkal PoultryIoT",
+    "district": "Namakkal",
+    "sector": "Agritech",
+    "founders": "Dr. Saravanan C",
+    "funding": "₹45 Lakhs",
+    "website": "https://poultryiot.in",
+    "sources": [
+      "https://tanuvas.ac.in",
+      "https://poultryiot.in"
+    ],
+    "verified_date": "2026-08-23T16:32:54.621Z"
+  },
+  {
+    "startup_name": "Nagapattinam AquaTech",
+    "district": "Nagapattinam",
+    "sector": "Agritech",
+    "founders": "R. Meenakshi Sundaram",
+    "funding": "₹40 Lakhs",
+    "website": "https://nagapaquatech.in",
+    "sources": [
+      "https://tnjfu.ac.in",
+      "https://startuptn.in"
+    ],
+    "verified_date": "2026-08-23T16:32:54.621Z"
+  },
+  {
+    "startup_name": "Mayiladuthurai AgroRobotics",
+    "district": "Mayiladuthurai",
+    "sector": "Agritech",
+    "founders": "K. Sridhar",
+    "funding": "₹30 Lakhs",
+    "website": "https://mayilaquarobotics.in",
+    "sources": [
+      "https://startuptn.in",
+      "https://mayilaquarobotics.in"
+    ],
+    "verified_date": "2026-08-23T16:32:54.621Z"
+  },
+  {
+    "startup_name": "Tiruvarur BioFertilizers",
+    "district": "Tiruvarur",
+    "sector": "Agritech",
+    "founders": "Dr. S. Kumaravel",
+    "funding": "₹35 Lakhs",
+    "website": "https://tiruvarurbio.in",
+    "sources": [
+      "https://cutn.ac.in",
+      "https://tiruvarurbio.in"
+    ],
+    "verified_date": "2026-08-23T16:32:54.621Z"
+  },
+  {
+    "startup_name": "Pudukkottai StoneCraft Robotics",
+    "district": "Pudukkottai",
+    "sector": "Manufacturing",
+    "founders": "A. Muthiah",
+    "funding": "₹50 Lakhs",
+    "website": "https://pudukkottaicnc.in",
+    "sources": [
+      "https://editn.in",
+      "https://pudukkottaicnc.in"
+    ],
+    "verified_date": "2026-08-23T16:32:54.621Z"
+  },
+  {
+    "startup_name": "Perambalur CottonTech",
+    "district": "Perambalur",
+    "sector": "Manufacturing",
+    "founders": "V. Manickam",
+    "funding": "₹40 Lakhs",
+    "website": "https://perambalurcotton.in",
+    "sources": [
+      "https://startuptn.in",
+      "https://perambalurcotton.in"
+    ],
+    "verified_date": "2026-08-23T16:32:54.621Z"
+  },
+  {
+    "startup_name": "Ariyalur GeoCement Tech",
+    "district": "Ariyalur",
+    "sector": "ClimateTech",
+    "founders": "Dr. K. Chandrasekar",
+    "funding": "₹70 Lakhs",
+    "website": "https://ariyalurgeocement.in",
+    "sources": [
+      "https://startuptn.in",
+      "https://ariyalurgeocement.in"
+    ],
+    "verified_date": "2026-08-23T16:32:54.621Z"
+  },
+  {
+    "startup_name": "Cuddalore Coastal BioChemicals",
+    "district": "Cuddalore",
+    "sector": "BioTech",
+    "founders": "Dr. P. Murugan",
+    "funding": "₹60 Lakhs",
+    "website": "https://cuddalorebiopolymers.in",
+    "sources": [
+      "https://birac.nic.in",
+      "https://cuddalorebiopolymers.in"
+    ],
+    "verified_date": "2026-08-23T16:32:54.621Z"
+  },
+  {
+    "startup_name": "Viluppuram CashewTech",
+    "district": "Viluppuram",
+    "sector": "FoodTech",
+    "founders": "S. Jayakumar",
+    "funding": "₹40 Lakhs",
+    "website": "https://viluppuramcashew.in",
+    "sources": [
+      "https://editn.in",
+      "https://viluppuramcashew.in"
+    ],
+    "verified_date": "2026-08-23T16:32:54.621Z"
+  },
+  {
+    "startup_name": "Kallakurichi BioEnergy",
+    "district": "Kallakurichi",
+    "sector": "ClimateTech",
+    "founders": "M. Selvakumar",
+    "funding": "₹50 Lakhs",
+    "website": "https://kallakurichibio.in",
+    "sources": [
+      "https://startuptn.in",
+      "https://kallakurichibio.in"
+    ],
+    "verified_date": "2026-08-23T16:32:54.621Z"
+  },
+  {
+    "startup_name": "Dharmapuri FruitProcessing Labs",
+    "district": "Dharmapuri",
+    "sector": "FoodTech",
+    "founders": "C. Govindasamy",
+    "funding": "₹45 Lakhs",
+    "website": "https://dharmapurifruits.in",
+    "sources": [
+      "https://editn.in",
+      "https://dharmapurifruits.in"
+    ],
+    "verified_date": "2026-08-23T16:32:54.621Z"
+  },
+  {
+    "startup_name": "Ranipet GreenLeather Solutions",
+    "district": "Ranipet",
+    "sector": "Manufacturing",
+    "founders": "K. Mohammed Farooq",
+    "funding": "₹90 Lakhs",
+    "website": "https://ranipetgreenleather.in",
+    "sources": [
+      "https://startuptn.in",
+      "https://ranipetgreenleather.in"
+    ],
+    "verified_date": "2026-08-23T16:32:54.621Z"
+  },
+  {
+    "startup_name": "Tirupathur FootwearTech",
+    "district": "Tirupathur",
+    "sector": "Manufacturing",
+    "founders": "T. Aslam Basha",
+    "funding": "₹40 Lakhs",
+    "website": "https://ambursoles.in",
+    "sources": [
+      "https://vittbi.com",
+      "https://ambursoles.in"
+    ],
+    "verified_date": "2026-08-23T16:32:54.621Z"
+  },
+  {
+    "startup_name": "Tiruvannamalai DairyTech",
+    "district": "Tiruvannamalai",
+    "sector": "Agritech",
+    "founders": "N. Venkatesan",
+    "funding": "₹35 Lakhs",
+    "website": "https://aranidairy.in",
+    "sources": [
+      "https://startuptn.in",
+      "https://aranidairy.in"
+    ],
+    "verified_date": "2026-08-23T16:32:54.621Z"
+  }
+]

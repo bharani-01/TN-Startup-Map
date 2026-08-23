@@ -1,0 +1,38 @@
+[
+  {
+    "canonical_id": "tns_000001",
+    "canonical_name": "AgniKul Cosmos",
+    "duplicate_name": "Agnikul Cosmos Private Limited",
+    "match_type": "LEGAL_ENTITY",
+    "match_confidence": 100,
+    "relationship": "Corporate Legal Registration",
+    "action_taken": "Merged into canonical entity"
+  },
+  {
+    "canonical_id": "tns_000003",
+    "canonical_name": "The ePlane Company",
+    "duplicate_name": "Ubifly Technologies Pvt Ltd",
+    "match_type": "LEGAL_ENTITY",
+    "match_confidence": 100,
+    "relationship": "Operating Legal Entity",
+    "action_taken": "Merged into canonical entity"
+  },
+  {
+    "canonical_id": "tns_000017",
+    "canonical_name": "BNC Motors",
+    "duplicate_name": "Bharat New Energy Company Pvt Ltd",
+    "match_type": "LEGAL_ENTITY",
+    "match_confidence": 100,
+    "relationship": "Corporate Legal Registration",
+    "action_taken": "Merged into canonical entity"
+  },
+  {
+    "canonical_id": "tns_000011",
+    "canonical_name": "Chai Kings",
+    "duplicate_name": "Four Quarters Foods Pvt Ltd",
+    "match_type": "LEGAL_ENTITY",
+    "match_confidence": 100,
+    "relationship": "Parent Legal Entity",
+    "action_taken": "Merged into canonical entity"
+  }
+]

@@ -1,0 +1,74 @@
+[
+  {
+    "source_name": "StartupTN (Tamil Nadu Startup and Innovation Mission)",
+    "records_claimed": 2700,
+    "audited": 300,
+    "supported": 34,
+    "rejected": 266,
+    "reliability": "100% Valid Agency / 11.3% True Attributed in Dataset"
+  },
+  {
+    "source_name": "IIT Madras Incubation Cell (IITMIC)",
+    "records_claimed": 450,
+    "audited": 100,
+    "supported": 10,
+    "rejected": 90,
+    "reliability": "100% Valid Agency / 10.0% True Attributed in Dataset"
+  },
+  {
+    "source_name": "Startup India / DPIIT",
+    "records_claimed": 3600,
+    "audited": 300,
+    "supported": 34,
+    "rejected": 266,
+    "reliability": "100% Valid Agency / 11.3% True Attributed in Dataset"
+  },
+  {
+    "source_name": "PSG-STEP (PSG College of Technology)",
+    "records_claimed": 280,
+    "audited": 50,
+    "supported": 4,
+    "rejected": 46,
+    "reliability": "100% Valid Agency / 8.0% True Attributed in Dataset"
+  },
+  {
+    "source_name": "Crescent Innovation & Incubation Council (CIIC)",
+    "records_claimed": 250,
+    "audited": 50,
+    "supported": 4,
+    "rejected": 46,
+    "reliability": "100% Valid Agency / 8.0% True Attributed in Dataset"
+  },
+  {
+    "source_name": "Forge Innovation & Ventures (FORGE.FACTORY)",
+    "records_claimed": 240,
+    "audited": 50,
+    "supported": 4,
+    "rejected": 46,
+    "reliability": "100% Valid Agency / 8.0% True Attributed in Dataset"
+  },
+  {
+    "source_name": "VIT Technology Business Incubator (VITTBI)",
+    "records_claimed": 220,
+    "audited": 50,
+    "supported": 3,
+    "rejected": 47,
+    "reliability": "100% Valid Agency / 6.0% True Attributed in Dataset"
+  },
+  {
+    "source_name": "Nativelead Foundation & Native Angels Network",
+    "records_claimed": 200,
+    "audited": 50,
+    "supported": 5,
+    "rejected": 45,
+    "reliability": "100% Valid Agency / 10.0% True Attributed in Dataset"
+  },
+  {
+    "source_name": "The Chennai Angels (TCA)",
+    "records_claimed": 150,
+    "audited": 50,
+    "supported": 3,
+    "rejected": 47,
+    "reliability": "100% Valid Agency / 6.0% True Attributed in Dataset"
+  }
+]

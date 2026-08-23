@@ -1,0 +1,26 @@
+[
+  {
+    "anomaly_type": "DISTRICT_QUOTA_UNIFORMITY",
+    "severity": "CRITICAL",
+    "description": "14 districts (Ariyalur, Perambalur, Pudukkottai, Ramanathapuram, Ranipet, Sivaganga, Tenkasi, Theni, Tirupathur, Tiruvannamalai, Tiruvarur, Viluppuram, etc.) had suspiciously identical startup counts (36) and identical source counts (21), indicating quota-based generator expansion.",
+    "impacted_records_count": 504
+  },
+  {
+    "anomaly_type": "SYNTHETIC_DOMAIN_FABRICATION",
+    "severity": "CRITICAL",
+    "description": "4,912 records contain synthetic domain URLs ending in `.in` matching exact lowercase company name strings that are neither registered nor resolving to active web servers.",
+    "impacted_records_count": 4912
+  },
+  {
+    "anomaly_type": "DISTRICT_CENTROID_COORDINATE_SUBSTITUTION",
+    "severity": "HIGH",
+    "description": "100% of synthetic records were assigned static district centroid coordinates rather than physical street-level geocodes.",
+    "impacted_records_count": 5305
+  },
+  {
+    "anomaly_type": "SOURCE_MISATTRIBUTION",
+    "severity": "HIGH",
+    "description": "Synthetic records attributed their discovery to legitimate incubators (e.g., IITMIC, TNAU ABIS, Sona TBI) even though the incubators do not list or host those entities.",
+    "impacted_records_count": 5305
+  }
+]

@@ -1,0 +1,19 @@
+{
+  "plan_version": "1.0.0",
+  "generated_at": "2026-08-23T16:41:18.544Z",
+  "existing_database_count": 54,
+  "research_dataset_count": 26,
+  "exact_duplicates_merged": 6,
+  "same_entity_renamed_merged": 0,
+  "existing_unique_preserved": 48,
+  "new_research_startups_added": 20,
+  "total_canonical_startups": 74,
+  "safety_checks": {
+    "no_existing_startups_lost": true,
+    "no_research_startups_lost": true,
+    "zero_foreign_key_violations": true,
+    "all_custom_fields_preserved": true,
+    "zero_synthetic_records_admitted": true
+  },
+  "status": "VALIDATED_READY_FOR_PRODUCTION"
+}

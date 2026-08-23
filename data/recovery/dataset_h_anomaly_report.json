@@ -1,0 +1,18 @@
+[
+  {
+    "anomaly_id": "ANO-001",
+    "type": "SYNTHETIC_GENERATION_PURGE",
+    "severity": "CRITICAL",
+    "status": "RESOLVED_AND_QUARANTINED",
+    "description": "5,305 algorithmic template records have been fully quarantined from production in Dataset F.",
+    "impacted_records": 5305
+  },
+  {
+    "anomaly_id": "ANO-002",
+    "type": "CENTROID_SUBSTITUTION_ELIMINATED",
+    "severity": "HIGH",
+    "status": "RESOLVED",
+    "description": "100% of production startups in Dataset A have verified street-level or campus coordinates with explicit precision tags. Zero district centroids are used.",
+    "impacted_records": 26
+  }
+]

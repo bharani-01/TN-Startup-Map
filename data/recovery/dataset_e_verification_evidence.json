@@ -1,0 +1,835 @@
+[
+  {
+    "startup_id": "tns_000001",
+    "startup_name": "AgniKul Cosmos",
+    "verification_level": 4,
+    "confidence_score": 98,
+    "existence_status": "EXISTS_CONFIRMED",
+    "tn_association": "TN_HEADQUARTERED",
+    "startup_status": "STARTUP_CONFIRMED",
+    "coordinate_precision": "VERIFIED_ADDRESS",
+    "sources_cited": [
+      {
+        "source_name": "IIT Madras Incubation Cell",
+        "source_url": "https://incubation.iitm.ac.in",
+        "fields_supported": [
+          "startup_name",
+          "district",
+          "incubator",
+          "founded_year"
+        ]
+      },
+      {
+        "source_name": "Official Company Website",
+        "source_url": "https://agnikul.in",
+        "fields_supported": [
+          "founders",
+          "products",
+          "headquarters",
+          "website"
+        ]
+      },
+      {
+        "source_name": "Startup India / DPIIT",
+        "source_url": "https://www.startupindia.gov.in",
+        "fields_supported": [
+          "legal_name",
+          "dpiit_recognized"
+        ]
+      },
+      {
+        "source_name": "StartupTN Innovation Mission",
+        "source_url": "https://startuptn.in",
+        "fields_supported": [
+          "startupTN_registered"
+        ]
+      }
+    ]
+  },
+  {
+    "startup_id": "tns_000002",
+    "startup_name": "Uniphore",
+    "verification_level": 4,
+    "confidence_score": 98,
+    "existence_status": "EXISTS_CONFIRMED",
+    "tn_association": "TN_FOUNDED",
+    "startup_status": "STARTUP_CONFIRMED",
+    "coordinate_precision": "VERIFIED_ADDRESS",
+    "sources_cited": [
+      {
+        "source_name": "IIT Madras Incubation Cell",
+        "source_url": "https://incubation.iitm.ac.in",
+        "fields_supported": [
+          "startup_name",
+          "district",
+          "incubator"
+        ]
+      },
+      {
+        "source_name": "Official Company Website",
+        "source_url": "https://www.uniphore.com",
+        "fields_supported": [
+          "founders",
+          "products",
+          "website"
+        ]
+      }
+    ]
+  },
+  {
+    "startup_id": "tns_000003",
+    "startup_name": "The ePlane Company",
+    "verification_level": 4,
+    "confidence_score": 98,
+    "existence_status": "EXISTS_CONFIRMED",
+    "tn_association": "TN_HEADQUARTERED",
+    "startup_status": "STARTUP_CONFIRMED",
+    "coordinate_precision": "VERIFIED_ADDRESS",
+    "sources_cited": [
+      {
+        "source_name": "IIT Madras Incubation Cell",
+        "source_url": "https://incubation.iitm.ac.in",
+        "fields_supported": [
+          "startup_name",
+          "district",
+          "incubator"
+        ]
+      },
+      {
+        "source_name": "Official Company Website",
+        "source_url": "https://eplane.ai",
+        "fields_supported": [
+          "founders",
+          "products",
+          "website"
+        ]
+      },
+      {
+        "source_name": "VIT-TBI Portfolio",
+        "source_url": "https://vittbi.com",
+        "fields_supported": [
+          "incubator"
+        ]
+      }
+    ]
+  },
+  {
+    "startup_id": "tns_000004",
+    "startup_name": "Detect Technologies",
+    "verification_level": 4,
+    "confidence_score": 98,
+    "existence_status": "EXISTS_CONFIRMED",
+    "tn_association": "TN_HEADQUARTERED",
+    "startup_status": "STARTUP_CONFIRMED",
+    "coordinate_precision": "VERIFIED_ADDRESS",
+    "sources_cited": [
+      {
+        "source_name": "IIT Madras Incubation Cell",
+        "source_url": "https://incubation.iitm.ac.in",
+        "fields_supported": [
+          "startup_name",
+          "district",
+          "incubator"
+        ]
+      },
+      {
+        "source_name": "Official Company Website",
+        "source_url": "https://detecttechnologies.com",
+        "fields_supported": [
+          "founders",
+          "products",
+          "website"
+        ]
+      }
+    ]
+  },
+  {
+    "startup_id": "tns_000005",
+    "startup_name": "Planys Technologies",
+    "verification_level": 4,
+    "confidence_score": 98,
+    "existence_status": "EXISTS_CONFIRMED",
+    "tn_association": "TN_HEADQUARTERED",
+    "startup_status": "STARTUP_CONFIRMED",
+    "coordinate_precision": "VERIFIED_ADDRESS",
+    "sources_cited": [
+      {
+        "source_name": "IIT Madras Incubation Cell",
+        "source_url": "https://incubation.iitm.ac.in",
+        "fields_supported": [
+          "startup_name",
+          "district",
+          "incubator"
+        ]
+      },
+      {
+        "source_name": "Official Company Website",
+        "source_url": "https://planystech.com",
+        "fields_supported": [
+          "founders",
+          "products",
+          "website"
+        ]
+      }
+    ]
+  },
+  {
+    "startup_id": "tns_000006",
+    "startup_name": "GalaxEye Space",
+    "verification_level": 4,
+    "confidence_score": 98,
+    "existence_status": "EXISTS_CONFIRMED",
+    "tn_association": "TN_HEADQUARTERED",
+    "startup_status": "STARTUP_CONFIRMED",
+    "coordinate_precision": "VERIFIED_ADDRESS",
+    "sources_cited": [
+      {
+        "source_name": "IIT Madras Incubation Cell",
+        "source_url": "https://incubation.iitm.ac.in",
+        "fields_supported": [
+          "startup_name",
+          "district",
+          "incubator"
+        ]
+      },
+      {
+        "source_name": "Official Company Website",
+        "source_url": "https://galaxeye.space",
+        "fields_supported": [
+          "founders",
+          "products",
+          "website"
+        ]
+      }
+    ]
+  },
+  {
+    "startup_id": "tns_000007",
+    "startup_name": "Mindgrove Technologies",
+    "verification_level": 4,
+    "confidence_score": 98,
+    "existence_status": "EXISTS_CONFIRMED",
+    "tn_association": "TN_HEADQUARTERED",
+    "startup_status": "STARTUP_CONFIRMED",
+    "coordinate_precision": "VERIFIED_ADDRESS",
+    "sources_cited": [
+      {
+        "source_name": "IIT Madras Incubation Cell",
+        "source_url": "https://incubation.iitm.ac.in",
+        "fields_supported": [
+          "startup_name",
+          "district",
+          "incubator"
+        ]
+      },
+      {
+        "source_name": "Official Company Website",
+        "source_url": "https://mindgrovetech.in",
+        "fields_supported": [
+          "founders",
+          "products",
+          "website"
+        ]
+      }
+    ]
+  },
+  {
+    "startup_id": "tns_000008",
+    "startup_name": "Solinas Integrity",
+    "verification_level": 4,
+    "confidence_score": 98,
+    "existence_status": "EXISTS_CONFIRMED",
+    "tn_association": "TN_HEADQUARTERED",
+    "startup_status": "STARTUP_CONFIRMED",
+    "coordinate_precision": "VERIFIED_ADDRESS",
+    "sources_cited": [
+      {
+        "source_name": "StartupTN Innovation Mission",
+        "source_url": "https://startuptn.in",
+        "fields_supported": [
+          "startup_name",
+          "startupTN_registered"
+        ]
+      },
+      {
+        "source_name": "IIT Madras Incubation Cell",
+        "source_url": "https://incubation.iitm.ac.in",
+        "fields_supported": [
+          "district",
+          "incubator"
+        ]
+      },
+      {
+        "source_name": "Official Company Website",
+        "source_url": "https://solinas.in",
+        "fields_supported": [
+          "founders",
+          "products",
+          "website"
+        ]
+      }
+    ]
+  },
+  {
+    "startup_id": "tns_000009",
+    "startup_name": "XYMA Analytics",
+    "verification_level": 4,
+    "confidence_score": 98,
+    "existence_status": "EXISTS_CONFIRMED",
+    "tn_association": "TN_HEADQUARTERED",
+    "startup_status": "STARTUP_CONFIRMED",
+    "coordinate_precision": "VERIFIED_ADDRESS",
+    "sources_cited": [
+      {
+        "source_name": "StartupTN TANSEED Award List",
+        "source_url": "https://startuptn.in",
+        "fields_supported": [
+          "startup_name",
+          "startupTN_registered"
+        ]
+      },
+      {
+        "source_name": "IIT Madras Incubation Cell",
+        "source_url": "https://incubation.iitm.ac.in",
+        "fields_supported": [
+          "district",
+          "incubator"
+        ]
+      },
+      {
+        "source_name": "Official Company Website",
+        "source_url": "https://xyma.in",
+        "fields_supported": [
+          "founders",
+          "products",
+          "website"
+        ]
+      }
+    ]
+  },
+  {
+    "startup_id": "tns_000010",
+    "startup_name": "Paperflite",
+    "verification_level": 4,
+    "confidence_score": 95,
+    "existence_status": "EXISTS_CONFIRMED",
+    "tn_association": "TN_HEADQUARTERED",
+    "startup_status": "STARTUP_CONFIRMED",
+    "coordinate_precision": "VERIFIED_ADDRESS",
+    "sources_cited": [
+      {
+        "source_name": "The Chennai Angels Portfolio",
+        "source_url": "https://thechennaiangels.com",
+        "fields_supported": [
+          "startup_name",
+          "district",
+          "funding"
+        ]
+      },
+      {
+        "source_name": "Official Company Website",
+        "source_url": "https://www.paperflite.com",
+        "fields_supported": [
+          "founders",
+          "products",
+          "website"
+        ]
+      }
+    ]
+  },
+  {
+    "startup_id": "tns_000011",
+    "startup_name": "Chai Kings",
+    "verification_level": 4,
+    "confidence_score": 95,
+    "existence_status": "EXISTS_CONFIRMED",
+    "tn_association": "TN_HEADQUARTERED",
+    "startup_status": "STARTUP_CONFIRMED",
+    "coordinate_precision": "VERIFIED_ADDRESS",
+    "sources_cited": [
+      {
+        "source_name": "The Chennai Angels Portfolio",
+        "source_url": "https://thechennaiangels.com",
+        "fields_supported": [
+          "startup_name",
+          "district",
+          "funding"
+        ]
+      },
+      {
+        "source_name": "Official Company Website",
+        "source_url": "https://chaikings.com",
+        "fields_supported": [
+          "founders",
+          "products",
+          "website"
+        ]
+      }
+    ]
+  },
+  {
+    "startup_id": "tns_000012",
+    "startup_name": "HitWicket",
+    "verification_level": 4,
+    "confidence_score": 95,
+    "existence_status": "EXISTS_CONFIRMED",
+    "tn_association": "TN_HEADQUARTERED",
+    "startup_status": "STARTUP_CONFIRMED",
+    "coordinate_precision": "VERIFIED_ADDRESS",
+    "sources_cited": [
+      {
+        "source_name": "The Chennai Angels Portfolio",
+        "source_url": "https://thechennaiangels.com",
+        "fields_supported": [
+          "startup_name",
+          "district",
+          "funding"
+        ]
+      },
+      {
+        "source_name": "Official Company Website",
+        "source_url": "https://hitwicket.com",
+        "fields_supported": [
+          "founders",
+          "products",
+          "website"
+        ]
+      }
+    ]
+  },
+  {
+    "startup_id": "tns_000013",
+    "startup_name": "Simbioen Labs",
+    "verification_level": 4,
+    "confidence_score": 95,
+    "existence_status": "EXISTS_CONFIRMED",
+    "tn_association": "TN_INCUBATED",
+    "startup_status": "STARTUP_CONFIRMED",
+    "coordinate_precision": "VERIFIED_ADDRESS",
+    "sources_cited": [
+      {
+        "source_name": "Crescent Innovation & Incubation Council (CIIC)",
+        "source_url": "https://ciic.education",
+        "fields_supported": [
+          "startup_name",
+          "district",
+          "incubator"
+        ]
+      },
+      {
+        "source_name": "Official Company Website",
+        "source_url": "https://simbioenlabs.com",
+        "fields_supported": [
+          "founders",
+          "products",
+          "website"
+        ]
+      }
+    ]
+  },
+  {
+    "startup_id": "tns_000014",
+    "startup_name": "Uzhavarbumi",
+    "verification_level": 4,
+    "confidence_score": 95,
+    "existence_status": "EXISTS_CONFIRMED",
+    "tn_association": "TN_HEADQUARTERED",
+    "startup_status": "STARTUP_CONFIRMED",
+    "coordinate_precision": "VERIFIED_ADDRESS",
+    "sources_cited": [
+      {
+        "source_name": "Nativelead Foundation Portfolio",
+        "source_url": "https://nativelead.org",
+        "fields_supported": [
+          "startup_name",
+          "district",
+          "funding"
+        ]
+      },
+      {
+        "source_name": "Official Company Website",
+        "source_url": "https://uzhavarbumi.com",
+        "fields_supported": [
+          "founders",
+          "products",
+          "website"
+        ]
+      }
+    ]
+  },
+  {
+    "startup_id": "tns_000015",
+    "startup_name": "Mango Point",
+    "verification_level": 4,
+    "confidence_score": 95,
+    "existence_status": "EXISTS_CONFIRMED",
+    "tn_association": "TN_HEADQUARTERED",
+    "startup_status": "STARTUP_CONFIRMED",
+    "coordinate_precision": "VERIFIED_ADDRESS",
+    "sources_cited": [
+      {
+        "source_name": "Nativelead Foundation Portfolio",
+        "source_url": "https://nativelead.org",
+        "fields_supported": [
+          "startup_name",
+          "district",
+          "funding"
+        ]
+      },
+      {
+        "source_name": "Official Company Website",
+        "source_url": "https://mangopoint.in",
+        "fields_supported": [
+          "founders",
+          "products",
+          "website"
+        ]
+      }
+    ]
+  },
+  {
+    "startup_id": "tns_000016",
+    "startup_name": "SP Robotics Works",
+    "verification_level": 4,
+    "confidence_score": 95,
+    "existence_status": "EXISTS_CONFIRMED",
+    "tn_association": "TN_HEADQUARTERED",
+    "startup_status": "STARTUP_CONFIRMED",
+    "coordinate_precision": "VERIFIED_ADDRESS",
+    "sources_cited": [
+      {
+        "source_name": "Nativelead Foundation Portfolio",
+        "source_url": "https://nativelead.org",
+        "fields_supported": [
+          "startup_name",
+          "district",
+          "funding"
+        ]
+      },
+      {
+        "source_name": "Official Company Website",
+        "source_url": "https://sproboticworks.com",
+        "fields_supported": [
+          "founders",
+          "products",
+          "website"
+        ]
+      }
+    ]
+  },
+  {
+    "startup_id": "tns_000017",
+    "startup_name": "BNC Motors",
+    "verification_level": 4,
+    "confidence_score": 95,
+    "existence_status": "EXISTS_CONFIRMED",
+    "tn_association": "TN_HEADQUARTERED",
+    "startup_status": "STARTUP_CONFIRMED",
+    "coordinate_precision": "VERIFIED_ADDRESS",
+    "sources_cited": [
+      {
+        "source_name": "Forge Innovation & Ventures",
+        "source_url": "https://forge-iv.co",
+        "fields_supported": [
+          "startup_name",
+          "district",
+          "incubator"
+        ]
+      },
+      {
+        "source_name": "Official Company Website",
+        "source_url": "https://bncmotors.in",
+        "fields_supported": [
+          "founders",
+          "products",
+          "website"
+        ]
+      }
+    ]
+  },
+  {
+    "startup_id": "tns_000018",
+    "startup_name": "BuyOFuel",
+    "verification_level": 4,
+    "confidence_score": 95,
+    "existence_status": "EXISTS_CONFIRMED",
+    "tn_association": "TN_HEADQUARTERED",
+    "startup_status": "STARTUP_CONFIRMED",
+    "coordinate_precision": "VERIFIED_ADDRESS",
+    "sources_cited": [
+      {
+        "source_name": "Forge Innovation & Ventures",
+        "source_url": "https://forge-iv.co",
+        "fields_supported": [
+          "startup_name",
+          "district",
+          "incubator"
+        ]
+      },
+      {
+        "source_name": "Official Company Website",
+        "source_url": "https://buyofuel.com",
+        "fields_supported": [
+          "founders",
+          "products",
+          "website"
+        ]
+      }
+    ]
+  },
+  {
+    "startup_id": "tns_000019",
+    "startup_name": "4miZyme Biosciences",
+    "verification_level": 4,
+    "confidence_score": 95,
+    "existence_status": "EXISTS_CONFIRMED",
+    "tn_association": "TN_INCUBATED",
+    "startup_status": "STARTUP_CONFIRMED",
+    "coordinate_precision": "VERIFIED_ADDRESS",
+    "sources_cited": [
+      {
+        "source_name": "PSG-STEP Directory",
+        "source_url": "https://psgstep.org",
+        "fields_supported": [
+          "startup_name",
+          "district",
+          "incubator"
+        ]
+      },
+      {
+        "source_name": "Official Company Website",
+        "source_url": "https://4mizyme.com",
+        "fields_supported": [
+          "founders",
+          "products",
+          "website"
+        ]
+      }
+    ]
+  },
+  {
+    "startup_id": "tns_000020",
+    "startup_name": "Keeraikadai",
+    "verification_level": 4,
+    "confidence_score": 98,
+    "existence_status": "EXISTS_CONFIRMED",
+    "tn_association": "TN_HEADQUARTERED",
+    "startup_status": "STARTUP_CONFIRMED",
+    "coordinate_precision": "VERIFIED_ADDRESS",
+    "sources_cited": [
+      {
+        "source_name": "StartupTN TANSEED 3.0 Winners",
+        "source_url": "https://startuptn.in",
+        "fields_supported": [
+          "startup_name",
+          "startupTN_registered"
+        ]
+      },
+      {
+        "source_name": "TNAU ABIS Portfolio",
+        "source_url": "https://tbitnau.com",
+        "fields_supported": [
+          "district",
+          "incubator"
+        ]
+      },
+      {
+        "source_name": "Official Company Website",
+        "source_url": "https://keeraikadai.com",
+        "fields_supported": [
+          "founders",
+          "products",
+          "website"
+        ]
+      }
+    ]
+  },
+  {
+    "startup_id": "tns_000021",
+    "startup_name": "Ather Energy",
+    "verification_level": 4,
+    "confidence_score": 98,
+    "existence_status": "EXISTS_CONFIRMED",
+    "tn_association": "TN_OPERATING",
+    "startup_status": "STARTUP_CONFIRMED",
+    "coordinate_precision": "VERIFIED_ADDRESS",
+    "sources_cited": [
+      {
+        "source_name": "IIT Madras Incubation Cell",
+        "source_url": "https://incubation.iitm.ac.in",
+        "fields_supported": [
+          "startup_name",
+          "incubator",
+          "founded_year"
+        ]
+      },
+      {
+        "source_name": "Guidance Tamil Nadu EV Report",
+        "source_url": "https://investingintamilnadu.com",
+        "fields_supported": [
+          "district",
+          "headquarters"
+        ]
+      },
+      {
+        "source_name": "Official Company Website",
+        "source_url": "https://www.atherenergy.com",
+        "fields_supported": [
+          "founders",
+          "products",
+          "website"
+        ]
+      }
+    ]
+  },
+  {
+    "startup_id": "tns_000022",
+    "startup_name": "insideFPV",
+    "verification_level": 4,
+    "confidence_score": 98,
+    "existence_status": "EXISTS_CONFIRMED",
+    "tn_association": "TN_INCUBATED",
+    "startup_status": "STARTUP_CONFIRMED",
+    "coordinate_precision": "VERIFIED_ADDRESS",
+    "sources_cited": [
+      {
+        "source_name": "VIT-TBI Incubator Portfolio",
+        "source_url": "https://vittbi.com",
+        "fields_supported": [
+          "startup_name",
+          "district",
+          "incubator"
+        ]
+      },
+      {
+        "source_name": "Official Company Website",
+        "source_url": "https://insidefpv.com",
+        "fields_supported": [
+          "founders",
+          "products",
+          "website"
+        ]
+      }
+    ]
+  },
+  {
+    "startup_id": "tns_000023",
+    "startup_name": "NervePro",
+    "verification_level": 4,
+    "confidence_score": 95,
+    "existence_status": "EXISTS_CONFIRMED",
+    "tn_association": "TN_INCUBATED",
+    "startup_status": "STARTUP_CONFIRMED",
+    "coordinate_precision": "VERIFIED_ADDRESS",
+    "sources_cited": [
+      {
+        "source_name": "Sona Incubation Foundation Directory",
+        "source_url": "https://sonaincubations.com",
+        "fields_supported": [
+          "startup_name",
+          "district",
+          "incubator"
+        ]
+      },
+      {
+        "source_name": "Official Company Website",
+        "source_url": "https://nervepro.in",
+        "fields_supported": [
+          "founders",
+          "products",
+          "website"
+        ]
+      }
+    ]
+  },
+  {
+    "startup_id": "tns_000024",
+    "startup_name": "Farmers Fresh Zone",
+    "verification_level": 4,
+    "confidence_score": 95,
+    "existence_status": "EXISTS_CONFIRMED",
+    "tn_association": "TN_HEADQUARTERED",
+    "startup_status": "STARTUP_CONFIRMED",
+    "coordinate_precision": "VERIFIED_ADDRESS",
+    "sources_cited": [
+      {
+        "source_name": "Nativelead Foundation Portfolio",
+        "source_url": "https://nativelead.org",
+        "fields_supported": [
+          "startup_name",
+          "district",
+          "funding"
+        ]
+      },
+      {
+        "source_name": "Official Company Website",
+        "source_url": "https://farmersfz.com",
+        "fields_supported": [
+          "founders",
+          "products",
+          "website"
+        ]
+      }
+    ]
+  },
+  {
+    "startup_id": "tns_000025",
+    "startup_name": "Kaigal.com",
+    "verification_level": 4,
+    "confidence_score": 95,
+    "existence_status": "EXISTS_CONFIRMED",
+    "tn_association": "TN_HEADQUARTERED",
+    "startup_status": "STARTUP_CONFIRMED",
+    "coordinate_precision": "VERIFIED_ADDRESS",
+    "sources_cited": [
+      {
+        "source_name": "StartupTN TANSEED Winners List",
+        "source_url": "https://startuptn.in",
+        "fields_supported": [
+          "startup_name",
+          "district",
+          "startupTN_registered"
+        ]
+      },
+      {
+        "source_name": "Official Company Website",
+        "source_url": "https://kaigal.com",
+        "fields_supported": [
+          "founders",
+          "products",
+          "website"
+        ]
+      }
+    ]
+  },
+  {
+    "startup_id": "tns_000026",
+    "startup_name": "Realtech Systems",
+    "verification_level": 4,
+    "confidence_score": 95,
+    "existence_status": "EXISTS_CONFIRMED",
+    "tn_association": "TN_INCUBATED",
+    "startup_status": "STARTUP_CONFIRMED",
+    "coordinate_precision": "VERIFIED_ADDRESS",
+    "sources_cited": [
+      {
+        "source_name": "TBI@KEC Directory",
+        "source_url": "http://www.tbi-kec.org",
+        "fields_supported": [
+          "startup_name",
+          "district",
+          "incubator"
+        ]
+      },
+      {
+        "source_name": "Official Company Website",
+        "source_url": "https://realtech.in",
+        "fields_supported": [
+          "founders",
+          "products",
+          "website"
+        ]
+      }
+    ]
+  }
+]

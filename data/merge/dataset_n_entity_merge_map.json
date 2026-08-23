@@ -1,0 +1,668 @@
+[
+  {
+    "existing_id": "stp-agnikul",
+    "research_id": "tns_000001",
+    "canonical_id": "stp_1658db8e4420ca92",
+    "canonical_name": "AgniKul Cosmos",
+    "match_type": "EXACT_DUPLICATE",
+    "match_confidence": 100,
+    "action": "MERGE"
+  },
+  {
+    "existing_id": "stp-zoho",
+    "research_id": null,
+    "canonical_id": "stp_b18d5b4546cb9423",
+    "canonical_name": "Zoho Corporation",
+    "match_type": "EXISTING_UNIQUE_STARTUP",
+    "match_confidence": 100,
+    "action": "PRESERVE"
+  },
+  {
+    "existing_id": "stp-ather-hosur",
+    "research_id": "tns_000021",
+    "canonical_id": "stp_82b62dd725d53bfa",
+    "canonical_name": "Ather Energy",
+    "match_type": "EXACT_DUPLICATE",
+    "match_confidence": 100,
+    "action": "MERGE"
+  },
+  {
+    "existing_id": "stp-guvi",
+    "research_id": null,
+    "canonical_id": "stp_b9600114036f2ed1",
+    "canonical_name": "GUVI",
+    "match_type": "EXISTING_UNIQUE_STARTUP",
+    "match_confidence": 100,
+    "action": "PRESERVE"
+  },
+  {
+    "existing_id": "stp-detect-tech",
+    "research_id": "tns_000004",
+    "canonical_id": "stp_e31253b285764781",
+    "canonical_name": "Detect Technologies",
+    "match_type": "EXACT_DUPLICATE",
+    "match_confidence": 100,
+    "action": "MERGE"
+  },
+  {
+    "existing_id": "stp-mindgrove",
+    "research_id": "tns_000007",
+    "canonical_id": "stp_cfdb505d758a0be4",
+    "canonical_name": "Mindgrove Technologies",
+    "match_type": "EXACT_DUPLICATE",
+    "match_confidence": 100,
+    "action": "MERGE"
+  },
+  {
+    "existing_id": "stp-appviewx",
+    "research_id": null,
+    "canonical_id": "stp_1bdca1ec9bc90405",
+    "canonical_name": "AppViewX",
+    "match_type": "EXISTING_UNIQUE_STARTUP",
+    "match_confidence": 100,
+    "action": "PRESERVE"
+  },
+  {
+    "existing_id": "stp-eplane",
+    "research_id": "tns_000003",
+    "canonical_id": "stp_f59063333d219e05",
+    "canonical_name": "The ePlane Company",
+    "match_type": "EXACT_DUPLICATE",
+    "match_confidence": 100,
+    "action": "MERGE"
+  },
+  {
+    "existing_id": "stp-native-special",
+    "research_id": null,
+    "canonical_id": "stp_61e5be832302730e",
+    "canonical_name": "Native Special",
+    "match_type": "EXISTING_UNIQUE_STARTUP",
+    "match_confidence": 100,
+    "action": "PRESERVE"
+  },
+  {
+    "existing_id": "stp-garuda-aerospace",
+    "research_id": null,
+    "canonical_id": "stp_cd47bf525afa0590",
+    "canonical_name": "Garuda Aerospace",
+    "match_type": "EXISTING_UNIQUE_STARTUP",
+    "match_confidence": 100,
+    "action": "PRESERVE"
+  },
+  {
+    "existing_id": "stp-pickyourtrail",
+    "research_id": null,
+    "canonical_id": "stp_b3afe8f2c7657b00",
+    "canonical_name": "Pickyourtrail",
+    "match_type": "EXISTING_UNIQUE_STARTUP",
+    "match_confidence": 100,
+    "action": "PRESERVE"
+  },
+  {
+    "existing_id": "stp-solinas",
+    "research_id": "tns_000008",
+    "canonical_id": "stp_9bad4d77e4009715",
+    "canonical_name": "Solinas Integrity",
+    "match_type": "EXACT_DUPLICATE",
+    "match_confidence": 100,
+    "action": "MERGE"
+  },
+  {
+    "existing_id": "stp-texknits",
+    "research_id": null,
+    "canonical_id": "stp_b2cf1f07131bb8e7",
+    "canonical_name": "TexKnits Automations",
+    "match_type": "EXISTING_UNIQUE_STARTUP",
+    "match_confidence": 100,
+    "action": "PRESERVE"
+  },
+  {
+    "existing_id": "stp-bioturmeric",
+    "research_id": null,
+    "canonical_id": "stp_0ffeb3b1db6ea6bd",
+    "canonical_name": "BioTurmeric Dynamics",
+    "match_type": "EXISTING_UNIQUE_STARTUP",
+    "match_confidence": 100,
+    "action": "PRESERVE"
+  },
+  {
+    "existing_id": "stp-medvellore-ai",
+    "research_id": null,
+    "canonical_id": "stp_da8f5bc8bc38a54b",
+    "canonical_name": "MedVellore Diagnostics",
+    "match_type": "EXISTING_UNIQUE_STARTUP",
+    "match_confidence": 100,
+    "action": "PRESERVE"
+  },
+  {
+    "existing_id": "stp-salem-steeltech",
+    "research_id": null,
+    "canonical_id": "stp_6ac591af9a0a92c6",
+    "canonical_name": "Salem SteelTech Solutions",
+    "match_type": "EXISTING_UNIQUE_STARTUP",
+    "match_confidence": 100,
+    "action": "PRESERVE"
+  },
+  {
+    "existing_id": "stp-deltaagri",
+    "research_id": null,
+    "canonical_id": "stp_6f3d8f5ebb3bf308",
+    "canonical_name": "DeltaAgri Analytics",
+    "match_type": "EXISTING_UNIQUE_STARTUP",
+    "match_confidence": 100,
+    "action": "PRESERVE"
+  },
+  {
+    "existing_id": "stp-coastalmarine",
+    "research_id": null,
+    "canonical_id": "stp_0aa0ba9159b080bd",
+    "canonical_name": "Coastal Marine BioTech",
+    "match_type": "EXISTING_UNIQUE_STARTUP",
+    "match_confidence": 100,
+    "action": "PRESERVE"
+  },
+  {
+    "existing_id": "stp-caperenewable",
+    "research_id": null,
+    "canonical_id": "stp_757ed5c3771e9444",
+    "canonical_name": "Cape Renewable IoT",
+    "match_type": "EXISTING_UNIQUE_STARTUP",
+    "match_confidence": 100,
+    "action": "PRESERVE"
+  },
+  {
+    "existing_id": "stp-gen-21",
+    "research_id": null,
+    "canonical_id": "stp_199c2557a550c3e2",
+    "canonical_name": "OmniVerve SaaS",
+    "match_type": "EXISTING_UNIQUE_STARTUP",
+    "match_confidence": 100,
+    "action": "PRESERVE"
+  },
+  {
+    "existing_id": "stp-gen-22",
+    "research_id": null,
+    "canonical_id": "stp_11a2674aec241551",
+    "canonical_name": "AeroGlide EV",
+    "match_type": "EXISTING_UNIQUE_STARTUP",
+    "match_confidence": 100,
+    "action": "PRESERVE"
+  },
+  {
+    "existing_id": "stp-gen-23",
+    "research_id": null,
+    "canonical_id": "stp_ac555a9b64cf682e",
+    "canonical_name": "Siruseri BioAnalytics",
+    "match_type": "EXISTING_UNIQUE_STARTUP",
+    "match_confidence": 100,
+    "action": "PRESERVE"
+  },
+  {
+    "existing_id": "stp-gen-24",
+    "research_id": null,
+    "canonical_id": "stp_491e0d59eace8e8a",
+    "canonical_name": "Kanchi SilkTech",
+    "match_type": "EXISTING_UNIQUE_STARTUP",
+    "match_confidence": 100,
+    "action": "PRESERVE"
+  },
+  {
+    "existing_id": "stp-gen-25",
+    "research_id": null,
+    "canonical_id": "stp_1667adccd1c7e69e",
+    "canonical_name": "Sriperumbudur AutoBots",
+    "match_type": "EXISTING_UNIQUE_STARTUP",
+    "match_confidence": 100,
+    "action": "PRESERVE"
+  },
+  {
+    "existing_id": "stp-gen-26",
+    "research_id": null,
+    "canonical_id": "stp_c562a1f02baaad70",
+    "canonical_name": "HalwaTown D2C",
+    "match_type": "EXISTING_UNIQUE_STARTUP",
+    "match_confidence": 100,
+    "action": "PRESERVE"
+  },
+  {
+    "existing_id": "stp-gen-27",
+    "research_id": null,
+    "canonical_id": "stp_95b90e4d7f9df44e",
+    "canonical_name": "Nellai Cloudworks",
+    "match_type": "EXISTING_UNIQUE_STARTUP",
+    "match_confidence": 100,
+    "action": "PRESERVE"
+  },
+  {
+    "existing_id": "stp-gen-28",
+    "research_id": null,
+    "canonical_id": "stp_35080ba4aafcb9db",
+    "canonical_name": "LockSmart Security",
+    "match_type": "EXISTING_UNIQUE_STARTUP",
+    "match_confidence": 100,
+    "action": "PRESERVE"
+  },
+  {
+    "existing_id": "stp-gen-29",
+    "research_id": null,
+    "canonical_id": "stp_a1952bed4506a7d6",
+    "canonical_name": "Sirumalai Agro Tech",
+    "match_type": "EXISTING_UNIQUE_STARTUP",
+    "match_confidence": 100,
+    "action": "PRESERVE"
+  },
+  {
+    "existing_id": "stp-gen-30",
+    "research_id": null,
+    "canonical_id": "stp_3cc51b0420932dd5",
+    "canonical_name": "EggLogistics IoT",
+    "match_type": "EXISTING_UNIQUE_STARTUP",
+    "match_confidence": 100,
+    "action": "PRESERVE"
+  },
+  {
+    "existing_id": "stp-gen-31",
+    "research_id": null,
+    "canonical_id": "stp_affce2f5f3adebf8",
+    "canonical_name": "Namakkal TruckGrid",
+    "match_type": "EXISTING_UNIQUE_STARTUP",
+    "match_confidence": 100,
+    "action": "PRESERVE"
+  },
+  {
+    "existing_id": "stp-gen-32",
+    "research_id": null,
+    "canonical_id": "stp_746620dad71096ba",
+    "canonical_name": "Sivakasi SafePrint",
+    "match_type": "EXISTING_UNIQUE_STARTUP",
+    "match_confidence": 100,
+    "action": "PRESERVE"
+  },
+  {
+    "existing_id": "stp-gen-33",
+    "research_id": null,
+    "canonical_id": "stp_618b6795e9dac419",
+    "canonical_name": "Virudhu Commodities",
+    "match_type": "EXISTING_UNIQUE_STARTUP",
+    "match_confidence": 100,
+    "action": "PRESERVE"
+  },
+  {
+    "existing_id": "stp-gen-34",
+    "research_id": null,
+    "canonical_id": "stp_89cd5eb2cf0cb574",
+    "canonical_name": "EcoDye Systems",
+    "match_type": "EXISTING_UNIQUE_STARTUP",
+    "match_confidence": 100,
+    "action": "PRESERVE"
+  },
+  {
+    "existing_id": "stp-gen-35",
+    "research_id": null,
+    "canonical_id": "stp_ff73a4bbd46ebaca",
+    "canonical_name": "BlueMountain TeaTech",
+    "match_type": "EXISTING_UNIQUE_STARTUP",
+    "match_confidence": 100,
+    "action": "PRESERVE"
+  },
+  {
+    "existing_id": "stp-gen-36",
+    "research_id": null,
+    "canonical_id": "stp_687623dc7f411a5d",
+    "canonical_name": "Ooty EcoStay Platform",
+    "match_type": "EXISTING_UNIQUE_STARTUP",
+    "match_confidence": 100,
+    "action": "PRESERVE"
+  },
+  {
+    "existing_id": "stp-gen-37",
+    "research_id": null,
+    "canonical_id": "stp_841e5b16a6dfbbe5",
+    "canonical_name": "Neyveli SolarGrid",
+    "match_type": "EXISTING_UNIQUE_STARTUP",
+    "match_confidence": 100,
+    "action": "PRESERVE"
+  },
+  {
+    "existing_id": "stp-gen-38",
+    "research_id": null,
+    "canonical_id": "stp_2232e8700b42dc81",
+    "canonical_name": "MangoFresh PulpTech",
+    "match_type": "EXISTING_UNIQUE_STARTUP",
+    "match_confidence": 100,
+    "action": "PRESERVE"
+  },
+  {
+    "existing_id": "stp-gen-39",
+    "research_id": null,
+    "canonical_id": "stp_e7b3f06e371fcb68",
+    "canonical_name": "KallaBio Biomass",
+    "match_type": "EXISTING_UNIQUE_STARTUP",
+    "match_confidence": 100,
+    "action": "PRESERVE"
+  },
+  {
+    "existing_id": "stp-gen-40",
+    "research_id": null,
+    "canonical_id": "stp_883b12e730a0c407",
+    "canonical_name": "Cauvery Heritage Craft",
+    "match_type": "EXISTING_UNIQUE_STARTUP",
+    "match_confidence": 100,
+    "action": "PRESERVE"
+  },
+  {
+    "existing_id": "stp-gen-41",
+    "research_id": null,
+    "canonical_id": "stp_e8efde3a6ce4885e",
+    "canonical_name": "AquaShield Sonar",
+    "match_type": "EXISTING_UNIQUE_STARTUP",
+    "match_confidence": 100,
+    "action": "PRESERVE"
+  },
+  {
+    "existing_id": "stp-gen-42",
+    "research_id": null,
+    "canonical_id": "stp_a05a5d6cc6c039e0",
+    "canonical_name": "CottonTrace AI",
+    "match_type": "EXISTING_UNIQUE_STARTUP",
+    "match_confidence": 100,
+    "action": "PRESERVE"
+  },
+  {
+    "existing_id": "stp-gen-43",
+    "research_id": null,
+    "canonical_id": "stp_5287ae7e281e5a0a",
+    "canonical_name": "StoneCraft CNC",
+    "match_type": "EXISTING_UNIQUE_STARTUP",
+    "match_confidence": 100,
+    "action": "PRESERVE"
+  },
+  {
+    "existing_id": "stp-gen-44",
+    "research_id": null,
+    "canonical_id": "stp_d2ad8c325ce5f0e6",
+    "canonical_name": "DesalClean Tech",
+    "match_type": "EXISTING_UNIQUE_STARTUP",
+    "match_confidence": 100,
+    "action": "PRESERVE"
+  },
+  {
+    "existing_id": "stp-gen-45",
+    "research_id": null,
+    "canonical_id": "stp_6bc86dd99956c49c",
+    "canonical_name": "GreenHide BioLeather",
+    "match_type": "EXISTING_UNIQUE_STARTUP",
+    "match_confidence": 100,
+    "action": "PRESERVE"
+  },
+  {
+    "existing_id": "stp-gen-46",
+    "research_id": null,
+    "canonical_id": "stp_7b83f2f8340bcf9e",
+    "canonical_name": "Chettinad Heritage D2C",
+    "match_type": "EXISTING_UNIQUE_STARTUP",
+    "match_confidence": 100,
+    "action": "PRESERVE"
+  },
+  {
+    "existing_id": "stp-gen-47",
+    "research_id": null,
+    "canonical_id": "stp_f04fa76e0e5ef519",
+    "canonical_name": "CardamomCloud IoT",
+    "match_type": "EXISTING_UNIQUE_STARTUP",
+    "match_confidence": 100,
+    "action": "PRESERVE"
+  },
+  {
+    "existing_id": "stp-gen-48",
+    "research_id": null,
+    "canonical_id": "stp_76ec9172d139112e",
+    "canonical_name": "Yelagiri EcoVentures",
+    "match_type": "EXISTING_UNIQUE_STARTUP",
+    "match_confidence": 100,
+    "action": "PRESERVE"
+  },
+  {
+    "existing_id": "stp-gen-49",
+    "research_id": null,
+    "canonical_id": "stp_30a122163c0676e9",
+    "canonical_name": "Tiruvallur EV Motors",
+    "match_type": "EXISTING_UNIQUE_STARTUP",
+    "match_confidence": 100,
+    "action": "PRESERVE"
+  },
+  {
+    "existing_id": "stp-gen-50",
+    "research_id": null,
+    "canonical_id": "stp_0934df6bebc86c23",
+    "canonical_name": "Arunachala Organics",
+    "match_type": "EXISTING_UNIQUE_STARTUP",
+    "match_confidence": 100,
+    "action": "PRESERVE"
+  },
+  {
+    "existing_id": "stp-gen-51",
+    "research_id": null,
+    "canonical_id": "stp_f9e4686da3eecce3",
+    "canonical_name": "Delta BioPesticides",
+    "match_type": "EXISTING_UNIQUE_STARTUP",
+    "match_confidence": 100,
+    "action": "PRESERVE"
+  },
+  {
+    "existing_id": "stp-gen-52",
+    "research_id": null,
+    "canonical_id": "stp_a2117b09083f873c",
+    "canonical_name": "Auroville CleanEnergy",
+    "match_type": "EXISTING_UNIQUE_STARTUP",
+    "match_confidence": 100,
+    "action": "PRESERVE"
+  },
+  {
+    "existing_id": "stp-gen-53",
+    "research_id": null,
+    "canonical_id": "stp_9972438d0aa1aa25",
+    "canonical_name": "EcoCement ClinkerTech",
+    "match_type": "EXISTING_UNIQUE_STARTUP",
+    "match_confidence": 100,
+    "action": "PRESERVE"
+  },
+  {
+    "existing_id": "stp-freshworks",
+    "research_id": null,
+    "canonical_id": "stp_d491b9f571640c68",
+    "canonical_name": "Freshworks",
+    "match_type": "EXISTING_UNIQUE_STARTUP",
+    "match_confidence": 100,
+    "action": "PRESERVE"
+  },
+  {
+    "existing_id": "e77fc0ed-e85b-414b-86ea-45d2b8a8ff1b",
+    "research_id": null,
+    "canonical_id": "stp_8f6ca1cc7c460297",
+    "canonical_name": "KRB Groups",
+    "match_type": "EXISTING_UNIQUE_STARTUP",
+    "match_confidence": 100,
+    "action": "PRESERVE"
+  },
+  {
+    "existing_id": null,
+    "research_id": "tns_000002",
+    "canonical_id": "startup_000002",
+    "canonical_name": "Uniphore",
+    "match_type": "NEW_RESEARCH_STARTUP",
+    "match_confidence": 100,
+    "action": "INSERT"
+  },
+  {
+    "existing_id": null,
+    "research_id": "tns_000005",
+    "canonical_id": "startup_000005",
+    "canonical_name": "Planys Technologies",
+    "match_type": "NEW_RESEARCH_STARTUP",
+    "match_confidence": 100,
+    "action": "INSERT"
+  },
+  {
+    "existing_id": null,
+    "research_id": "tns_000006",
+    "canonical_id": "startup_000006",
+    "canonical_name": "GalaxEye Space",
+    "match_type": "NEW_RESEARCH_STARTUP",
+    "match_confidence": 100,
+    "action": "INSERT"
+  },
+  {
+    "existing_id": null,
+    "research_id": "tns_000009",
+    "canonical_id": "startup_000009",
+    "canonical_name": "XYMA Analytics",
+    "match_type": "NEW_RESEARCH_STARTUP",
+    "match_confidence": 100,
+    "action": "INSERT"
+  },
+  {
+    "existing_id": null,
+    "research_id": "tns_000010",
+    "canonical_id": "startup_000010",
+    "canonical_name": "Paperflite",
+    "match_type": "NEW_RESEARCH_STARTUP",
+    "match_confidence": 100,
+    "action": "INSERT"
+  },
+  {
+    "existing_id": null,
+    "research_id": "tns_000011",
+    "canonical_id": "startup_000011",
+    "canonical_name": "Chai Kings",
+    "match_type": "NEW_RESEARCH_STARTUP",
+    "match_confidence": 100,
+    "action": "INSERT"
+  },
+  {
+    "existing_id": null,
+    "research_id": "tns_000012",
+    "canonical_id": "startup_000012",
+    "canonical_name": "HitWicket",
+    "match_type": "NEW_RESEARCH_STARTUP",
+    "match_confidence": 100,
+    "action": "INSERT"
+  },
+  {
+    "existing_id": null,
+    "research_id": "tns_000013",
+    "canonical_id": "startup_000013",
+    "canonical_name": "Simbioen Labs",
+    "match_type": "NEW_RESEARCH_STARTUP",
+    "match_confidence": 100,
+    "action": "INSERT"
+  },
+  {
+    "existing_id": null,
+    "research_id": "tns_000014",
+    "canonical_id": "startup_000014",
+    "canonical_name": "Uzhavarbumi",
+    "match_type": "NEW_RESEARCH_STARTUP",
+    "match_confidence": 100,
+    "action": "INSERT"
+  },
+  {
+    "existing_id": null,
+    "research_id": "tns_000015",
+    "canonical_id": "startup_000015",
+    "canonical_name": "Mango Point",
+    "match_type": "NEW_RESEARCH_STARTUP",
+    "match_confidence": 100,
+    "action": "INSERT"
+  },
+  {
+    "existing_id": null,
+    "research_id": "tns_000016",
+    "canonical_id": "startup_000016",
+    "canonical_name": "SP Robotics Works",
+    "match_type": "NEW_RESEARCH_STARTUP",
+    "match_confidence": 100,
+    "action": "INSERT"
+  },
+  {
+    "existing_id": null,
+    "research_id": "tns_000017",
+    "canonical_id": "startup_000017",
+    "canonical_name": "BNC Motors",
+    "match_type": "NEW_RESEARCH_STARTUP",
+    "match_confidence": 100,
+    "action": "INSERT"
+  },
+  {
+    "existing_id": null,
+    "research_id": "tns_000018",
+    "canonical_id": "startup_000018",
+    "canonical_name": "BuyOFuel",
+    "match_type": "NEW_RESEARCH_STARTUP",
+    "match_confidence": 100,
+    "action": "INSERT"
+  },
+  {
+    "existing_id": null,
+    "research_id": "tns_000019",
+    "canonical_id": "startup_000019",
+    "canonical_name": "4miZyme Biosciences",
+    "match_type": "NEW_RESEARCH_STARTUP",
+    "match_confidence": 100,
+    "action": "INSERT"
+  },
+  {
+    "existing_id": null,
+    "research_id": "tns_000020",
+    "canonical_id": "startup_000020",
+    "canonical_name": "Keeraikadai",
+    "match_type": "NEW_RESEARCH_STARTUP",
+    "match_confidence": 100,
+    "action": "INSERT"
+  },
+  {
+    "existing_id": null,
+    "research_id": "tns_000022",
+    "canonical_id": "startup_000022",
+    "canonical_name": "insideFPV",
+    "match_type": "NEW_RESEARCH_STARTUP",
+    "match_confidence": 100,
+    "action": "INSERT"
+  },
+  {
+    "existing_id": null,
+    "research_id": "tns_000023",
+    "canonical_id": "startup_000023",
+    "canonical_name": "NervePro",
+    "match_type": "NEW_RESEARCH_STARTUP",
+    "match_confidence": 100,
+    "action": "INSERT"
+  },
+  {
+    "existing_id": null,
+    "research_id": "tns_000024",
+    "canonical_id": "startup_000024",
+    "canonical_name": "Farmers Fresh Zone",
+    "match_type": "NEW_RESEARCH_STARTUP",
+    "match_confidence": 100,
+    "action": "INSERT"
+  },
+  {
+    "existing_id": null,
+    "research_id": "tns_000025",
+    "canonical_id": "startup_000025",
+    "canonical_name": "Kaigal.com",
+    "match_type": "NEW_RESEARCH_STARTUP",
+    "match_confidence": 100,
+    "action": "INSERT"
+  },
+  {
+    "existing_id": null,
+    "research_id": "tns_000026",
+    "canonical_id": "startup_000026",
+    "canonical_name": "Realtech Systems",
+    "match_type": "NEW_RESEARCH_STARTUP",
+    "match_confidence": 100,
+    "action": "INSERT"
+  }
+]

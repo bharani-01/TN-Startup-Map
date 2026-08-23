@@ -49,6 +49,7 @@ import {
   StartupPress, 
   BANNER_PRESETS 
 } from '../../../types';
+import { MapLocationPicker } from '../../../components/MapLocationPicker';
 
 export const FounderEditProfile: React.FC = () => {
   const navigate = useNavigate();
@@ -79,6 +80,10 @@ export const FounderEditProfile: React.FC = () => {
     contactPhone: '',
     address: '',
     pincode: '',
+    district: 'Chennai',
+    city: '',
+    latitude: 13.0827,
+    longitude: 80.2707,
     linkedin: '',
     twitter: '',
     github: '',
@@ -226,6 +231,10 @@ export const FounderEditProfile: React.FC = () => {
             contactPhone: s.contactPhone || '',
             address: s.address || '',
             pincode: s.pincode || '',
+            district: s.district || 'Chennai',
+            city: s.city || '',
+            latitude: s.latitude || 13.0827,
+            longitude: s.longitude || 80.2707,
             linkedin: s.linkedin || '',
             twitter: s.twitter || '',
             github: s.github || '',
@@ -828,6 +837,91 @@ export const FounderEditProfile: React.FC = () => {
                     <span className="font-semibold text-[#1D1D1F]">Display "Hiring" Beacon</span>
                   </label>
                 </div>
+              </div>
+            </div>
+
+            {/* Physical Location & Spatial Map Pin Picker */}
+            <div className="pt-4 border-t border-black/[0.06] space-y-4">
+              <div className="flex items-center justify-between">
+                <div>
+                  <h4 className="font-display font-bold text-sm text-[#1D1D1F] flex items-center gap-1.5">
+                    <MapPin className="w-4 h-4 text-[#0071E3]" />
+                    <span>Physical Office & Exact Spatial Map Location</span>
+                  </h4>
+                  <p className="text-xs text-[#86868B]">
+                    Ensure your venture is accurately plotted on the Tamil Nadu 38-district spatial map.
+                  </p>
+                </div>
+                <span className="font-mono text-xs font-bold text-[#0071E3] bg-[#0071E3]/10 px-2.5 py-1 rounded-full">
+                  {formData.latitude.toFixed(4)}° N, {formData.longitude.toFixed(4)}° E
+                </span>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="block font-bold text-[#1D1D1F] mb-1">District</label>
+                  <input
+                    type="text"
+                    value={formData.district}
+                    onChange={(e) => handleChange('district', e.target.value)}
+                    placeholder="e.g. Chennai, Coimbatore, Madurai..."
+                    className="w-full px-4 py-2.5 rounded-2xl border border-black/[0.08] bg-black/[0.02] focus:bg-white focus:ring-2 focus:ring-[#0071E3]/20"
+                  />
+                </div>
+
+                <div>
+                  <label className="block font-bold text-[#1D1D1F] mb-1">City / Locality / Tech Park</label>
+                  <input
+                    type="text"
+                    value={formData.city}
+                    onChange={(e) => handleChange('city', e.target.value)}
+                    placeholder="e.g. OMR, Taramani, Saravanampatti..."
+                    className="w-full px-4 py-2.5 rounded-2xl border border-black/[0.08] bg-black/[0.02] focus:bg-white focus:ring-2 focus:ring-[#0071E3]/20"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div className="sm:col-span-2">
+                  <label className="block font-bold text-[#1D1D1F] mb-1">Full Street Address</label>
+                  <input
+                    type="text"
+                    value={formData.address}
+                    onChange={(e) => handleChange('address', e.target.value)}
+                    placeholder="e.g. Module #2B, IIT Madras Research Park, Kanagam Road"
+                    className="w-full px-4 py-2.5 rounded-2xl border border-black/[0.08] bg-black/[0.02] focus:bg-white focus:ring-2 focus:ring-[#0071E3]/20"
+                  />
+                </div>
+
+                <div>
+                  <label className="block font-bold text-[#1D1D1F] mb-1">Postal Pincode</label>
+                  <input
+                    type="text"
+                    value={formData.pincode}
+                    onChange={(e) => handleChange('pincode', e.target.value)}
+                    placeholder="e.g. 600113"
+                    className="w-full px-4 py-2.5 rounded-2xl border border-black/[0.08] bg-black/[0.02] focus:bg-white focus:ring-2 focus:ring-[#0071E3]/20 font-mono"
+                  />
+                </div>
+              </div>
+
+              <div className="pt-2">
+                <MapLocationPicker
+                  latitude={formData.latitude}
+                  longitude={formData.longitude}
+                  districtName={formData.district}
+                  cityName={formData.city}
+                  onLocationChange={(lat, lng, placeName) => {
+                    setFormData((prev) => {
+                      const updates: any = { latitude: lat, longitude: lng };
+                      if (placeName && !prev.address) {
+                        updates.address = placeName.split(',').slice(0, 3).join(',').trim();
+                      }
+                      return { ...prev, ...updates };
+                    });
+                  }}
+                  height="300px"
+                />
               </div>
             </div>
           </div>

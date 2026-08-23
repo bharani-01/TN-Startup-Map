@@ -27,6 +27,7 @@ import {
   Filter
 } from 'lucide-react';
 import { useAuth } from '../../../context/AuthContext';
+import { MapLocationPicker } from '../../../components/MapLocationPicker';
 
 export const AdminSubmissions: React.FC = () => {
   const { token } = useAuth();
@@ -460,36 +461,70 @@ export const AdminSubmissions: React.FC = () => {
               )}
 
               {/* Location & Map Pin */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 p-4 bg-white/5 rounded-2xl border border-white/5">
-                <div>
-                  <span className="text-[10px] uppercase tracking-wider font-bold text-apple-secondary block mb-1">
-                    District & Locality
-                  </span>
-                  <div className="flex items-center gap-1.5 text-white font-semibold">
-                    <MapPin className="w-3.5 h-3.5 text-apple-blue" />
-                    <span>{previewSub.city || previewSub.data?.city}, {previewSub.district || previewSub.data?.district}</span>
+              <div className="space-y-3 p-4 bg-white/5 rounded-2xl border border-white/5">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <span className="text-[10px] uppercase tracking-wider font-bold text-apple-secondary block mb-1">
+                      District & Locality
+                    </span>
+                    <div className="flex items-center gap-1.5 text-white font-semibold">
+                      <MapPin className="w-3.5 h-3.5 text-apple-blue" />
+                      <span>{previewSub.city || previewSub.data?.city}, {previewSub.district || previewSub.data?.district}</span>
+                    </div>
+                  </div>
+
+                  <div>
+                    <span className="text-[10px] uppercase tracking-wider font-bold text-apple-secondary block mb-1">
+                      Website & Press
+                    </span>
+                    {(previewSub.website || previewSub.data?.website) ? (
+                      <a
+                        href={previewSub.website || previewSub.data?.website}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-1.5 text-apple-blue hover:underline font-semibold"
+                      >
+                        <Globe className="w-3.5 h-3.5" />
+                        <span className="truncate">{previewSub.website || previewSub.data?.website}</span>
+                        <ExternalLink className="w-3 h-3" />
+                      </a>
+                    ) : (
+                      <span className="text-apple-secondary">No website link</span>
+                    )}
                   </div>
                 </div>
 
-                <div>
-                  <span className="text-[10px] uppercase tracking-wider font-bold text-apple-secondary block mb-1">
-                    Website & Press
-                  </span>
-                  {(previewSub.website || previewSub.data?.website) ? (
-                    <a
-                      href={previewSub.website || previewSub.data?.website}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-1.5 text-apple-blue hover:underline font-semibold"
-                    >
-                      <Globe className="w-3.5 h-3.5" />
-                      <span className="truncate">{previewSub.website || previewSub.data?.website}</span>
-                      <ExternalLink className="w-3 h-3" />
-                    </a>
-                  ) : (
-                    <span className="text-apple-secondary">No website link</span>
-                  )}
-                </div>
+                {(previewSub.address || previewSub.data?.address) && (
+                  <div className="pt-2 border-t border-white/5 text-slate-300">
+                    <span className="text-[10px] uppercase tracking-wider font-bold text-apple-secondary block mb-0.5">
+                      Street Address
+                    </span>
+                    <p className="font-medium text-white">
+                      {previewSub.address || previewSub.data?.address} {previewSub.pincode || previewSub.data?.pincode ? `(${previewSub.pincode || previewSub.data?.pincode})` : ''}
+                    </p>
+                  </div>
+                )}
+
+                {/* Spatial Map Pin Preview */}
+                {(previewSub.latitude || previewSub.data?.latitude) && (
+                  <div className="pt-2 border-t border-white/5 space-y-1.5">
+                    <div className="flex items-center justify-between">
+                      <span className="text-[10px] uppercase tracking-wider font-bold text-apple-secondary">
+                        Spatial Map Placement
+                      </span>
+                      <span className="font-mono text-[10px] text-apple-blue font-bold">
+                        {Number(previewSub.latitude || previewSub.data?.latitude).toFixed(4)}° N, {Number(previewSub.longitude || previewSub.data?.longitude).toFixed(4)}° E
+                      </span>
+                    </div>
+                    <MapLocationPicker
+                      latitude={Number(previewSub.latitude || previewSub.data?.latitude)}
+                      longitude={Number(previewSub.longitude || previewSub.data?.longitude)}
+                      onLocationChange={() => {}}
+                      height="160px"
+                      readOnly={true}
+                    />
+                  </div>
+                )}
               </div>
 
               {/* Founder Information */}

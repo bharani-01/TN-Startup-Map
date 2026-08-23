@@ -59,12 +59,17 @@ export class SubmissionService {
       website: subData.website,
       district: subData.district,
       city: subData.city,
+      address: subData.address,
+      pincode: subData.pincode,
+      latitude: subData.latitude ? (typeof subData.latitude === 'string' ? parseFloat(subData.latitude) : subData.latitude) : undefined,
+      longitude: subData.longitude ? (typeof subData.longitude === 'string' ? parseFloat(subData.longitude) : subData.longitude) : undefined,
       sectors: subData.sectors,
       foundedYear: subData.foundedYear,
       stage: subData.stage,
       fundingType: subData.fundingType,
       teamSize: subData.teamSize || '1-10',
       linkedin: subData.linkedin,
+      logoUrl: subData.logoUrl,
       contactEmail: founderEmail,
       founders: [
         {

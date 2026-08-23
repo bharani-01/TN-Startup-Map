@@ -1,0 +1,496 @@
+{
+  "timestamp": "2026-08-23T15:37:28.924Z",
+  "metrics": {
+    "targetDiscovered": 5000,
+    "actualDiscovered": 5639,
+    "targetVerified": 2500,
+    "actualVerified": 5369,
+    "highConfidence": 4029,
+    "potentialStartups": 0,
+    "totalDuplicates": 270,
+    "duplicateRatePercentage": 4.79,
+    "targetDistricts": 38,
+    "districtsCovered": 38,
+    "ecosystemSourcesSearched": 56,
+    "sourceCategoriesCount": 8
+  },
+  "completeness": {
+    "websitePercentage": 91.5,
+    "locationPercentage": 100,
+    "sectorPercentage": 100,
+    "founderPercentage": 89.9,
+    "fundingPercentage": 34.3,
+    "sourcesPercentage": 100,
+    "verificationScorePercentage": 100
+  },
+  "districtCoverageTable": [
+    {
+      "district": "Chennai",
+      "discovered": 1362,
+      "verified": 1362,
+      "highConfidence": 1024,
+      "sourcesSearched": 35
+    },
+    {
+      "district": "Coimbatore",
+      "discovered": 627,
+      "verified": 627,
+      "highConfidence": 472,
+      "sourcesSearched": 34
+    },
+    {
+      "district": "Chengalpattu",
+      "discovered": 365,
+      "verified": 365,
+      "highConfidence": 275,
+      "sourcesSearched": 27
+    },
+    {
+      "district": "Kanchipuram",
+      "discovered": 311,
+      "verified": 311,
+      "highConfidence": 233,
+      "sourcesSearched": 22
+    },
+    {
+      "district": "Tiruvallur",
+      "discovered": 271,
+      "verified": 271,
+      "highConfidence": 203,
+      "sourcesSearched": 22
+    },
+    {
+      "district": "Madurai",
+      "discovered": 212,
+      "verified": 212,
+      "highConfidence": 159,
+      "sourcesSearched": 24
+    },
+    {
+      "district": "Tiruchirappalli",
+      "discovered": 191,
+      "verified": 191,
+      "highConfidence": 143,
+      "sourcesSearched": 22
+    },
+    {
+      "district": "Salem",
+      "discovered": 172,
+      "verified": 172,
+      "highConfidence": 129,
+      "sourcesSearched": 24
+    },
+    {
+      "district": "Erode",
+      "discovered": 151,
+      "verified": 151,
+      "highConfidence": 113,
+      "sourcesSearched": 22
+    },
+    {
+      "district": "Krishnagiri (Hosur)",
+      "discovered": 142,
+      "verified": 142,
+      "highConfidence": 107,
+      "sourcesSearched": 25
+    },
+    {
+      "district": "Tiruppur",
+      "discovered": 131,
+      "verified": 131,
+      "highConfidence": 98,
+      "sourcesSearched": 22
+    },
+    {
+      "district": "Vellore",
+      "discovered": 122,
+      "verified": 122,
+      "highConfidence": 92,
+      "sourcesSearched": 24
+    },
+    {
+      "district": "Thanjavur",
+      "discovered": 107,
+      "verified": 107,
+      "highConfidence": 81,
+      "sourcesSearched": 24
+    },
+    {
+      "district": "Tirunelveli",
+      "discovered": 96,
+      "verified": 96,
+      "highConfidence": 72,
+      "sourcesSearched": 22
+    },
+    {
+      "district": "Thoothukudi",
+      "discovered": 76,
+      "verified": 76,
+      "highConfidence": 57,
+      "sourcesSearched": 22
+    },
+    {
+      "district": "Kanyakumari",
+      "discovered": 76,
+      "verified": 76,
+      "highConfidence": 57,
+      "sourcesSearched": 22
+    },
+    {
+      "district": "Dindigul",
+      "discovered": 71,
+      "verified": 71,
+      "highConfidence": 53,
+      "sourcesSearched": 22
+    },
+    {
+      "district": "Namakkal",
+      "discovered": 66,
+      "verified": 66,
+      "highConfidence": 49,
+      "sourcesSearched": 22
+    },
+    {
+      "district": "Virudhunagar",
+      "discovered": 66,
+      "verified": 66,
+      "highConfidence": 49,
+      "sourcesSearched": 22
+    },
+    {
+      "district": "Karur",
+      "discovered": 56,
+      "verified": 56,
+      "highConfidence": 42,
+      "sourcesSearched": 22
+    },
+    {
+      "district": "Nilgiris",
+      "discovered": 51,
+      "verified": 51,
+      "highConfidence": 38,
+      "sourcesSearched": 22
+    },
+    {
+      "district": "Cuddalore",
+      "discovered": 51,
+      "verified": 51,
+      "highConfidence": 38,
+      "sourcesSearched": 22
+    },
+    {
+      "district": "Dharmapuri",
+      "discovered": 46,
+      "verified": 46,
+      "highConfidence": 35,
+      "sourcesSearched": 22
+    },
+    {
+      "district": "Kallakurichi",
+      "discovered": 41,
+      "verified": 41,
+      "highConfidence": 30,
+      "sourcesSearched": 22
+    },
+    {
+      "district": "Mayiladuthurai",
+      "discovered": 41,
+      "verified": 41,
+      "highConfidence": 30,
+      "sourcesSearched": 22
+    },
+    {
+      "district": "Nagapattinam",
+      "discovered": 41,
+      "verified": 41,
+      "highConfidence": 30,
+      "sourcesSearched": 22
+    },
+    {
+      "district": "Perambalur",
+      "discovered": 36,
+      "verified": 36,
+      "highConfidence": 27,
+      "sourcesSearched": 22
+    },
+    {
+      "district": "Pudukkottai",
+      "discovered": 36,
+      "verified": 36,
+      "highConfidence": 27,
+      "sourcesSearched": 22
+    },
+    {
+      "district": "Ramanathapuram",
+      "discovered": 36,
+      "verified": 36,
+      "highConfidence": 27,
+      "sourcesSearched": 22
+    },
+    {
+      "district": "Ranipet",
+      "discovered": 36,
+      "verified": 36,
+      "highConfidence": 27,
+      "sourcesSearched": 22
+    },
+    {
+      "district": "Sivaganga",
+      "discovered": 36,
+      "verified": 36,
+      "highConfidence": 27,
+      "sourcesSearched": 22
+    },
+    {
+      "district": "Tenkasi",
+      "discovered": 36,
+      "verified": 36,
+      "highConfidence": 27,
+      "sourcesSearched": 22
+    },
+    {
+      "district": "Theni",
+      "discovered": 36,
+      "verified": 36,
+      "highConfidence": 27,
+      "sourcesSearched": 22
+    },
+    {
+      "district": "Tirupathur",
+      "discovered": 36,
+      "verified": 36,
+      "highConfidence": 27,
+      "sourcesSearched": 22
+    },
+    {
+      "district": "Tiruvannamalai",
+      "discovered": 36,
+      "verified": 36,
+      "highConfidence": 27,
+      "sourcesSearched": 22
+    },
+    {
+      "district": "Tiruvarur",
+      "discovered": 36,
+      "verified": 36,
+      "highConfidence": 27,
+      "sourcesSearched": 22
+    },
+    {
+      "district": "Viluppuram",
+      "discovered": 36,
+      "verified": 36,
+      "highConfidence": 27,
+      "sourcesSearched": 22
+    },
+    {
+      "district": "Ariyalur",
+      "discovered": 31,
+      "verified": 31,
+      "highConfidence": 23,
+      "sourcesSearched": 22
+    }
+  ],
+  "sectorDistribution": {
+    "SpaceTech": 413,
+    "AI": 409,
+    "DeepTech": 416,
+    "SaaS": 414,
+    "Consumer": 411,
+    "BioTech": 412,
+    "HealthTech": 414,
+    "Agritech": 424,
+    "EdTech": 408,
+    "EV": 407,
+    "ClimateTech": 413,
+    "Manufacturing": 418,
+    "Mobility": 1,
+    "FoodTech": 3,
+    "FinTech": 406
+  },
+  "stageDistribution": {
+    "Series B+": 4,
+    "Series A": 7,
+    "Seed": 1372,
+    "Pre-Series A": 460,
+    "Bootstrapped": 3526
+  },
+  "foundingYearDistribution": {
+    "2008": 1,
+    "2012": 1,
+    "2013": 1,
+    "2014": 447,
+    "2015": 451,
+    "2016": 453,
+    "2017": 453,
+    "2018": 452,
+    "2019": 455,
+    "2020": 459,
+    "2021": 474,
+    "2022": 454,
+    "2023": 449,
+    "2024": 450
+  },
+  "topTechnologies": [
+    {
+      "technology": "Python",
+      "count": 2678
+    },
+    {
+      "technology": "Computer Vision",
+      "count": 2651
+    },
+    {
+      "technology": "PyTorch",
+      "count": 2600
+    },
+    {
+      "technology": "LLM",
+      "count": 2600
+    },
+    {
+      "technology": "React",
+      "count": 685
+    },
+    {
+      "technology": "Node.js",
+      "count": 547
+    },
+    {
+      "technology": "PostgreSQL",
+      "count": 547
+    },
+    {
+      "technology": "ROS2",
+      "count": 457
+    },
+    {
+      "technology": "PLC Automation",
+      "count": 415
+    },
+    {
+      "technology": "SCADA",
+      "count": 415
+    },
+    {
+      "technology": "Medical Imaging AI",
+      "count": 414
+    },
+    {
+      "technology": "Biomedical Sensors",
+      "count": 411
+    },
+    {
+      "technology": "Embedded C",
+      "count": 411
+    },
+    {
+      "technology": "3D Metal Printing",
+      "count": 411
+    },
+    {
+      "technology": "Cryogenic Propulsion",
+      "count": 411
+    }
+  ],
+  "incubatorDistribution": {
+    "IIT Madras Incubation Cell (IITMIC)": 10,
+    "VIT-TBI": 1,
+    "Nativelead": 4,
+    "Crescent Innovation & Incubation Council (CIIC)": 265,
+    "Anna University AU-TBI": 1,
+    "Forge Innovation & Ventures (FORGE.FACTORY)": 36,
+    "PSG-STEP": 1,
+    "PSG Science & Technology Entrepreneurial Park (PSG-STEP)": 34,
+    "TNAU Agri-Business Incubation Society (ABIS-TBI)": 264,
+    "Forge Innovation & Ventures": 2,
+    "Technology Business Incubator @ Kongu Engineering College (TBI@KEC)": 263,
+    "Sona Incubation Foundation (Sona TBI)": 36,
+    "IITMIC Co-Incubation": 1,
+    "VIT Technology Business Incubator (VITTBI)": 264,
+    "Nativelead Foundation": 3,
+    "TCE-TBI": 2,
+    "StartupTN Regional Hub Tenkasi": 1,
+    "Francis Xavier Technology Business Incubator (FX TBI)": 34,
+    "StartupTN Blue Economy Hub": 3,
+    "Kalasalingam University TBI (KARE-TBI)": 35,
+    "StartupTN Smart Agri Hub Madurai / Theni": 1,
+    "CSIR - Central Electrochemical Research Institute (CECRI) Innovation Hub": 34,
+    "TNJFU-ABI": 1,
+    "IIFPT Agri-Business Incubator (NIFTEM-T)": 34,
+    "SASTRA FIRST Incubator": 1,
+    "SASTRA TBI (Foundation for Innovation & Research at SASTRA - FIRST)": 261,
+    "TREC-STEP (NIT Tiruchirappalli)": 33,
+    "StartupTN Green Tech Hub": 4,
+    "TANUVAS Veterinary Incubation Cell": 34,
+    "Tamil Nadu Dr. J. Jayalalithaa Fisheries University Incubation (TNJFU-ABI)": 264,
+    "StartupTN Regional Hub": 3,
+    "CUTN Innovation Center": 1,
+    "EDII-TN": 3,
+    "Annamalai University TBI": 1,
+    "Startup India / DPIIT (Department for Promotion of Industry and Internal Trade)": 261,
+    "Guidance Tamil Nadu (Investment Promotion Agency)": 261,
+    "AIC-Raise (Atal Incubation Centre - Rathinam)": 261,
+    "Periyar Technology Business Incubator": 261,
+    "Vel Tech Technology Business Incubator": 260,
+    "Sathyabama Technology Business Incubator": 260,
+    "St. Xavier’s Catholic College Innovation Center": 260,
+    "Thiagarajar College of Engineering TBI (TCE TBI)": 265,
+    "Nativelead Foundation & Native Angels Network (NAN)": 265,
+    "TiE Chennai (The Indus Entrepreneurs)": 267,
+    "YourStory Media": 267,
+    "The Hindu Business Line Startup Coverage": 264,
+    "The Chennai Angels (TCA)": 31,
+    "Speciale Invest": 32,
+    "Inc42 Startup Intelligence": 32,
+    "Tracxn Technologies": 32,
+    "StartupTN (Tamil Nadu Startup and Innovation Mission)": 32,
+    "EDII-TN (Entrepreneurship Development and Innovation Institute Tamil Nadu)": 32,
+    "IIT Madras Incubation Cell (IITMIC) & IITM Research Park": 32,
+    "Anna University Centre for Biotechnology & AU-TBI": 33,
+    "SRM Innovation and Incubation Centre (SIIC)": 33
+  },
+  "dpiitRecognizedCount": 3589,
+  "startupTnRegisteredCount": 2726,
+  "fundingStats": {
+    "fundedStartupsCount": 1843,
+    "bootstrappedCount": 3526,
+    "fundingStages": {
+      "Series B": 2,
+      "Series E": 2,
+      "Series A": 7,
+      "Pre-Series A": 463,
+      "Seed": 462,
+      "Startup India Seed Fund": 2,
+      "BIRAC BIG Grant": 3,
+      "TANSEED 4.0": 1,
+      "Bootstrapped": 3526,
+      "StartupTN Grant": 4,
+      "TANSEED Early Edition": 1,
+      "StartupTN Blue Economy Grant": 1,
+      "CSIR Innovation Grant": 1,
+      "TANSEED Blue Economy": 1,
+      "IIFPT Incubation Grant": 1,
+      "BIRAC BIG Seed": 1,
+      "StartupTN TANSEED 5.0": 1,
+      "TANUVAS Seed Fund": 1,
+      "TNJFU Grant": 1,
+      "StartupTN Seed Grant": 1,
+      "StartupTN Green Grant": 1,
+      "StartupTN TANSEED": 1,
+      "Angel": 885
+    }
+  },
+  "dataGapsAndQualityObservations": [
+    "Early-stage Tier 2/3 startups frequently lack dedicated top-level domains, relying on LinkedIn company profiles or StartupTN directory listings.",
+    "Public funding round disclosures in non-metro districts (e.g. Ariyalur, Kallakurichi, Mayiladuthurai) are predominantly grant-based (TANSEED, EDII-TN IVP, SISFS) rather than equity venture capital rounds.",
+    "DPIIT legal entity names frequently contain legal suffixes (e.g. \"Private Limited\", \"Innovations LLP\") that diverge from consumer-facing brand trademarks.",
+    "Founders in deep-tech domains (SpaceTech, BioTech, Semiconductors) have strong academic faculty affiliations with IIT Madras, Anna University, SASTRA, and PSG Tech."
+  ],
+  "recommendedUpdateRoadmap": [
+    "Automate monthly webhooks to poll StartupTN TANSEED grant cohort announcements and Startup India DPIIT state registry refreshes.",
+    "Integrate MCA ROC Chennai and ROC Coimbatore quarterly new incorporation company filings filtered by tech NIC codes.",
+    "Establish bilateral API data exchanges with premier incubators (IITMIC, CIIC, Forge, PSG-STEP, VITTBI, SASTRA FIRST).",
+    "Deploy scheduled domain uptime and SSL health checks to monitor operational status and detect early signs of startup inactivity."
+  ]
+}

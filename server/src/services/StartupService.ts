@@ -57,17 +57,20 @@ export class StartupService {
       slug = `${slug}-${Date.now().toString().slice(-4)}`;
     }
 
-    // Find district coordinates if not supplied
-    let lat = data.latitude || 13.0827;
-    let lng = data.longitude || 80.2707;
+    // Find district coordinates if not supplied or invalid
+    let lat = data.latitude !== undefined && data.latitude !== null ? (typeof data.latitude === 'string' ? parseFloat(data.latitude) : data.latitude) : undefined;
+    let lng = data.longitude !== undefined && data.longitude !== null ? (typeof data.longitude === 'string' ? parseFloat(data.longitude) : data.longitude) : undefined;
     let districtName = data.district || 'Chennai';
     let districtSlug = slugify(districtName);
 
     const distObj = await districtRepository.findBySlug(districtSlug);
     if (distObj) {
-      lat = data.latitude || distObj.latitude;
-      lng = data.longitude || distObj.longitude;
+      lat = lat !== undefined && !isNaN(lat) ? lat : distObj.latitude;
+      lng = lng !== undefined && !isNaN(lng) ? lng : distObj.longitude;
       districtName = distObj.name;
+    } else {
+      lat = lat !== undefined && !isNaN(lat) ? lat : 13.0827;
+      lng = lng !== undefined && !isNaN(lng) ? lng : 80.2707;
     }
 
     const newStartup: Startup = {

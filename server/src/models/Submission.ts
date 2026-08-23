@@ -12,6 +12,10 @@ export interface StartupSubmissionDTO {
   founderLinkedin?: string;
   city: string;
   district: string;
+  address?: string;
+  pincode?: string;
+  latitude?: number | string;
+  longitude?: number | string;
   sectors: string[];
   foundedYear: number;
   stage: StartupStage;
