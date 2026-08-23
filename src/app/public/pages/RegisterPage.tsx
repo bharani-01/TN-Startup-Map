@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { MapPin, Lock, Mail, User, Loader2, AlertCircle, Building2, ArrowRight } from 'lucide-react';
+import { Helmet } from 'react-helmet-async';
 import { useAuth } from '../../../context/AuthContext';
 
 export const RegisterPage: React.FC = () => {
@@ -41,12 +42,18 @@ export const RegisterPage: React.FC = () => {
 
   return (
     <div className="min-h-[calc(100vh-64px)] flex items-center justify-center px-4 py-12 bg-[#F5F5F7]">
+      <Helmet>
+        <title>Create Account — Tamil Nadu Startup Connect</title>
+        <meta name="description" content="Create your Tamil Nadu Startup Connect explorer account." />
+        <meta name="robots" content="noindex, nofollow" />
+      </Helmet>
+
       <div className="w-full max-w-md bg-white/95 backdrop-blur-2xl rounded-3xl border border-black/[0.08] shadow-apple-card p-8 sm:p-10 space-y-6">
         
         {/* Header */}
         <div className="text-center space-y-3">
           <img
-            src="/logo.png"
+            src="/logo.webp"
             alt="Tamil Nadu"
             className="h-16 w-auto object-contain mx-auto"
           />

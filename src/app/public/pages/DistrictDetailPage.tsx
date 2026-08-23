@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
+import { canonicalUrl, OG_DEFAULT_IMAGE } from '../../../utils/seo';
 import { MapPin, Building2, Award, ArrowLeft, Layers, Compass, Loader2 } from 'lucide-react';
 import { District, Startup } from '../../../types';
 import { StartupCard } from '../components/StartupCard';
@@ -64,6 +66,20 @@ export const DistrictDetailPage: React.FC = () => {
 
   return (
     <div className="max-w-[1720px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 py-8 sm:py-12 space-y-8">
+      <Helmet>
+        <title>{district.name} District — Tamil Nadu Startup Connect</title>
+        <meta name="description" content={`Explore the startup ecosystem in ${district.name}, Tamil Nadu. Discover ${startups.length} verified ventures, innovation clusters, and founders in this district.`} />
+        <meta name="robots" content="index, follow" />
+        <link rel="canonical" href={canonicalUrl(`/districts/${district.slug}`)} />
+        <meta property="og:title" content={`${district.name} District — Tamil Nadu Startup Connect`} />
+        <meta property="og:description" content={`Explore ${startups.length} verified startups and the innovation ecosystem in ${district.name}, Tamil Nadu.`} />
+        <meta property="og:url" content={canonicalUrl(`/districts/${district.slug}`)} />
+        <meta property="og:image" content={OG_DEFAULT_IMAGE} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={`${district.name} District — Tamil Nadu Startup Connect`} />
+        <meta name="twitter:description" content={`Explore ${startups.length} verified startups in ${district.name}, Tamil Nadu.`} />
+      </Helmet>
+
       
       {/* Top Back Navigation Pill */}
       <div>

@@ -16,7 +16,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenSearch }) => {
       {/* 1. Tamil Nadu Heritage & Modern Skyline Panoramic Horizon */}
       <div className="absolute inset-0 w-full h-full pointer-events-none select-none z-0 overflow-hidden">
         <img 
-          src="/tn-skyline-hero.png" 
+          src="/tn-skyline-hero.webp" 
           alt="Tamil Nadu Heritage and Modern Innovation Skyline" 
           className="w-full h-full object-cover object-bottom sm:object-contain sm:object-bottom lg:object-cover lg:object-bottom opacity-80 sm:opacity-95 transition-opacity duration-700"
         />

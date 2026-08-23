@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
+import { canonicalUrl, OG_DEFAULT_IMAGE } from '../../../utils/seo';
 import { 
   Filter, 
   Search, 
@@ -100,6 +102,20 @@ export const MapPage: React.FC = () => {
 
   return (
     <div className="relative w-full h-[calc(100vh-64px)] overflow-hidden bg-apple-bg">
+      <Helmet>
+        <title>Interactive Startup Map — Tamil Nadu Startup Connect</title>
+        <meta name="description" content="Explore Tamil Nadu's startup ecosystem on an interactive map. Discover clusters, district boundaries, and verified innovation ventures across all 38 districts." />
+        <meta name="robots" content="index, follow" />
+        <link rel="canonical" href={canonicalUrl('/map')} />
+        <meta property="og:title" content="Interactive Startup Map — Tamil Nadu Startup Connect" />
+        <meta property="og:description" content="Explore Tamil Nadu's startup ecosystem on an interactive map across all 38 districts." />
+        <meta property="og:url" content={canonicalUrl('/map')} />
+        <meta property="og:image" content={OG_DEFAULT_IMAGE} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Interactive Startup Map — Tamil Nadu Startup Connect" />
+        <meta name="twitter:description" content="Explore Tamil Nadu's startup ecosystem on an interactive map across all 38 districts." />
+      </Helmet>
+
       
       {/* 1. Full-Bleed 100% Map Canvas */}
       <div className="absolute inset-0 w-full h-full z-0">

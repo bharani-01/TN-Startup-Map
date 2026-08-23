@@ -14,7 +14,7 @@ export const PublicFooter: React.FC = () => {
           <div className="md:col-span-2 space-y-4">
             <Link to="/" className="flex items-center gap-2.5 apple-press inline-flex">
               <img
-                src="/logo.png"
+                src="/logo.webp"
                 alt="Tamil Nadu"
                 className="h-9 w-auto object-contain shrink-0 drop-shadow-xs"
               />

@@ -219,8 +219,8 @@ export const BANNER_PRESETS: BannerPreset[] = [
     id: 'tn-skyline',
     name: 'Tamil Nadu Heritage & Innovation',
     category: 'Ecosystem Landmark',
-    url: '/tn-skyline-hero.png',
-    previewUrl: '/tn-skyline-hero.png',
+    url: '/tn-skyline-hero.webp',
+    previewUrl: '/tn-skyline-hero.webp',
   },
   {
     id: 'deeptech-matrix',

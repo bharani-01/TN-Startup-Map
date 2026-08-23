@@ -1,5 +1,7 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import { useOutletContext, Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
+import { canonicalUrl, OG_DEFAULT_IMAGE } from '../../../utils/seo';
 import { Compass, ArrowRight, Layers, MapPin, Sparkles } from 'lucide-react';
 import { HeroSection } from '../components/HeroSection';
 import { FeaturedLeaders } from '../components/FeaturedLeaders';
@@ -52,6 +54,22 @@ export const HomePage: React.FC = () => {
 
   return (
     <div className="relative min-h-screen pb-24 bg-[#F5F5F7]">
+      <Helmet>
+        <title>Tamil Nadu Startup Connect — Innovation &amp; Venture Directory</title>
+        <meta name="description" content="Discover and explore startups, founders, investors, incubators, and jobs across Tamil Nadu's 38 districts. Your gateway to India's fastest growing startup ecosystem." />
+        <meta name="robots" content="index, follow" />
+        <link rel="canonical" href={canonicalUrl('/')} />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Tamil Nadu Startup Connect — Innovation & Venture Directory" />
+        <meta property="og:description" content="Discover and explore startups, founders, investors, incubators, and jobs across Tamil Nadu's 38 districts." />
+        <meta property="og:url" content={canonicalUrl('/')} />
+        <meta property="og:image" content={OG_DEFAULT_IMAGE} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Tamil Nadu Startup Connect — Innovation & Venture Directory" />
+        <meta name="twitter:description" content="Discover and explore startups, founders, investors, incubators, and jobs across Tamil Nadu's 38 districts." />
+        <meta name="twitter:image" content={OG_DEFAULT_IMAGE} />
+      </Helmet>
+
       {/* Precision Blueprint Tech Grid Canvas Background */}
       <div className="absolute inset-0 bg-grid-pattern opacity-60 pointer-events-none z-0" />
 

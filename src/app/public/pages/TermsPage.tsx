@@ -1,10 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
+import { canonicalUrl } from '../../../utils/seo';
 import { Shield, FileText, CheckCircle2, AlertTriangle, Scale, Lock, Globe, Building2, HelpCircle } from 'lucide-react';
 
 export const TermsPage: React.FC = () => {
   return (
     <div className="min-h-screen bg-[#F5F5F7] py-12 sm:py-16 px-4 sm:px-6 lg:px-8 text-left">
+      <Helmet>
+        <title>Terms of Service — Tamil Nadu Startup Connect</title>
+        <meta name="description" content="Read the Terms of Service governing your use of Tamil Nadu Startup Connect, the premier startup discovery platform for Tamil Nadu's innovation ecosystem." />
+        <meta name="robots" content="index, follow" />
+        <link rel="canonical" href={canonicalUrl('/terms')} />
+      </Helmet>
       <div className="max-w-4xl mx-auto space-y-10">
         
         {/* Header Banner */}

@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
+import { canonicalUrl, OG_DEFAULT_IMAGE } from '../../../utils/seo';
 import { 
   Building2, 
   Grid3X3, 
@@ -110,6 +112,20 @@ export const StartupsPage: React.FC = () => {
 
   return (
     <div className="relative min-h-screen pb-24 bg-[#F5F5F7]">
+      <Helmet>
+        <title>Startups Directory — Tamil Nadu Startup Connect</title>
+        <meta name="description" content="Browse and filter verified startups across Tamil Nadu's 38 districts. Filter by sector, stage, funding type, and more." />
+        <meta name="robots" content="index, follow" />
+        <link rel="canonical" href={canonicalUrl('/startups')} />
+        <meta property="og:title" content="Startups Directory — Tamil Nadu Startup Connect" />
+        <meta property="og:description" content="Browse and filter verified startups across Tamil Nadu's 38 districts. Filter by sector, stage, funding type, and more." />
+        <meta property="og:url" content={canonicalUrl('/startups')} />
+        <meta property="og:image" content={OG_DEFAULT_IMAGE} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Startups Directory — Tamil Nadu Startup Connect" />
+        <meta name="twitter:description" content="Browse and filter verified startups across Tamil Nadu's 38 districts." />
+      </Helmet>
+
       {/* Precision Blueprint Tech Grid Canvas Background */}
       <div className="absolute inset-0 bg-grid-pattern opacity-60 pointer-events-none z-0" />
 

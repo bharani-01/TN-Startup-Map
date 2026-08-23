@@ -16,7 +16,7 @@ export const FounderNavbar: React.FC = () => {
           <div className="flex items-center gap-6">
             <Link to="/founder" className="flex items-center gap-2.5 group">
               <img
-                src="/logo.png"
+                src="/logo.webp"
                 alt="Tamil Nadu"
                 className="h-9 w-auto object-contain shrink-0"
               />

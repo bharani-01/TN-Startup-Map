@@ -1,6 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { useAuth } from './AuthContext';
-import { useNavigate } from 'react-router-dom';
 
 interface BookmarkContextType {
   bookmarkedIds: string[];

@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
+import { canonicalUrl, OG_DEFAULT_IMAGE } from '../../../utils/seo';
 import { 
   Building2, 
   MapPin, 
@@ -233,6 +235,20 @@ export const SubmitStartupPage: React.FC = () => {
 
   return (
     <div className="max-w-3xl mx-auto px-4 py-8 sm:py-12 space-y-8">
+      <Helmet>
+        <title>Submit Your Startup — Tamil Nadu Startup Connect</title>
+        <meta name="description" content="List your startup on Tamil Nadu's premier venture directory. Get discovered by investors, partners, and talent across 38 districts." />
+        <meta name="robots" content="index, follow" />
+        <link rel="canonical" href={canonicalUrl('/submit')} />
+        <meta property="og:title" content="Submit Your Startup — Tamil Nadu Startup Connect" />
+        <meta property="og:description" content="List your startup on Tamil Nadu's premier venture directory. Get discovered by investors, partners, and talent." />
+        <meta property="og:url" content={canonicalUrl('/submit')} />
+        <meta property="og:image" content={OG_DEFAULT_IMAGE} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Submit Your Startup — Tamil Nadu Startup Connect" />
+        <meta name="twitter:description" content="List your startup on Tamil Nadu's premier venture directory." />
+      </Helmet>
+
       
       {/* Header */}
       <div className="text-center space-y-2">

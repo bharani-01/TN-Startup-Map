@@ -55,7 +55,7 @@ export const PublicNavbar: React.FC<PublicNavbarProps> = ({ onOpenSearch }) => {
           <div className="flex items-center gap-3 shrink-0">
             <Link to="/" className="flex items-center gap-2.5 apple-press group">
               <img
-                src="/logo.png"
+                src="/logo.webp"
                 alt="Tamil Nadu"
                 className="h-10 sm:h-12 w-auto object-contain shrink-0 drop-shadow-xs"
               />

@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
+import { canonicalUrl, OG_DEFAULT_IMAGE } from '../../../utils/seo';
 import { 
   ArrowLeft, 
   Clock, 
@@ -177,6 +179,24 @@ export const BlogDetailPage: React.FC = () => {
 
   return (
     <div className="relative min-h-screen bg-[#F5F5F7] pb-28 selection:bg-[#0071E3] selection:text-white">
+      <Helmet>
+        <title>{blog.title} — Tamil Nadu Startup Connect</title>
+        <meta name="description" content={blog.subtitle || blog.title} />
+        <meta name="robots" content="index, follow" />
+        <link rel="canonical" href={canonicalUrl(`/blog/${blog.slug}`)} />
+        <meta property="og:type" content="article" />
+        <meta property="og:title" content={blog.title} />
+        <meta property="og:description" content={blog.subtitle || blog.title} />
+        <meta property="og:url" content={canonicalUrl(`/blog/${blog.slug}`)} />
+        {blog.coverImageUrl && <meta property="og:image" content={blog.coverImageUrl} />}
+        <meta property="article:published_time" content={blog.publishedAt} />
+        <meta property="article:author" content={blog.authorName} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={blog.title} />
+        <meta name="twitter:description" content={blog.subtitle || blog.title} />
+        {blog.coverImageUrl && <meta name="twitter:image" content={blog.coverImageUrl} />}
+      </Helmet>
+
       
       {/* Precision Blueprint Tech Grid Canvas Background */}
       <div className="absolute inset-0 bg-grid-pattern opacity-50 pointer-events-none z-0" />

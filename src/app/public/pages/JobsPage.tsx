@@ -1,5 +1,7 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
+import { canonicalUrl, OG_DEFAULT_IMAGE } from '../../../utils/seo';
 import {
   Briefcase,
   MapPin,
@@ -107,6 +109,20 @@ export const JobsPage: React.FC = () => {
 
   return (
     <div className="relative min-h-screen bg-[#F5F5F7] pb-24 text-left">
+      <Helmet>
+        <title>Jobs &amp; Career Opportunities — Tamil Nadu Startup Connect</title>
+        <meta name="description" content="Discover startup jobs and career opportunities across Tamil Nadu. Find roles in technology, engineering, design, marketing, and more from verified startups." />
+        <meta name="robots" content="index, follow" />
+        <link rel="canonical" href={canonicalUrl('/jobs')} />
+        <meta property="og:title" content="Jobs & Career Opportunities — Tamil Nadu Startup Connect" />
+        <meta property="og:description" content="Discover startup jobs and career opportunities across Tamil Nadu. Find roles from verified startups." />
+        <meta property="og:url" content={canonicalUrl('/jobs')} />
+        <meta property="og:image" content={OG_DEFAULT_IMAGE} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Jobs & Career Opportunities — Tamil Nadu Startup Connect" />
+        <meta name="twitter:description" content="Discover startup jobs and career opportunities across Tamil Nadu." />
+      </Helmet>
+
       {/* Precision Blueprint Tech Grid Canvas Background */}
       <div className="absolute inset-0 bg-grid-pattern opacity-60 pointer-events-none z-0" />
 

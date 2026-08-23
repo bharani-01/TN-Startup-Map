@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
+import { canonicalUrl, OG_DEFAULT_IMAGE } from '../../../utils/seo';
 import { 
   BookOpen, 
   Search, 
@@ -201,6 +203,20 @@ export const BlogListPage: React.FC = () => {
 
   return (
     <div className="relative min-h-screen bg-[#F5F5F7] pb-24 selection:bg-[#0071E3] selection:text-white">
+      <Helmet>
+        <title>Ecosystem Stories &amp; Founder Insights — Tamil Nadu Startup Connect</title>
+        <meta name="description" content="Read engineering breakthroughs, manufacturing playbooks, and venture building stories from Tamil Nadu founders and innovators." />
+        <meta name="robots" content="index, follow" />
+        <link rel="canonical" href={canonicalUrl('/blog')} />
+        <meta property="og:title" content="Ecosystem Stories & Founder Insights — Tamil Nadu Startup Connect" />
+        <meta property="og:description" content="Read engineering breakthroughs, manufacturing playbooks, and venture building stories from Tamil Nadu founders." />
+        <meta property="og:url" content={canonicalUrl('/blog')} />
+        <meta property="og:image" content={OG_DEFAULT_IMAGE} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Ecosystem Stories & Founder Insights — Tamil Nadu Startup Connect" />
+        <meta name="twitter:description" content="Read engineering breakthroughs, manufacturing playbooks, and venture building stories from Tamil Nadu founders." />
+      </Helmet>
+
       
       {/* Precision Blueprint Tech Grid Canvas Background */}
       <div className="absolute inset-0 bg-grid-pattern opacity-50 pointer-events-none z-0" />

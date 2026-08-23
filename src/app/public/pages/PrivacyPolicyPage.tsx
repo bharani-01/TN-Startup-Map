@@ -1,10 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
+import { canonicalUrl } from '../../../utils/seo';
 import { ShieldCheck, Lock, Eye, Server, Cookie, UserCheck, Mail, Database } from 'lucide-react';
 
 export const PrivacyPolicyPage: React.FC = () => {
   return (
     <div className="min-h-screen bg-[#F5F5F7] py-12 sm:py-16 px-4 sm:px-6 lg:px-8 text-left">
+      <Helmet>
+        <title>Privacy Policy — Tamil Nadu Startup Connect</title>
+        <meta name="description" content="Read our Privacy Policy to understand how Tamil Nadu Startup Connect collects, uses, and protects your personal data in compliance with DPDPA 2023." />
+        <meta name="robots" content="index, follow" />
+        <link rel="canonical" href={canonicalUrl('/privacy')} />
+      </Helmet>
       <div className="max-w-4xl mx-auto space-y-10">
         
         {/* Header Banner */}

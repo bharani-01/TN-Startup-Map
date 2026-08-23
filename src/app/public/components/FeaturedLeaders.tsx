@@ -470,7 +470,7 @@ export const FeaturedLeaders: React.FC = () => {
               {/* Authentic Tamil Nadu Map Image in Background */}
               <div className="absolute inset-0 flex items-center justify-center pointer-events-none p-2 overflow-hidden opacity-55 group-hover:opacity-75 transition-opacity">
                 <img
-                  src="/images/tn-map-emblem.png"
+                  src="/images/tn-map-emblem.webp"
                   alt="Tamil Nadu Map"
                   className="w-full h-full object-contain"
                 />

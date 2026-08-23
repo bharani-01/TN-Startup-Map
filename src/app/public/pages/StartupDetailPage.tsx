@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
+import { canonicalUrl, OG_DEFAULT_IMAGE } from '../../../utils/seo';
 import { 
   Building2, 
   MapPin, 
@@ -208,6 +210,22 @@ export const StartupDetailPage: React.FC = () => {
 
   return (
     <div className="relative min-h-screen bg-[#F5F5F7] pb-24 text-left">
+      <Helmet>
+        <title>{startup.name} — Tamil Nadu Startup Connect</title>
+        <meta name="description" content={startup.tagline || `${startup.name} is a ${startup.stage || ''} startup based in ${startup.district}, Tamil Nadu.`} />
+        <meta name="robots" content="index, follow" />
+        <link rel="canonical" href={canonicalUrl(`/startups/${startup.slug}`)} />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content={`${startup.name} — Tamil Nadu Startup Connect`} />
+        <meta property="og:description" content={startup.tagline || `${startup.name} is a startup based in ${startup.district}, Tamil Nadu.`} />
+        <meta property="og:url" content={canonicalUrl(`/startups/${startup.slug}`)} />
+        <meta property="og:image" content={startup.logoUrl || OG_DEFAULT_IMAGE} />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content={`${startup.name} — Tamil Nadu Startup Connect`} />
+        <meta name="twitter:description" content={startup.tagline || `${startup.name} is a startup based in ${startup.district}, Tamil Nadu.`} />
+        <meta name="twitter:image" content={startup.logoUrl || OG_DEFAULT_IMAGE} />
+      </Helmet>
+
       {/* Precision Blueprint Tech Grid Canvas Background */}
       <div className="absolute inset-0 bg-grid-pattern opacity-60 pointer-events-none z-0" />
 
