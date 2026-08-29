@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
-import { MapPin, Lock, Mail, Loader2, AlertCircle, ArrowRight, ShieldCheck, Sparkles, Building2, User } from 'lucide-react';
+import { Lock, Mail, Loader2, AlertCircle, ArrowRight, User } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
 import { useAuth } from '../../../context/AuthContext';
 
@@ -74,13 +74,6 @@ export const LoginPage: React.FC = () => {
         setLoading(false);
       }
     }
-  };
-
-  const handleQuickFill = (testEmail: string, testPass: string) => {
-    setMode('login');
-    setEmail(testEmail);
-    setPassword(testPass);
-    setError(null);
   };
 
   return (
@@ -210,40 +203,6 @@ export const LoginPage: React.FC = () => {
             )}
           </button>
         </form>
-
-        {/* Demo Quick Login Presets for Evaluators */}
-        {mode === 'login' && (
-          <div className="p-4 bg-black/[0.02] rounded-3xl border border-black/[0.05] space-y-2.5">
-            <span className="font-bold text-[#86868B] block uppercase tracking-wider text-[10px]">
-              One-Click Quick Login Presets:
-            </span>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-              <button
-                type="button"
-                onClick={() => handleQuickFill('admin@tnstartupmap.in', 'Admin@12345')}
-                className="p-3 rounded-2xl bg-white border border-black/[0.08] hover:border-[#0071E3]/40 shadow-apple-sm text-left transition-all apple-press-subtle"
-              >
-                <div className="flex items-center justify-between">
-                  <span className="font-bold text-[#1D1D1F] text-xs">Admin</span>
-                  <ShieldCheck className="w-3.5 h-3.5 text-[#0071E3]" />
-                </div>
-                <p className="text-[10px] text-[#86868B] truncate mt-0.5">admin@tnstartupmap.in</p>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => handleQuickFill('srinath@agnikul.in', 'Founder@12345')}
-                className="p-3 rounded-2xl bg-white border border-black/[0.08] hover:border-[#0071E3]/40 shadow-apple-sm text-left transition-all apple-press-subtle"
-              >
-                <div className="flex items-center justify-between">
-                  <span className="font-bold text-[#1D1D1F] text-xs">Founder</span>
-                  <Building2 className="w-3.5 h-3.5 text-[#34C759]" />
-                </div>
-                <p className="text-[10px] text-[#86868B] truncate mt-0.5">srinath@agnikul.in</p>
-              </button>
-            </div>
-          </div>
-        )}
 
         {/* Founder prompt */}
         <div className="text-center text-xs text-[#86868B] pt-2 border-t border-black/[0.05]">
