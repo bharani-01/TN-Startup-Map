@@ -5,9 +5,13 @@ import { PublicFooter } from '../components/PublicFooter';
 import { GlobalSearchModal } from '../search/GlobalSearchModal';
 import { CookieConsent } from '../components/CookieConsent';
 import { RevisitFeedbackPrompt } from '../components/RevisitFeedbackPrompt';
+import { usePageTracking } from '../../../hooks/usePageTracking';
 
 export const PublicLayout: React.FC = () => {
   const [searchOpen, setSearchOpen] = useState(false);
+
+  // Automatic visitor page tracking
+  usePageTracking();
 
   // Global hotkey listener for Cmd+K / Ctrl+K
   useEffect(() => {

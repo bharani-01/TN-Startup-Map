@@ -52,6 +52,7 @@ router.patch('/errors/:id', errorLogController.updateErrorStatus.bind(errorLogCo
 
 // Platform Ecosystem Telemetry & Traffic
 router.get('/analytics', analyticsController.getEcosystemAnalytics.bind(analyticsController));
+router.get('/analytics/startups-views', analyticsController.getAllStartupsViews.bind(analyticsController));
 router.get('/startups/:id/analytics', analyticsController.getStartupAnalytics.bind(analyticsController));
 
 export default router;

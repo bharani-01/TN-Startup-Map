@@ -6,7 +6,7 @@ export type TelemetryEventType =
   | 'SOCIAL_CLICK';
 
 export interface TrackClickOptions {
-  entityType: 'STARTUP' | 'JOB' | 'STORY';
+  entityType: 'STARTUP' | 'JOB' | 'STORY' | 'PAGE' | 'DISTRICT' | 'PORTAL' | string;
   entityId: string;
   eventType: TelemetryEventType;
   targetUrl?: string;

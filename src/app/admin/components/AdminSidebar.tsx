@@ -11,12 +11,14 @@ import {
   Briefcase,
   Activity,
   MessageSquare,
-  Bug
+  Bug,
+  BarChart3
 } from 'lucide-react';
 
 export const AdminSidebar: React.FC = () => {
   const links = [
     { label: 'Executive Overview', path: '/admin', icon: LayoutDashboard },
+    { label: 'Traffic & Visits', path: '/admin/analytics', icon: BarChart3 },
     { label: 'Pending Submissions', path: '/admin/submissions', icon: Inbox },
     { label: 'Founder Claims', path: '/admin/claims', icon: ShieldCheck },
     { label: 'Startup Entities', path: '/admin/startups', icon: Building2 },

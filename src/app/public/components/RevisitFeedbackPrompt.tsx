@@ -76,7 +76,7 @@ export const RevisitFeedbackPrompt: React.FC = () => {
 
     setIsSubmitting(true);
     try {
-      const token = localStorage.getItem('token') || sessionStorage.getItem('token');
+      const token = localStorage.getItem('tn_token') || localStorage.getItem('token');
       const headers: Record<string, string> = {
         'Content-Type': 'application/json',
       };

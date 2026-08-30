@@ -38,12 +38,16 @@ export class AnalyticsController {
     }
   }
 
-  // GET /api/founder/analytics/:startupId — FOUNDER & ADMIN
+  // GET /api/founder/analytics/:startupId or GET /api/admin/startups/:id/analytics
   async getStartupAnalytics(req: Request, res: Response, next: NextFunction) {
     try {
-      const rawStartupId = req.params.startupId;
+      const rawStartupId = req.params.id || req.params.startupId;
       const startupId = Array.isArray(rawStartupId) ? rawStartupId[0] : rawStartupId;
       const days = parseInt(req.query.days as string) || 30;
+
+      if (!startupId) {
+        return res.status(HTTP_STATUS.BAD_REQUEST).json(ApiResponse.error('Startup ID or slug is required'));
+      }
 
       const metrics = await analyticsRepository.getStartupMetrics(startupId, days);
       res.status(HTTP_STATUS.OK).json(ApiResponse.success(metrics));
@@ -58,6 +62,16 @@ export class AnalyticsController {
       const days = parseInt(req.query.days as string) || 30;
       const metrics = await analyticsRepository.getEcosystemMetrics(days);
       res.status(HTTP_STATUS.OK).json(ApiResponse.success(metrics));
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  // GET /api/admin/analytics/startups-views — ADMIN only
+  async getAllStartupsViews(req: Request, res: Response, next: NextFunction) {
+    try {
+      const viewsMap = await analyticsRepository.getAllStartupsViewCounts();
+      res.status(HTTP_STATUS.OK).json(ApiResponse.success(viewsMap));
     } catch (error) {
       next(error);
     }

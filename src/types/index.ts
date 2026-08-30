@@ -300,6 +300,9 @@ export interface EcosystemStats {
   startupsHiring: number;
   recentlyFundedCount: number;
   totalUsers: number;
+  totalVisits?: number;
+  todayVisits?: number;
+  uniqueVisitors?: number;
   pendingSubmissionsCount: number;
   pendingClaimsCount: number;
   topDistricts: Array<{ name: string; slug: string; count: number }>;

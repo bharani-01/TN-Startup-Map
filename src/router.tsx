@@ -40,6 +40,7 @@ import { AdminAuditLogs } from './app/admin/pages/AdminAuditLogs';
 import { AdminStartupDetail } from './app/admin/pages/AdminStartupDetail';
 import { AdminFeedback } from './app/admin/pages/AdminFeedback';
 import { AdminErrorLogs } from './app/admin/pages/AdminErrorLogs';
+import { AdminAnalytics } from './app/admin/pages/AdminAnalytics';
 
 export const router = createBrowserRouter([
   // Public Domain Routes
@@ -86,6 +87,7 @@ export const router = createBrowserRouter([
     element: <AdminLayout />,
     children: [
       { index: true, element: <AdminOverview /> },
+      { path: 'analytics', element: <AdminAnalytics /> },
       { path: 'submissions', element: <AdminSubmissions /> },
       { path: 'claims', element: <AdminClaims /> },
       { path: 'startups', element: <AdminStartups /> },

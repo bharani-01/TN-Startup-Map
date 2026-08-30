@@ -14,7 +14,8 @@ export const errorHandler = (
   let message = err.message || 'Internal Server Error';
   let errors = err.errors || [];
 
-  const isServerException = statusCode >= 500 || !(err instanceof ApiError);
+  // Only 5xx server exceptions or unhandled server crashes are recorded to system error logs
+  const isServerException = statusCode >= 500;
 
   if (isServerException) {
     logger.error(`Unhandled Error on ${req.method} ${req.originalUrl}:`, err);

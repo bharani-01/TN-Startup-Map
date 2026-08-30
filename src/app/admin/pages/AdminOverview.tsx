@@ -9,7 +9,10 @@ import {
   ArrowRight,
   Activity,
   MessageSquare,
-  Bug
+  Bug,
+  Eye,
+  BarChart3,
+  TrendingUp,
 } from 'lucide-react';
 import { EcosystemStats } from '../../../types';
 import { useAuth } from '../../../context/AuthContext';
@@ -45,11 +48,18 @@ export const AdminOverview: React.FC = () => {
             Ecosystem Administration
           </h1>
           <p className="text-xs sm:text-sm text-slate-400 mt-1">
-            Review pending submissions, verify founder claims, monitor system health, and review user feedback.
+            Review pending submissions, monitor platform traffic & visits, govern claims, and monitor system health.
           </p>
         </div>
 
         <div className="flex items-center gap-2.5">
+          <Link
+            to="/admin/analytics"
+            className="px-4 py-2 bg-white/10 hover:bg-white/15 text-white font-semibold text-xs rounded-lg shadow-sm flex items-center gap-2 transition-colors border border-white/10"
+          >
+            <BarChart3 className="w-4 h-4 text-[#0071E3]" />
+            <span>Traffic Telemetry</span>
+          </Link>
           <Link
             to="/admin/submissions"
             className="px-4 py-2 bg-[#0071E3] hover:bg-[#0077ED] text-white font-semibold text-xs rounded-lg shadow-sm flex items-center gap-2 transition-colors"
@@ -61,12 +71,48 @@ export const AdminOverview: React.FC = () => {
       </div>
 
       {/* Main Metric Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
         {[
-          { label: 'Total Verified Startups', value: stats?.totalStartups ?? 0, icon: Building2, color: 'text-[#0071E3]', bg: 'bg-[#0071E3]/10' },
-          { label: 'Pending Review Queue', value: stats?.pendingSubmissionsCount ?? 0, icon: Inbox, color: 'text-amber-400', bg: 'bg-amber-400/10' },
-          { label: 'Pending Claim Requests', value: stats?.pendingClaimsCount ?? 0, icon: ShieldCheck, color: 'text-purple-400', bg: 'bg-purple-400/10' },
-          { label: 'Average CSAT Rating', value: `${feedbackStats?.averageRating || '5.0'} / 5.0`, icon: MessageSquare, color: 'text-emerald-400', bg: 'bg-emerald-400/10' },
+          {
+            label: 'Total Platform Visits',
+            value: (stats?.totalVisits ?? 0).toLocaleString(),
+            subtext: `Today: ${(stats?.todayVisits ?? 0).toLocaleString()} views`,
+            icon: Eye,
+            color: 'text-sky-400',
+            bg: 'bg-sky-400/10',
+          },
+          {
+            label: 'Total Verified Startups',
+            value: stats?.totalStartups ?? 0,
+            subtext: `${stats?.startupsHiring || 0} currently hiring`,
+            icon: Building2,
+            color: 'text-[#0071E3]',
+            bg: 'bg-[#0071E3]/10',
+          },
+          {
+            label: 'Pending Review Queue',
+            value: stats?.pendingSubmissionsCount ?? 0,
+            subtext: 'Awaiting moderation',
+            icon: Inbox,
+            color: 'text-amber-400',
+            bg: 'bg-amber-400/10',
+          },
+          {
+            label: 'Pending Claim Requests',
+            value: stats?.pendingClaimsCount ?? 0,
+            subtext: 'Founder ownership verifications',
+            icon: ShieldCheck,
+            color: 'text-purple-400',
+            bg: 'bg-purple-400/10',
+          },
+          {
+            label: 'Average CSAT Rating',
+            value: `${feedbackStats?.averageRating || '5.0'} / 5.0`,
+            subtext: `${feedbackStats?.totalFeedback || 0} user reviews`,
+            icon: MessageSquare,
+            color: 'text-emerald-400',
+            bg: 'bg-emerald-400/10',
+          },
         ].map((card) => {
           const Icon = card.icon;
           return (
@@ -80,6 +126,9 @@ export const AdminOverview: React.FC = () => {
               <div className="text-2xl font-bold text-white tracking-tight">
                 {card.value}
               </div>
+              <div className="text-[11px] text-slate-500 font-medium">
+                {card.subtext}
+              </div>
             </div>
           );
         })}
@@ -88,6 +137,32 @@ export const AdminOverview: React.FC = () => {
       {/* Quick Action Navigation Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         
+        {/* Platform Traffic & Telemetry */}
+        <div className="p-6 rounded-2xl bg-[#1c1c1e] border border-white/10 space-y-4 shadow-sm flex flex-col justify-between">
+          <div className="space-y-2">
+            <div className="flex items-center justify-between">
+              <h3 className="font-bold text-sm text-white flex items-center gap-2">
+                <BarChart3 className="w-4 h-4 text-sky-400" />
+                <span>Traffic & Visits Telemetry</span>
+              </h3>
+              <span className="text-[10px] font-mono font-bold bg-sky-400/10 text-sky-300 px-1.5 py-0.5 rounded border border-sky-400/20">
+                {(stats?.todayVisits || 0)} TODAY
+              </span>
+            </div>
+            <p className="text-xs text-slate-400 leading-relaxed">
+              Explore live visitor telemetry, page-view time series, top visited startups leaderboard, and outbound interaction rates.
+            </p>
+          </div>
+
+          <Link
+            to="/admin/analytics"
+            className="w-full py-2.5 px-4 bg-white/10 hover:bg-white/15 text-white font-semibold text-xs rounded-lg flex items-center justify-center gap-1.5 transition-colors"
+          >
+            <span>Open Traffic Telemetry</span>
+            <ArrowRight className="w-3.5 h-3.5" />
+          </Link>
+        </div>
+
         {/* Verification Queues */}
         <div className="p-6 rounded-2xl bg-[#1c1c1e] border border-white/10 space-y-4 shadow-sm flex flex-col justify-between">
           <div className="space-y-2">
@@ -213,29 +288,6 @@ export const AdminOverview: React.FC = () => {
             className="w-full py-2.5 px-4 bg-white/10 hover:bg-white/15 text-white font-semibold text-xs rounded-lg flex items-center justify-center gap-1.5 transition-colors"
           >
             <span>Open Crash Triage</span>
-            <ArrowRight className="w-3.5 h-3.5" />
-          </Link>
-        </div>
-
-        {/* Jobs Moderation */}
-        <div className="p-6 rounded-2xl bg-[#1c1c1e] border border-white/10 space-y-4 shadow-sm flex flex-col justify-between">
-          <div className="space-y-2">
-            <div className="flex items-center justify-between">
-              <h3 className="font-bold text-sm text-white flex items-center gap-2">
-                <Briefcase className="w-4 h-4 text-emerald-400" />
-                <span>Jobs & Hiring Moderation</span>
-              </h3>
-            </div>
-            <p className="text-xs text-slate-400 leading-relaxed">
-              Govern career listings posted by startup founders. Moderate compliance, hide postings, or restore listings.
-            </p>
-          </div>
-
-          <Link
-            to="/admin/jobs"
-            className="w-full py-2.5 px-4 bg-white/10 hover:bg-white/15 text-white font-semibold text-xs rounded-lg flex items-center justify-center gap-1.5 transition-colors"
-          >
-            <span>Manage Job Postings</span>
             <ArrowRight className="w-3.5 h-3.5" />
           </Link>
         </div>

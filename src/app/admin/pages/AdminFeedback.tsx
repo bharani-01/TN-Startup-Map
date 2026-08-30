@@ -3,6 +3,7 @@ import {
   MessageSquare, Star, Search, CheckCircle2, AlertCircle, 
   RefreshCw, Check, Clock, Globe, User, MessageCircle, ChevronDown, X
 } from 'lucide-react';
+import { useAuth } from '../../../context/AuthContext';
 
 interface FeedbackItem {
   id: string;
@@ -32,6 +33,7 @@ interface FeedbackStats {
 }
 
 export const AdminFeedback: React.FC = () => {
+  const { token } = useAuth();
   const [feedbacks, setFeedbacks] = useState<FeedbackItem[]>([]);
   const [stats, setStats] = useState<FeedbackStats | null>(null);
   const [loading, setLoading] = useState(true);
@@ -56,9 +58,9 @@ export const AdminFeedback: React.FC = () => {
 
   const fetchStats = async () => {
     try {
-      const token = localStorage.getItem('token') || sessionStorage.getItem('token');
+      const authToken = token || localStorage.getItem('tn_token');
       const res = await fetch('/api/admin/feedback/stats', {
-        headers: { Authorization: `Bearer ${token}` },
+        headers: { Authorization: `Bearer ${authToken}` },
       });
       if (res.ok) {
         const json = await res.json();
@@ -78,7 +80,7 @@ export const AdminFeedback: React.FC = () => {
         setLoadingMore(true);
       }
 
-      const token = localStorage.getItem('token') || sessionStorage.getItem('token');
+      const authToken = token || localStorage.getItem('tn_token');
       const params = new URLSearchParams({
         limit: LIMIT.toString(),
         offset: offsetRef.current.toString(),
@@ -90,7 +92,7 @@ export const AdminFeedback: React.FC = () => {
       if (searchQuery.trim()) params.append('search', searchQuery.trim());
 
       const res = await fetch(`/api/admin/feedback?${params.toString()}`, {
-        headers: { Authorization: `Bearer ${token}` },
+        headers: { Authorization: `Bearer ${authToken}` },
       });
 
       if (res.ok) {
@@ -114,7 +116,7 @@ export const AdminFeedback: React.FC = () => {
       setLoading(false);
       setLoadingMore(false);
     }
-  }, [ratingFilter, categoryFilter, resolvedFilter, searchQuery]);
+  }, [token, ratingFilter, categoryFilter, resolvedFilter, searchQuery]);
 
   useEffect(() => {
     fetchStats();
@@ -141,12 +143,12 @@ export const AdminFeedback: React.FC = () => {
 
   const handleToggleResolve = async (item: FeedbackItem) => {
     try {
-      const token = localStorage.getItem('token') || sessionStorage.getItem('token');
+      const authToken = token || localStorage.getItem('tn_token');
       const res = await fetch(`/api/admin/feedback/${item.id}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${authToken}`,
         },
         body: JSON.stringify({ isResolved: !item.isResolved }),
       });
@@ -166,12 +168,12 @@ export const AdminFeedback: React.FC = () => {
     if (!selectedItem) return;
     try {
       setIsUpdating(true);
-      const token = localStorage.getItem('token') || sessionStorage.getItem('token');
+      const authToken = token || localStorage.getItem('tn_token');
       const res = await fetch(`/api/admin/feedback/${selectedItem.id}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${authToken}`,
         },
         body: JSON.stringify({ adminNotes: adminNoteInput }),
       });

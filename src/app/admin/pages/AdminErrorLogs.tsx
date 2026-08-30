@@ -3,6 +3,7 @@ import {
   Bug, AlertTriangle, Search, Filter, CheckCircle, AlertCircle, 
   RefreshCw, Check, Clock, Globe, User, Terminal, ChevronDown, ChevronUp, Copy, X 
 } from 'lucide-react';
+import { useAuth } from '../../../context/AuthContext';
 
 interface ErrorLogItem {
   id: string;
@@ -32,6 +33,7 @@ interface ErrorLogStats {
 }
 
 export const AdminErrorLogs: React.FC = () => {
+  const { token } = useAuth();
   const [errors, setErrors] = useState<ErrorLogItem[]>([]);
   const [stats, setStats] = useState<ErrorLogStats | null>(null);
   const [loading, setLoading] = useState(true);
@@ -60,9 +62,9 @@ export const AdminErrorLogs: React.FC = () => {
 
   const fetchStats = async () => {
     try {
-      const token = localStorage.getItem('token') || sessionStorage.getItem('token');
+      const authToken = token || localStorage.getItem('tn_token');
       const res = await fetch('/api/admin/errors/stats', {
-        headers: { Authorization: `Bearer ${token}` },
+        headers: { Authorization: `Bearer ${authToken}` },
       });
       if (res.ok) {
         const json = await res.json();
@@ -82,7 +84,7 @@ export const AdminErrorLogs: React.FC = () => {
         setLoadingMore(true);
       }
 
-      const token = localStorage.getItem('token') || sessionStorage.getItem('token');
+      const authToken = token || localStorage.getItem('tn_token');
       const params = new URLSearchParams({
         limit: LIMIT.toString(),
         offset: offsetRef.current.toString(),
@@ -94,7 +96,7 @@ export const AdminErrorLogs: React.FC = () => {
       if (searchQuery.trim()) params.append('search', searchQuery.trim());
 
       const res = await fetch(`/api/admin/errors?${params.toString()}`, {
-        headers: { Authorization: `Bearer ${token}` },
+        headers: { Authorization: `Bearer ${authToken}` },
       });
 
       if (res.ok) {
@@ -118,7 +120,7 @@ export const AdminErrorLogs: React.FC = () => {
       setLoading(false);
       setLoadingMore(false);
     }
-  }, [severityFilter, sourceFilter, resolvedFilter, searchQuery]);
+  }, [token, severityFilter, sourceFilter, resolvedFilter, searchQuery]);
 
   useEffect(() => {
     fetchStats();
@@ -145,12 +147,12 @@ export const AdminErrorLogs: React.FC = () => {
 
   const handleToggleResolve = async (item: ErrorLogItem) => {
     try {
-      const token = localStorage.getItem('token') || sessionStorage.getItem('token');
+      const authToken = token || localStorage.getItem('tn_token');
       const res = await fetch(`/api/admin/errors/${item.id}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${authToken}`,
         },
         body: JSON.stringify({ isResolved: !item.isResolved }),
       });
@@ -170,12 +172,12 @@ export const AdminErrorLogs: React.FC = () => {
     if (!selectedError) return;
     try {
       setIsUpdating(true);
-      const token = localStorage.getItem('token') || sessionStorage.getItem('token');
+      const authToken = token || localStorage.getItem('tn_token');
       const res = await fetch(`/api/admin/errors/${selectedError.id}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${authToken}`,
         },
         body: JSON.stringify({ adminNotes: adminNoteInput }),
       });
